@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="de">
+  <file original="ng.template" id="ngi18n">
+    <unit id="82167058490521791">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:2</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
+      </notes>
+      <segment state="reviewed">
+        <source>Empty example</source>
+        <target>Leeres Beispiel</target>
+      </segment>
+    </unit>
+    <unit id="exampleId">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:3</note>
+      </notes>
+      <segment state="reviewed">
+        <source>Example with id</source>
+        <target>Beispiel mit id</target>
+      </segment>
+    </unit>
+    <unit id="8206782399116601364">
+      <notes>
+        <note category="description">description</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with description</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="6148908020771771708">
+      <notes>
+        <note category="description">descriptionMeaning</note>
+        <note category="meaning">meaning</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:5</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with description/meaning</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="4022307138323826581">
+      <notes>
+        <note category="description">titleDescription</note>
+        <note category="meaning">titleMeaning</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>Title</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="3328635074237601307">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:8</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="8180817321131110864">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:8</note>
+      </notes>
+      <segment state="initial">
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<ph id="0" equiv="INTERPOLATION" disp="{{amount}}"/> of things} }</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="8511147241295446916">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="7842238767399919809">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>{VAR_SELECT, select, male {male} female {female} other {other} }</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="685963878805841813">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12,14</note>
+      </notes>
+      <segment state="initial">
+        <source>Updated: <ph id="0" equiv="ICU" disp="{minutes, plural, =0 {...} =1 {...} other {...}}"/>
+  </source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="2868095629197866953">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12,13</note>
+      </notes>
+      <segment state="initial">
+        <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<ph id="0" equiv="INTERPOLATION" disp="{{minutes}}"/> minutes ago by
+    {VAR_SELECT, select, male {male} female {female} other {other} }} }</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="6796106025314020146">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:15</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="quwer">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:15</note>
+      </notes>
+      <segment state="translated">
+        <source>Example with value  <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/>
+        </source>
+        <target>Beispiel mit Wert <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></target>
+      </segment>
+    </unit>
+    <unit id="134004861588612618">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="asdf">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
+      </notes>
+      <segment state="translated">
+        <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
+        <target>asdf <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></target>
+      </segment>
+    </unit>
+    <unit id="7312493194969094694">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:19,28</note>
+      </notes>
+      <segment state="initial">
+        <source>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+    beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+    odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+    sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+    voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+    laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui
+    in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+    quo voluptas nulla pariatur?</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
+

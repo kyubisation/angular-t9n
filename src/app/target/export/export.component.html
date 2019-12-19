@@ -1,0 +1,19 @@
+<h2>Export translation units to Excel</h2>
+
+<p>Export all translation units or filter by translation state.</p>
+
+<form [formGroup]="filter" (ngSubmit)="export()">
+  <mat-form-field appearance="standard">
+    <mat-select formControlName="state">
+      <mat-option value=""></mat-option>
+      <mat-option value="initial">Initial</mat-option>
+      <mat-option value="translated">Translated</mat-option>
+      <mat-option value="reviewed">Reviewed</mat-option>
+      <mat-option value="final">Final</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="loading | async">Export</button>
+</form>
+
+<mat-spinner *ngIf="loading | async"></mat-spinner>

@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+dl {
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.tooltip-locations.mat-tooltip {
+  white-space: pre-line;
+  max-width: 40rem;
+}
+
+.mat-autocomplete-panel {
+  scrollbar-color: mat-color($mat-indigo, 500) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: mat-color($mat-indigo, 500);
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}

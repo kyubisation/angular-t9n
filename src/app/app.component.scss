@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  height: calc(100% - 64px);
+  padding-top: 64px;
+}
+
+.service-down-error {
+  display: none;
+}
+
+:host(.service-down) {
+  .service-down-error {
+    display: inline-block;
+  }
+
+  main {
+    opacity: 0.5;
+  }
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+
+  .separator {
+    flex: 1 1 auto;
+  }
+
+  a img {
+    padding-right: 0.2rem;
+  }
+}

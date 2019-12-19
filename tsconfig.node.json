@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2018",
+    "declaration": true,
+    "esModuleInterop": true,
+    "strict": true
+  },
+  "files": ["builders/t9n/index.ts", "schematics/ng-add/index.ts"]
+}

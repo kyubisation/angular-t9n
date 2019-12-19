@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Translation server for Angular.",
+  "description": "Translation server options",
+  "type": "object",
+  "properties": {
+    "translationFile": {
+      "type": "string",
+      "description": "The file path to the source translation file."
+    },
+    "targetTranslationPath": {
+      "type": "string",
+      "default": "",
+      "description": "The path to the target translation files."
+    },
+    "includeContextInTarget": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to include the context information (like notes) in the target files. This is useful for sending the target translation files to translation agencies/services."
+    },
+    "encoding": {
+      "type": "string",
+      "description": "The encoding of the translation files.",
+      "default": "UTF-8"
+    },
+    "port": {
+      "type": "number",
+      "description": "The port on which to host the translation app.",
+      "default": 4300
+    }
+  },
+  "additionalProperties": false,
+  "required": ["translationFile"]
+}
