@@ -1,0 +1,62 @@
+<h2>Import translation units from Excel</h2>
+
+<p>
+  Import all translation units from an Excel file. This is intended to be used with
+  <a routerLink="../export">Export</a>.
+</p>
+<p>
+  The import expects the columns to be in order of
+  <code>Id, Description, Meaning, Source, Target</code>. The first row is skipped, since it is
+  assumed to be a header row.
+</p>
+<p>.xlsx files can be dragged and dropped onto this area.</p>
+
+<mat-form-field appearance="standard">
+  <mat-label>Target state</mat-label>
+  <mat-select [formControl]="targetState">
+    <mat-option value="translated">Translated</mat-option>
+    <mat-option value="reviewed">Reviewed</mat-option>
+    <mat-option value="final">Final</mat-option>
+  </mat-select>
+  <mat-hint>The imported units will be assigned to this state</mat-hint>
+</mat-form-field>
+
+<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+<input #fileInput type="file" multiple accept=".xlsx" (change)="onInput($event)" />
+
+<mat-spinner *ngIf="importing | async"></mat-spinner>
+
+<ng-container *ngIf="importResult | async as result">
+  <h3>Import result</h3>
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngIf="result.failedFiles.length">
+      <mat-expansion-panel-header
+        >Files for which the import failed (e.g. invalid, empty or malformed
+        file)</mat-expansion-panel-header
+      >
+      <mat-list>
+        <mat-list-item *ngFor="let file of result.failedFiles">{{ file }}</mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="result.failedUnits.length">
+      <mat-expansion-panel-header
+        >Units for which the import failed (e.g. unit id does not exist)</mat-expansion-panel-header
+      >
+      <mat-list>
+        <mat-list-item *ngFor="let unit of result.failedUnits">
+          <h4 mat-line>{{ unit.id }}</h4>
+          <p mat-line>{{ unit.source }}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="result.importedUnits.length">
+      <mat-expansion-panel-header>Imported units</mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let unit of result.importedUnits">
+          <h4 mat-line>{{ unit.id }}</h4>
+          <p mat-line>{{ unit.source }}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>

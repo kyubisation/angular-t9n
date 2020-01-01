@@ -1,0 +1,125 @@
+<div class="mat-elevation-z8">
+  <table mat-table matSort aria-label="Orphaned units">
+    <ng-container matColumnDef="expansion">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button type="button" mat-icon-button (click)="toggleRow(row)">
+          <mat-icon *ngIf="row._embedded.collapsed">expand_more</mat-icon>
+          <mat-icon *ngIf="!row._embedded.collapsed">expand_less</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="migration">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          type="button"
+          mat-icon-button
+          matTooltip="Migrate translation and state to this unit. This will remove this orphan."
+          (click)="migrate(row._embedded.orphan, row)"
+        >
+          <mat-icon>assignment_turned_in</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="distance">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        matTooltip="Distance according to the levenshtein comparison"
+      >
+        Distance
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let row"
+        matTooltip="Distance according to the levenshtein comparison"
+      >
+        {{ row.distance }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td
+        mat-cell
+        [matTooltip]="row.locations?.join('\n')"
+        [matTooltipDisabled]="!row.locations?.length"
+        matTooltipClass="tooltip-locations"
+        *matCellDef="let row"
+      >
+        {{ row.id }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+    </ng-container>
+    <ng-container matColumnDef="meaning">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Meaning</th>
+      <td mat-cell *matCellDef="let row">{{ row.meaning }}</td>
+    </ng-container>
+    <ng-container matColumnDef="source">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+      <td mat-cell *matCellDef="let row">{{ row.source }}</td>
+    </ng-container>
+    <ng-container matColumnDef="target">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Target</th>
+      <td mat-cell *matCellDef="let row">{{ row.target }}</td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <td mat-cell *matCellDef="let row">{{ row.state | titlecase }}</td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="
+        ['expansion', 'distance', 'id', 'description', 'meaning', 'source', 'target', 'state'];
+        sticky: true
+      "
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'expansion',
+          'distance',
+          'id',
+          'description',
+          'meaning',
+          'source',
+          'target',
+          'state'
+        ];
+        when: isOrphan
+      "
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'migration',
+          'distance',
+          'id',
+          'description',
+          'meaning',
+          'source',
+          'target',
+          'state'
+        ]
+      "
+      [class.collapsed]="row._embedded.orphan._embedded.collapsed"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="dataSource?.totalEntries | async"
+    [pageIndex]="0"
+    [pageSize]="25"
+    [pageSizeOptions]="[25, 50, 100, 250]"
+  >
+  </mat-paginator>
+</div>

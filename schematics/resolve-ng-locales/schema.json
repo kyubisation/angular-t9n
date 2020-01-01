@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "angular-t9n-resolve-ng-locales",
+  "title": "Angular t9n locale resolver",
+  "description": "Resolves the available locales from the @angular/common package",
+  "type": "object",
+  "properties": {
+    "dist": {
+      "type": "string",
+      "format": "path",
+      "default": "src",
+      "description": "The output path of the locales.",
+      "x-prompt": "Where should the locales be saved to?"
+    }
+  },
+  "required": ["dist"]
+}

@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" role="heading">
+  <a mat-button routerLink="/">
+    <mat-icon>translate</mat-icon>
+    angular-t9n
+  </a>
+  <span class="separator"></span>
+  <mat-icon
+    class="service-down-error"
+    matTooltip="Translation server is not available. Start the server in the console with the command 'ng run {yourProject}:t9n'."
+    >error</mat-icon
+  >
+  <a mat-button href="https://github.com/kyubisation/angular-t9n">
+    <img src="assets/github.svg" alt="GitHub" /> GitHub
+  </a>
+</mat-toolbar>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

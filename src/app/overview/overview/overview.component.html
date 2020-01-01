@@ -1,0 +1,75 @@
+<dl>
+  <dt>Source Language</dt>
+  <dd>{{ sourceLanguage | async }}</dd>
+
+  <dt>Amount of translation units</dt>
+  <dd>{{ unitCount | async }}</dd>
+</dl>
+
+<h2>Languages</h2>
+
+<button (click)="openLanguageModal()" type="button" mat-raised-button color="primary">
+  Add Language
+</button>
+
+<div>
+  <mat-card *ngFor="let target of targets | async">
+    <mat-card-title>{{ target.language }}</mat-card-title>
+    <mat-card-content>
+      <table>
+        <tr>
+          <th>Untranslated</th>
+          <td>{{ target.initialCount }}</td>
+        </tr>
+        <tr>
+          <th>Translated</th>
+          <td>{{ target.translatedCount }}</td>
+        </tr>
+        <tr>
+          <th>Reviewed</th>
+          <td>{{ target.reviewedCount }}</td>
+        </tr>
+        <tr>
+          <th>Final</th>
+          <td>{{ target.finalCount }}</td>
+        </tr>
+      </table>
+
+      <div>
+        <div
+          matTooltip="{{ initialPercentage(target) }}% untranslated"
+          [style.width.%]="initialPercentage(target)"
+        ></div>
+        <div
+          matTooltip="{{ translatedPercentage(target) }}% translated"
+          [style.width.%]="translatedPercentage(target)"
+        ></div>
+        <div
+          matTooltip="{{ reviewedPercentage(target) }}% reviewed"
+          [style.width.%]="reviewedPercentage(target)"
+        ></div>
+        <div
+          matTooltip="{{ finalPercentage(target) }}% finalized"
+          [style.width.%]="finalPercentage(target)"
+        ></div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <a [routerLink]="['/target', target.language]" mat-raised-button color="primary">Open</a>
+      <a [routerLink]="['/target', target.language, 'export']" mat-raised-button color="primary"
+        >Export</a
+      >
+      <a [routerLink]="['/target', target.language, 'import']" mat-raised-button color="primary"
+        >Import</a
+      >
+      <a
+        *ngIf="target.orphanCount"
+        [routerLink]="['/target', target.language, 'orphans']"
+        mat-raised-button
+        color="primary"
+        matTooltip="Units that are no longer contained in the source"
+        >Orphans</a
+      >
+    </mat-card-actions>
+  </mat-card>
+</div>

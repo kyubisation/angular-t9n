@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="de">
+    <body>
+      <trans-unit id="4f883844115f7551053ac3a3d48afc1ea50281c1" datatype="html">
+        <source>Empty example</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="exampleId" datatype="html">
+        <source>Example with id</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="36327853584692a14706d63ef84f7e42bf58a68c" datatype="html">
+        <source>Example with description</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">description</note>
+      </trans-unit>
+      <trans-unit id="4a63bb1f0232c5b9e06b36412dd71d7382a843c1" datatype="html">
+        <source>Example with description/meaning</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">descriptionMeaning</note>
+        <note priority="1" from="meaning">meaning</note>
+      </trans-unit>
+      <trans-unit id="e064b8162799537754c0af4df60203743683f836" datatype="html">
+        <source>Title</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="description">titleDescription</note>
+        <note priority="1" from="meaning">titleMeaning</note>
+      </trans-unit>
+      <trans-unit id="8045b9a4b27fbf247d805ae1cd2d09f16109f402" datatype="html">
+        <source>Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="19750aff03afcc804b9143ce8be0715029017c38" datatype="html">
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<x id="INTERPOLATION" equiv-text="{{amount}}"/> of things} }</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f99f34ac9bd4606345071bd813858dec29f3b7d1" datatype="html">
+        <source>The author is <x id="ICU" equiv-text="{gender, select, male {...} female {...} other {...}}"/></source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eff74b75ab7364b6fa888f1cbfae901aaaf02295" datatype="html">
+        <source>{VAR_SELECT, select, male {male} female {female} other {other} }</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c137db3e92e54dfea7d5e877bb703034da2cc2c7" datatype="html">
+        <source>Updated: <x id="ICU" equiv-text="{minutes, plural, =0 {...} =1 {...} other {...}}"/>
+  </source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7151c2e67748b726f0864fc443861d45df21d706" datatype="html">
+        <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<x id="INTERPOLATION" equiv-text="{{minutes}}"/> minutes ago by {VAR_SELECT, select, male {male} female {female} other {other} }} }</source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4afe1eb449a9f2db51da444c24e96e51e660df3a" datatype="html">
+        <source>Example with value <x id="INTERPOLATION" equiv-text="{{minutes}}"/></source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="00d0d9fcb34884ed2846eef6b63f2d52dd56f532" datatype="html">
+        <source>Example with image <x id="TAG_IMG" ctype="image" equiv-text="&lt;img/>"/></source>
+        <target state="new"></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
+

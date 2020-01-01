@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+:host {
+  display: block;
+  padding: 0 1.5rem;
+  min-height: 100%;
+  margin-top: -1.5rem;
+  padding-top: 1.5rem;
+}
+
+:host(.dragging) {
+  background-color: mat-color($mat-indigo, 100);
+}
+
+button {
+  display: block;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+input {
+  display: none;
+}

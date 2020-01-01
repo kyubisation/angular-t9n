@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "t9n": {
+      "implementation": "./t9n",
+      "schema": "./t9n/schema.json",
+      "description": "Translation server for Angular."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "angular-t9n-ng-add",
+  "title": "Angular t9n ng-add",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "translationFile": {
+      "type": "string",
+      "format": "path",
+      "default": "messages.xlf",
+      "description": "The file path to the root translation file.",
+      "x-prompt": "Path to the root translation file?"
+    },
+    "targetTranslationPath": {
+      "type": "string",
+      "format": "path",
+      "description": "The directory path of the target translation files.",
+      "x-prompt": "Path to the target translation files? (Defaults to the directory of the translation file)"
+    },
+    "includeContextInTarget": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to include the context information (like notes) in the target files.",
+      "x-prompt": "Should the context information (like notes) be included in the target files? This is useful for sending the target translation files to translation agencies/services."
+    },
+    "encoding": {
+      "type": "string",
+      "description": "The encoding of the translation files.",
+      "default": "UTF-8",
+      "x-prompt": "What is the encoding of the translation files?"
+    },
+    "packageScript": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to add a script entry in package.json to start the translation server.",
+      "x-prompt": "Add a command to package.json scripts to start the translation server? (The translation server can be started via 'ng run {projectName}:t9n')"
+    }
+  },
+  "required": ["translationFile"]
+}

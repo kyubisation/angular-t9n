@@ -1,0 +1,14 @@
+.github/*
+browserslist
+LICENSE
+coverage
+dist
+package-lock.json
+.*
+*.ico
+*.xlf
+*.svg
+builders/*/index.js
+builders/*/index.d.ts
+schematics/*/index.js
+schematics/*/index.d.ts
