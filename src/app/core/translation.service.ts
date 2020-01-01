@@ -40,7 +40,7 @@ export class TranslationService {
     this.serviceDown = timer(0, 1000).pipe(
       switchMap(() =>
         this._http.get<RootResponse>(`${environment.translationServer}/api`).pipe(
-          timeout(500),
+          timeout(1000),
           tap(r => this._rootSubject.next(r)),
           catchError(() => of(undefined))
         )
