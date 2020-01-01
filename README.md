@@ -18,11 +18,11 @@ The following properties can be configured in the `t9n` section in the `angular.
 
 | Property               | Description                                                                                                                                                                                           |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| translationFile        | The file path to the source translation file.<br>**Default: message.xlf**                                                                                                                             |
-| targetTranslationPath  | The path to the target translation files.<br>**Default: dirname(translationFile)**                                                                                                                    |
-| includeContextInTarget | Whether to include the context information<br>(like notes) in the target files. This is<br>useful for sending the target translation<br>files to translation agencies/services.<br>**Default: false** |
-| encoding               | The encoding of the translation files.<br>**Default: UTF-8**                                                                                                                                          |
-| port                   | The port on which to host the translation app.<br>Default: **4300**                                                                                                                                   |
+| translationFile        | The file path to the source translation file.<br>**Default:** message.xlf                                                                                                                             |
+| targetTranslationPath  | The path to the target translation files.<br>**Default:** dirname(translationFile)                                                                                                                    |
+| includeContextInTarget | Whether to include the context information<br>(like notes) in the target files. This is<br>useful for sending the target translation<br>files to translation agencies/services.<br>**Default:** false |
+| encoding               | The encoding of the translation files.<br>**Default:** UTF-8                                                                                                                                          |
+| port                   | The port on which to host the translation app.<br>**Default:** 4300                                                                                                                                   |
 
 ## Usage
 

@@ -25,9 +25,9 @@
         <note category="description">description</note>
         <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:4</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Example with description</source>
-        <target></target>
+        <target>Beispiel mit Beschreibung</target>
       </segment>
     </unit>
     <unit id="6148908020771771708">
@@ -117,16 +117,6 @@
         <target></target>
       </segment>
     </unit>
-    <unit id="quwer">
-      <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:15</note>
-      </notes>
-      <segment state="translated">
-        <source>Example with value  <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/>
-        </source>
-        <target>Beispiel mit Wert <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></target>
-      </segment>
-    </unit>
     <unit id="134004861588612618">
       <notes>
         <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
@@ -134,15 +124,6 @@
       <segment state="initial">
         <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
         <target></target>
-      </segment>
-    </unit>
-    <unit id="asdf">
-      <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
-      </notes>
-      <segment state="translated">
-        <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
-        <target>asdf <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></target>
       </segment>
     </unit>
     <unit id="7312493194969094694">
@@ -161,6 +142,25 @@
     in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
     quo voluptas nulla pariatur?</source>
         <target></target>
+      </segment>
+    </unit>
+    <unit id="quwer">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:15</note>
+      </notes>
+      <segment state="translated">
+        <source>Example with value  <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/>
+        </source>
+        <target>Beispiel mit Wert <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></target>
+      </segment>
+    </unit>
+    <unit id="asdf">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
+      </notes>
+      <segment state="translated">
+        <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
+        <target>asdf <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></target>
       </segment>
     </unit>
   </file>
