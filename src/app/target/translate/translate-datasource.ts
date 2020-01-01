@@ -3,7 +3,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  skip,
+  startWith,
+  switchMap,
+  takeUntil,
+  tap
+} from 'rxjs/operators';
 
 import { FormTargetUnit } from '../../../models';
 import { TranslationTargetService } from '../core/translation-target.service';
@@ -32,6 +41,7 @@ export class TranslateDataSource extends DataSource<FormTargetUnit> {
   connect(): Observable<FormTargetUnit[]> {
     return merge(this._paginator.page, this._sort.sortChange, this._filter.valueChanges).pipe(
       startWith(undefined),
+      debounceTime(100),
       tap(() => this._destroy.next()),
       switchMap(() =>
         this._translationTargetService.units({
@@ -52,10 +62,15 @@ export class TranslateDataSource extends DataSource<FormTargetUnit> {
           if (!u.target) {
             unit.state.disable();
           }
+
+          // The startWith, skip combination is necessary to deal with an IE11 bug
           unit.target.valueChanges
             .pipe(
               takeUntil(this._destroy),
+              startWith(unit.target.value),
               debounceTime(500),
+              distinctUntilChanged(),
+              skip(1),
               tap(target =>
                 target
                   ? unit.state.enable({ emitEvent: false })
@@ -69,6 +84,9 @@ export class TranslateDataSource extends DataSource<FormTargetUnit> {
           unit.state.valueChanges
             .pipe(
               takeUntil(this._destroy),
+              startWith(unit.state.value),
+              distinctUntilChanged(),
+              skip(1),
               switchMap(state =>
                 this._translationTargetService.updateUnit({
                   ...u,
