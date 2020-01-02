@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/kyubisation/angular-t9n/compare/0.1.2...0.2.0) (2020-01-02)
+
+### ⚠ BREAKING CHANGES
+
+- remove encoding as an option, since it might be problematic for the web app.
+
+### Bug Fixes
+
+- validate for existing target in add language modal ([83afd29](https://github.com/kyubisation/angular-t9n/commit/83afd29701423c4d7d030eddbee86a2689bf1104))
+
+* remove encoding as an option ([245bbea](https://github.com/kyubisation/angular-t9n/commit/245bbea327b598630da7c6f0aeedd0d45ba68274))
+
 ### [0.1.2](https://github.com/kyubisation/angular-t9n/compare/0.1.1...0.1.2) (2020-01-02)
 
 ### Features
