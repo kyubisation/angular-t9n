@@ -17,7 +17,7 @@ export class ExportComponent {
 
   constructor(private _exportService: ExportService, formBuilder: FormBuilder) {
     this.filter = formBuilder.group({
-      state: ''
+      state: 'initial'
     });
   }
 
