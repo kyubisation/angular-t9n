@@ -42,9 +42,8 @@ describe('TranslationServer', () => {
     targetPath = mkdtempSync(join(tmpdir(), 'TranslationFactory'));
     const appPath = join(targetPath, 'app');
     mkdirSync(appPath);
-    writeFileSync(join(appPath, 'index.html'), indexContent, 'utf8');
+    writeFileSync(join(appPath, 'index.html'), indexContent, 'utf-8');
     context = await TranslationFactory.createTranslationContext({
-      encoding: 'UTF-8',
       includeContextInTarget: true,
       logger,
       project,

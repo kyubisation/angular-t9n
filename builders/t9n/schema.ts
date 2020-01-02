@@ -3,6 +3,5 @@ export interface Schema {
   translationFile: string;
   targetTranslationPath: string;
   includeContextInTarget: boolean;
-  encoding: string;
   port: number;
 }

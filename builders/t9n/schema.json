@@ -18,11 +18,6 @@
       "default": false,
       "description": "Whether to include the context information (like notes) in the target files. This is useful for sending the target translation files to translation agencies/services."
     },
-    "encoding": {
-      "type": "string",
-      "description": "The encoding of the translation files.",
-      "default": "UTF-8"
-    },
     "port": {
       "type": "number",
       "description": "The port on which to host the translation app.",

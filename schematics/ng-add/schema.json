@@ -30,12 +30,6 @@
       "description": "Whether to include the context information (like notes) in the target files.",
       "x-prompt": "Should the context information (like notes) be included in the target files? This is useful for sending the target translation files to translation agencies/services."
     },
-    "encoding": {
-      "type": "string",
-      "description": "The encoding of the translation files.",
-      "default": "UTF-8",
-      "x-prompt": "What is the encoding of the translation files?"
-    },
     "packageScript": {
       "type": "boolean",
       "default": true,

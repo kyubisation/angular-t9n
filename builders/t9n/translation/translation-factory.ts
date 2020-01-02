@@ -16,7 +16,7 @@ const readFileAsync = promisify(readFile);
 
 export class TranslationFactory {
   static async createTranslationContext(configuration: TranslationFactoryConfiguration) {
-    const xlfContent = await readFileAsync(configuration.sourceFile, configuration.encoding);
+    const xlfContent = await readFileAsync(configuration.sourceFile, 'utf-8');
     const doc = new DOMParser().parseFromString(xlfContent);
     const version = doc.documentElement.getAttribute('version');
     if (doc.documentElement.tagName !== 'xliff') {
@@ -36,15 +36,12 @@ export class TranslationFactory {
     serializer: TranslationSerializer
   ) {
     const { language, original, unitMap } = await deserializer.deserializeSource(
-      configuration.sourceFile,
-      configuration.encoding
+      configuration.sourceFile
     );
     const source = new TranslationSource(configuration.sourceFile, language, unitMap);
     const filenameFactory = this._createFilenameFactory(configuration);
     const targets = await Promise.all(
-      configuration.targets.map(target =>
-        deserializer.deserializeTarget(target, configuration.encoding)
-      )
+      configuration.targets.map(target => deserializer.deserializeTarget(target))
     ).then(deserializedTargets =>
       deserializedTargets
         .map(t => new TranslationTarget(source, filenameFactory(t.language), t.language, t.unitMap))

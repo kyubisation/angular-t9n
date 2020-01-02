@@ -7,7 +7,6 @@ import { TranslationTarget } from './translation-target';
 export interface TranslationContextConfiguration {
   logger: logging.LoggerApi;
   project: string;
-  encoding: string;
   includeContextInTarget: boolean;
   source: TranslationSource;
   sourceFile: string;

@@ -46,7 +46,7 @@ export class TranslationServer extends Koa<any, Koa.DefaultContext & Router.Rout
       .use(router.allowedMethods())
       .use(async ctx => {
         if (ctx.method === 'GET' && !ctx.path.startsWith('/api/')) {
-          ctx.body = await readFileAsync(join(appPath, 'index.html'), 'utf8');
+          ctx.body = await readFileAsync(join(appPath, 'index.html'), 'utf-8');
         }
       });
   }

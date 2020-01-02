@@ -16,7 +16,6 @@ export class TranslationContext {
   private readonly _serializer: TranslationSerializer;
   private readonly _targets: Map<string, TranslationTarget>;
   private readonly _options: {
-    encoding: string;
     original: string;
     includeContextInTarget: boolean;
   };

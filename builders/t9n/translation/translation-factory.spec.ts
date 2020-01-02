@@ -19,7 +19,6 @@ describe('TranslationFactory', () => {
   it('should throw with invalid xliff file', async () => {
     await expect(
       TranslationFactory.createTranslationContext({
-        encoding: 'UTF-8',
         includeContextInTarget: true,
         logger: new logging.NullLogger(),
         project: 'test',
@@ -33,7 +32,6 @@ describe('TranslationFactory', () => {
   it('should throw with invalid xliff version', async () => {
     await expect(
       TranslationFactory.createTranslationContext({
-        encoding: 'UTF-8',
         includeContextInTarget: true,
         logger: new logging.NullLogger(),
         project: 'test',
@@ -46,7 +44,6 @@ describe('TranslationFactory', () => {
 
   it('should create a context for xlf 1.2 without target files', async () => {
     const context = await TranslationFactory.createTranslationContext({
-      encoding: 'UTF-8',
       includeContextInTarget: true,
       logger: new logging.NullLogger(),
       project: 'test',
@@ -60,7 +57,6 @@ describe('TranslationFactory', () => {
 
   it('should create a context for xlf 2.0 without target files', async () => {
     const context = await TranslationFactory.createTranslationContext({
-      encoding: 'UTF-8',
       includeContextInTarget: true,
       logger: new logging.NullLogger(),
       project: 'test',
@@ -76,7 +72,6 @@ describe('TranslationFactory', () => {
     const targetFile = join(targetPath, 'messages.de.xlf');
     copyFileSync(join(xlf2TestPath, 'messages.de.xlf'), targetFile);
     const context = await TranslationFactory.createTranslationContext({
-      encoding: 'UTF-8',
       includeContextInTarget: true,
       logger: new logging.NullLogger(),
       project: 'test',

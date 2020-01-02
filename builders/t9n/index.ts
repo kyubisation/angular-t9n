@@ -46,8 +46,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     sourceFile: translationFile,
     targetPath: targetTranslationPath,
     targets: targetFiles.map(f => join(targetTranslationPath, f)),
-    includeContextInTarget: options.includeContextInTarget,
-    encoding: options.encoding || 'UTF-8'
+    includeContextInTarget: options.includeContextInTarget
   });
   const appPath = resolve(__dirname, '../../app');
   const server = new TranslationServer(context.logger, translationContext, appPath);

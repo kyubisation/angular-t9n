@@ -12,13 +12,12 @@ export class Xlf2Serializer implements TranslationSerializer {
   async serializeTarget(
     target: TranslationTarget,
     options: {
-      encoding: string;
       original: string;
       includeContextInTarget: boolean;
     }
   ): Promise<void> {
     const units = [...target.units, ...target.orphans.map(o => o.unit)];
-    const content = `<?xml version="1.0" encoding="${options.encoding}"?>
+    const content = `<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="${
       target.source.language
     }" trgLang="${target.language}">
@@ -38,7 +37,7 @@ ${units
   </file>
 </xliff>
 `;
-    await writeFileAsync(target.file, content + '\n', options.encoding);
+    await writeFileAsync(target.file, content + '\n', 'utf-8');
   }
 
   private _serializeNotes(unit: TranslationTargetUnit, target: TranslationTarget) {

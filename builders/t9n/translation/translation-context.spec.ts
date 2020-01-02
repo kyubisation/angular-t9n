@@ -9,7 +9,6 @@ import { TranslationContext } from './translation-context';
 import { TranslationContextConfiguration } from './translation-context-configuration';
 import { TranslationSource } from './translation-source';
 import { TranslationTarget } from './translation-target';
-import { TranslationTargetUnit } from './translation-target-unit';
 
 jest.useFakeTimers();
 
@@ -18,7 +17,7 @@ describe('TranslationContext', () => {
     counter = 0;
     serializeTarget(
       _target: TranslationTarget,
-      _options: { encoding: string; original: string; includeContextInTarget: boolean }
+      _options: { original: string; includeContextInTarget: boolean }
     ): Promise<void> {
       this.counter++;
       return new Promise(r => r());
@@ -26,7 +25,6 @@ describe('TranslationContext', () => {
   }
 
   const deserializer = new Xlf2Deserializer();
-  const encoding = 'UTF-8';
   const xlfTestPath = resolve(__dirname, '../../../test/xlf2');
   const sourceFile = join(xlfTestPath, 'messages.xlf');
   let serializer: Serializer;
@@ -38,11 +36,10 @@ describe('TranslationContext', () => {
   beforeEach(async () => {
     serializer = new Serializer();
     targetPath = mkdtempSync(join(tmpdir(), 'TranslationContext'));
-    const sourceResult = await deserializer.deserializeSource(sourceFile, encoding);
+    const sourceResult = await deserializer.deserializeSource(sourceFile);
     original = sourceResult.original;
     source = new TranslationSource(sourceFile, sourceResult.language, sourceResult.unitMap);
     configuration = {
-      encoding: 'UTF-8',
       filenameFactory: l => join(targetPath, `messages.${l}.xlf`),
       includeContextInTarget: true,
       logger: new logging.NullLogger(),

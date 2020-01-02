@@ -6,6 +6,5 @@ export interface TranslationFactoryConfiguration {
   targetPath: string;
   targets: string[];
   includeContextInTarget: boolean;
-  encoding: string;
   project: string;
 }

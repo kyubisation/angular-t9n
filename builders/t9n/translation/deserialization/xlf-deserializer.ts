@@ -4,8 +4,8 @@ import { TranslationTargetUnit } from '../translation-target-unit';
 import { XlfDeserializerBase } from './xlf-deserializer-base';
 
 export class XlfDeserializer extends XlfDeserializerBase {
-  async deserializeSource(file: string, encoding: string) {
-    const doc = await this._createDocument(file, encoding);
+  async deserializeSource(file: string) {
+    const doc = await this._createDocument(file);
     const fileNode = this._getFileNode(doc);
     const language = fileNode.getAttribute('source-language')!;
     const original = fileNode.getAttribute('original') || '';
@@ -18,8 +18,8 @@ export class XlfDeserializer extends XlfDeserializerBase {
     return { language, original, unitMap };
   }
 
-  async deserializeTarget(file: string, encoding: string) {
-    const doc = await this._createDocument(file, encoding);
+  async deserializeTarget(file: string) {
+    const doc = await this._createDocument(file);
     const fileNode = this._getFileNode(doc);
     const language = fileNode.getAttribute('target-language')!;
     this._assertTargetLanguage(language, file);

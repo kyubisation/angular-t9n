@@ -14,8 +14,7 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
   private _parser = new DOMParser();
 
   abstract deserializeSource(
-    file: string,
-    encoding: string
+    file: string
   ): Promise<{
     language: string;
     original: string;
@@ -23,19 +22,18 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
   }>;
 
   abstract deserializeTarget(
-    file: string,
-    encoding: string
+    file: string
   ): Promise<{ language: string; unitMap: Map<string, TranslationTargetUnit> }>;
 
-  protected async _createDocument(file: string, encoding: string) {
-    const content = await readFileAsync(file, encoding || 'utf8');
+  protected async _createDocument(file: string) {
+    const content = await readFileAsync(file, 'utf-8');
     const doc = this._parser.parseFromString(content);
-    this._assertEncoding(doc, file, encoding);
+    this._assertEncoding(doc, file);
     this._assertXliff(doc);
     return doc;
   }
 
-  private _assertEncoding(doc: Document, file: string, encoding: string) {
+  private _assertEncoding(doc: Document, file: string) {
     const processingInstruction: ProcessingInstruction | undefined = Array.from(
       doc.childNodes
     ).find(c => c.nodeType === doc.PROCESSING_INSTRUCTION_NODE) as any;
@@ -44,9 +42,9 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
     }
 
     const match = processingInstruction.data.match(/encoding="([^"]+)"/);
-    if (match && match[1] !== encoding) {
+    if (match && match[1].replace(/[ -]+/g, '').toUpperCase() !== 'UTF8') {
       throw new Error(
-        `Builder option is configured with encoding ${encoding}, but ${file} has encoding ${
+        `angular-t9n only supports UTF-8, but ${file} has encoding ${
           match[1]
         } '${doc.firstChild!.toString()}'`
       );

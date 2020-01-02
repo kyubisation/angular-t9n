@@ -4,7 +4,6 @@ export interface TranslationSerializer {
   serializeTarget(
     target: TranslationTarget,
     options: {
-      encoding: string;
       original: string;
       includeContextInTarget: boolean;
     }

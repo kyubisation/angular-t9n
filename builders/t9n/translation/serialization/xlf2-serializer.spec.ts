@@ -11,7 +11,6 @@ import { Xlf2Serializer } from './xlf2-serializer';
 describe('Xlf2Serializer', () => {
   const deserializer = new Xlf2Deserializer();
   const serializer = new Xlf2Serializer();
-  const encoding = 'UTF-8';
   const xlfTestPath = resolve(__dirname, '../../../../test/xlf2');
   const sourceFile = join(xlfTestPath, 'messages.xlf');
   const targetFile = join(xlfTestPath, 'messages.de.xlf');
@@ -23,10 +22,10 @@ describe('Xlf2Serializer', () => {
   beforeEach(async () => {
     const dir = mkdtempSync(join(tmpdir(), 'Xlf2Serializer'));
     targetTmpFile = join(dir, 'messages.de.xlf');
-    const sourceResult = await deserializer.deserializeSource(sourceFile, encoding);
+    const sourceResult = await deserializer.deserializeSource(sourceFile);
     original = sourceResult.original;
     source = new TranslationSource(sourceFile, sourceResult.language, sourceResult.unitMap);
-    const targetResult = await deserializer.deserializeTarget(targetFile, encoding);
+    const targetResult = await deserializer.deserializeTarget(targetFile);
     target = new TranslationTarget(
       source,
       targetTmpFile,
@@ -37,10 +36,9 @@ describe('Xlf2Serializer', () => {
 
   it('should serialize a target', async () => {
     await serializer.serializeTarget(target, {
-      encoding,
       original,
       includeContextInTarget: true
     });
-    expect(readFileSync(targetFile, encoding)).toEqual(readFileSync(targetTmpFile, encoding));
+    expect(readFileSync(targetFile, 'utf-8')).toEqual(readFileSync(targetTmpFile, 'utf-8'));
   });
 });
