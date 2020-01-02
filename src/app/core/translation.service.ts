@@ -5,6 +5,7 @@ import {
   catchError,
   distinctUntilChanged,
   filter,
+  first,
   map,
   switchMap,
   tap,
@@ -61,6 +62,7 @@ export class TranslationService {
 
   createTarget(language: string) {
     return this._root.pipe(
+      first(),
       map(r => this._targetHref(r, language)),
       switchMap(href => this._http.post<TargetResponse>(href, {})),
       tap(t => this._updateTarget(t))
