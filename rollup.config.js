@@ -52,8 +52,6 @@ export default [
       'koa-static',
       'os',
       'path',
-      'rxjs',
-      'rxjs/operators',
       'util',
       'xmldom'
     ],
