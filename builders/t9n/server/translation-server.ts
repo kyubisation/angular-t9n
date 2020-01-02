@@ -5,7 +5,6 @@ import { readFile } from 'fs';
 import Koa from 'koa';
 import koaBody from 'koa-body';
 import koaStatic from 'koa-static';
-import { Server } from 'net';
 import { join } from 'path';
 import { promisify } from 'util';
 
@@ -32,32 +31,22 @@ import {
 
 const readFileAsync = promisify(readFile);
 
-export class TranslationServer {
-  private readonly _server: Koa<any, any>;
-
+export class TranslationServer extends Koa<any, Koa.DefaultContext & Router.RouterParamContext> {
   constructor(
     private readonly _logger: logging.LoggerApi,
-    private readonly _context: TranslationContext
+    private readonly _context: TranslationContext,
+    appPath: string
   ) {
+    super();
     this._logger.info(`Current languages: ${this._context.languages.join(', ')}\n`);
-    this._server = this._createApp();
-  }
-
-  listen(port: number, listeningListener?: () => void): Server {
-    return this._server.listen(port, listeningListener);
-  }
-
-  private _createApp() {
-    const dist = join(__dirname, '../../dist');
     const router = this._createApiRouter();
-    return new Koa()
-      .use(koaStatic(dist))
+    this.use(koaStatic(appPath))
       .use(koaCors())
       .use(router.routes())
       .use(router.allowedMethods())
       .use(async ctx => {
-        if (ctx.method === 'GET' && ctx.status !== 404) {
-          ctx.body = await readFileAsync(join(dist, 'index.html'), 'utf8');
+        if (ctx.method === 'GET' && !ctx.path.startsWith('/api/')) {
+          ctx.body = await readFileAsync(join(appPath, 'index.html'), 'utf8');
         }
       });
   }
@@ -146,8 +135,7 @@ export class TranslationServer {
         const { language, id } = ctx.params;
         const target = this._context.target(language);
         if (!target) {
-          ctx.throw(404, 'Target does not exist');
-          return;
+          return ctx.throw(404, 'Target does not exist');
         }
 
         const unit = target.unitMap.get(id);
@@ -157,26 +145,25 @@ export class TranslationServer {
           ctx.body = new TargetUnitResponse(target, unit, toUrlFactory(ctx));
         }
       })
-      .put('/targets/:language/units/:id', koaBody(), async ctx => {
+      .put('/targets/:language/units/:id', koaBody(), ctx => {
         const body = ctx.request.body as Partial<TranslationTargetUnit>;
         const { language, id } = ctx.params;
         const target = this._context.target(language);
         if (!target) {
-          ctx.throw(404, 'Target does not exist');
-          return;
+          return ctx.throw(404, 'Target does not exist');
         } else if (!target.unitMap.has(id)) {
-          ctx.throw(404, 'Unit does not exist');
-          return;
+          return ctx.throw(404, 'Unit does not exist');
         } else if (!body || typeof body.state !== 'string' || typeof body.target !== 'string') {
-          ctx.throw(400, 'Properties target and state must be strings');
-          return;
+          return ctx.throw(400, 'Properties target and state must be strings');
         } else if (!['initial', 'translated', 'reviewed', 'final'].includes(body.state)) {
-          ctx.throw(400, `state must be one of 'initial', 'translated', 'reviewed', 'final'`);
-          return;
+          return ctx.throw(
+            400,
+            `state must be one of 'initial', 'translated', 'reviewed', 'final'`
+          );
         }
 
         const existingUnit = target.unitMap.get(id)!;
-        const updatedUnit = await this._context.updateTranslation(language, {
+        const updatedUnit = this._context.updateTranslation(language, {
           id,
           source: existingUnit.source,
           target: body.target,
@@ -188,8 +175,7 @@ export class TranslationServer {
         const { language } = ctx.params;
         const target = this._context.target(language);
         if (!target) {
-          ctx.throw(404, 'Target does not exist');
-          return;
+          return ctx.throw(404, 'Target does not exist');
         }
 
         ctx.body = new PaginationResponse({
@@ -220,8 +206,7 @@ export class TranslationServer {
         const { language, id } = ctx.params;
         const target = this._context.target(language);
         if (!target) {
-          ctx.throw(404, 'Target does not exist');
-          return;
+          return ctx.throw(404, 'Target does not exist');
         }
 
         const orphan = target.orphans.find(o => o.unit.id === id);
@@ -235,8 +220,7 @@ export class TranslationServer {
         const { language, id } = ctx.params;
         const target = this._context.target(language);
         if (!target) {
-          ctx.throw(404, 'Target does not exist');
-          return;
+          return ctx.throw(404, 'Target does not exist');
         }
 
         const index = target.orphans.findIndex(o => o.unit.id === id);

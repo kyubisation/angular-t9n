@@ -5,7 +5,17 @@
     "target": "es2018",
     "declaration": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "types": [
+      "jest",
+      "js-levenshtein",
+      "koa",
+      "koa__cors",
+      "koa__router",
+      "koa-static",
+      "node",
+      "xmldom"
+    ]
   },
   "files": ["builders/t9n/index.ts", "schematics/ng-add/index.ts"]
 }

@@ -17,5 +17,5 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"]
   },
-  "exclude": ["builders/**/*", "schematics/**/*"]
+  "exclude": ["builders", "schematics"]
 }

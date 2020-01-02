@@ -19,6 +19,7 @@
     "build:rollup": "rollup --config rollup.config.js",
     "format": "prettier --write **/*",
     "test": "ng test",
+    "test:node": "jest",
     "lint": "ng lint",
     "xi18n:xlf": "ng xi18n -c xlf",
     "xi18n:xlf2": "ng xi18n",
@@ -37,14 +38,9 @@
   },
   "files": [
     "{builders,schematics}/**/*.{json,js,d.ts}",
-    "dist/**/*.*",
+    "app/**/*.*",
     "!tsconfig.json"
   ],
-  "schematics": "./schematics/collection.json",
-  "builders": "./builders/builders.json",
-  "ng-add": {
-    "save": "devDependencies"
-  },
   "dependencies": {
     "@koa/cors": "^3.0.0",
     "@koa/router": "^8.0.5",
@@ -72,18 +68,21 @@
     "@angular/router": "~9.0.0-rc.7",
     "@types/jasmine": "~3.3.16",
     "@types/jasminewd2": "~2.0.8",
+    "@types/jest": "^24.0.25",
     "@types/js-levenshtein": "^1.1.0",
     "@types/koa": "^2.11.0",
     "@types/koa-static": "^4.0.1",
     "@types/koa__cors": "^2.2.3",
     "@types/koa__router": "^8.0.2",
     "@types/node": "^12.11.1",
+    "@types/supertest": "^2.0.8",
     "@types/xmldom": "^0.1.27",
     "@wessberg/rollup-plugin-ts": "^1.1.83",
     "codelyzer": "^5.1.2",
     "husky": "^3.1.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
+    "jest": "^24.9.0",
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.6",
@@ -95,6 +94,8 @@
     "rollup": "^1.27.13",
     "rxjs": "~6.5.3",
     "standard-version": "^7.0.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.2.0",
     "ts-node": "~7.0.0",
     "tslib": "^1.10.0",
     "tslint": "~5.11.0",
@@ -103,6 +104,30 @@
     "typescript": "~3.6.4",
     "xlsx": "^0.15.4",
     "zone.js": "~0.10.2"
+  },
+  "schematics": "./schematics/collection.json",
+  "builders": "./builders/builders.json",
+  "ng-add": {
+    "save": "devDependencies"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.node.json"
+      }
+    },
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": [
+      "src"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.ts",
+      "!**/index.ts",
+      "!**/*.spec.ts"
+    ],
+    "coverageDirectory": "coverage"
   },
   "prettier": {
     "singleQuote": true,

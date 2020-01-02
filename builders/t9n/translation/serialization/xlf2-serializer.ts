@@ -1,5 +1,4 @@
 import { writeFile } from 'fs';
-import { EOL } from 'os';
 import { promisify } from 'util';
 
 import { TranslationTarget } from '../translation-target';
@@ -35,17 +34,16 @@ ${units
       </segment>
     </unit>`
   )
-  .join(EOL)}
+  .join('\n')}
   </file>
 </xliff>
 `;
-    await writeFileAsync(target.file, content + EOL, options.encoding);
+    await writeFileAsync(target.file, content + '\n', options.encoding);
   }
 
   private _serializeNotes(unit: TranslationTargetUnit, target: TranslationTarget) {
     const sourceUnit = target.source.unitMap.get(unit.id) || unit;
-    let notes = `
-      <notes>`;
+    let notes = '';
     notes += sourceUnit.description
       ? `
         <note category="description">${sourceUnit.description}</note>`
@@ -58,8 +56,11 @@ ${units
       notes += `
         <note category="location">${location}</note>`;
     }
-    notes += `
+
+    return !notes
+      ? ''
+      : `
+      <notes>${notes}
       </notes>`;
-    return notes;
   }
 }

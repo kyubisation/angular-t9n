@@ -10,6 +10,7 @@ import { TranslationContextConfiguration } from './translation-context-configura
 import { TranslationFactoryConfiguration } from './translation-factory-configuration';
 import { TranslationSource } from './translation-source';
 import { TranslationTarget } from './translation-target';
+import { TranslationTargetUnit } from './translation-target-unit';
 
 const readFileAsync = promisify(readFile);
 
@@ -62,8 +63,10 @@ export class TranslationFactory {
     const context = new TranslationContext(contextConfiguration);
     const sourceTarget =
       context.target(source.language) || (await context.createTarget(source.language));
-    sourceTarget.units.forEach(u => Object.assign(u, { target: u.source, state: 'final' }));
-    await serializer.serializeTarget(sourceTarget, contextConfiguration);
+    sourceTarget.units
+      .filter(u => u.source !== u.target || u.state !== 'final')
+      .map(u => ({ ...u, target: u.source, state: 'final' } as TranslationTargetUnit))
+      .forEach(u => context.updateTranslation(source.language, u));
     return context;
   }
 

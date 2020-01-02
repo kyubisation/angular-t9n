@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="4f883844115f7551053ac3a3d48afc1ea50281c1" datatype="html">
+        <source>Empty example</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="exampleId" datatype="html">
+        <source>Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">titleDescription</note>
+        <note priority="1" from="meaning">titleMeaning</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

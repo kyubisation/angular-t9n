@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="de">
+  <file original="ng.template" id="ngi18n">
+    <unit id="82167058490521791">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:2</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
+      </notes>
+      <segment state="initial">
+        <source>Empty example</source>
+        <target>Leeres Beispiel</target>
+      </segment>
+    </unit>
+    <unit id="exampleId">
+      <notes>
+        <note category="description">titleDescription</note>
+        <note category="meaning">titleMeaning</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:3</note>
+      </notes>
+      <segment state="reviewed">
+        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <target>Beispiel mit <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></target>
+      </segment>
+    </unit>
+    <unit id="translated">
+      <segment state="translated">
+        <source>Example with description</source>
+        <target>Beispiel mit Beschreibung</target>
+      </segment>
+    </unit>
+    <unit id="final">
+      <segment state="final">
+        <source>Example with description</source>
+        <target>Beispiel mit Beschreibung</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
+

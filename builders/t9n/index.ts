@@ -1,7 +1,7 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
 import { json } from '@angular-devkit/core';
 import { existsSync, mkdirSync, readdirSync, statSync } from 'fs';
-import { basename, dirname, extname, join } from 'path';
+import { basename, dirname, extname, join, resolve } from 'path';
 
 import { Schema as Options } from './schema';
 import { TranslationServer } from './server';
@@ -49,7 +49,8 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     includeContextInTarget: options.includeContextInTarget,
     encoding: options.encoding || 'UTF-8'
   });
-  const server = new TranslationServer(context.logger, translationContext);
+  const appPath = resolve(__dirname, '../../app');
+  const server = new TranslationServer(context.logger, translationContext, appPath);
   server.listen(options.port, () =>
     context.logger.info(`Translation server started: http://localhost:${options.port}\n`)
   );

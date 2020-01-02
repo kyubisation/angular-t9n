@@ -1,5 +1,4 @@
 import { writeFile } from 'fs';
-import { EOL } from 'os';
 import { promisify } from 'util';
 
 import { TranslationTarget } from '../translation-target';
@@ -34,12 +33,12 @@ ${units
     }
       </trans-unit>`
   )
-  .join(EOL)}
+  .join('\n')}
     </body>
   </file>
 </xliff>
 `;
-    await writeFileAsync(target.file, content + EOL, options.encoding);
+    await writeFileAsync(target.file, content + '\n', options.encoding);
   }
 
   private _transformState(state: string) {

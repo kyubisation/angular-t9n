@@ -59,8 +59,12 @@ export class TranslationContext {
     return target;
   }
 
-  async updateTranslation(language: string, unit: TranslationTargetUnit) {
-    const target = this._targets.get(language) || (await this.createTarget(language));
+  updateTranslation(language: string, unit: TranslationTargetUnit) {
+    const target = this._targets.get(language);
+    if (!target) {
+      throw new Error(`No target for language ${language}!`);
+    }
+
     const existingUnit = target.unitMap.get(unit.id);
     if (!existingUnit) {
       throw new Error(`Unit with id ${unit.id} does not exist for language ${language}!`);

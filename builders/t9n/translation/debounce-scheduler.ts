@@ -2,7 +2,7 @@ export class DebounceScheduler<T> {
   private readonly _scheduleMap = new Map<T, NodeJS.Timeout>();
 
   constructor(
-    private readonly _action: (trigger: T) => Promise<void>,
+    private readonly _action: (trigger: T) => void,
     private readonly _debounceTime = 500
   ) {}
 

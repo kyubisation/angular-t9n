@@ -9,7 +9,7 @@ const writeFileAsync = promisify(writeFile);
 const brotliCompressAsync = promisify(brotliCompress);
 
 (async () => {
-  const directory = join(__dirname, 'dist');
+  const directory = join(__dirname, 'app');
   const files = await readdirAsync(directory, { withFileTypes: true });
   const compressions = files
     .filter(f => f.isFile() && ['html', 'js', 'css'].some(e => f.name.endsWith(`.${e}`)))
