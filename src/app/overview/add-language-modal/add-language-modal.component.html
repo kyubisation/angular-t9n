@@ -5,7 +5,8 @@
     <p>(e.g. en, en-GB or en-US-POSIX)</p>
     <mat-form-field>
       <input matInput formControlName="language" [matAutocomplete]="localeAutocomplete" />
-      <mat-error *ngIf="form.get('language')?.invalid">Invalid pattern</mat-error>
+      <mat-error *ngIf="form.get('language')?.errors?.pattern">Invalid pattern</mat-error>
+      <mat-error *ngIf="form.get('language')?.errors?.target">Language already exists</mat-error>
       <mat-autocomplete #localeAutocomplete>
         <mat-option *ngFor="let locale of locales | async" [value]="locale">{{
           locale

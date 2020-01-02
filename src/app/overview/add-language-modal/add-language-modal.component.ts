@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { first, map, startWith, switchMap } from 'rxjs/operators';
 
 import { locales } from '../../../locales';
 import { TranslationService } from '../../core/translation.service';
@@ -22,13 +22,22 @@ export class AddLanguageModalComponent {
     formBuilder: FormBuilder
   ) {
     this.form = formBuilder.group({
-      language: ['', [Validators.required, Validators.pattern('\\w[\\w-]*')]]
+      language: [
+        '',
+        [Validators.required, Validators.pattern('\\w[\\w-]*')],
+        (control: AbstractControl) => this._targetExists(control)
+      ]
     });
     this.locales = this.form.controls.language.valueChanges.pipe(
       startWith(''),
-      map(language =>
-        language ? locales.filter(locale => locale.startsWith(language)).slice(0, 10) : []
-      )
+      map(language => (language ? locales.filter(locale => locale.startsWith(language)) : [])),
+      switchMap(filteredLocales =>
+        this._translationService.targets.pipe(
+          map(targets => targets.map(t => t.language)),
+          map(t => filteredLocales.filter(l => t.indexOf(l) < 0))
+        )
+      ),
+      map(l => l.slice(0, 20))
     );
   }
 
@@ -40,5 +49,12 @@ export class AddLanguageModalComponent {
     this._translationService
       .createTarget(this.form.controls.language.value)
       .subscribe(() => this._dialogRef.close());
+  }
+
+  private _targetExists(control: AbstractControl) {
+    return this._translationService.targets.pipe(
+      first(),
+      map(targets => (targets.some(t => t.language === control.value) ? { target: true } : null))
+    );
   }
 }
