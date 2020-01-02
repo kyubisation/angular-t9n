@@ -19,6 +19,8 @@ import { RootResponse, TargetResponse } from '../../models';
   providedIn: 'root'
 })
 export class TranslationService {
+  project: Observable<string>;
+  sourceFile: Observable<string>;
   sourceLanguage: Observable<string>;
   unitCount: Observable<number>;
   targets: Observable<TargetResponse[]>;
@@ -32,6 +34,8 @@ export class TranslationService {
   );
 
   constructor(private _http: HttpClient) {
+    this.project = this._root.pipe(map(r => r.project));
+    this.sourceFile = this._root.pipe(map(r => r.sourceFile));
     this.sourceLanguage = this._root.pipe(map(r => r.sourceLanguage));
     this.unitCount = this._root.pipe(map(r => r.unitCount));
     this.targets = this._targetsSubject.pipe(

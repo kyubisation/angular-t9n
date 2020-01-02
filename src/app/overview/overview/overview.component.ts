@@ -13,11 +13,15 @@ import { AddLanguageModalComponent } from '../add-language-modal/add-language-mo
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OverviewComponent {
+  project: Observable<string>;
+  sourceFile: Observable<string>;
   sourceLanguage: Observable<string>;
   unitCount: Observable<number>;
   targets: Observable<TargetResponse[]>;
 
   constructor(private dialog: MatDialog, translationService: TranslationService) {
+    this.project = translationService.project;
+    this.sourceFile = translationService.sourceFile;
     this.sourceLanguage = translationService.sourceLanguage;
     this.unitCount = translationService.unitCount;
     this.targets = translationService.targets;
