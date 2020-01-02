@@ -18,7 +18,7 @@
     "build:ng": "ng build --prod && node ./brotlify.js",
     "build:rollup": "rollup --config rollup.config.js",
     "format": "prettier --write **/*",
-    "test": "ng test",
+    "test": "npm run test:node",
     "test:node": "jest",
     "lint": "ng lint",
     "xi18n:xlf": "ng xi18n -c xlf",
