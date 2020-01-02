@@ -4,6 +4,8 @@ import { Hal, HalLink, Links } from '../hal';
 import { UrlFactory } from '../url-factory';
 
 export class RootResponse implements Hal {
+  project: string;
+  sourceFile: string;
   sourceLanguage: string;
   languages: string[];
   unitCount: number;
@@ -11,6 +13,8 @@ export class RootResponse implements Hal {
   _embedded?: { [key: string]: unknown };
 
   constructor(context: TranslationContext, urlFactory: UrlFactory) {
+    this.project = context.project;
+    this.sourceFile = context.source.file;
     this.sourceLanguage = context.source.language;
     this.languages = context.languages;
     this.unitCount = context.source.units.length;

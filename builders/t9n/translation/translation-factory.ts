@@ -15,7 +15,7 @@ const readFileAsync = promisify(readFile);
 
 export class TranslationFactory {
   static async createTranslationContext(configuration: TranslationFactoryConfiguration) {
-    const xlfContent = await readFileAsync(configuration.source, configuration.encoding);
+    const xlfContent = await readFileAsync(configuration.sourceFile, configuration.encoding);
     const doc = new DOMParser().parseFromString(xlfContent);
     const version = doc.documentElement.getAttribute('version');
     if (doc.documentElement.tagName !== 'xliff') {
@@ -34,71 +34,46 @@ export class TranslationFactory {
     deserializer: TranslationDeserializer,
     serializer: TranslationSerializer
   ) {
-    const { sourceLanguage, original, unitMap } = await deserializer.deserializeSource(
-      configuration.source,
+    const { language, original, unitMap } = await deserializer.deserializeSource(
+      configuration.sourceFile,
       configuration.encoding
     );
-    const source = new TranslationSource(sourceLanguage, unitMap);
-    const deserializedTargets = await Promise.all(
+    const source = new TranslationSource(configuration.sourceFile, language, unitMap);
+    const filenameFactory = this._createFilenameFactory(configuration);
+    const targets = await Promise.all(
       configuration.targets.map(target =>
-        deserializer
-          .deserializeTarget(target, configuration.encoding)
-          .then(t => new TranslationTarget(source, t.targetLanguage, t.unitMap))
+        deserializer.deserializeTarget(target, configuration.encoding)
       )
-    );
-    const targets = deserializedTargets.reduce(
-      (map, t) => map.set(t.language, t),
-      new Map<string, TranslationTarget>()
+    ).then(deserializedTargets =>
+      deserializedTargets
+        .map(t => new TranslationTarget(source, filenameFactory(t.language), t.language, t.unitMap))
+        .reduce((map, t) => map.set(t.language, t), new Map<string, TranslationTarget>())
     );
 
     const contextConfiguration: TranslationContextConfiguration = {
-      encoding: configuration.encoding,
-      includeContextInTarget: configuration.includeContextInTarget,
-      filenameFactory: this._createFilenameFactory(configuration.source, configuration.targetPath),
-      original,
-      serializer,
+      ...configuration,
       source,
-      targets
+      targets,
+      filenameFactory,
+      original,
+      serializer
     };
 
-    await this._migrateSourceToTargetLanguage(contextConfiguration);
-    return new TranslationContext(configuration.logger, contextConfiguration);
+    const context = new TranslationContext(contextConfiguration);
+    const sourceTarget =
+      context.target(source.language) || (await context.createTarget(source.language));
+    sourceTarget.units.forEach(u => Object.assign(u, { target: u.source, state: 'final' }));
+    await serializer.serializeTarget(sourceTarget, contextConfiguration);
+    return context;
   }
 
-  private static _createFilenameFactory(
-    source: string,
-    targetPath: string
-  ): (target: TranslationTarget) => string {
-    const extension = extname(source);
-    const filename = basename(source);
+  private static _createFilenameFactory(configuration: {
+    sourceFile: string;
+    targetPath: string;
+  }): (language: string) => string {
+    const extension = extname(configuration.sourceFile);
+    const filename = basename(configuration.sourceFile);
     const namePart = filename.substring(0, filename.length - extension.length);
-    return t => join(targetPath, `${namePart}.${t.language}${extension}`);
-  }
-
-  private static async _migrateSourceToTargetLanguage({
-    encoding,
-    includeContextInTarget,
-    filenameFactory,
-    original,
-    source,
-    targets,
-    serializer
-  }: TranslationContextConfiguration) {
-    let target = targets.get(source.language);
-    if (!target) {
-      target = new TranslationTarget(source, source.language);
-      targets.set(source.language, target);
-    }
-
-    target.units.forEach(u => {
-      u.target = u.source;
-      u.state = 'final';
-    });
-
-    await serializer.serializeTarget(filenameFactory(target), target, {
-      original,
-      encoding,
-      includeContextInTarget
-    });
+    return l => join(configuration.targetPath, `${namePart}.${l}${extension}`);
   }
 }

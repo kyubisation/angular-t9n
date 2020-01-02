@@ -42,16 +42,19 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
 
   const translationContext = await TranslationFactory.createTranslationContext({
     logger: context.logger,
-    source: translationFile,
+    project: context.target ? context.target.project : 'unknown',
+    sourceFile: translationFile,
     targetPath: targetTranslationPath,
     targets: targetFiles.map(f => join(targetTranslationPath, f)),
     includeContextInTarget: options.includeContextInTarget,
     encoding: options.encoding || 'UTF-8'
   });
-  const server = new TranslationServer(context.logger, translationContext, options.port);
-  await server.shutdown.toPromise();
+  const server = new TranslationServer(context.logger, translationContext);
+  server.listen(options.port, () =>
+    context.logger.info(`Translation server started: http://localhost:${options.port}\n`)
+  );
 
-  return { success: true };
+  return new Promise(() => {});
 }
 
 function isFile(path: string) {

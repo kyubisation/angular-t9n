@@ -5,9 +5,8 @@ import { readFile } from 'fs';
 import Koa from 'koa';
 import koaBody from 'koa-body';
 import koaStatic from 'koa-static';
-import { Server, Socket } from 'net';
+import { Server } from 'net';
 import { join } from 'path';
-import { Observable, Subject } from 'rxjs';
 import { promisify } from 'util';
 
 import { TranslationContext, TranslationTargetUnit } from '../translation';
@@ -34,32 +33,18 @@ import {
 const readFileAsync = promisify(readFile);
 
 export class TranslationServer {
-  readonly shutdown: Observable<void>;
-
-  private _connections: { [key: string]: Socket } = {};
-  private _shutdown = new Subject<void>();
-  private _server: Server;
+  private readonly _server: Koa<any, any>;
 
   constructor(
     private readonly _logger: logging.LoggerApi,
-    private readonly _context: TranslationContext,
-    private readonly _port: number
+    private readonly _context: TranslationContext
   ) {
     this._logger.info(`Current languages: ${this._context.languages.join(', ')}\n`);
-    this._server = this._createServer();
-    this.shutdown = this._shutdown.asObservable();
+    this._server = this._createApp();
   }
 
-  private _createServer() {
-    const server = this._createApp().listen(this._port, () =>
-      this._logger.info(`Translation server started: http://localhost:${this._port}\n`)
-    );
-    server.on('connection', connection => {
-      const key = `${connection.remoteAddress}:${connection.remotePort}`;
-      this._connections[key] = connection;
-      connection.on('close', () => delete this._connections[key]);
-    });
-    return server;
+  listen(port: number, listeningListener?: () => void): Server {
+    return this._server.listen(port, listeningListener);
   }
 
   private _createApp() {
@@ -84,16 +69,6 @@ export class TranslationServer {
       options?: Router.UrlOptionsQuery
     ) => `${ctx.protocol}://${ctx.host}${ctx.router.url(name, params, options)}`;
     return new Router({ prefix: '/api' })
-      .delete('/', async () => {
-        this._logger.info('\nClosing connections');
-        await new Promise((resolve, reject) => {
-          this._server.close(err => (err ? reject(err) : resolve()));
-          Object.values(this._connections).forEach(c => c.destroy());
-        });
-        this._logger.info('Shutting down translation server');
-        this._shutdown.next();
-        this._shutdown.complete();
-      })
       .get(ROOT_ROUTE, '/', ctx => {
         ctx.body = new RootResponse(this._context, toUrlFactory(ctx));
       })

@@ -11,6 +11,7 @@ export class TranslationTarget {
 
   constructor(
     readonly source: TranslationSource,
+    readonly file: string,
     readonly language: string,
     unitMap = new Map<string, TranslationTargetUnit>()
   ) {

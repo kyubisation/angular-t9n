@@ -1,7 +1,6 @@
 import { logging } from '@angular-devkit/core';
-import { Subject } from 'rxjs';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
 
+import { DebounceScheduler } from './debounce-scheduler';
 import { TranslationSerializer } from './serialization/translation-serializer';
 import { TranslationContextConfiguration } from './translation-context-configuration';
 import { TranslationSource } from './translation-source';
@@ -9,8 +8,11 @@ import { TranslationTarget } from './translation-target';
 import { TranslationTargetUnit } from './translation-target-unit';
 
 export class TranslationContext {
+  readonly project: string;
   readonly source: TranslationSource;
+  readonly sourceFile: string;
 
+  private readonly _logger: logging.LoggerApi;
   private readonly _serializer: TranslationSerializer;
   private readonly _targets: Map<string, TranslationTarget>;
   private readonly _options: {
@@ -18,22 +20,27 @@ export class TranslationContext {
     original: string;
     includeContextInTarget: boolean;
   };
-  private readonly _filenameFactory: (target: TranslationTarget) => string;
-  private readonly _serializeScheduler = new Map<string, Subject<void>>();
+  private readonly _filenameFactory: (language: string) => string;
+  private readonly _serializeScheduler: DebounceScheduler<string>;
 
   get languages() {
     return Array.from(this._targets.keys()).sort();
   }
 
-  constructor(
-    private readonly _logger: logging.LoggerApi,
-    configuration: TranslationContextConfiguration
-  ) {
-    this._serializer = configuration.serializer;
+  constructor(configuration: TranslationContextConfiguration) {
+    this.project = configuration.project;
     this.source = configuration.source;
+    this.sourceFile = configuration.sourceFile;
+    this._logger = configuration.logger;
+    this._serializer = configuration.serializer;
     this._targets = configuration.targets;
     this._filenameFactory = configuration.filenameFactory;
     this._options = { ...configuration };
+    this._serializeScheduler = new DebounceScheduler<string>(async language => {
+      const target = this._targets.get(language)!;
+      await this._serializer.serializeTarget(target, this._options);
+      this._logger.info(`${this._timestamp()}: Updated ${target.file}`);
+    });
   }
 
   target(language: string) {
@@ -45,9 +52,9 @@ export class TranslationContext {
       throw new Error(`${language} already exists as target!`);
     }
 
-    const target = new TranslationTarget(this.source, language);
-    const file = await this._serialize(target);
-    this._logger.info(`${this._timestamp()}: Created ${file}`);
+    const target = new TranslationTarget(this.source, this._filenameFactory(language), language);
+    await this._serializer.serializeTarget(target, this._options);
+    this._logger.info(`${this._timestamp()}: Created ${target.file}`);
     this._targets.set(language, target);
     return target;
   }
@@ -61,32 +68,8 @@ export class TranslationContext {
 
     existingUnit.target = unit.target;
     existingUnit.state = unit.state;
-    this._scheduleSerialization(language);
+    this._serializeScheduler.schedule(language);
     return existingUnit;
-  }
-
-  private _scheduleSerialization(language: string) {
-    const subject = this._serializeScheduler.get(language) || this._createScheduler(language);
-    subject.next();
-  }
-
-  private _createScheduler(language: string) {
-    const subject = new Subject<void>();
-    subject
-      .pipe(
-        debounceTime(500),
-        map(() => this._targets.get(language)!),
-        switchMap(t => this._serialize(t))
-      )
-      .subscribe(f => this._logger.info(`${this._timestamp()}: Updated ${f}`));
-    this._serializeScheduler.set(language, subject);
-    return subject;
-  }
-
-  private async _serialize(target: TranslationTarget) {
-    const file = this._filenameFactory(target);
-    await this._serializer.serializeTarget(file, target, this._options);
-    return file;
   }
 
   private _timestamp() {

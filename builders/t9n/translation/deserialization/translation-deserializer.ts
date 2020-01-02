@@ -6,12 +6,12 @@ export interface TranslationDeserializer {
     file: string,
     encoding: string
   ): Promise<{
-    sourceLanguage: string;
+    language: string;
     original: string;
     unitMap: Map<string, TranslationSourceUnit>;
   }>;
   deserializeTarget(
     file: string,
     encoding: string
-  ): Promise<{ targetLanguage: string; unitMap: Map<string, TranslationTargetUnit> }>;
+  ): Promise<{ language: string; unitMap: Map<string, TranslationTargetUnit> }>;
 }

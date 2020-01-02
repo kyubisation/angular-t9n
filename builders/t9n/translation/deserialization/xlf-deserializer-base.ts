@@ -17,7 +17,7 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
     file: string,
     encoding: string
   ): Promise<{
-    sourceLanguage: string;
+    language: string;
     original: string;
     unitMap: Map<string, TranslationSourceUnit>;
   }>;
@@ -25,7 +25,7 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
   abstract deserializeTarget(
     file: string,
     encoding: string
-  ): Promise<{ targetLanguage: string; unitMap: Map<string, TranslationTargetUnit> }>;
+  ): Promise<{ language: string; unitMap: Map<string, TranslationTargetUnit> }>;
 
   protected async _createDocument(file: string, encoding: string) {
     const content = await readFileAsync(file, encoding || 'utf8');

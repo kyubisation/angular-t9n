@@ -11,7 +11,6 @@ const writeFileAsync = promisify(writeFile);
 
 export class XlfSerializer implements TranslationSerializer {
   async serializeTarget(
-    file: string,
     target: TranslationTarget,
     options: {
       encoding: string;
@@ -40,7 +39,7 @@ ${units
   </file>
 </xliff>
 `;
-    await writeFileAsync(file, content + EOL, options.encoding);
+    await writeFileAsync(target.file, content + EOL, options.encoding);
   }
 
   private _transformState(state: string) {
