@@ -8,6 +8,7 @@
     },
     "resolve-ng-locales": {
       "description": "Resolves the available locales from the @angular/common package",
+      "private": true,
       "factory": "./resolve-ng-locales/index#resolveNgLocales",
       "schema": "./resolve-ng-locales/schema.json"
     }
