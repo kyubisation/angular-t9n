@@ -4,6 +4,8 @@ This project is a tool to manage `.xlf` translation files. It is implemented as 
 
 `angular-t9n` allows adding translation targets, editing translations, exporting to Excel, importing from Excel and migrating orphaned translations.
 
+The focus of this project is on Angular specific XLIFF files.
+
 ## Installation
 
 ```
