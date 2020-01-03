@@ -1,5 +1,4 @@
 import { Component, HostBinding } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { TranslationService } from './core/translation.service';
 
