@@ -4,7 +4,7 @@ This project is a tool to manage `.xlf` translation files. It is implemented as 
 
 `angular-t9n` allows adding translation targets, editing translations, exporting to Excel, importing from Excel and migrating orphaned translations.
 
-The focus of this project is on Angular specific XLIFF files.
+The focus of this project is on Angular specific XLIFF files with UTF-8 encoding.
 
 ## Installation
 
@@ -23,7 +23,6 @@ The following properties can be configured in the `t9n` section in the `angular.
 | translationFile        | The file path to the source translation file.<br>**Default:** message.xlf                                                                                                                             |
 | targetTranslationPath  | The path to the target translation files.<br>**Default:** dirname(translationFile)                                                                                                                    |
 | includeContextInTarget | Whether to include the context information<br>(like notes) in the target files. This is<br>useful for sending the target translation<br>files to translation agencies/services.<br>**Default:** false |
-| encoding               | The encoding of the translation files.<br>**Default:** UTF-8                                                                                                                                          |
 | port                   | The port on which to host the translation app.<br>**Default:** 4300                                                                                                                                   |
 
 ## Usage
