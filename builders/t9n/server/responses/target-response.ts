@@ -1,5 +1,6 @@
 import { TranslationTarget } from '../../translation';
 import {
+  ORPHAN_ROUTE,
   ORPHANS_ROUTE,
   ROUTE_TEMPLATE,
   TARGET_ROUTE,
@@ -21,7 +22,8 @@ export class TargetResponse implements Hal {
   _embedded?: { [key: string]: unknown };
 
   constructor(target: TranslationTarget, urlFactory: UrlFactory) {
-    this.language = target.language;
+    const language = target.language;
+    this.language = language;
     const counter = { initial: 0, translated: 0, reviewed: 0, final: 0 };
     target.units.forEach(u => ++counter[u.state]);
     this.unitCount = target.units.length;
@@ -32,17 +34,18 @@ export class TargetResponse implements Hal {
     this.orphanCount = target.orphans.length;
 
     this._links = new Links()
-      .self(urlFactory(TARGET_ROUTE, { language: target.language }))
-      .href('units', urlFactory(TARGET_UNITS_ROUTE, { language: target.language }))
-      .hrefWhen(this.orphanCount > 0, 'orphans', () =>
-        urlFactory(ORPHANS_ROUTE, { language: target.language })
-      )
+      .self(urlFactory(TARGET_ROUTE, { language }))
+      .href('units', urlFactory(TARGET_UNITS_ROUTE, { language }))
       .templatedHref(
         'unit',
-        urlFactory(TARGET_UNIT_ROUTE, { language: target.language, id: ROUTE_TEMPLATE }).replace(
+        urlFactory(TARGET_UNIT_ROUTE, { language, id: ROUTE_TEMPLATE }).replace(
           ROUTE_TEMPLATE,
           '{id}'
         )
+      )
+      .hrefWhen(this.orphanCount > 0, 'orphans', () => urlFactory(ORPHANS_ROUTE, { language }))
+      .templatedHrefWhen(this.orphanCount > 0, 'orphan', () =>
+        urlFactory(ORPHAN_ROUTE, { language, id: ROUTE_TEMPLATE }).replace(ROUTE_TEMPLATE, '{id}')
       )
       .build();
   }
