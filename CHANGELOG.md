@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/kyubisation/angular-t9n/compare/0.2.1...0.3.0) (2020-01-05)
+
+### Features
+
+- add orphan template link in target response ([90b3102](https://github.com/kyubisation/angular-t9n/commit/90b3102e22a45a08df13293cc4a54c24f1cc9b4a))
+- implement unit detail page ([9d1b8a5](https://github.com/kyubisation/angular-t9n/commit/9d1b8a53d1a46f10ece217e210278d8418a39270))
+- replace orphan collapsible table with detail page ([9aabe0b](https://github.com/kyubisation/angular-t9n/commit/9aabe0b749d6522db3eb63904f374153a41fd913))
+
 ### [0.2.1](https://github.com/kyubisation/angular-t9n/compare/0.2.0...0.2.1) (2020-01-03)
 
 ## [0.2.0](https://github.com/kyubisation/angular-t9n/compare/0.1.2...0.2.0) (2020-01-02)
