@@ -43,8 +43,9 @@ export class TargetResponse implements Hal {
           '{id}'
         )
       )
-      .hrefWhen(this.orphanCount > 0, 'orphans', () => urlFactory(ORPHANS_ROUTE, { language }))
-      .templatedHrefWhen(this.orphanCount > 0, 'orphan', () =>
+      .href('orphans', urlFactory(ORPHANS_ROUTE, { language }))
+      .templatedHref(
+        'orphan',
         urlFactory(ORPHAN_ROUTE, { language, id: ROUTE_TEMPLATE }).replace(ROUTE_TEMPLATE, '{id}')
       )
       .build();

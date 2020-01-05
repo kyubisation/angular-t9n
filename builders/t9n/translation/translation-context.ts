@@ -3,6 +3,7 @@ import { logging } from '@angular-devkit/core';
 import { DebounceScheduler } from './debounce-scheduler';
 import { TranslationSerializer } from './serialization/translation-serializer';
 import { TranslationContextConfiguration } from './translation-context-configuration';
+import { TranslationOrphan } from './translation-orphan';
 import { TranslationSource } from './translation-source';
 import { TranslationTarget } from './translation-target';
 import { TranslationTargetUnit } from './translation-target-unit';
@@ -73,6 +74,21 @@ export class TranslationContext {
     existingUnit.state = unit.state;
     this._serializeScheduler.schedule(language);
     return existingUnit;
+  }
+
+  removeOrphan(language: string, orphan: TranslationOrphan) {
+    const target = this._targets.get(language);
+    if (!target) {
+      throw new Error(`No target for language ${language}!`);
+    }
+
+    const index = target.orphans.indexOf(orphan);
+    if (index < 0) {
+      throw new Error(`Orphan with id ${orphan.unit.id} does not exist for language ${language}!`);
+    }
+
+    target.orphans.splice(index, 1);
+    this._serializeScheduler.schedule(language);
   }
 
   private _timestamp() {

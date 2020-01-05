@@ -1,5 +1,40 @@
-<div class="mat-elevation-z8">
-  <table mat-table matSort aria-label="Orphaned units">
+<h2>{{ (orphan | async)?.id }}</h2>
+
+<dl *ngIf="orphan | async as orphan">
+  <dt>Description</dt>
+  <dd>{{ orphan.description || '-' }}</dd>
+
+  <dt>Meaning</dt>
+  <dd>{{ orphan.meaning || '-' }}</dd>
+
+  <dt>Source</dt>
+  <dd class="source">{{ orphan.source }}</dd>
+
+  <dt>Target</dt>
+  <dd class="target">{{ orphan.target }}</dd>
+
+  <dt>State</dt>
+  <dd>{{ orphan.state | titlecase }}</dd>
+</dl>
+
+<div class="mat-elevation-z1">
+  <table mat-table matSort aria-label="Similar units" [dataSource]="similar | async">
+    <ng-container matColumnDef="distance">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        matTooltip="Distance according to the levenshtein comparison"
+      >
+        Distance
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let row"
+        matTooltip="Distance according to the levenshtein comparison"
+      >
+        {{ row.distance }}
+      </td>
+    </ng-container>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td
@@ -35,20 +70,21 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-        <a
-          [routerLink]="['./', row.id, queryParams | async]"
+        <button
+          type="button"
           mat-icon-button
-          matTooltip="Migrate orphan"
+          matTooltip="Migrate translation and state to this unit and remove this orphan."
+          (click)="migrate(row)"
         >
-          <mat-icon>edit</mat-icon>
-        </a>
+          <mat-icon>input</mat-icon>
+        </button>
       </td>
     </ng-container>
 
     <tr
       mat-header-row
       *matHeaderRowDef="
-        ['id', 'description', 'meaning', 'source', 'target', 'state', 'action'];
+        ['distance', 'id', 'description', 'meaning', 'source', 'target', 'state', 'action'];
         sticky: true
       "
     ></tr>
@@ -56,17 +92,18 @@
       mat-row
       *matRowDef="
         let row;
-        columns: ['id', 'description', 'meaning', 'source', 'target', 'state', 'action']
+        columns: ['distance', 'id', 'description', 'meaning', 'source', 'target', 'state', 'action']
       "
     ></tr>
   </table>
+</div>
 
-  <mat-paginator
-    #paginator
-    [length]="dataSource?.totalEntries | async"
-    [pageIndex]="0"
-    [pageSize]="25"
-    [pageSizeOptions]="[25, 50, 100, 250]"
-  >
-  </mat-paginator>
+<div class="actions">
+  <a mat-raised-button color="primary" routerLink=".." [queryParams]="params | async">
+    <mat-icon>keyboard_backspace</mat-icon> Back
+  </a>
+
+  <button type="button" mat-raised-button color="warn" (click)="delete()">
+    Delete orphan
+  </button>
 </div>

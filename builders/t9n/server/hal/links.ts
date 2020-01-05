@@ -16,10 +16,6 @@ export class Links {
     return this;
   }
 
-  templatedHrefWhen(condition: boolean, name: string, hrefFactory: () => string) {
-    return condition ? this.templatedHref(name, hrefFactory()) : this;
-  }
-
   templatedHref(name: string, href: string) {
     this._links[name] = { href, templated: true };
     return this;

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ExportComponent } from './export/export.component';
 import { ImportComponent } from './import/import.component';
+import { OrphanComponent } from './orphan/orphan.component';
 import { OrphansComponent } from './orphans/orphans.component';
 import { TargetComponent } from './target/target.component';
 import { TranslateComponent } from './translate/translate.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'orphans',
         component: OrphansComponent
+      },
+      {
+        path: 'orphans/:orphanId',
+        component: OrphanComponent
       }
     ]
   }

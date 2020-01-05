@@ -1,5 +1,17 @@
+:host {
+  display: block;
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.source,
+.target {
+  white-space: pre-wrap;
+}
+
 table {
   width: 100%;
+  margin-bottom: 1rem;
 
   th,
   td {
@@ -9,6 +21,14 @@ table {
   td {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+
+    &.mat-column-action {
+      width: 2rem;
+    }
+
+    &.mat-column-distance {
+      width: 3rem;
+    }
 
     &.mat-column-id {
       width: 15rem;
@@ -28,21 +48,10 @@ table {
     &.mat-column-state {
       width: 10rem;
     }
-
-    &.mat-column-action {
-      width: 2rem;
-    }
-  }
-
-  mat-form-field {
-    display: block;
   }
 }
 
-mat-paginator {
-  margin-top: -1px;
-  bottom: 0;
-  position: sticky;
-  z-index: 10;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+.actions {
+  display: flex;
+  justify-content: space-between;
 }

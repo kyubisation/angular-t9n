@@ -56,7 +56,7 @@
         </mat-form-field>
       </td>
     </ng-container>
-    <ng-container matColumnDef="unit-link">
+    <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <a
@@ -121,7 +121,7 @@
     <tr
       mat-header-row
       *matHeaderRowDef="
-        ['id', 'description', 'meaning', 'source', 'target', 'state', 'unit-link'];
+        ['id', 'description', 'meaning', 'source', 'target', 'state', 'action'];
         sticky: true
       "
     ></tr>
@@ -134,7 +134,8 @@
           'meaning-filter',
           'source-filter',
           'target-filter',
-          'state-filter'
+          'state-filter',
+          'action'
         ];
         sticky: true
       "
@@ -143,7 +144,7 @@
       mat-row
       *matRowDef="
         let row;
-        columns: ['id', 'description', 'meaning', 'source', 'target', 'state', 'unit-link']
+        columns: ['id', 'description', 'meaning', 'source', 'target', 'state', 'action']
       "
     ></tr>
   </table>

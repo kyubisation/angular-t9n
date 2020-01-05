@@ -20,7 +20,6 @@ export class OrphansDataSource extends DataSource<TranslationTargetUnitResponse>
   constructor(
     private _paginator: MatPaginator,
     private _sort: MatSort,
-    private _update: Observable<void>,
     private _translationTargetService: TranslationTargetService
   ) {
     super();
@@ -33,7 +32,7 @@ export class OrphansDataSource extends DataSource<TranslationTargetUnitResponse>
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<TranslationTargetUnitResponse[]> {
-    return merge(this._paginator.page, this._sort.sortChange, this._update).pipe(
+    return merge(this._paginator.page, this._sort.sortChange).pipe(
       startWith(undefined),
       switchMap(() =>
         this._translationTargetService.orphans({
@@ -43,19 +42,7 @@ export class OrphansDataSource extends DataSource<TranslationTargetUnitResponse>
         })
       ),
       tap(orphanPage => this._totalEntries.next(orphanPage.totalEntries)),
-      map(orphanPage => orphanPage._embedded.entries),
-      tap(orphans => orphans.forEach(orphan => (orphan._embedded!.collapsed = true))),
-      map(orphans =>
-        orphans
-          .map(u =>
-            [u].concat(
-              (u._embedded!.similar as TranslationTargetUnitResponse[]).map(s =>
-                Object.assign(s, { _embedded: { orphan: u } })
-              )
-            )
-          )
-          .reduce((current, next) => current.concat(next), [])
-      )
+      map(orphanPage => orphanPage._embedded.entries)
     );
   }
 

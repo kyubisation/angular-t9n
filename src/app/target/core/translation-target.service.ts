@@ -110,6 +110,14 @@ export class TranslationTargetService {
     return this._http.put<TranslationTargetUnitResponse>(unit._links!.self.href, { target, state });
   }
 
+  orphan(id: string) {
+    return this.target.pipe(
+      first(),
+      map(t => t._links!.orphan.href.replace('{id}', id)),
+      switchMap(href => this._http.get<TranslationTargetUnitResponse>(href))
+    );
+  }
+
   orphans(query: {
     page?: number;
     entriesPerPage?: number;
@@ -128,16 +136,19 @@ export class TranslationTargetService {
 
   migrateOrphan(orphan: TranslationTargetUnitResponse, unit: TranslationTargetUnitResponse) {
     return this.updateUnit({ ...unit, target: orphan.target, state: orphan.state }).pipe(
-      switchMap(() => this._http.delete(orphan._links!.self.href)),
-      switchMap(() => this.updateTarget()),
-      map(t => t.orphanCount)
+      switchMap(() => this.deleteOrphan(orphan))
     );
   }
 
-  updateTarget() {
-    return this.target.pipe(
-      first(),
-      switchMap(t => this._translationService.updateTarget(t.language))
+  deleteOrphan(orphan: TranslationTargetUnitResponse) {
+    return this._http.delete(orphan._links!.self.href).pipe(
+      switchMap(() =>
+        this.target.pipe(
+          first(),
+          switchMap(t => this._translationService.updateTarget(t.language))
+        )
+      ),
+      map(t => ({ orphansRemaining: t.orphanCount > 0 }))
     );
   }
 }

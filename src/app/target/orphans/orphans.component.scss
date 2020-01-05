@@ -1,10 +1,6 @@
 table {
   width: 100%;
 
-  tr.collapsed {
-    display: none;
-  }
-
   th,
   td {
     padding-right: 0.5rem;
@@ -13,11 +9,6 @@ table {
   td {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-
-    &.mat-column-expansion,
-    &.mat-column-distance {
-      width: 3rem;
-    }
 
     &.mat-column-id {
       width: 15rem;
@@ -36,6 +27,10 @@ table {
     &.mat-column-meaning,
     &.mat-column-state {
       width: 10rem;
+    }
+
+    &.mat-column-action {
+      width: 2rem;
     }
   }
 }

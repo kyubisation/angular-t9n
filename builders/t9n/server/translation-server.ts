@@ -223,11 +223,11 @@ export class TranslationServer extends Koa<any, Koa.DefaultContext & Router.Rout
           return ctx.throw(404, 'Target does not exist');
         }
 
-        const index = target.orphans.findIndex(o => o.unit.id === id);
-        if (index < 0) {
+        const orphan = target.orphans.find(o => o.unit.id === id);
+        if (!orphan) {
           ctx.throw(404, 'Orphan does not exist');
         } else {
-          target.orphans.splice(index, 1);
+          this._context.removeOrphan(language, orphan);
           ctx.status = 204;
         }
       });

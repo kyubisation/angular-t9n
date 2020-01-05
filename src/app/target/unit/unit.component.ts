@@ -54,13 +54,13 @@ export class UnitComponent implements OnDestroy {
 
     try {
       if (document.execCommand('copy')) {
-        this._snackbar.open('Copied source to clipboard', undefined, { duration: 3000 });
+        this._snackbar.open('Copied source to clipboard', undefined, { duration: 2500 });
         return;
       } else {
         throw new Error();
       }
     } catch {
-      this._snackbar.open('Failed to copy source to clipboard', undefined, { duration: 3000 });
+      this._snackbar.open('Failed to copy source to clipboard', undefined, { duration: 2500 });
     }
 
     document.body.removeChild(textarea);
