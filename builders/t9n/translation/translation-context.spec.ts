@@ -43,7 +43,7 @@ describe('TranslationContext', () => {
       filenameFactory: l => join(targetPath, `messages.${l}.xlf`),
       includeContextInTarget: true,
       logger: new logging.NullLogger(),
-      original: 'ng.template',
+      original,
       project: 'test',
       serializer,
       source,
