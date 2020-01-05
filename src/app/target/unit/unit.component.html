@@ -3,22 +3,23 @@
 <ng-container *ngIf="form | async as formGroup">
   <form [formGroup]="formGroup">
     <mat-form-field appearance="standard">
-      <mat-label>Description</mat-label>
+      <mat-label i18n>Description</mat-label>
       <input matInput formControlName="description" />
     </mat-form-field>
 
     <mat-form-field appearance="standard">
-      <mat-label>Meaning</mat-label>
+      <mat-label i18n>Meaning</mat-label>
       <input matInput formControlName="meaning" />
     </mat-form-field>
 
     <mat-form-field appearance="standard">
-      <mat-label>Source</mat-label>
+      <mat-label i18n>Source</mat-label>
       <textarea matInput formControlName="source" cdkTextareaAutosize></textarea>
       <button
         type="button"
         mat-icon-button
         matSuffix
+        i18n-matTooltip
         matTooltip="Copy source to clipboard"
         (click)="copySourceToClipboard(formGroup.get('source').value)"
       >
@@ -27,9 +28,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="standard">
-      <mat-label>Target</mat-label>
+      <mat-label i18n>Target</mat-label>
       <textarea matInput formControlName="target" cdkTextareaAutosize></textarea>
-      <mat-hint *ngIf="formGroup.get('target').errors?.placeholders as placeholders"
+      <mat-hint *ngIf="formGroup.get('target').errors?.placeholders as placeholders" i18n
         >Expected {{ placeholders.length }} placeholders
         <mat-icon [matTooltip]="placeholders.join('\n')" matTooltipClass="tooltip-linebreak"
           >info</mat-icon
@@ -40,17 +41,17 @@
     <mat-form-field appearance="standard">
       <mat-label>State</mat-label>
       <mat-select formControlName="state">
-        <mat-option *ngIf="formGroup.get('state').value === 'initial'" value="initial"
+        <mat-option *ngIf="formGroup.get('state').value === 'initial'" value="initial" i18n
           >Initial</mat-option
         >
-        <mat-option value="translated">Translated</mat-option>
-        <mat-option value="reviewed">Reviewed</mat-option>
-        <mat-option value="final">Final</mat-option>
+        <mat-option value="translated" i18n>Translated</mat-option>
+        <mat-option value="reviewed" i18n>Reviewed</mat-option>
+        <mat-option value="final" i18n>Final</mat-option>
       </mat-select>
     </mat-form-field>
   </form>
 </ng-container>
 
-<a mat-raised-button color="primary" routerLink="../.." [queryParams]="params | async">
+<a mat-raised-button color="primary" routerLink="../.." [queryParams]="params | async" i18n>
   <mat-icon>keyboard_backspace</mat-icon> Back
 </a>

@@ -2,6 +2,14 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template" target-language="en">
     <body>
+      <trans-unit id="bd9465b87ace92fb36372747d2f2ecc3dcf55e4f" datatype="html">
+        <source>Translation server is not available. Start the server in the console with the command 'ng run yourProject:t9n'.</source>
+        <target state="final">Translation server is not available. Start the server in the console with the command 'ng run yourProject:t9n'.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4f883844115f7551053ac3a3d48afc1ea50281c1" datatype="html">
         <source>Empty example</source>
         <target state="final">Empty example</target>
@@ -143,6 +151,552 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
           <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="875e859b2db104fac70b465111523760246d6cfd" datatype="html">
+        <source>Add language</source>
+        <target state="final">Add language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acd556b316c5f1fc3c6f9b2e49466fe5ef1094d3" datatype="html">
+        <source>Pattern must match <x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code>"/>\w[\w-]+<x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code>"/></source>
+        <target state="final">Pattern must match <x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code>"/>\w[\w-]+<x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code>"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="196ef55d6606e4cedd70600b9af4448224960483" datatype="html">
+        <source>(e.g. en, en-GB or en-US-POSIX)</source>
+        <target state="final">(e.g. en, en-GB or en-US-POSIX)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deac588f3a8e44f388840418d4f63b411bca77bd" datatype="html">
+        <source>Invalid pattern</source>
+        <target state="final">Invalid pattern</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e776bd6667dae0287b3d14b314576bd7b6fa9965" datatype="html">
+        <source>Language already exists</source>
+        <target state="final">Language already exists</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <target state="final">Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
+        <source>Add</source>
+        <target state="final">Add</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c8ac022dae267e926db44cb2a8481e1927af5f74" datatype="html">
+        <source>Project</source>
+        <target state="final">Project</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b1aa38a8172b4d696e75f01c98d6ebc7d8f56a48" datatype="html">
+        <source>Source file</source>
+        <target state="final">Source file</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fd880911af2d35171d03e8fb150d7bf7db7a0c87" datatype="html">
+        <source>Source language</source>
+        <target state="final">Source language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="278061c66625e15895baad8b89c0f4fc9d23fec9" datatype="html">
+        <source>Amount of translation units</source>
+        <target state="final">Amount of translation units</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="65fb3f4eda0c18b319941abff7c46922312811dc" datatype="html">
+        <source>
+  Add Language
+</source>
+        <target state="final">
+  Add Language
+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="89ec6af1377c23bac8d589155bc821bac9fed91b" datatype="html">
+        <source>Untranslated</source>
+        <target state="final">Untranslated</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2d5820ffb1bf91459a6048abaef0dbb811b343cc" datatype="html">
+        <source>Translated</source>
+        <target state="final">Translated</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4a1911975d1421d0a019e902c93e29f540ada91" datatype="html">
+        <source>Reviewed</source>
+        <target state="final">Reviewed</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5233e7292acd46d01dfa207d4921e4a723110ed2" datatype="html">
+        <source>Final</source>
+        <target state="final">Final</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
+        <source>Edit</source>
+        <target state="final">Edit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5f19586aba912ec6eb123ec5ab609a3bcc073066" datatype="html">
+        <source>Export</source>
+        <target state="final">Export</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/target/target.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a059709f71aa4c0ac219e160e78a738682ca6a36" datatype="html">
+        <source>Import</source>
+        <target state="final">Import</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/target/target.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4ab6aedb58478677ac0bfc5eb87bc3fe8b8c0920" datatype="html">
+        <source>Orphans</source>
+        <target state="final">Orphans</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/overview/overview/overview.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/target/target.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2798cc1e152b1ec07fd8daf94a2a073d1ba1ebcc" datatype="html">
+        <source>Id</source>
+        <target state="final">Id</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eec715de352a6b114713b30b640d319fa78207a0" datatype="html">
+        <source>Description</source>
+        <target state="final">Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f2081dbd0b230b2e61d03f870d85af5b54aed1ba" datatype="html">
+        <source>Meaning</source>
+        <target state="final">Meaning</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6834fa6b43d1ecbdf147c48dd9c4d72f1484571d" datatype="html">
+        <source>Source</source>
+        <target state="final">Source</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="38baeb215c17af9d9e295e371a57f4a48ab4c191" datatype="html">
+        <source>Target</source>
+        <target state="final">Target</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="821c0fe56d5c0303da42619fefd7646ae379c743" datatype="html">
+        <source>Expected <x id="INTERPOLATION" equiv-text="{{ placeholders.length }}"/> placeholders
+            <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>info<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/>
+          </source>
+        <target state="final">Expected <x id="INTERPOLATION" equiv-text="{{ placeholders.length }}"/> placeholders
+            <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>info<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/>
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="873b72903b1858a9cd6c8967521030b4d7d1435b" datatype="html">
+        <source>State</source>
+        <target state="final">State</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="53647666ac3abdac9ad0cbc0564cc8a2ead09c04" datatype="html">
+        <source>Initial</source>
+        <target state="final">Initial</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8ffafcd86cec5320fa7c805a4bc0ea5eaba008be" datatype="html">
+        <source>Edit unit</source>
+        <target state="final">Edit unit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/translate/translate.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6c7f990d42b4dd2bc29b4557e8e7b3b4f2795383" datatype="html">
+        <source>Export translation units to Excel</source>
+        <target state="final">Export translation units to Excel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="684798705c72c14b4f99f3d190c07a43157afa66" datatype="html">
+        <source>Export all translation units or filter by translation state.</source>
+        <target state="final">Export all translation units or filter by translation state.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/export/export.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e5b9218a6c766b23fc18899f8dc559cc4f7e7621" datatype="html">
+        <source>Translate</source>
+        <target state="final">Translate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/target/target.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="883f596b4489ae541868cbc12502ed1ec13f08c7" datatype="html">
+        <source>
+      Orphans are translation units whose id is no longer contained in the source file. Migrate them
+      in the orphans section.
+    </source>
+        <target state="final">
+      Orphans are translation units whose id is no longer contained in the source file. Migrate them
+      in the orphans section.
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/target/target.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52421cc98f4af0af7bc604b3e3ce9d9a622876ef" datatype="html">
+        <source>Migrate orphan</source>
+        <target state="final">Migrate orphan</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphans/orphans.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="26cd243c2aa49cd82520b0e412bf19a5b1f45302" datatype="html">
+        <source>Copy source to clipboard</source>
+        <target state="final">Copy source to clipboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0c91320dddf373127b7097ea295ec705b1a7f299" datatype="html">
+        <source>Expected <x id="INTERPOLATION" equiv-text="{{ placeholders.length }}"/> placeholders
+        <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>info<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/>
+      </source>
+        <target state="final">Expected <x id="INTERPOLATION" equiv-text="{{ placeholders.length }}"/> placeholders
+        <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>info<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/>
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9fa637b44217cf7b98d8b03ef7cb169de84e5b28" datatype="html">
+        <source>
+  <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>keyboard_backspace<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/> Back
+</source>
+        <target state="final">
+  <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>keyboard_backspace<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/> Back
+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/unit/unit.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33f0509c876e1399d92a9d1882ce38e6f4245ce3" datatype="html">
+        <source>
+        Distance
+      </source>
+        <target state="final">
+        Distance
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4c8dd97ad35918071742dd1be55f3959bff306a" datatype="html">
+        <source>Distance according to the levenshtein comparison</source>
+        <target state="final">Distance according to the levenshtein comparison</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b23ad1c2228a9d53a867f669b452bcc052387674" datatype="html">
+        <source>
+        <x id="INTERPOLATION" equiv-text="{{ row.distance }}"/>
+      </source>
+        <target state="final">
+        <x id="INTERPOLATION" equiv-text="{{ row.distance }}"/>
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed06ba25f8b8effadedaa466355f5b85b0041712" datatype="html">
+        <source>Migrate translation and state to this unit and remove this orphan.</source>
+        <target state="final">Migrate translation and state to this unit and remove this orphan.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d95249a07dd66d94bfc599a7076307818b92d6b" datatype="html">
+        <source>
+    <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>keyboard_backspace<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/> Back
+  </source>
+        <target state="final">
+    <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon>"/>keyboard_backspace<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon>"/> Back
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="53150cdcaa3fc290a4f4018e446e44b998f1f155" datatype="html">
+        <source>
+    Delete orphan
+  </source>
+        <target state="final">
+    Delete orphan
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/target/orphan/orphan.component.html</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
     </body>

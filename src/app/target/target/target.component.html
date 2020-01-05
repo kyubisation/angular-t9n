@@ -7,20 +7,22 @@
         routerLink="./"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        i18n
         >Translate</a
       >
-      <a mat-list-item routerLink="./export" routerLinkActive="active">Export</a>
-      <a mat-list-item routerLink="./import" routerLinkActive="active">Import</a>
+      <a mat-list-item routerLink="./export" routerLinkActive="active" i18n>Export</a>
+      <a mat-list-item routerLink="./import" routerLinkActive="active" i18n>Import</a>
       <a
         *ngIf="(target | async)?.orphanCount"
         mat-list-item
         routerLink="./orphans"
         routerLinkActive="active"
+        i18n
         >Orphans</a
       >
     </mat-nav-list>
 
-    <mat-card *ngIf="(target | async)?.orphanCount">
+    <mat-card *ngIf="(target | async)?.orphanCount" i18n>
       Orphans are translation units whose id is no longer contained in the source file. Migrate them
       in the orphans section.
     </mat-card>
