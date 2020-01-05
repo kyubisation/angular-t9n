@@ -14,7 +14,7 @@ export function createPageParams(query: {
   if (query.entriesPerPage) {
     params = params.set('entriesPerPage', query.entriesPerPage.toString());
   }
-  if (query.sort && query.sort.active) {
+  if (query.sort && query.sort.active && query.sort.direction) {
     params = params.set(
       'sort',
       `${query.sort.direction === 'desc' ? '!' : ''}${query.sort.active}`

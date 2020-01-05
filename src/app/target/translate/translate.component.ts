@@ -1,10 +1,19 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  ViewChild
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 import { FormTargetUnit } from '../../../models';
+import { PaginationHelper } from '../core/pagination-helper';
 import { TranslationTargetService } from '../core/translation-target.service';
 
 import { TranslateDataSource } from './translate-datasource';
@@ -15,17 +24,22 @@ import { TranslateDataSource } from './translate-datasource';
   styleUrls: ['./translate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TranslateComponent implements AfterViewInit {
+export class TranslateComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<FormTargetUnit>;
   dataSource!: TranslateDataSource;
   filter: FormGroup;
+  private _paginationHelper: PaginationHelper;
+  private _destroy = new Subject<void>();
 
   constructor(
     private _translationTargetService: TranslationTargetService,
+    private _route: ActivatedRoute,
+    private _router: Router,
     formBuilder: FormBuilder
   ) {
+    this._paginationHelper = new PaginationHelper(this, this._route, this._router);
     this.filter = formBuilder.group({
       id: '',
       description: '',
@@ -37,6 +51,7 @@ export class TranslateComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this._paginationHelper.applyAndTrackQueryParamsUntil(this._destroy);
     this.dataSource = new TranslateDataSource(
       this.paginator,
       this.sort,
@@ -44,5 +59,10 @@ export class TranslateComponent implements AfterViewInit {
       this._translationTargetService
     );
     this.table.dataSource = this.dataSource;
+  }
+
+  ngOnDestroy(): void {
+    this._destroy.next();
+    this._destroy.complete();
   }
 }
