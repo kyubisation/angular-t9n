@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+
+  mat-form-field {
+    flex: 1 1 100%;
+
+    @media (min-width: 960px) {
+      margin-right: 1rem;
+      flex: 0 0 calc(50% - 1rem);
+    }
+  }
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+}

@@ -6,6 +6,7 @@ import { ImportComponent } from './import/import.component';
 import { OrphansComponent } from './orphans/orphans.component';
 import { TargetComponent } from './target/target.component';
 import { TranslateComponent } from './translate/translate.component';
+import { UnitComponent } from './unit/unit.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
       {
         path: '',
         component: TranslateComponent
+      },
+      {
+        path: 'unit/:unitId',
+        component: UnitComponent
       },
       {
         path: 'import',

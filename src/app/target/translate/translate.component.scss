@@ -28,6 +28,10 @@ table {
     &.mat-column-state {
       width: 10rem;
     }
+
+    &.mat-column-unit-link {
+      width: 2rem;
+    }
   }
 
   mat-form-field {

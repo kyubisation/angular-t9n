@@ -31,6 +31,10 @@
             "scripts": []
           },
           "configurations": {
+            "de": {
+              "i18nLocale": "de",
+              "i18nFile": "src/locale/xlf2/messages.de.xlf"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -67,6 +71,9 @@
             "browserTarget": "angular-t9n:build"
           },
           "configurations": {
+            "de": {
+              "browserTarget": "angular-t9n:build:de"
+            },
             "production": {
               "browserTarget": "angular-t9n:build:production"
             }

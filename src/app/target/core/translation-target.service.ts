@@ -1,9 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { SortDirection } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, first, map, switchMap } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  first,
+  map,
+  skip,
+  startWith,
+  switchMap,
+  takeUntil,
+  tap
+} from 'rxjs/operators';
 
 import { PaginationResponse, TargetResponse, TranslationTargetUnitResponse } from '../../../models';
 import { TranslationService } from '../../core/translation.service';
@@ -47,6 +59,44 @@ export class TranslationTargetService {
         this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
       )
     );
+  }
+
+  updateUnitOnChange(
+    unit: TranslationTargetUnitResponse,
+    controls: { target: AbstractControl; state: AbstractControl },
+    until: Observable<void>
+  ) {
+    // The startWith, skip combination is necessary to deal with an IE11 bug
+    controls.target.valueChanges
+      .pipe(
+        takeUntil(until),
+        startWith(controls.target.value),
+        debounceTime(500),
+        distinctUntilChanged(),
+        skip(1),
+        tap(target =>
+          target
+            ? controls.state.enable({ emitEvent: false })
+            : controls.state.disable({ emitEvent: false })
+        ),
+        switchMap(target => this.updateUnit({ ...unit, target, state: controls.state.value }))
+      )
+      .subscribe(r => controls.state.setValue(r.state, { emitEvent: false }));
+    controls.state.valueChanges
+      .pipe(
+        takeUntil(until),
+        startWith(controls.state.value),
+        distinctUntilChanged(),
+        skip(1),
+        switchMap(state =>
+          this.updateUnit({
+            ...unit,
+            target: controls.target.value,
+            state
+          })
+        )
+      )
+      .subscribe();
   }
 
   updateUnit(unit: Partial<TranslationTargetUnitResponse>) {

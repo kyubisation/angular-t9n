@@ -44,7 +44,7 @@
         mat-cell
         [matTooltip]="row.locations?.join('\n')"
         [matTooltipDisabled]="!row.locations?.length"
-        matTooltipClass="tooltip-locations"
+        matTooltipClass="tooltip-linebreak"
         *matCellDef="let row"
       >
         {{ row.id }}

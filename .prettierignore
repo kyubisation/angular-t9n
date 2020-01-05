@@ -2,7 +2,7 @@
 browserslist
 LICENSE
 coverage
-app
+app/*
 package-lock.json
 .*
 *.ico

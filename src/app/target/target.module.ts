@@ -23,6 +23,7 @@ import { OrphansComponent } from './orphans/orphans.component';
 import { TargetRoutingModule } from './target-routing.module';
 import { TargetComponent } from './target/target.component';
 import { TranslateComponent } from './translate/translate.component';
+import { UnitComponent } from './unit/unit.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TranslateComponent } from './translate/translate.component';
     ExportComponent,
     ImportComponent,
     TargetComponent,
-    OrphansComponent
+    OrphansComponent,
+    UnitComponent
   ],
   imports: [
     CommonModule,

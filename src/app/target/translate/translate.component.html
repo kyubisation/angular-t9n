@@ -6,7 +6,7 @@
         mat-cell
         [matTooltip]="row.locations?.join('\n')"
         [matTooltipDisabled]="!row.locations?.length"
-        matTooltipClass="tooltip-locations"
+        matTooltipClass="tooltip-linebreak"
         *matCellDef="let row"
       >
         {{ row.id }}
@@ -34,6 +34,12 @@
             placeholder="Translation"
             [formControl]="row.target"
           ></textarea>
+          <mat-hint *ngIf="row.target.errors?.placeholders as placeholders"
+            >Expected {{ placeholders.length }} placeholders
+            <mat-icon [matTooltip]="placeholders.join('\n')" matTooltipClass="tooltip-linebreak"
+              >info</mat-icon
+            >
+          </mat-hint>
         </mat-form-field>
       </td>
     </ng-container>
@@ -48,6 +54,18 @@
             <mat-option value="final">Final</mat-option>
           </mat-select>
         </mat-form-field>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="unit-link">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <a
+          [routerLink]="['./unit', row.id, queryParams | async]"
+          mat-icon-button
+          matTooltip="Edit unit"
+        >
+          <mat-icon>edit</mat-icon>
+        </a>
       </td>
     </ng-container>
 
@@ -102,7 +120,10 @@
 
     <tr
       mat-header-row
-      *matHeaderRowDef="['id', 'description', 'meaning', 'source', 'target', 'state']; sticky: true"
+      *matHeaderRowDef="
+        ['id', 'description', 'meaning', 'source', 'target', 'state', 'unit-link'];
+        sticky: true
+      "
     ></tr>
     <tr
       mat-header-row
@@ -120,7 +141,10 @@
     ></tr>
     <tr
       mat-row
-      *matRowDef="let row; columns: ['id', 'description', 'meaning', 'source', 'target', 'state']"
+      *matRowDef="
+        let row;
+        columns: ['id', 'description', 'meaning', 'source', 'target', 'state', 'unit-link']
+      "
     ></tr>
   </table>
 

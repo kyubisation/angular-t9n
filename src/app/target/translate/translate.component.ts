@@ -29,6 +29,7 @@ export class TranslateComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<FormTargetUnit>;
   dataSource!: TranslateDataSource;
+  queryParams: Observable<Params>;
   filter: FormGroup;
   private _paginationHelper: PaginationHelper;
   private _destroy = new Subject<void>();
@@ -40,6 +41,7 @@ export class TranslateComponent implements AfterViewInit, OnDestroy {
     formBuilder: FormBuilder
   ) {
     this._paginationHelper = new PaginationHelper(this, this._route, this._router);
+    this.queryParams = this._route.queryParams;
     this.filter = formBuilder.group({
       id: '',
       description: '',

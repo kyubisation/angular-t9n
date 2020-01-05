@@ -3,19 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subject } from 'rxjs';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  skip,
-  startWith,
-  switchMap,
-  takeUntil,
-  tap
-} from 'rxjs/operators';
+import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { FormTargetUnit } from '../../../models';
 import { TranslationTargetService } from '../core/translation-target.service';
+import { xlfElementValidator } from '../core/xlf-element-validator';
 
 export class TranslateDataSource extends DataSource<FormTargetUnit> {
   totalEntries: Observable<number>;
@@ -56,46 +48,11 @@ export class TranslateDataSource extends DataSource<FormTargetUnit> {
         unitPage._embedded!.entries.map(u => {
           const unit: FormTargetUnit = {
             ...u,
-            target: new FormControl(u.target),
-            state: new FormControl(u.state)
+            target: new FormControl(u.target, xlfElementValidator(u.source)),
+            state: new FormControl({ value: u.state, disabled: !u.target })
           };
-          if (!u.target) {
-            unit.state.disable();
-          }
-
-          // The startWith, skip combination is necessary to deal with an IE11 bug
-          unit.target.valueChanges
-            .pipe(
-              takeUntil(this._destroy),
-              startWith(unit.target.value),
-              debounceTime(500),
-              distinctUntilChanged(),
-              skip(1),
-              tap(target =>
-                target
-                  ? unit.state.enable({ emitEvent: false })
-                  : unit.state.disable({ emitEvent: false })
-              ),
-              switchMap(target =>
-                this._translationTargetService.updateUnit({ ...u, target, state: unit.state.value })
-              )
-            )
-            .subscribe(r => unit.state.setValue(r.state, { emitEvent: false }));
-          unit.state.valueChanges
-            .pipe(
-              takeUntil(this._destroy),
-              startWith(unit.state.value),
-              distinctUntilChanged(),
-              skip(1),
-              switchMap(state =>
-                this._translationTargetService.updateUnit({
-                  ...u,
-                  target: unit.target.value,
-                  state
-                })
-              )
-            )
-            .subscribe();
+          this._translationTargetService.updateUnitOnChange(u, unit, this._destroy);
+          unit.target.markAsTouched();
           return unit;
         })
       )
