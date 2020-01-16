@@ -87,6 +87,10 @@ export class ImportService {
   ) {
     return this._translationTargetService
       .unit(unit.id!)
-      .pipe(switchMap(u => this._translationTargetService.updateUnit({ ...u, state })));
+      .pipe(
+        switchMap(u =>
+          this._translationTargetService.updateUnit({ ...u, target: unit.target!, state })
+        )
+      );
   }
 }
