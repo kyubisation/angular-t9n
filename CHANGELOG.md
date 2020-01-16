@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/kyubisation/angular-t9n/compare/0.3.0...0.3.1) (2020-01-16)
+
+### Bug Fixes
+
+- import should use target value from file ([26e0670](https://github.com/kyubisation/angular-t9n/commit/26e0670358c8d065fa4171cbfa6fcbd157a3c227))
+
 ## [0.3.0](https://github.com/kyubisation/angular-t9n/compare/0.2.1...0.3.0) (2020-01-05)
 
 ### Features
