@@ -10,7 +10,13 @@
       "prefix": "t9n",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
+        }
+      },
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "de": "src/locale/xlf2/messages.de.xlf"
         }
       },
       "architect": {
@@ -31,10 +37,6 @@
             "scripts": []
           },
           "configurations": {
-            "de": {
-              "i18nLocale": "de",
-              "i18nFile": "src/locale/xlf2/messages.de.xlf"
-            },
             "production": {
               "fileReplacements": [
                 {
