@@ -5,4 +5,5 @@ export * from './root-response';
 export * from './source-unit-response';
 export * from './source-unit-with-translations-response';
 export * from './target-response';
+export * from './targets-response';
 export * from './target-unit-response';

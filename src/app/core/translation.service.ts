@@ -5,15 +5,16 @@ import {
   catchError,
   distinctUntilChanged,
   filter,
-  first,
   map,
   switchMap,
+  take,
   tap,
   timeout
 } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { RootResponse, TargetResponse } from '../../models';
+import { TargetsResponse } from '../../models/targets-response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,21 +28,20 @@ export class TranslationService {
   serviceDown: Observable<boolean>;
 
   private _rootSubject = new BehaviorSubject<RootResponse | undefined>(undefined);
-  private _targetsSubject = new BehaviorSubject(new Map<string, TargetResponse>());
+  private _targetsSubject = new BehaviorSubject<TargetsResponse | undefined>(undefined);
+  private _targetsMap = new BehaviorSubject(new Map<string, TargetResponse>());
   private _root = this._rootSubject.pipe(
     filter((r): r is RootResponse => !!r),
-    distinctUntilChanged((x, y) => JSON.stringify(x) === JSON.stringify(y))
+    distinctUntilChanged((x, y) => x.sourceFile === y.sourceFile)
   );
+  private _targets = this._targetsSubject.pipe(filter((r): r is TargetsResponse => !!r));
 
   constructor(private _http: HttpClient) {
     this.project = this._root.pipe(map(r => r.project));
     this.sourceFile = this._root.pipe(map(r => r.sourceFile));
     this.sourceLanguage = this._root.pipe(map(r => r.sourceLanguage));
     this.unitCount = this._root.pipe(map(r => r.unitCount));
-    this.targets = this._targetsSubject.pipe(
-      filter(t => t.size > 0),
-      map(t => Array.from(t.values()).sort((a, b) => a.language.localeCompare(b.language)))
-    );
+    this.targets = this._targetsMap.pipe(map(t => Array.from(t.values())));
     this.serviceDown = timer(0, 1000).pipe(
       switchMap(() =>
         this._http.get<RootResponse>(`${environment.translationServer}/api`).pipe(
@@ -50,23 +50,24 @@ export class TranslationService {
           catchError(() => of(undefined))
         )
       ),
-      map(r => !r)
+      map(r => !r),
+      distinctUntilChanged()
     );
     this._root
-      .pipe(switchMap(r => this._loadTargets(r)))
+      .pipe(switchMap(r => this._http.get<TargetsResponse>(r._links!.targets.href)))
       .subscribe(targets => this._targetsSubject.next(targets));
+    this._targets
+      .pipe(switchMap(t => this._loadTargets(t)))
+      .subscribe(m => this._targetsMap.next(m));
   }
 
   target(language: string): Observable<TargetResponse | undefined> {
-    return this._targetsSubject.pipe(
-      filter(t => t.size > 0),
-      map(t => t.get(language))
-    );
+    return this._targetsMap.pipe(map(t => t.get(language)));
   }
 
   createTarget(language: string) {
-    return this._root.pipe(
-      first(),
+    return this._targets.pipe(
+      take(1),
       map(r => this._targetHref(r, language)),
       switchMap(href => this._http.post<TargetResponse>(href, {})),
       tap(t => this._updateTarget(t))
@@ -74,17 +75,17 @@ export class TranslationService {
   }
 
   updateTarget(language: string) {
-    return this._root.pipe(
+    return this._targets.pipe(
       map(r => this._targetHref(r, language)),
       switchMap(href => this._http.get<TargetResponse>(href)),
       tap(t => this._updateTarget(t))
     );
   }
 
-  private _loadTargets(rootResponse: RootResponse) {
+  private _loadTargets(targetsResponse: TargetsResponse) {
     return combineLatest(
-      rootResponse.languages
-        .map(l => this._targetHref(rootResponse, l))
+      targetsResponse.languages
+        .map(l => this._targetHref(targetsResponse, l))
         .map(href => this._http.get<TargetResponse>(href))
     ).pipe(
       map(targets =>
@@ -96,15 +97,15 @@ export class TranslationService {
     );
   }
 
-  private _targetHref(rootResponse: RootResponse, language: string) {
-    return rootResponse._links!.targets.href.replace('{language}', language);
+  private _targetHref(targets: TargetsResponse, language: string) {
+    return targets._links!.target.href.replace('{language}', language);
   }
 
   private _updateTarget(target: TargetResponse) {
-    const targets = new Map<string, TargetResponse>(this._targetsSubject.value).set(
+    const targets = new Map<string, TargetResponse>(this._targetsMap.value).set(
       target.language,
       target
     );
-    this._targetsSubject.next(targets);
+    this._targetsMap.next(targets);
   }
 }

@@ -18,7 +18,8 @@ import {
   SOURCE_UNITS_ROUTE,
   TARGET_ROUTE,
   TARGET_UNIT_ROUTE,
-  TARGET_UNITS_ROUTE
+  TARGET_UNITS_ROUTE,
+  TARGETS_ROUTE
 } from './constants';
 import {
   OrphanResponse,
@@ -26,6 +27,7 @@ import {
   RootResponse,
   SourceUnitWithTranslationsResponse,
   TargetResponse,
+  TargetsResponse,
   TargetUnitResponse
 } from './responses';
 
@@ -77,6 +79,9 @@ export class TranslationServer extends Koa<any, Koa.DefaultContext & Router.Rout
         } else {
           ctx.body = new SourceUnitWithTranslationsResponse(unit, this._context, toUrlFactory(ctx));
         }
+      })
+      .get(TARGETS_ROUTE, '/targets', ctx => {
+        ctx.body = new TargetsResponse(this._context, toUrlFactory(ctx));
       })
       .get(TARGET_ROUTE, '/targets/:language', ctx => {
         const { language } = ctx.params;

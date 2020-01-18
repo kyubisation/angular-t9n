@@ -13,6 +13,7 @@ import {
   RootResponse,
   SourceUnitResponse,
   TargetResponse,
+  TargetsResponse,
   TargetUnitResponse
 } from './responses';
 import { TranslationServer } from './translation-server';
@@ -64,7 +65,6 @@ describe('TranslationServer', () => {
     const response = await request(server.callback()).get('/api');
     expect(response.status).toEqual(200);
     const root = response.body as RootResponse;
-    expect(root.languages).toEqual(context.languages);
     expect(root.project).toEqual(project);
     expect(root.sourceFile).toEqual(sourceFile);
     expect(root.sourceLanguage).toEqual(context.source.language);
@@ -92,6 +92,13 @@ describe('TranslationServer', () => {
     const unitResponse = response.body as SourceUnitResponse;
     expect(unitResponse.id).toEqual(unit.id);
     expect(unitResponse.source).toEqual(unit.source);
+  });
+
+  it('GET /api/targets', async () => {
+    const response = await request(server.callback()).get('/api/targets');
+    expect(response.status).toEqual(200);
+    const root = response.body as TargetsResponse;
+    expect(root.languages).toEqual(context.languages);
   });
 
   it('GET /api/targets/:non-existant-target => 404', async () => {

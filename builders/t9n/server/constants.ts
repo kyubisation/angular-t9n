@@ -1,6 +1,7 @@
 export const ROOT_ROUTE = 'root';
 export const SOURCE_UNITS_ROUTE = 'sourceUnits';
 export const SOURCE_UNIT_ROUTE = 'sourceUnit';
+export const TARGETS_ROUTE = 'targets';
 export const TARGET_ROUTE = 'target';
 export const TARGET_UNITS_ROUTE = 'targetUnits';
 export const TARGET_UNIT_ROUTE = 'targetUnit';
