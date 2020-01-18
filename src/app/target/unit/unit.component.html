@@ -20,8 +20,8 @@
         mat-icon-button
         matSuffix
         i18n-matTooltip
-        matTooltip="Copy source to clipboard"
-        (click)="copySourceToClipboard(formGroup.get('source').value)"
+        matTooltip="Copy source to target"
+        (click)="formGroup.get('target').setValue(formGroup.get('source').value)"
       >
         <mat-icon>file_copy</mat-icon>
       </button>

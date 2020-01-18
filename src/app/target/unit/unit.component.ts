@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, share, switchMap } from 'rxjs/operators';
@@ -23,8 +22,7 @@ export class UnitComponent implements OnDestroy {
   constructor(
     private _translationTargetService: TranslationTargetService,
     private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
-    private _snackbar: MatSnackBar
+    private _formBuilder: FormBuilder
   ) {
     this.params = this._route.params.pipe(map(({ unitId, ...params }) => params));
     this.unit = this._route.paramMap.pipe(
@@ -37,32 +35,6 @@ export class UnitComponent implements OnDestroy {
   ngOnDestroy(): void {
     this._destroy.next();
     this._destroy.complete();
-  }
-
-  copySourceToClipboard(source: string) {
-    if (!document) {
-      return;
-    }
-
-    const textarea = document.createElement('textarea');
-    textarea.classList.add('cdk-visually-hidden');
-    textarea.value = source;
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-
-    try {
-      if (document.execCommand('copy')) {
-        this._snackbar.open('Copied source to clipboard', undefined, { duration: 2500 });
-        return;
-      } else {
-        throw new Error();
-      }
-    } catch {
-      this._snackbar.open('Failed to copy source to clipboard', undefined, { duration: 2500 });
-    }
-
-    document.body.removeChild(textarea);
   }
 
   private _createForm(unit: TranslationTargetUnitResponse) {
