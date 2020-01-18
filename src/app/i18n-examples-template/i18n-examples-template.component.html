@@ -4,16 +4,23 @@
   <span i18n="description">Example with description</span>
   <span i18n="meaning|descriptionMeaning">Example with description/meaning</span>
   <span i18n-title="titleMeaning|titleDescription" title="Title">Should NOT be translated</span>
+  <span i18n>Example with {amount, plural, =0 {nothing} =1 {one thing} other {things}}</span>
   <span i18n
     >Example with {amount, plural, =0 {nothing} =1 {one thing} other {{{amount}} of things}}</span
   >
   <span i18n>The author is {gender, select, male {male} female {female} other {other}}</span>
+  <span i18n>The author is {gender, select, male {male} female {female} other {{{gender}}}}</span>
   <span i18n
     >Updated: {minutes, plural, =0 {just now} =1 {one minute ago} other {{{minutes}} minutes ago by
     {gender, select, male {male} female {female} other {other}}}}
   </span>
   <span i18n>Example with value {{ minutes }}</span>
+  <span i18n>Example with value {{ title | titlecase }}</span>
   <span i18n>Example with image <img src="favicon.ico" alt="It's a favicon"/></span>
+  <span i18n
+    >Example with images <img src="favicon.ico" alt="It's a favicon"/> and
+    <img src="favicon2.ico" alt="It's another favicon"
+  /></span>
   <span i18n>Empty example</span>
   <span i18n
     >Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque

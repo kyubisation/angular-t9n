@@ -17,7 +17,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="exampleId" datatype="html">
@@ -53,32 +53,60 @@
         <note priority="1" from="description">titleDescription</note>
         <note priority="1" from="meaning">titleMeaning</note>
       </trans-unit>
+      <trans-unit id="7d86c5e90ecd121e2e3ae81f35aae5eb41fa2aaa" datatype="html">
+        <source>Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="43fe8baae40ba16c622b0f25695b445b550b93da" datatype="html">
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {things} }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8045b9a4b27fbf247d805ae1cd2d09f16109f402" datatype="html">
         <source>Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="19750aff03afcc804b9143ce8be0715029017c38" datatype="html">
         <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<x id="INTERPOLATION" equiv-text="{{amount}}"/> of things} }</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f99f34ac9bd4606345071bd813858dec29f3b7d1" datatype="html">
         <source>The author is <x id="ICU" equiv-text="{gender, select, male {...} female {...} other {...}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eff74b75ab7364b6fa888f1cbfae901aaaf02295" datatype="html">
         <source>{VAR_SELECT, select, male {male} female {female} other {other} }</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b55a1cf34b18e4d28e724c6a8e9bd43456f1190" datatype="html">
+        <source>The author is <x id="ICU" equiv-text="{gender, select, male {...} female {...} other {...}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c7e1ea0cdcc7f51260cb17d5951e46811ce18571" datatype="html">
+        <source>{VAR_SELECT, select, male {male} female {female} other {<x id="INTERPOLATION" equiv-text="{{gender}}"/>} }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ee34415da191001c5dedfae283e5522b2354e667" datatype="html">
@@ -86,7 +114,7 @@
   </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fcb08f1898b891ce78bd8b0eb7089d3463110758" datatype="html">
@@ -94,21 +122,36 @@
     {VAR_SELECT, select, male {male} female {female} other {other} }} }</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e120abedac6817953412e8d9aa3be7cf9893d425" datatype="html">
         <source>Example with value <x id="INTERPOLATION" equiv-text="{{ minutes }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ade398f0a8bda44f70a5d1ed3a5882c8de796ab2" datatype="html">
+        <source>Example with value <x id="INTERPOLATION" equiv-text="{{ title | titlecase }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="00d0d9fcb34884ed2846eef6b63f2d52dd56f532" datatype="html">
         <source>Example with image <x id="TAG_IMG" ctype="image" equiv-text="&lt;img/&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cf384cd77db30fbdbd443046c7dc28c0766771f1" datatype="html">
+        <source>Example with images <x id="TAG_IMG" ctype="image" equiv-text="&lt;img/&gt;"/> and
+    <x id="TAG_IMG_1" ctype="image" equiv-text="&lt;img/&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="070b033d63a4116c12941916f638e6153f8dad57" datatype="html">
@@ -124,7 +167,7 @@
     quo voluptas nulla pariatur?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/i18n-examples-template/i18n-examples-template.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="875e859b2db104fac70b465111523760246d6cfd" datatype="html">
@@ -159,21 +202,21 @@
         <source>Language already exists</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
         <source>Add</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/overview/add-language-modal/add-language-modal.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c8ac022dae267e926db44cb2a8481e1927af5f74" datatype="html">
