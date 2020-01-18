@@ -13,7 +13,7 @@
     <unit id="82167058490521791">
       <notes>
         <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:2</note>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:24</note>
       </notes>
       <segment state="final">
         <source>Empty example</source>
@@ -61,9 +61,27 @@
         <target>Title</target>
       </segment>
     </unit>
+    <unit id="2168835922015701630">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:7</note>
+      </notes>
+      <segment state="final">
+        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <target>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></target>
+      </segment>
+    </unit>
+    <unit id="9083455685404174731">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:7</note>
+      </notes>
+      <segment state="final">
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {things} }</source>
+        <target>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {things} }</target>
+      </segment>
+    </unit>
     <unit id="3328635074237601307">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:8</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:9</note>
       </notes>
       <segment state="final">
         <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
@@ -72,7 +90,7 @@
     </unit>
     <unit id="8180817321131110864">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:8</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:9</note>
       </notes>
       <segment state="final">
         <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<ph id="0" equiv="INTERPOLATION" disp="{{amount}}"/> of things} }</source>
@@ -81,7 +99,7 @@
     </unit>
     <unit id="8511147241295446916">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:10</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:11</note>
       </notes>
       <segment state="final">
         <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
@@ -90,16 +108,34 @@
     </unit>
     <unit id="7842238767399919809">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:10</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:11</note>
       </notes>
       <segment state="final">
         <source>{VAR_SELECT, select, male {male} female {female} other {other} }</source>
         <target>{VAR_SELECT, select, male {male} female {female} other {other} }</target>
       </segment>
     </unit>
+    <unit id="615032484519668846">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12</note>
+      </notes>
+      <segment state="final">
+        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
+        <target>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></target>
+      </segment>
+    </unit>
+    <unit id="1076465086362097198">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12</note>
+      </notes>
+      <segment state="final">
+        <source>{VAR_SELECT, select, male {male} female {female} other {<ph id="0" equiv="INTERPOLATION" disp="{{gender}}"/>} }</source>
+        <target>{VAR_SELECT, select, male {male} female {female} other {<ph id="0" equiv="INTERPOLATION" disp="{{gender}}"/>} }</target>
+      </segment>
+    </unit>
     <unit id="685963878805841813">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12,14</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:14,16</note>
       </notes>
       <segment state="final">
         <source>Updated: <ph id="0" equiv="ICU" disp="{minutes, plural, =0 {...} =1 {...} other {...}}"/>
@@ -110,7 +146,7 @@
     </unit>
     <unit id="2868095629197866953">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12,13</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:14,15</note>
       </notes>
       <segment state="final">
         <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<ph id="0" equiv="INTERPOLATION" disp="{{minutes}}"/> minutes ago by
@@ -121,25 +157,45 @@
     </unit>
     <unit id="6796106025314020146">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:15</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
       </notes>
       <segment state="final">
         <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></source>
         <target>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></target>
       </segment>
     </unit>
+    <unit id="6636027407356199973">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:18</note>
+      </notes>
+      <segment state="final">
+        <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ title | titlecase }}"/></source>
+        <target>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ title | titlecase }}"/></target>
+      </segment>
+    </unit>
     <unit id="134004861588612618">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:19</note>
       </notes>
       <segment state="final">
         <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
         <target>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></target>
       </segment>
     </unit>
+    <unit id="5429384145691392061">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:21,23</note>
+      </notes>
+      <segment state="final">
+        <source>Example with images <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/> and
+    <ph id="1" equiv="TAG_IMG_1" type="image" disp="&lt;img/>"/></source>
+        <target>Example with images <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/> and
+    <ph id="1" equiv="TAG_IMG_1" type="image" disp="&lt;img/>"/></target>
+      </segment>
+    </unit>
     <unit id="7312493194969094694">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:19,28</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:26,35</note>
       </notes>
       <segment state="final">
         <source>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
@@ -202,7 +258,7 @@
     </unit>
     <unit id="6776451739899171940">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:9</note>
+        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:10</note>
       </notes>
       <segment state="final">
         <source>Language already exists</source>
@@ -211,7 +267,7 @@
     </unit>
     <unit id="2159130950882492111">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:18</note>
+        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:20</note>
       </notes>
       <segment state="final">
         <source>Cancel</source>
@@ -220,7 +276,7 @@
     </unit>
     <unit id="3249513483374643425">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:19</note>
+        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:21</note>
       </notes>
       <segment state="final">
         <source>Add</source>
