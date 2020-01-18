@@ -30,12 +30,6 @@
     <mat-form-field appearance="standard">
       <mat-label i18n>Target</mat-label>
       <textarea matInput formControlName="target" cdkTextareaAutosize></textarea>
-      <mat-hint *ngIf="formGroup.get('target').errors?.placeholders as placeholders" i18n
-        >Expected {{ placeholders.length }} placeholders
-        <mat-icon [matTooltip]="placeholders.join('\n')" matTooltipClass="tooltip-linebreak"
-          >info</mat-icon
-        >
-      </mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="standard">

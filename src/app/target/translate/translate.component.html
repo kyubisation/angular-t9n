@@ -34,12 +34,6 @@
             placeholder="Translation"
             [formControl]="row.target"
           ></textarea>
-          <mat-hint *ngIf="row.target.errors?.placeholders as placeholders" i18n
-            >Expected {{ placeholders.length }} placeholders
-            <mat-icon [matTooltip]="placeholders.join('\n')" matTooltipClass="tooltip-linebreak"
-              >info</mat-icon
-            >
-          </mat-hint>
         </mat-form-field>
       </td>
     </ng-container>
