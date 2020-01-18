@@ -7,7 +7,6 @@ import { map, share, switchMap } from 'rxjs/operators';
 
 import { TranslationTargetUnitResponse } from '../../../models';
 import { TranslationTargetService } from '../core/translation-target.service';
-import { xlfElementValidator } from '../core/xlf-element-validator';
 
 @Component({
   selector: 't9n-unit',
@@ -71,7 +70,7 @@ export class UnitComponent implements OnDestroy {
       description: [{ value: unit.description || '-', disabled: true }],
       meaning: [{ value: unit.meaning || '-', disabled: true }],
       source: [{ value: unit.source, disabled: true }],
-      target: [unit.target, xlfElementValidator(unit.source)],
+      target: unit.target,
       state: [{ value: unit.state, disabled: !unit.target }]
     });
     this._translationTargetService.updateUnitOnChange(

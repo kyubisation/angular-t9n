@@ -7,7 +7,6 @@ import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { FormTargetUnit } from '../../../models';
 import { TranslationTargetService } from '../core/translation-target.service';
-import { xlfElementValidator } from '../core/xlf-element-validator';
 
 export class TranslateDataSource extends DataSource<FormTargetUnit> {
   totalEntries: Observable<number>;
@@ -48,7 +47,7 @@ export class TranslateDataSource extends DataSource<FormTargetUnit> {
         unitPage._embedded!.entries.map(u => {
           const unit: FormTargetUnit = {
             ...u,
-            target: new FormControl(u.target, xlfElementValidator(u.source)),
+            target: new FormControl(u.target),
             state: new FormControl({ value: u.state, disabled: !u.target })
           };
           this._translationTargetService.updateUnitOnChange(u, unit, this._destroy);
