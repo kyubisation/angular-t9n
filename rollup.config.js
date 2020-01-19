@@ -1,50 +1,27 @@
 import ts from '@wessberg/rollup-plugin-ts';
 
 export default [
-  {
-    input: './schematics/ng-add/index.ts',
+  target('./schematics/ng-add/index.ts'),
+  target('./schematics/resolve-ng-locales/index.ts'),
+  target('./builders/t9n/index.ts', 'named')
+];
+
+function target(input, exports = 'auto') {
+  return {
+    input,
     output: {
-      file: './schematics/ng-add/index.js',
-      format: 'cjs'
-    },
-    external: [
-      '@angular-devkit/schematics',
-      '@schematics/angular/utility/config',
-      '@schematics/angular/utility/workspace-models',
-      'path'
-    ],
-    plugins: [
-      ts({
-        browserslist: false,
-        tsconfig: 'tsconfig.node.json'
-      })
-    ]
-  },
-  {
-    input: './schematics/resolve-ng-locales/index.ts',
-    output: {
-      file: './schematics/resolve-ng-locales/index.js',
-      format: 'cjs'
-    },
-    external: ['@angular-devkit/core', 'fs', 'path'],
-    plugins: [
-      ts({
-        browserslist: false,
-        tsconfig: 'tsconfig.node.json'
-      })
-    ]
-  },
-  {
-    input: './builders/t9n/index.ts',
-    output: {
-      file: './builders/t9n/index.js',
-      exports: 'named',
+      file: input.replace(/\.ts$/, '.js'),
+      exports,
       format: 'cjs'
     },
     external: [
       '@angular-devkit/architect',
+      '@angular-devkit/core',
+      '@angular-devkit/schematics',
       '@koa/cors',
       '@koa/router',
+      '@schematics/angular/utility/config',
+      '@schematics/angular/utility/workspace-models',
       'fs',
       'js-levenshtein',
       'koa',
@@ -61,5 +38,5 @@ export default [
         tsconfig: 'tsconfig.node.json'
       })
     ]
-  }
-];
+  };
+}
