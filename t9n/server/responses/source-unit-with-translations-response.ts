@@ -1,4 +1,5 @@
-import { TranslationContext, TranslationSourceUnit } from '../../translation';
+import { TranslationContext } from '../../translation-context';
+import { TranslationSourceUnit } from '../../translation-source-unit';
 import { UrlFactory } from '../url-factory';
 
 import { SourceUnitResponse } from './source-unit-response';

@@ -1,4 +1,4 @@
-import { TranslationSourceUnit } from '../../translation';
+import { TranslationSourceUnit } from '../../translation-source-unit';
 import { SOURCE_UNIT_ROUTE } from '../constants';
 import { Hal, HalLink, Links } from '../hal';
 import { UrlFactory } from '../url-factory';

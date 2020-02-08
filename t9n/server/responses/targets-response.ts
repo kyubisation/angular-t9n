@@ -1,4 +1,4 @@
-import { TranslationContext } from '../../translation';
+import { TranslationContext } from '../../translation-context';
 import { ROUTE_TEMPLATE, TARGET_ROUTE, TARGETS_ROUTE } from '../constants';
 import { Hal, HalLink, Links } from '../hal';
 import { UrlFactory } from '../url-factory';

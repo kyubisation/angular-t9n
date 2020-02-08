@@ -1,4 +1,5 @@
-import { TranslationTarget, TranslationTargetUnit } from '../../translation';
+import { TranslationTarget } from '../../translation-target';
+import { TranslationTargetUnit } from '../../translation-target-unit';
 import { SOURCE_UNIT_ROUTE, TARGET_UNIT_ROUTE } from '../constants';
 import { Hal, HalLink, Links } from '../hal';
 import { UrlFactory } from '../url-factory';

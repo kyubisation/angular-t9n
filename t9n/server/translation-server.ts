@@ -8,7 +8,8 @@ import koaStatic from 'koa-static';
 import { join } from 'path';
 import { promisify } from 'util';
 
-import { TranslationContext, TranslationTargetUnit } from '../translation';
+import { TranslationContext } from '../translation-context';
+import { TranslationTargetUnit } from '../translation-target-unit';
 
 import {
   ORPHAN_ROUTE,

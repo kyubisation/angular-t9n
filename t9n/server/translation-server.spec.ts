@@ -4,7 +4,9 @@ import { tmpdir } from 'os';
 import { join, resolve } from 'path';
 import request from 'supertest';
 
-import { TranslationContext, TranslationFactory, TranslationOrphan } from '../translation';
+import { TranslationContext } from '../translation-context';
+import { TranslationFactory } from '../translation-factory';
+import { TranslationOrphan } from '../translation-orphan';
 
 import {
   OrphanMatchResponse,

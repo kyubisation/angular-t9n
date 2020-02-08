@@ -1,4 +1,5 @@
-import { TranslationTarget, TranslationTargetUnit } from '../../translation';
+import { TranslationTarget } from '../../translation-target';
+import { TranslationTargetUnit } from '../../translation-target-unit';
 import { UrlFactory } from '../url-factory';
 
 import { TargetUnitResponse } from './target-unit-response';

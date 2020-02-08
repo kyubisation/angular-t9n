@@ -3,12 +3,10 @@ import { json } from '@angular-devkit/core';
 import { existsSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { basename, dirname, extname, join, resolve } from 'path';
 
-import { Schema as Options } from './schema';
-import { TranslationServer } from './server';
-import { TranslationFactory } from './translation';
+import { TranslationFactory, TranslationServer } from '../../t9n';
 
-export * from './server';
-export * from './translation';
+import { Schema as Options } from './schema';
+
 export { Schema as t9nOptions } from './schema';
 
 export default createBuilder<Options & json.JsonObject, BuilderOutput>(t9n);

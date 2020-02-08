@@ -1,6 +1,7 @@
 import ts from '@wessberg/rollup-plugin-ts';
 
 export default [
+  target('./t9n/index.ts'),
   target('./schematics/ng-add/index.ts'),
   target('./schematics/resolve-ng-locales/index.ts'),
   target('./builders/t9n/index.ts', 'named')
@@ -15,6 +16,7 @@ function target(input, exports = 'auto') {
       format: 'cjs'
     },
     external: [
+      '../../t9n',
       '@angular-devkit/architect',
       '@angular-devkit/core',
       '@angular-devkit/schematics',

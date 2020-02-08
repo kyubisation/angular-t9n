@@ -38,6 +38,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+t9n/**/*.js
+t9n/**/*.map
+t9n/**/*.d.ts
 schematics/**/*.js
 schematics/**/*.map
 schematics/**/*.d.ts
