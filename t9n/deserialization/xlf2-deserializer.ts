@@ -1,14 +1,12 @@
-import { TranslationSourceUnit } from '../translation-source-unit';
-import { TranslationTargetUnit } from '../translation-target-unit';
+import { TranslationSourceUnit, TranslationTargetUnit } from '../models';
 
 import { XlfDeserializerBase } from './xlf-deserializer-base';
 
 export class Xlf2Deserializer extends XlfDeserializerBase {
-  async deserializeSource(file: string) {
-    const doc = await this._createDocument(file);
+  deserializeSource(content: string) {
+    const doc = this._createDocument(content);
     const language = doc.documentElement.getAttribute('srcLang')!;
     const fileNode = this._getFileNode(doc);
-    const original = fileNode.getAttribute('original') || '';
     const unitMap = Array.from(fileNode.childNodes)
       .filter(c => c.nodeName === 'unit')
       .map(u => this._deserializeSourceUnit(u as Element))
@@ -16,13 +14,13 @@ export class Xlf2Deserializer extends XlfDeserializerBase {
         (current, next) => current.set(next.id, next),
         new Map<string, TranslationSourceUnit>()
       );
-    return { language, original, unitMap };
+    return { language, unitMap };
   }
 
-  async deserializeTarget(file: string) {
-    const doc = await this._createDocument(file);
+  deserializeTarget(content: string) {
+    const doc = this._createDocument(content);
     const language = doc.documentElement.getAttribute('trgLang')!;
-    this._assertTargetLanguage(language, file);
+    this._assertTargetLanguage(language);
     const fileNode = this._getFileNode(doc);
     const unitMap = Array.from(fileNode.childNodes)
       .filter(c => c.nodeName === 'unit')

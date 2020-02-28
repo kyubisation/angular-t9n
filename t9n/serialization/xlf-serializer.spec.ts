@@ -1,44 +1,31 @@
-import { mkdtempSync, readFileSync } from 'fs';
-import { tmpdir } from 'os';
+import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 
 import { XlfDeserializer } from '../deserialization';
-import { TranslationSource } from '../translation-source';
-import { TranslationTarget } from '../translation-target';
+import { TranslationSource, TranslationTarget } from '../models';
 
 import { XlfSerializer } from './xlf-serializer';
 
 describe('XlfSerializer', () => {
   const deserializer = new XlfDeserializer();
-  const serializer = new XlfSerializer();
-  const xlfTestPath = resolve(__dirname, '../../../../test/xlf');
+  const serializer = new XlfSerializer({ includeContextInTarget: true });
+  const xlfTestPath = resolve(__dirname, '../../test/xlf');
   const sourceFile = join(xlfTestPath, 'messages.xlf');
   const targetFile = join(xlfTestPath, 'messages.de.xlf');
-  let original: string;
   let source: TranslationSource;
   let target: TranslationTarget;
-  let targetTmpFile: string;
 
-  beforeEach(async () => {
-    const dir = mkdtempSync(join(tmpdir(), 'XlfSerializer'));
-    targetTmpFile = join(dir, 'messages.de.xlf');
-    const sourceResult = await deserializer.deserializeSource(sourceFile);
-    original = sourceResult.original;
-    source = new TranslationSource(sourceFile, sourceResult.language, sourceResult.unitMap);
-    const targetResult = await deserializer.deserializeTarget(targetFile);
-    target = new TranslationTarget(
-      source,
-      targetTmpFile,
-      targetResult.language,
-      targetResult.unitMap
-    );
+  beforeEach(() => {
+    const sourceFileContent = readFileSync(sourceFile, 'utf8');
+    const sourceResult = deserializer.deserializeSource(sourceFileContent);
+    source = new TranslationSource(sourceResult.language, sourceResult.unitMap);
+    const targetFileContent = readFileSync(targetFile, 'utf8');
+    const targetResult = deserializer.deserializeTarget(targetFileContent);
+    target = new TranslationTarget(source, targetResult.language, targetResult.unitMap);
   });
 
-  it('should serialize a target', async () => {
-    await serializer.serializeTarget(target, {
-      original,
-      includeContextInTarget: true
-    });
-    expect(readFileSync(targetFile, 'utf-8')).toEqual(readFileSync(targetTmpFile, 'utf-8'));
+  it('should serialize a target', () => {
+    const result = serializer.serializeTarget(target);
+    expect(readFileSync(targetFile, 'utf-8')).toEqual(result);
   });
 });

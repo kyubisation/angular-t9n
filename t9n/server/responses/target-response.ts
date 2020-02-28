@@ -1,4 +1,4 @@
-import { TranslationTarget } from '../../translation-target';
+import { TranslationTarget } from '../../models';
 import {
   ORPHAN_ROUTE,
   ORPHANS_ROUTE,

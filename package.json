@@ -16,7 +16,7 @@
     "start": "ng serve",
     "build": "npm run build:ng && npm run build:rollup",
     "build:ng": "ng build --prod && node ./brotlify.js",
-    "build:rollup": "rollup --config rollup.config.js",
+    "build:node": "rollup --config rollup.config.js",
     "format": "prettier --write **/*",
     "test": "npm run test:node",
     "test:node": "jest",

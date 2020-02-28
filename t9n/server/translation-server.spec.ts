@@ -1,12 +1,13 @@
 import { logging } from '@angular-devkit/core';
-import { mkdirSync, mkdtempSync, writeFileSync } from 'fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join, resolve } from 'path';
 import request from 'supertest';
 
+import { Xlf2Deserializer } from '../deserialization';
+import { TranslationOrphan, TranslationSource, TranslationTarget } from '../models';
+import { PersistanceStrategy } from '../persistance';
 import { TranslationContext } from '../translation-context';
-import { TranslationFactory } from '../translation-factory';
-import { TranslationOrphan } from '../translation-orphan';
 
 import {
   OrphanMatchResponse,
@@ -21,7 +22,22 @@ import {
 import { TranslationServer } from './translation-server';
 
 describe('TranslationServer', () => {
-  const xlf2TestPath = resolve(__dirname, '../../../test/xlf2');
+  class MockPersistanceStrategy implements PersistanceStrategy {
+    constructor(
+      public source: TranslationSource,
+      public targets = new Map<string, TranslationTarget>()
+    ) {}
+    create(language: string): Promise<TranslationTarget> {
+      const target = new TranslationTarget(this.source, language);
+      this.targets.set(language, target);
+      return Promise.resolve(target);
+    }
+    update(_target: TranslationTarget): Promise<void> {
+      return Promise.resolve();
+    }
+  }
+
+  const xlf2TestPath = resolve(__dirname, '../../test/xlf2');
   const sourceFile = join(xlf2TestPath, 'messages.xlf');
   const logger = new logging.NullLogger();
   const project = 'test';
@@ -46,14 +62,15 @@ describe('TranslationServer', () => {
     const appPath = join(targetPath, 'app');
     mkdirSync(appPath);
     writeFileSync(join(appPath, 'index.html'), indexContent, 'utf-8');
-    context = await TranslationFactory.createTranslationContext({
-      includeContextInTarget: true,
-      logger,
+    const sourceFileContent = readFileSync(sourceFile, 'utf8');
+    const sourceResult = new Xlf2Deserializer().deserializeSource(sourceFileContent);
+    context = new TranslationContext(
       project,
       sourceFile,
-      targetPath,
-      targets: []
-    });
+      new MockPersistanceStrategy(
+        new TranslationSource(sourceResult.language, sourceResult.unitMap)
+      )
+    );
     server = new TranslationServer(logger, context, appPath);
   });
 
@@ -109,7 +126,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/:language', async () => {
-    const target = context.target(context.source.language)!;
+    const target = await context.createTarget('en');
     const response = await request(server.callback()).get(`/api/targets/${target.language}`);
     expect(response.status).toEqual(200);
     const targetResponse = response.body as TargetResponse;
@@ -117,7 +134,7 @@ describe('TranslationServer', () => {
   });
 
   it('POST /api/targets/:existing-language => 400', async () => {
-    const target = context.target(context.source.language)!;
+    const target = await context.createTarget('en');
     const response = await request(server.callback()).post(`/api/targets/${target.language}`);
     expect(response.status).toEqual(400);
   });
@@ -135,6 +152,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units', async () => {
+    await context.createTarget('en');
     const response = await request(server.callback()).get('/api/targets/en/units');
     expect(response.status).toEqual(200);
     const page = response.body as PaginationResponse<any, any>;
@@ -145,7 +163,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units sort', async () => {
-    const target = context.target(context.source.language)!;
+    const target = await context.createTarget('en');
     for (const sort of ['id', 'description', 'meaning', 'source', 'target', 'state']) {
       const response = await request(server.callback()).get(`/api/targets/en/units?sort=${sort}`);
       expect(response.status).toEqual(200);
@@ -161,7 +179,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units filter', async () => {
-    const target = context.target(context.source.language)!;
+    const target = await context.createTarget('en');
     const unit = Object.assign(target.units[0], { description: 'description', meaning: 'meaning' });
     for (const filter of ['id', 'description', 'meaning', 'source', 'target', 'state']) {
       const response = await request(server.callback()).get(
@@ -186,6 +204,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units/:non-existant-unit => 404', async () => {
+    await context.createTarget('en');
     const response = await request(server.callback()).get(
       '/api/targets/en/units/non-existant-unit'
     );
@@ -193,7 +212,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units/:id', async () => {
-    const unit = context.target(context.source.language)!.units[0];
+    const unit = (await context.createTarget('en')).units[0];
     const response = await request(server.callback()).get(`/api/targets/en/units/${unit.id}`);
     expect(response.status).toEqual(200);
     const unitResponse = response.body as TargetUnitResponse;
@@ -211,6 +230,7 @@ describe('TranslationServer', () => {
   });
 
   it('PUT /api/targets/en/units/:non-existant-unit => 404', async () => {
+    await context.createTarget('en');
     const response = await request(server.callback())
       .put('/api/targets/en/units/non-existant-unit')
       .send({ target: 'target', state: 'state' });
@@ -218,13 +238,13 @@ describe('TranslationServer', () => {
   });
 
   it('PUT /api/targets/en/units/:id no payload => 400', async () => {
-    const unit = context.target(context.source.language)!.units[0];
+    const unit = (await context.createTarget('en')).units[0];
     const response = await request(server.callback()).put(`/api/targets/en/units/${unit.id}`);
     expect(response.status).toEqual(400);
   });
 
   it('PUT /api/targets/en/units/:id missing target => 400', async () => {
-    const unit = context.target(context.source.language)!.units[0];
+    const unit = (await context.createTarget('en')).units[0];
     const response = await request(server.callback())
       .put(`/api/targets/en/units/${unit.id}`)
       .send({ state: 'translated' });
@@ -232,7 +252,7 @@ describe('TranslationServer', () => {
   });
 
   it('PUT /api/targets/en/units/:id missing state => 400', async () => {
-    const unit = context.target(context.source.language)!.units[0];
+    const unit = (await context.createTarget('en')).units[0];
     const response = await request(server.callback())
       .put(`/api/targets/en/units/${unit.id}`)
       .send({ target: 'target' });
@@ -240,7 +260,7 @@ describe('TranslationServer', () => {
   });
 
   it('PUT /api/targets/en/units/:id invalid state => 400', async () => {
-    const unit = context.target(context.source.language)!.units[0];
+    const unit = (await context.createTarget('en')).units[0];
     const response = await request(server.callback())
       .put(`/api/targets/en/units/${unit.id}`)
       .send({ target: 'target', state: 'invalid' });
@@ -248,6 +268,7 @@ describe('TranslationServer', () => {
   });
 
   it('PUT /api/targets/en/units/:id', async () => {
+    await context.createTarget('en');
     const target = 'target';
     const state = 'translated';
     const unit = context.target(context.source.language)!.units[0];
@@ -274,6 +295,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/orphans', async () => {
+    await context.createTarget('en');
     createOrphan();
     const response = await request(server.callback()).get('/api/targets/en/orphans');
     expect(response.status).toEqual(200);
@@ -285,9 +307,9 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units sort', async () => {
+    const target = await context.createTarget('en');
     createOrphan();
     createOrphan(1);
-    const target = context.target(context.source.language)!;
     for (const sort of ['id', 'description', 'meaning', 'source', 'target', 'state']) {
       const response = await request(server.callback()).get(`/api/targets/en/orphans?sort=${sort}`);
       expect(response.status).toEqual(200);
@@ -304,7 +326,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/units filter', async () => {
-    const target = context.target(context.source.language)!;
+    const target = await context.createTarget('en');
     const unit = Object.assign(target.units[0], { description: 'description', meaning: 'meaning' });
     createOrphan();
     createOrphan(1);
@@ -332,6 +354,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/orphans/:non-existant-unit => 404', async () => {
+    await context.createTarget('en');
     createOrphan();
     const response = await request(server.callback()).get(
       '/api/targets/en/orphans/non-existant-unit'
@@ -340,6 +363,7 @@ describe('TranslationServer', () => {
   });
 
   it('GET /api/targets/en/orphans/:id', async () => {
+    await context.createTarget('en');
     const orphan = createOrphan();
     const response = await request(server.callback()).get(
       `/api/targets/en/orphans/${orphan.unit.id}`
@@ -360,6 +384,7 @@ describe('TranslationServer', () => {
   });
 
   it('DELETE /api/targets/en/orphans/:non-existant-unit => 404', async () => {
+    await context.createTarget('en');
     createOrphan();
     const response = await request(server.callback()).delete(
       '/api/targets/en/orphans/non-existant-unit'
@@ -368,6 +393,7 @@ describe('TranslationServer', () => {
   });
 
   it('DELETE /api/targets/en/orphans/:id', async () => {
+    await context.createTarget('en');
     const orphan = createOrphan();
     const response = await request(server.callback()).delete(
       `/api/targets/en/orphans/${orphan.unit.id}`

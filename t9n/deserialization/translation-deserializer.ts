@@ -1,15 +1,8 @@
-import { TranslationSourceUnit } from '../translation-source-unit';
-import { TranslationTargetUnit } from '../translation-target-unit';
+import { TranslationSourceUnit, TranslationTargetUnit } from '../models';
+
+import { TranslationDeserializationResult } from './translation-deserialization-result';
 
 export interface TranslationDeserializer {
-  deserializeSource(
-    file: string
-  ): Promise<{
-    language: string;
-    original: string;
-    unitMap: Map<string, TranslationSourceUnit>;
-  }>;
-  deserializeTarget(
-    file: string
-  ): Promise<{ language: string; unitMap: Map<string, TranslationTargetUnit> }>;
+  deserializeSource(content: string): TranslationDeserializationResult<TranslationSourceUnit>;
+  deserializeTarget(content: string): TranslationDeserializationResult<TranslationTargetUnit>;
 }

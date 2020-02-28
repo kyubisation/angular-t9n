@@ -1,5 +1,4 @@
-import { TranslationOrphan } from '../../translation-orphan';
-import { TranslationTarget } from '../../translation-target';
+import { TranslationOrphan, TranslationTarget } from '../../models';
 import { ORPHAN_ROUTE } from '../constants';
 import { UrlFactory } from '../url-factory';
 

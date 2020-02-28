@@ -1,28 +1,26 @@
-import { TranslationSourceUnit } from '../translation-source-unit';
-import { TranslationTargetUnit } from '../translation-target-unit';
+import { TranslationSourceUnit, TranslationTargetUnit } from '../models';
 
 import { XlfDeserializerBase } from './xlf-deserializer-base';
 
 export class XlfDeserializer extends XlfDeserializerBase {
-  async deserializeSource(file: string) {
-    const doc = await this._createDocument(file);
+  deserializeSource(content: string) {
+    const doc = this._createDocument(content);
     const fileNode = this._getFileNode(doc);
     const language = fileNode.getAttribute('source-language')!;
-    const original = fileNode.getAttribute('original') || '';
     const unitMap = Array.from(fileNode.getElementsByTagName('trans-unit'))
       .map(u => this._deserializeSourceUnit(u))
       .reduce(
         (current, next) => current.set(next.id, next),
         new Map<string, TranslationSourceUnit>()
       );
-    return { language, original, unitMap };
+    return { language, unitMap };
   }
 
-  async deserializeTarget(file: string) {
-    const doc = await this._createDocument(file);
+  deserializeTarget(content: string) {
+    const doc = this._createDocument(content);
     const fileNode = this._getFileNode(doc);
     const language = fileNode.getAttribute('target-language')!;
-    this._assertTargetLanguage(language, file);
+    this._assertTargetLanguage(language);
     const unitMap = Array.from(fileNode.getElementsByTagName('trans-unit'))
       .map(u => this._deserializeTargetUnit(u))
       .reduce(

@@ -8,10 +8,10 @@ export class TranslationTarget {
   readonly units: TranslationTargetUnit[];
   readonly unitMap: Map<string, TranslationTargetUnit>;
   readonly orphans: TranslationOrphan[];
+  baseHref?: string;
 
   constructor(
     readonly source: TranslationSource,
-    readonly file: string,
     readonly language: string,
     unitMap = new Map<string, TranslationTargetUnit>()
   ) {

@@ -13,7 +13,7 @@ export class RootResponse implements Hal {
 
   constructor(context: TranslationContext, urlFactory: UrlFactory) {
     this.project = context.project;
-    this.sourceFile = context.source.file;
+    this.sourceFile = context.sourceFile;
     this.sourceLanguage = context.source.language;
     this.unitCount = context.source.units.length;
     this._links = new Links()

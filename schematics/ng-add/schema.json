@@ -14,15 +14,16 @@
     "translationFile": {
       "type": "string",
       "format": "path",
-      "default": "messages.xlf",
+      "default": "src/messages.xlf",
       "description": "The file path to the root translation file.",
       "x-prompt": "Path to the root translation file?"
     },
     "targetTranslationPath": {
       "type": "string",
       "format": "path",
+      "default": "src/locales",
       "description": "The directory path of the target translation files.",
-      "x-prompt": "Path to the target translation files? (Defaults to the directory of the translation file)"
+      "x-prompt": "Path to the target translation files?"
     },
     "includeContextInTarget": {
       "type": "boolean",

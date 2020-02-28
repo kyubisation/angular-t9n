@@ -1,18 +1,12 @@
-import { noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { getWorkspace, updateWorkspace } from '@schematics/angular/utility/config';
 import { ProjectType, WorkspaceProject } from '@schematics/angular/utility/workspace-models';
-import { dirname } from 'path';
 
 import { Schema } from './schema';
 
 export function ngAdd(_options: Schema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const { project, packageScript, ...options } = _options;
-    if (!options.targetTranslationPath) {
-      const dir = dirname(options.translationFile);
-      options.targetTranslationPath = dir === '.' ? '' : dir;
-    }
-
     const workspace = getWorkspace(tree);
     const projectName = project || workspace.defaultProject || Object.keys(workspace.projects)[0];
     const projectWorkspace = workspace.projects[projectName] as WorkspaceProject<
@@ -23,8 +17,7 @@ export function ngAdd(_options: Schema): Rule {
     }
 
     if (projectWorkspace.architect['t9n']) {
-      _context.logger.info(`The project ${projectName} already has an entry for 't9n'.`);
-      return noop();
+      _context.logger.info(`Overwriting previous t9n entry in project ${projectName}.`);
     }
 
     projectWorkspace.architect['t9n'] = {

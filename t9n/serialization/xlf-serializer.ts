@@ -1,34 +1,28 @@
-import { writeFile } from 'fs';
-import { promisify } from 'util';
-
-import { TranslationTarget } from '../translation-target';
-import { TranslationTargetUnit } from '../translation-target-unit';
+import { TranslationTarget, TranslationTargetUnit } from '../models';
 
 import { TranslationSerializer } from './translation-serializer';
 
-const writeFileAsync = promisify(writeFile);
-
 export class XlfSerializer implements TranslationSerializer {
-  async serializeTarget(
-    target: TranslationTarget,
-    options: {
-      original: string;
-      includeContextInTarget: boolean;
-    }
-  ): Promise<void> {
+  private readonly _includeContextInTarget: boolean;
+
+  constructor(options: { includeContextInTarget: boolean }) {
+    this._includeContextInTarget = options.includeContextInTarget;
+  }
+
+  serializeTarget(target: TranslationTarget): string {
     const units = [...target.units, ...target.orphans.map(o => o.unit)];
-    const content = `<?xml version="1.0" encoding="UTF-8"?>
+    return `<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="${target.source.language}" datatype="plaintext" original="${
-      options.original
-    }" target-language="${target.language}">
+  <file source-language="${
+    target.source.language
+  }" datatype="plaintext" original="ng2.template" target-language="${target.language}">
     <body>
 ${units
   .map(
     u => `      <trans-unit id="${u.id}" datatype="html">
         <source>${u.source}</source>
         <target state="${this._transformState(u.state)}">${u.target}</target>${
-      !options.includeContextInTarget ? '' : this._serializeNotes(u, target)
+      !this._includeContextInTarget ? '' : this._serializeNotes(u, target)
     }
       </trans-unit>`
   )
@@ -37,7 +31,6 @@ ${units
   </file>
 </xliff>
 `;
-    await writeFileAsync(target.file, content + '\n', 'utf-8');
   }
 
   private _transformState(state: string) {

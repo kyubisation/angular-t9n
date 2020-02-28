@@ -8,6 +8,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "lib": ["es2018", "dom"],
     "types": [
       "jest",
       "js-levenshtein",

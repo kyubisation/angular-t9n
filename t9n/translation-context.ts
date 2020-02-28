@@ -1,66 +1,43 @@
-import { logging } from '@angular-devkit/core';
-
 import { DebounceScheduler } from './debounce-scheduler';
-import { TranslationSerializer } from './serialization/translation-serializer';
-import { TranslationContextConfiguration } from './translation-context-configuration';
-import { TranslationOrphan } from './translation-orphan';
-import { TranslationSource } from './translation-source';
-import { TranslationTarget } from './translation-target';
-import { TranslationTargetUnit } from './translation-target-unit';
+import { TranslationOrphan, TranslationTargetUnit } from './models';
+import { PersistanceStrategy } from './persistance';
 
 export class TranslationContext {
-  readonly project: string;
-  readonly source: TranslationSource;
-  readonly sourceFile: string;
-
-  private readonly _logger: logging.LoggerApi;
-  private readonly _serializer: TranslationSerializer;
-  private readonly _targets: Map<string, TranslationTarget>;
-  private readonly _options: {
-    original: string;
-    includeContextInTarget: boolean;
-  };
-  private readonly _filenameFactory: (language: string) => string;
   private readonly _serializeScheduler: DebounceScheduler<string>;
 
   get languages() {
-    return Array.from(this._targets.keys()).sort();
+    return Array.from(this._persistanceStrategy.targets.keys());
   }
 
-  constructor(configuration: TranslationContextConfiguration) {
-    this.project = configuration.project;
-    this.source = configuration.source;
-    this.sourceFile = configuration.sourceFile;
-    this._logger = configuration.logger;
-    this._serializer = configuration.serializer;
-    this._targets = configuration.targets;
-    this._filenameFactory = configuration.filenameFactory;
-    this._options = { ...configuration };
-    this._serializeScheduler = new DebounceScheduler<string>(async language => {
-      const target = this._targets.get(language)!;
-      await this._serializer.serializeTarget(target, this._options);
-      this._logger.info(`${this._timestamp()}: Updated ${target.file}`);
-    });
+  get source() {
+    return this._persistanceStrategy.source;
+  }
+
+  constructor(
+    readonly project: string,
+    readonly sourceFile: string,
+    private readonly _persistanceStrategy: PersistanceStrategy
+  ) {
+    this._serializeScheduler = new DebounceScheduler<string>(
+      async language =>
+        await this._persistanceStrategy.update(this._persistanceStrategy.targets.get(language)!)
+    );
   }
 
   target(language: string) {
-    return this._targets.get(language);
+    return this._persistanceStrategy.targets.get(language);
   }
 
   async createTarget(language: string) {
-    if (this._targets.has(language)) {
+    if (this.target(language)) {
       throw new Error(`${language} already exists as target!`);
     }
 
-    const target = new TranslationTarget(this.source, this._filenameFactory(language), language);
-    await this._serializer.serializeTarget(target, this._options);
-    this._logger.info(`${this._timestamp()}: Created ${target.file}`);
-    this._targets.set(language, target);
-    return target;
+    return await this._persistanceStrategy.create(language);
   }
 
   updateTranslation(language: string, unit: TranslationTargetUnit) {
-    const target = this._targets.get(language);
+    const target = this.target(language);
     if (!target) {
       throw new Error(`No target for language ${language}!`);
     }
@@ -77,7 +54,7 @@ export class TranslationContext {
   }
 
   removeOrphan(language: string, orphan: TranslationOrphan) {
-    const target = this._targets.get(language);
+    const target = this.target(language);
     if (!target) {
       throw new Error(`No target for language ${language}!`);
     }
@@ -89,13 +66,5 @@ export class TranslationContext {
 
     target.orphans.splice(index, 1);
     this._serializeScheduler.schedule(language);
-  }
-
-  private _timestamp() {
-    const now = new Date();
-    const pad = (value: number) => value.toString().padStart(2, '0');
-    const date = [now.getFullYear(), now.getMonth() + 1, now.getDate()].map(pad).join('-');
-    const time = [now.getHours(), now.getMinutes(), now.getSeconds()].map(pad).join(':');
-    return `${date} ${time}`;
   }
 }

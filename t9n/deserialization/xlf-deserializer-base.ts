@@ -1,39 +1,28 @@
-import { readFile } from 'fs';
-import { basename } from 'path';
-import { promisify } from 'util';
-import { DOMParser } from 'xmldom';
+import { TranslationSourceUnit, TranslationTargetUnit } from '../models';
 
-import { TranslationSourceUnit } from '../translation-source-unit';
-import { TranslationTargetUnit } from '../translation-target-unit';
-
+import { TranslationDeserializationResult } from './translation-deserialization-result';
 import { TranslationDeserializer } from './translation-deserializer';
-
-const readFileAsync = promisify(readFile);
+import { XmlParser } from './xml-parser';
 
 export abstract class XlfDeserializerBase implements TranslationDeserializer {
-  private _parser = new DOMParser();
+  private _parser = new XmlParser();
 
   abstract deserializeSource(
-    file: string
-  ): Promise<{
-    language: string;
-    original: string;
-    unitMap: Map<string, TranslationSourceUnit>;
-  }>;
+    content: string
+  ): TranslationDeserializationResult<TranslationSourceUnit>;
 
   abstract deserializeTarget(
-    file: string
-  ): Promise<{ language: string; unitMap: Map<string, TranslationTargetUnit> }>;
+    content: string
+  ): TranslationDeserializationResult<TranslationTargetUnit>;
 
-  protected async _createDocument(file: string) {
-    const content = await readFileAsync(file, 'utf-8');
-    const doc = this._parser.parseFromString(content);
-    this._assertEncoding(doc, file);
+  protected _createDocument(content: string) {
+    const doc = this._parser.parse(content);
+    this._assertEncoding(doc);
     this._assertXliff(doc);
     return doc;
   }
 
-  private _assertEncoding(doc: Document, file: string) {
+  private _assertEncoding(doc: Document) {
     const processingInstruction: ProcessingInstruction | undefined = Array.from(
       doc.childNodes
     ).find(c => c.nodeType === doc.PROCESSING_INSTRUCTION_NODE) as any;
@@ -44,9 +33,9 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
     const match = processingInstruction.data.match(/encoding="([^"]+)"/);
     if (match && match[1].replace(/[ -]+/g, '').toUpperCase() !== 'UTF8') {
       throw new Error(
-        `angular-t9n only supports UTF-8, but ${file} has encoding ${
+        `angular-t9n only supports UTF-8, but encoding ${
           match[1]
-        } '${doc.firstChild!.toString()}'`
+        } was detected '${doc.firstChild!.toString()}'`
       );
     }
   }
@@ -63,14 +52,10 @@ export abstract class XlfDeserializerBase implements TranslationDeserializer {
     }
   }
 
-  protected _assertTargetLanguage(targetLanguage: string, file: string) {
+  protected _assertTargetLanguage(targetLanguage: string) {
     if (!targetLanguage) {
       throw new Error(
         `Expected the xliff tag to have a trgLang attribute (e.g. <xliff trgLang="de-CH" ...)`
-      );
-    } else if (!basename(file).includes(`.${targetLanguage}.`)) {
-      throw new Error(
-        `Expected the target language (${targetLanguage}) to be part of the filename ${file}`
       );
     }
   }

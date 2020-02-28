@@ -1,24 +1,26 @@
 import ts from '@wessberg/rollup-plugin-ts';
 
 export default [
-  target('./t9n/index.ts'),
-  target('./schematics/ng-add/index.ts'),
-  target('./schematics/resolve-ng-locales/index.ts'),
-  target('./builders/t9n/index.ts', 'named')
+  target({ input: './t9n/index.ts', output: './t9n/main.js' }),
+  target({ input: './t9n/index.ts', output: './t9n/index.js', format: 'esm' }),
+  target({ input: './schematics/ng-add/index.ts' }),
+  target({ input: './schematics/resolve-ng-locales/index.ts' }),
+  target({ input: './builders/t9n/index.ts', exports: 'named' })
 ];
 
-function target(input, exports = 'auto') {
+function target({ input, output, exports = 'auto', format = 'cjs' }) {
   return {
     input,
     output: {
-      file: input.replace(/\.ts$/, '.js'),
+      file: output || input.replace(/\.ts$/, '.js'),
       exports,
-      format: 'cjs'
+      format
     },
     external: [
       '../../t9n',
       '@angular-devkit/architect',
       '@angular-devkit/core',
+      '@angular-devkit/core/node',
       '@angular-devkit/schematics',
       '@koa/cors',
       '@koa/router',

@@ -1,11 +1,5 @@
-import { TranslationTarget } from '../translation-target';
+import { TranslationTarget } from '../models';
 
 export interface TranslationSerializer {
-  serializeTarget(
-    target: TranslationTarget,
-    options: {
-      original: string;
-      includeContextInTarget: boolean;
-    }
-  ): Promise<void>;
+  serializeTarget(target: TranslationTarget): string;
 }
