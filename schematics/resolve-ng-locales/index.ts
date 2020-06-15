@@ -10,9 +10,9 @@ export function resolveNgLocales(_options: Schema): Rule {
     const ngCommonPath = dirname(require.resolve('@angular/common/package.json'));
     const localesPath = join(ngCommonPath, 'locales');
     const locales = readdirSync(localesPath, { withFileTypes: true })
-      .filter(d => d.isFile() && d.name.endsWith('.d.ts'))
-      .map(d => d.name.replace(/\.d\.ts$/, ''));
-    const content = `export const locales = [\n${locales.map(l => `  '${l}'`).join(',\n')}\n];\n`;
+      .filter((d) => d.isFile() && d.name.endsWith('.d.ts'))
+      .map((d) => d.name.replace(/\.d\.ts$/, ''));
+    const content = `export const locales = [\n${locales.map((l) => `  '${l}'`).join(',\n')}\n];\n`;
     if (tree.exists(file)) {
       tree.overwrite(file, content);
     } else {

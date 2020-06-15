@@ -1,17 +1,40 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
-import { join, json, normalize, workspaces } from '@angular-devkit/core';
+import { join, json, logging, normalize, workspaces } from '@angular-devkit/core';
 import { NodeJsAsyncHost } from '@angular-devkit/core/node';
-import { resolve } from 'path';
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { dirname } from 'path';
 
+import { AppModule } from './app.module';
 import {
+  TranslationDeserializer,
+  Xlf2Deserializer,
+  XlfDeserializer,
+  XmlParser,
+} from './deserialization';
+import { TranslationSource, TranslationTarget } from './models';
+import {
+  AngularI18n,
   AngularJsonPersistanceStrategy,
-  SerializationStrategy,
-  TranslationContext,
-  TranslationServer
-} from '../../t9n';
-
+  PersistanceStrategy,
+  TargetPathBuilder,
+  TranslationTargetRegistry,
+} from './persistance';
 import { Schema as Options } from './schema';
+import {
+  SerializationOptions,
+  TranslationSerializer,
+  Xlf2Serializer,
+  XlfSerializer,
+} from './serialization';
+import { SerializationStrategy } from './serialization-strategy';
+import { WorkspaceHost } from './workspace-host';
 
+export * from './controllers';
+export * from './deserialization';
+export * from './models';
+export * from './persistance';
+export * from './serialization';
 export { Schema as t9nOptions } from './schema';
 
 export default createBuilder<Options & json.JsonObject, BuilderOutput>(t9n);
@@ -25,33 +48,119 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   const host = workspaces.createWorkspaceHost(nodeHost);
   const workspaceRoot = normalize(context.workspaceRoot);
   const sourceFile = join(workspaceRoot, options.translationFile);
-  const targetDirectory = join(workspaceRoot, options.targetTranslationPath);
+  const targetTranslationPath = options.targetTranslationPath || dirname(options.translationFile);
+  const targetDirectory = join(workspaceRoot, targetTranslationPath);
   if (!(await host.isFile(sourceFile))) {
     return { success: false, error: `${options.translationFile} does not exist or is not a file!` };
   } else if (!(await host.isDirectory(targetDirectory))) {
-    return { success: false, error: `${options.targetTranslationPath} is not a valid directory!` };
+    return {
+      success: false,
+      error: `targetTranslationPath ${targetTranslationPath} is not a valid directory!`,
+    };
   }
 
-  const persistanceStrategy = await AngularJsonPersistanceStrategy.create({
+  const xliffVersion = await detectXliffVersion();
+  const targetPathBuilder = new TargetPathBuilder(targetDirectory, sourceFile);
+  const angularI18n = new AngularI18n(
     host,
-    logger: context.logger,
-    project: context.target.project,
-    serializationContext: await SerializationStrategy.create(host, sourceFile, options),
-    sourceFile,
-    targetDirectory,
-    workspaceRoot
-  });
-
-  const translationContext = new TranslationContext(
+    workspaceRoot,
     context.target.project,
-    sourceFile,
-    persistanceStrategy
+    targetPathBuilder
   );
-  const appPath = resolve(__dirname, '../../app');
-  const server = new TranslationServer(context.logger, translationContext, appPath);
-  server.listen(options.port, () =>
+
+  const app = await NestFactory.create(
+    AppModule.forRoot([
+      { provide: logging.Logger, useValue: context.logger.createChild('NestJS') },
+      { provide: WorkspaceHost, useValue: host },
+      { provide: SerializationOptions, useValue: options },
+      { provide: TargetPathBuilder, useValue: targetPathBuilder },
+      { provide: AngularI18n, useValue: angularI18n },
+      {
+        provide: TranslationDeserializer,
+        useExisting: xliffVersion === '1.2' ? XlfDeserializer : Xlf2Deserializer,
+      },
+      {
+        provide: TranslationSerializer,
+        useExisting: xliffVersion === '1.2' ? XlfSerializer : Xlf2Serializer,
+      },
+      {
+        provide: TranslationSource,
+        useFactory: TRANSLATION_SOURCE_FACTORY,
+        inject: [SerializationStrategy],
+      },
+      {
+        provide: TranslationTargetRegistry,
+        useFactory: TRANSLATION_TARGET_REGISTRY_FACTORY,
+        inject: [TranslationSource, SerializationStrategy],
+      },
+      { provide: PersistanceStrategy, useClass: AngularJsonPersistanceStrategy },
+    ]),
+    {
+      cors: true,
+    }
+  );
+  app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, whitelist: true }));
+  await app.listen(options.port, () =>
     context.logger.info(`Translation server started: http://localhost:${options.port}\n`)
   );
-
   return new Promise(() => {});
+
+  async function detectXliffVersion(): Promise<'2.0' | '1.2'> {
+    const content = await host.readFile(sourceFile);
+    const doc = new XmlParser().parse(content);
+    const version = doc.documentElement.getAttribute('version');
+    if (doc.documentElement.tagName !== 'xliff') {
+      throw new Error('Only xliff is supported!');
+    } else if (version !== '2.0' && version !== '1.2') {
+      throw new Error('Unsupported xliff version!');
+    } else {
+      return version;
+    }
+  }
+
+  async function TRANSLATION_SOURCE_FACTORY(
+    serializationStrategy: SerializationStrategy
+  ): Promise<TranslationSource> {
+    const result = await serializationStrategy.deserializeSource(sourceFile);
+    const sourceLocale = await angularI18n.sourceLocale();
+    if (result.language && sourceLocale.code && result.language !== sourceLocale.code) {
+      context.logger.warn(
+        `Source locale in angular.json is ${sourceLocale} but in the ` +
+          ` source file ${sourceFile} it is ${result.language}.`
+      );
+    }
+
+    const source = new TranslationSource(sourceLocale.code || result.language, result.unitMap);
+    if (sourceLocale.baseHref) {
+      source.baseHref = sourceLocale.baseHref;
+    }
+
+    return source;
+  }
+
+  async function TRANSLATION_TARGET_REGISTRY_FACTORY(
+    source: TranslationSource,
+    serializationStrategy: SerializationStrategy
+  ): Promise<TranslationTargetRegistry> {
+    const locales = await angularI18n.locales();
+    const targets = await Promise.all(
+      Object.keys(locales).map(async (language) => {
+        const locale = locales[language];
+        const result = await serializationStrategy.deserializeTarget(
+          join(workspaceRoot, locale.translation)
+        );
+        const target = new TranslationTarget(source, result.language, result.unitMap);
+        if (locale.baseHref) {
+          target.baseHref = locale.baseHref;
+        }
+
+        return target;
+      })
+    );
+    return targets.reduce(
+      (current, next) => current.set(next.language, next),
+      new TranslationTargetRegistry()
+    );
+  }
 }

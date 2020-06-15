@@ -10,7 +10,6 @@
     },
     "targetTranslationPath": {
       "type": "string",
-      "default": "src/locales",
       "description": "The path to the target translation files."
     },
     "includeContextInTarget": {

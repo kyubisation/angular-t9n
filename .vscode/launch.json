@@ -7,15 +7,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}\\serve",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": [
-        "${workspaceFolder}/dist/out-tsc/**/*.js"
-      ]
+      "name": "t9n",
+      "program": "${workspaceFolder}/node_modules/@angular/cli/bin/ng",
+      "args": ["run", "angular-t9n:t9n"]
     }
   ]
 }

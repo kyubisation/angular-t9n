@@ -2,6 +2,9 @@
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es2018",
     "declaration": true,
     "esModuleInterop": true,

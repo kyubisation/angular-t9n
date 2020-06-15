@@ -1,11 +1,9 @@
 import ts from '@wessberg/rollup-plugin-ts';
 
 export default [
-  target({ input: './t9n/index.ts', output: './t9n/main.js' }),
-  target({ input: './t9n/index.ts', output: './t9n/index.js', format: 'esm' }),
+  target({ input: './builders/t9n/index.ts', exports: 'named' }),
   target({ input: './schematics/ng-add/index.ts' }),
   target({ input: './schematics/resolve-ng-locales/index.ts' }),
-  target({ input: './builders/t9n/index.ts', exports: 'named' })
 ];
 
 function target({ input, output, exports = 'auto', format = 'cjs' }) {
@@ -14,33 +12,31 @@ function target({ input, output, exports = 'auto', format = 'cjs' }) {
     output: {
       file: output || input.replace(/\.ts$/, '.js'),
       exports,
-      format
+      format,
     },
     external: [
-      '../../t9n',
       '@angular-devkit/architect',
       '@angular-devkit/core',
       '@angular-devkit/core/node',
       '@angular-devkit/schematics',
-      '@koa/cors',
-      '@koa/router',
+      '@nestjs/common',
+      '@nestjs/core',
+      '@nestjs/serve-static',
       '@schematics/angular/utility/config',
       '@schematics/angular/utility/workspace-models',
+      'class-validator',
       'fs',
       'js-levenshtein',
-      'koa',
-      'koa-body',
-      'koa-static',
       'os',
       'path',
       'util',
-      'xmldom'
+      'xmldom',
     ],
     plugins: [
       ts({
         browserslist: false,
-        tsconfig: 'tsconfig.node.json'
-      })
-    ]
+        tsconfig: 'tsconfig.node.json',
+      }),
+    ],
   };
 }

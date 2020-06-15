@@ -3,7 +3,7 @@
   <file original="ng.template" id="ngi18n">
     <unit id="4177047730710985478">
       <notes>
-        <note category="location">app/app.component.html:10</note>
+        <note category="location">app/app.component.html:13</note>
       </notes>
       <segment>
         <source>Translation server is not available. Start the server in the console with the command &apos;ng run yourProject:t9n&apos;.</source>
@@ -296,10 +296,10 @@
     <unit id="5706198276541510303">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:31</note>
-        <note category="location">app/target/translate/translate.component.html:54</note>
-        <note category="location">app/target/translate/translate.component.html:116</note>
+        <note category="location">app/target/translate/translate.component.html:48</note>
+        <note category="location">app/target/translate/translate.component.html:110</note>
         <note category="location">app/target/export/export.component.html:9</note>
-        <note category="location">app/target/unit/unit.component.html:47</note>
+        <note category="location">app/target/unit/unit.component.html:41</note>
       </notes>
       <segment>
         <source>Translated</source>
@@ -308,10 +308,10 @@
     <unit id="4467880638322247833">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:35</note>
-        <note category="location">app/target/translate/translate.component.html:55</note>
-        <note category="location">app/target/translate/translate.component.html:117</note>
+        <note category="location">app/target/translate/translate.component.html:49</note>
+        <note category="location">app/target/translate/translate.component.html:111</note>
         <note category="location">app/target/export/export.component.html:10</note>
-        <note category="location">app/target/unit/unit.component.html:48</note>
+        <note category="location">app/target/unit/unit.component.html:42</note>
       </notes>
       <segment>
         <source>Reviewed</source>
@@ -320,10 +320,10 @@
     <unit id="4609200447119745819">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:39</note>
-        <note category="location">app/target/translate/translate.component.html:56</note>
-        <note category="location">app/target/translate/translate.component.html:118</note>
+        <note category="location">app/target/translate/translate.component.html:50</note>
+        <note category="location">app/target/translate/translate.component.html:112</note>
         <note category="location">app/target/export/export.component.html:11</note>
-        <note category="location">app/target/unit/unit.component.html:49</note>
+        <note category="location">app/target/unit/unit.component.html:43</note>
       </notes>
       <segment>
         <source>Final</source>
@@ -423,19 +423,9 @@
         <source>Target</source>
       </segment>
     </unit>
-    <unit id="8887944298153213372">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:38,42</note>
-      </notes>
-      <segment>
-        <source>Expected <ph id="0" equiv="INTERPOLATION" disp="{{ placeholders.length }}"/> placeholders
-            <pc id="1" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon&gt;" dispEnd="&lt;/mat-icon&gt;">info</pc>
-          </source>
-      </segment>
-    </unit>
     <unit id="5911214550882917183">
       <notes>
-        <note category="location">app/target/translate/translate.component.html:47</note>
+        <note category="location">app/target/translate/translate.component.html:41</note>
         <note category="location">app/target/orphans/orphans.component.html:32</note>
         <note category="location">app/target/orphan/orphan.component.html:16</note>
         <note category="location">app/target/orphan/orphan.component.html:71</note>
@@ -446,10 +436,10 @@
     </unit>
     <unit id="2937311350146031865">
       <notes>
-        <note category="location">app/target/translate/translate.component.html:52</note>
-        <note category="location">app/target/translate/translate.component.html:115</note>
+        <note category="location">app/target/translate/translate.component.html:46</note>
+        <note category="location">app/target/translate/translate.component.html:109</note>
         <note category="location">app/target/export/export.component.html:8</note>
-        <note category="location">app/target/unit/unit.component.html:45</note>
+        <note category="location">app/target/unit/unit.component.html:39</note>
       </notes>
       <segment>
         <source>Initial</source>
@@ -457,7 +447,7 @@
     </unit>
     <unit id="7825860436592606655">
       <notes>
-        <note category="location">app/target/translate/translate.component.html:68</note>
+        <note category="location">app/target/translate/translate.component.html:62</note>
       </notes>
       <segment>
         <source>Edit unit</source>
@@ -506,27 +496,17 @@
         <source>Migrate orphan</source>
       </segment>
     </unit>
-    <unit id="6083012810085498346">
+    <unit id="7154699141836462400">
       <notes>
         <note category="location">app/target/unit/unit.component.html:23</note>
       </notes>
       <segment>
-        <source>Copy source to clipboard</source>
-      </segment>
-    </unit>
-    <unit id="2511796695836830757">
-      <notes>
-        <note category="location">app/target/unit/unit.component.html:34,38</note>
-      </notes>
-      <segment>
-        <source>Expected <ph id="0" equiv="INTERPOLATION" disp="{{ placeholders.length }}"/> placeholders
-        <pc id="1" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon&gt;" dispEnd="&lt;/mat-icon&gt;">info</pc>
-      </source>
+        <source>Copy source to target</source>
       </segment>
     </unit>
     <unit id="5794397576066894195">
       <notes>
-        <note category="location">app/target/unit/unit.component.html:55,57</note>
+        <note category="location">app/target/unit/unit.component.html:49,51</note>
       </notes>
       <segment>
         <source>
