@@ -6,13 +6,13 @@ export default [
   target({ input: './schematics/resolve-ng-locales/index.ts' }),
 ];
 
-function target({ input, output, exports = 'auto', format = 'cjs' }) {
+function target({ input, exports = 'auto' }) {
   return {
     input,
     output: {
-      file: output || input.replace(/\.ts$/, '.js'),
+      file: input.replace(/\.ts$/, '.js'),
       exports,
-      format,
+      format: 'cjs',
     },
     external: [
       '@angular-devkit/architect',
@@ -21,6 +21,8 @@ function target({ input, output, exports = 'auto', format = 'cjs' }) {
       '@angular-devkit/schematics',
       '@nestjs/common',
       '@nestjs/core',
+      '@nestjs/platform-ws',
+      '@nestjs/websockets',
       '@nestjs/serve-static',
       '@schematics/angular/utility/config',
       '@schematics/angular/utility/workspace-models',

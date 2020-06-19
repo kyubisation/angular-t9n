@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Scope } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 
 import {
   QueryParams,
@@ -8,14 +10,20 @@ import {
   TranslationTargetUnit,
 } from './models';
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class LinkHelper {
+  private readonly _origin: string;
+
+  constructor(@Inject(REQUEST) request: Request) {
+    this._origin = request.get('host') ? `${request.protocol}://${request.get('host')}` : '';
+  }
+
   root() {
-    return `/api`;
+    return `${this._origin}/api`;
   }
 
   sourceUnits(query?: QueryParams) {
-    const route = '/api/source/units';
+    const route = `${this._origin}/api/source/units`;
     return query && Object.keys(query).length
       ? `${route}?${new URLSearchParams(query).toString()}`
       : route;
@@ -23,19 +31,19 @@ export class LinkHelper {
 
   sourceUnit(unitOrId: TranslationSourceUnit | string) {
     const id = typeof unitOrId === 'string' ? unitOrId : unitOrId.id;
-    return `/api/source/units/${id}`;
+    return `${this._origin}/api/source/units/${id}`;
   }
 
   targets() {
-    return '/api/targets';
+    return `${this._origin}/api/targets`;
   }
 
   target(language: string) {
-    return `/api/targets/${language}`;
+    return `${this._origin}/api/targets/${language}`;
   }
 
   targetUnits(target: TranslationTarget, query?: QueryParams) {
-    const route = `/api/target/${target.language}/units`;
+    const route = `${this._origin}/api/target/${target.language}/units`;
     return query && Object.keys(query).length
       ? `${route}?${new URLSearchParams(query).toString()}`
       : route;
@@ -43,11 +51,11 @@ export class LinkHelper {
 
   targetUnit(unitOrId: TranslationTargetUnit | string, target: TranslationTarget) {
     const id = typeof unitOrId === 'string' ? unitOrId : unitOrId.id;
-    return `/api/targets/${target.language}/units/${id}`;
+    return `${this._origin}/api/targets/${target.language}/units/${id}`;
   }
 
   targetOrphans(target: TranslationTarget, query?: QueryParams) {
-    const route = `/api/target/${target.language}/orphans`;
+    const route = `${this._origin}/api/target/${target.language}/orphans`;
     return query && Object.keys(query).length
       ? `${route}?${new URLSearchParams(query).toString()}`
       : route;
@@ -55,6 +63,6 @@ export class LinkHelper {
 
   targetOrphan(unitOrId: TranslationOrphan | string, target: TranslationTarget) {
     const id = typeof unitOrId === 'string' ? unitOrId : unitOrId.unit.id;
-    return `/api/targets/${target.language}/orphans/${id}`;
+    return `${this._origin}/api/targets/${target.language}/orphans/${id}`;
   }
 }

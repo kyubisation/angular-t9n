@@ -1,8 +1,9 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
-import { join, json, logging, normalize, workspaces } from '@angular-devkit/core';
+import { join, json, logging, normalize, relative, workspaces } from '@angular-devkit/core';
 import { NodeJsAsyncHost } from '@angular-devkit/core/node';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { WsAdapter } from '@nestjs/platform-ws';
 import { dirname } from 'path';
 
 import { AppModule } from './app.module';
@@ -28,13 +29,19 @@ import {
   XlfSerializer,
 } from './serialization';
 import { SerializationStrategy } from './serialization-strategy';
+import { TargetInfo } from './target-info';
 import { WorkspaceHost } from './workspace-host';
 
+export * from './app.module';
 export * from './controllers';
 export * from './deserialization';
+export * from './link-helper';
 export * from './models';
 export * from './persistance';
 export * from './serialization';
+export * from './serialization-strategy';
+export * from './target-info';
+export * from './workspace-host';
 export { Schema as t9nOptions } from './schema';
 
 export default createBuilder<Options & json.JsonObject, BuilderOutput>(t9n);
@@ -67,11 +74,20 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     context.target.project,
     targetPathBuilder
   );
+  const sourceLocale = await angularI18n.sourceLocale();
 
   const app = await NestFactory.create(
     AppModule.forRoot([
       { provide: logging.Logger, useValue: context.logger.createChild('NestJS') },
       { provide: WorkspaceHost, useValue: host },
+      {
+        provide: TargetInfo,
+        useValue: new TargetInfo(
+          context.target.project,
+          options.translationFile,
+          sourceLocale.code
+        ),
+      },
       { provide: SerializationOptions, useValue: options },
       { provide: TargetPathBuilder, useValue: targetPathBuilder },
       { provide: AngularI18n, useValue: angularI18n },
@@ -97,9 +113,11 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     ]),
     {
       cors: true,
+      logger: ['error', 'warn'],
     }
   );
   app.setGlobalPrefix('api');
+  app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, whitelist: true }));
   await app.listen(options.port, () =>
     context.logger.info(`Translation server started: http://localhost:${options.port}\n`)
@@ -123,7 +141,6 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     serializationStrategy: SerializationStrategy
   ): Promise<TranslationSource> {
     const result = await serializationStrategy.deserializeSource(sourceFile);
-    const sourceLocale = await angularI18n.sourceLocale();
     if (result.language && sourceLocale.code && result.language !== sourceLocale.code) {
       context.logger.warn(
         `Source locale in angular.json is ${sourceLocale} but in the ` +
@@ -147,17 +164,28 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     const targets = await Promise.all(
       Object.keys(locales).map(async (language) => {
         const locale = locales[language];
-        const result = await serializationStrategy.deserializeTarget(
-          join(workspaceRoot, locale.translation)
-        );
+        const targetPath = join(workspaceRoot, locale.translation);
+        const result = await serializationStrategy.deserializeTarget(targetPath);
         const target = new TranslationTarget(source, result.language, result.unitMap);
         if (locale.baseHref) {
           target.baseHref = locale.baseHref;
         }
 
+        const normalizedPath = targetPathBuilder.createPath(target);
+        if (targetPath !== normalizedPath) {
+          context.logger.info(
+            `Normalizing path for ${target.language}\n => Moving ${relative(
+              workspaceRoot,
+              targetPath
+            )} to ${relative(workspaceRoot, normalizedPath)}`
+          );
+          await nodeHost.rename(targetPath, normalizedPath).toPromise();
+        }
+
         return target;
       })
     );
+    await angularI18n.update(source, targets);
     return targets.reduce(
       (current, next) => current.set(next.language, next),
       new TranslationTargetRegistry()

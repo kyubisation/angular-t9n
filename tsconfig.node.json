@@ -12,16 +12,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "lib": ["es2018", "dom"],
-    "types": [
-      "jest",
-      "js-levenshtein",
-      "koa",
-      "koa__cors",
-      "koa__router",
-      "koa-static",
-      "node",
-      "xmldom"
-    ]
-  },
-  "files": ["builders/t9n/index.ts", "schematics/ng-add/index.ts"]
+    "types": ["jest", "js-levenshtein", "node", "xmldom"]
+  }
 }

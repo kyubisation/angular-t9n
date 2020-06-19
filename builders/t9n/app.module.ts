@@ -10,6 +10,7 @@ import {
   TargetUnitsController,
 } from './controllers';
 import { Xlf2Deserializer, XlfDeserializer, XmlParser } from './deserialization';
+import { ProjectGateway } from './gateways/project.gateway';
 import { LinkHelper } from './link-helper';
 import { Xlf2Serializer, XlfSerializer } from './serialization';
 import { SerializationStrategy } from './serialization-strategy';
@@ -30,6 +31,7 @@ import { SerializationStrategy } from './serialization-strategy';
   ],
   providers: [
     LinkHelper,
+    ProjectGateway,
     SerializationStrategy,
     XmlParser,
     XlfDeserializer,

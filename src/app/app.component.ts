@@ -1,26 +1,30 @@
 import { Component, HostBinding } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 
-import { TranslationService } from './core/translation.service';
+import { WebsocketService } from './core/websocket.service';
 
 @Component({
   selector: 't9n-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @HostBinding('class.service-down') serviceDown = false;
+  @HostBinding('class.service-down') serviceDown = true;
 
-  constructor(translationService: TranslationService, snackbar: MatSnackBar) {
-    translationService.serviceDown.subscribe(a => {
-      this.serviceDown = a;
-      if (a) {
-        snackbar.open(
+  constructor(websocketService: WebsocketService, snackbar: MatSnackBar) {
+    let snackbarRef: MatSnackBarRef<SimpleSnackBar>;
+    websocketService.project.subscribe((p) => {
+      if (!this.serviceDown && !p) {
+        snackbarRef = snackbar.open(
           `Translation server is not available. Start the server in the console with the command 'ng run yourProject:t9n'`,
           undefined,
-          { duration: 2500 }
+          { duration: 10000 }
         );
+      } else if (this.serviceDown && p) {
+        snackbarRef?.dismiss();
       }
+
+      this.serviceDown = !p;
     });
   }
 }

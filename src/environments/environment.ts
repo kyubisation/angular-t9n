@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  translationServer: 'http://localhost:4300'
+  translationServer: 'http://localhost:4300',
+  translationSocket: 'ws://localhost:4300',
 };
 
 /*
