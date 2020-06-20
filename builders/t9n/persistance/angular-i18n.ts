@@ -42,7 +42,9 @@ export class AngularI18n {
         code: source.language,
         baseHref:
           source.baseHref ||
-          (typeof i18n.sourceLocale === 'object' ? i18n.sourceLocale.baseHref : ''),
+          (typeof i18n.sourceLocale === 'object'
+            ? i18n.sourceLocale.baseHref
+            : `/${source.language}/`),
       };
     } else {
       i18n.sourceLocale = source.language;

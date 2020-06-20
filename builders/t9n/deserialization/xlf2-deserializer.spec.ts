@@ -2,10 +2,11 @@ import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 
 import { Xlf2Deserializer } from './xlf2-deserializer';
+import { XmlParser } from './xml-parser';
 
 describe('Xlf2Deserializer', () => {
-  const deserializer = new Xlf2Deserializer();
-  const xlfTestPath = resolve(__dirname, '../../test/xlf2');
+  const deserializer = new Xlf2Deserializer(new XmlParser());
+  const xlfTestPath = resolve(__dirname, '../../../test/xlf2');
   const sourceFile = join(xlfTestPath, 'messages.xlf');
   const targetFile = join(xlfTestPath, 'messages.de.xlf');
   const invalidVersionFile = join(xlfTestPath, 'messages.invalid-version.xlf');

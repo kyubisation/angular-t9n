@@ -15,7 +15,8 @@ export class LinkHelper {
   private readonly _origin: string;
 
   constructor(@Inject(REQUEST) request: Request) {
-    this._origin = request.get('host') ? `${request.protocol}://${request.get('host')}` : '';
+    const host = request.get('host');
+    this._origin = host ? `${request.protocol}://${host}` : '';
   }
 
   root() {
@@ -43,7 +44,7 @@ export class LinkHelper {
   }
 
   targetUnits(target: TranslationTarget, query?: QueryParams) {
-    const route = `${this._origin}/api/target/${target.language}/units`;
+    const route = `${this._origin}/api/targets/${target.language}/units`;
     return query && Object.keys(query).length
       ? `${route}?${new URLSearchParams(query).toString()}`
       : route;
@@ -55,7 +56,7 @@ export class LinkHelper {
   }
 
   targetOrphans(target: TranslationTarget, query?: QueryParams) {
-    const route = `${this._origin}/api/target/${target.language}/orphans`;
+    const route = `${this._origin}/api/targets/${target.language}/orphans`;
     return query && Object.keys(query).length
       ? `${route}?${new URLSearchParams(query).toString()}`
       : route;

@@ -20,11 +20,12 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
     filterables?: { [property: string]: (filter: string) => (e: TEntry) => boolean };
   }) {
     let entries = params.entries;
-    entries = this._sort(entries, params.query.sort, params.sortables);
-    entries = this._filter(entries, params.query, params.filterables);
+    const { entriesPerPage, page, sort, ...query } = params.query;
+    entries = this._sort(entries, sort, params.sortables);
+    entries = this._filter(entries, query, params.filterables);
 
-    this.entriesPerPage = +params.query.entriesPerPage || 10;
-    this.currentPage = +params.query.page || 0;
+    this.entriesPerPage = +entriesPerPage || 10;
+    this.currentPage = +page || 0;
     this.totalEntries = entries.length;
     this.totalPages = Math.ceil(entries.length / this.entriesPerPage);
     const lastPage = this.totalPages - 1;

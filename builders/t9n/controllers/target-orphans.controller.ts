@@ -45,18 +45,18 @@ export class TargetOrphansController {
         state: (a, b) => (a.unit.state || '').localeCompare(b.unit.state || ''),
       },
       filterables: {
-        id: (f) => (e) => (e.unit.id ? e.unit.id.includes(f) : false),
-        description: (f) => (e) => (e.unit.description ? e.unit.description.includes(f) : false),
-        meaning: (f) => (e) => (e.unit.meaning ? e.unit.meaning.includes(f) : false),
-        source: (f) => (e) => (e.unit.source ? e.unit.source.includes(f) : false),
-        target: (f) => (e) => (e.unit.target ? e.unit.target.includes(f) : false),
-        state: (f) => (e) => (e.unit.state ? e.unit.state.includes(f) : false),
+        id: (f) => (e) => !!e.unit.id && e.unit.id.includes(f),
+        description: (f) => (e) => !!e.unit.description && e.unit.description.includes(f),
+        meaning: (f) => (e) => !!e.unit.meaning && e.unit.meaning.includes(f),
+        source: (f) => (e) => !!e.unit.source && e.unit.source.includes(f),
+        target: (f) => (e) => !!e.unit.target && e.unit.target.includes(f),
+        state: (f) => (e) => !!e.unit.state && e.unit.state.includes(f),
       },
     });
   }
 
   @Get(':id')
-  getTargetUnit(@Param('language') language: string, @Param('id') id: string): OrphanResponse {
+  getOrphan(@Param('language') language: string, @Param('id') id: string): OrphanResponse {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {
       throw new NotFoundException('Target does not exist');
@@ -72,7 +72,7 @@ export class TargetOrphansController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  updateTargetUnit(@Param('language') language: string, @Param('id') id: string): void {
+  deleteOrphan(@Param('language') language: string, @Param('id') id: string): void {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {
       throw new NotFoundException('Target does not exist');

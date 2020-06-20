@@ -41,12 +41,12 @@ export class TargetUnitsController {
         state: (a, b) => (a.state || '').localeCompare(b.state || ''),
       },
       filterables: {
-        id: (f) => (e) => (e.id ? e.id.includes(f) : false),
-        description: (f) => (e) => (e.description ? e.description.includes(f) : false),
-        meaning: (f) => (e) => (e.meaning ? e.meaning.includes(f) : false),
-        source: (f) => (e) => (e.source ? e.source.includes(f) : false),
-        target: (f) => (e) => (e.target ? e.target.includes(f) : false),
-        state: (f) => (e) => (e.state ? e.state.includes(f) : false),
+        id: (f) => (e) => !!e.id && e.id.includes(f),
+        description: (f) => (e) => !!e.description && e.description.includes(f),
+        meaning: (f) => (e) => !!e.meaning && e.meaning.includes(f),
+        source: (f) => (e) => !!e.source && e.source.includes(f),
+        target: (f) => (e) => !!e.target && e.target.includes(f),
+        state: (f) => (e) => !!e.state && e.state.includes(f),
       },
     });
   }

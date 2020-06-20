@@ -20,7 +20,7 @@ export class AngularJsonPersistanceStrategy extends PersistanceStrategy {
     private readonly _i18n: AngularI18n,
     private readonly _logger: logging.Logger,
     private readonly _targetPathBuilder: TargetPathBuilder,
-    private readonly _serializationContext: SerializationStrategy
+    private readonly _serializationStrategy: SerializationStrategy
   ) {
     super();
     this._serializeScheduler = new DebounceScheduler<string>(async (language) => {
@@ -68,7 +68,7 @@ export class AngularJsonPersistanceStrategy extends PersistanceStrategy {
 
   private async _update(target: TranslationTarget): Promise<void> {
     const filePath = this._targetPathBuilder.createPath(target);
-    await this._serializationContext.serializeTarget(target, filePath);
+    await this._serializationStrategy.serializeTarget(target, filePath);
     await this._updateProjectI18n();
   }
 

@@ -133,6 +133,8 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.ts",
+      "!**/*.module.ts",
+      "!**/*.d.ts",
       "!**/index.ts",
       "!**/*.spec.ts"
     ],
