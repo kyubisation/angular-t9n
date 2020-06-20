@@ -17,23 +17,23 @@ export class ExportService {
   export(state: string): Observable<void> {
     const params = new HttpParams().set('entriesPerPage', '100').set('state', state);
     return this._translationTargetService.target.pipe(
-      switchMap(t =>
+      switchMap((t) =>
         this._http
           .get<PaginationResponse<TranslationTargetUnitResponse>>(t._links!.units.href, {
-            params
+            params,
           })
           .pipe(
-            switchMap(p => this._loadNextUnitsPage(p, p._embedded.entries)),
-            map(entries =>
+            switchMap((p) => this._loadNextUnitsPage(p, p._embedded.entries)),
+            map((entries) =>
               entries.map(({ id, description, meaning, source, target }) => ({
                 Id: id,
                 Description: description,
                 Meaning: meaning,
                 Source: source,
-                Target: target
+                Target: target,
               }))
             ),
-            switchMap(async entries => {
+            switchMap(async (entries) => {
               const { utils, writeFile } = await import('xlsx');
               const header = ['Id', 'Description', 'Meaning', 'Source', 'Target'];
               const sheet = utils.json_to_sheet(entries, { header });
@@ -55,7 +55,7 @@ export class ExportService {
     } else {
       return this._http
         .get<PaginationResponse<TranslationTargetUnitResponse>>(page._links.next.href)
-        .pipe(switchMap(p => this._loadNextUnitsPage(p, entries.concat(p._embedded.entries))));
+        .pipe(switchMap((p) => this._loadNextUnitsPage(p, entries.concat(p._embedded.entries))));
     }
   }
 }

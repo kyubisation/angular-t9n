@@ -10,7 +10,7 @@ import { ImportService } from '../core/import.service';
   templateUrl: './import.component.html',
   styleUrls: ['./import.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ImportService]
+  providers: [ImportService],
 })
 export class ImportComponent {
   @HostBinding('class.dragging') dragging = false;

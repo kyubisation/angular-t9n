@@ -12,14 +12,14 @@ import { TranslationTargetService } from '../core/translation-target.service';
   templateUrl: './target.component.html',
   styleUrls: ['./target.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TranslationTargetService]
+  providers: [TranslationTargetService],
 })
 export class TargetComponent {
   target: Observable<TargetResponse>;
 
   constructor(private _route: ActivatedRoute, private _translationService: TranslationService) {
     this.target = this._route.params.pipe(
-      switchMap(p => this._translationService.target(p.language)),
+      switchMap((p) => this._translationService.target(p.language)),
       filter((t): t is TargetResponse => !!t)
     );
   }

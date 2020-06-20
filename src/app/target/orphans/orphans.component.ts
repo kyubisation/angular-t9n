@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,7 +21,7 @@ import { OrphansDataSource } from './orphans-datasource';
   selector: 't9n-orphans',
   templateUrl: './orphans.component.html',
   styleUrls: ['./orphans.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrphansComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -60,7 +60,7 @@ export class PaginationHelper {
     }
 
     const filters = Object.keys(this._source.filter.controls)
-      .filter(k => route.queryParamMap.get(k))
+      .filter((k) => route.queryParamMap.get(k))
       .reduce(
         (current, next) => Object.assign(current, { [next]: route.queryParamMap.get(next) }),
         {}
@@ -81,7 +81,7 @@ export class PaginationHelper {
         : undefined,
       filter
         ? Object.keys(filter.controls)
-            .filter(k => filter.get(k)!.value)
+            .filter((k) => filter.get(k)!.value)
             .reduce(
               (current, next) => Object.assign(current, { [next]: filter.get(next)!.value }),
               {}
@@ -90,7 +90,7 @@ export class PaginationHelper {
     );
     this._router.navigate([], {
       relativeTo: this._route,
-      queryParams
+      queryParams,
     });
   }
 }

@@ -39,16 +39,16 @@ export class TranslateDataSource extends DataSource<FormTargetUnit> {
           page: this._paginator.pageIndex,
           entriesPerPage: this._paginator.pageSize,
           sort: this._sort,
-          filter: this._filter.value
+          filter: this._filter.value,
         })
       ),
-      tap(unitPage => this._totalEntries.next(unitPage.totalEntries)),
-      map(unitPage =>
-        unitPage._embedded!.entries.map(u => {
+      tap((unitPage) => this._totalEntries.next(unitPage.totalEntries)),
+      map((unitPage) =>
+        unitPage._embedded!.entries.map((u) => {
           const unit: FormTargetUnit = {
             ...u,
             target: new FormControl(u.target),
-            state: new FormControl({ value: u.state, disabled: !u.target })
+            state: new FormControl({ value: u.state, disabled: !u.target }),
           };
           this._translationTargetService.updateUnitOnChange(u, unit, this._destroy);
           unit.target.markAsTouched();

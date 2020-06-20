@@ -34,7 +34,7 @@ import { UnitComponent } from './unit/unit.component';
     TargetComponent,
     OrphansComponent,
     UnitComponent,
-    OrphanComponent
+    OrphanComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +54,7 @@ import { UnitComponent } from './unit/unit.component';
     MatTableModule,
     MatTooltipModule,
     TextFieldModule,
-    TargetRoutingModule
-  ]
+    TargetRoutingModule,
+  ],
 })
 export class TargetModule {}

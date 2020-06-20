@@ -10,7 +10,7 @@ import { TranslationService } from '../../core/translation.service';
 @Component({
   selector: 't9n-add-language-modal',
   templateUrl: './add-language-modal.component.html',
-  styleUrls: ['./add-language-modal.component.scss']
+  styleUrls: ['./add-language-modal.component.scss'],
 })
 export class AddLanguageModalComponent {
   form: FormGroup;
@@ -25,19 +25,19 @@ export class AddLanguageModalComponent {
       language: [
         '',
         [Validators.required, Validators.pattern('\\w[\\w-]*')],
-        (control: AbstractControl) => this._targetExists(control)
-      ]
+        (control: AbstractControl) => this._targetExists(control),
+      ],
     });
     this.locales = this.form.controls.language.valueChanges.pipe(
       startWith(''),
-      map(language => (language ? locales.filter(locale => locale.startsWith(language)) : [])),
-      switchMap(filteredLocales =>
+      map((language) => (language ? locales.filter((locale) => locale.startsWith(language)) : [])),
+      switchMap((filteredLocales) =>
         this._translationService.targets.pipe(
-          map(targets => targets.map(t => t.language)),
-          map(t => filteredLocales.filter(l => t.indexOf(l) < 0))
+          map((targets) => targets.map((t) => t.language)),
+          map((t) => filteredLocales.filter((l) => t.indexOf(l) < 0))
         )
       ),
-      map(l => l.slice(0, 20))
+      map((l) => l.slice(0, 20))
     );
   }
 
@@ -54,7 +54,9 @@ export class AddLanguageModalComponent {
   private _targetExists(control: AbstractControl) {
     return this._translationService.targets.pipe(
       first(),
-      map(targets => (targets.some(t => t.language === control.value) ? { target: true } : null))
+      map((targets) =>
+        targets.some((t) => t.language === control.value) ? { target: true } : null
+      )
     );
   }
 }

@@ -12,7 +12,7 @@ import { TranslationTargetService } from '../core/translation-target.service';
   selector: 't9n-orphan',
   templateUrl: './orphan.component.html',
   styleUrls: ['./orphan.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrphanComponent implements OnDestroy {
   orphan: Observable<TranslationTargetUnitResponse>;
@@ -29,11 +29,11 @@ export class OrphanComponent implements OnDestroy {
   ) {
     this.params = this._route.params.pipe(map(({ orphanId, ...params }) => params));
     this.orphan = this._route.paramMap.pipe(
-      switchMap(p => this._translationTargetService.orphan(p.get('orphanId')!)),
-      tap(o => (this._orphan = o)),
+      switchMap((p) => this._translationTargetService.orphan(p.get('orphanId')!)),
+      tap((o) => (this._orphan = o)),
       share()
     );
-    this.similar = this.orphan.pipe(map(o => o._embedded!.similar as OrphanMatchResponse[]));
+    this.similar = this.orphan.pipe(map((o) => o._embedded!.similar as OrphanMatchResponse[]));
   }
 
   ngOnDestroy(): void {

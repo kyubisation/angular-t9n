@@ -8,9 +8,8 @@ package-lock.json
 *.ico
 *.xlf
 *.svg
-t9n/index.js
-t9n/index.d.ts
 builders/*/index.js
 builders/*/index.d.ts
+builders/t9n/client/*
 schematics/*/index.js
 schematics/*/index.d.ts

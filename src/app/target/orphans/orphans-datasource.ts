@@ -38,11 +38,11 @@ export class OrphansDataSource extends DataSource<TranslationTargetUnitResponse>
         this._translationTargetService.orphans({
           page: this._paginator.pageIndex,
           entriesPerPage: this._paginator.pageSize,
-          sort: this._sort
+          sort: this._sort,
         })
       ),
-      tap(orphanPage => this._totalEntries.next(orphanPage.totalEntries)),
-      map(orphanPage => orphanPage._embedded.entries)
+      tap((orphanPage) => this._totalEntries.next(orphanPage.totalEntries)),
+      map((orphanPage) => orphanPage._embedded.entries)
     );
   }
 

@@ -14,7 +14,7 @@ import {
   startWith,
   switchMap,
   takeUntil,
-  tap
+  tap,
 } from 'rxjs/operators';
 
 import { PaginationResponse, TargetResponse, TranslationTargetUnitResponse } from '../../../models';
@@ -32,7 +32,7 @@ export class TranslationTargetService {
     private _http: HttpClient
   ) {
     this.target = this._activatedRoute.params.pipe(
-      switchMap(p => this._translationService.target(p.language)),
+      switchMap((p) => this._translationService.target(p.language)),
       filter((t): t is TargetResponse => !!t)
     );
   }
@@ -40,8 +40,8 @@ export class TranslationTargetService {
   unit(id: string) {
     return this.target.pipe(
       first(),
-      map(t => t._links!.unit.href.replace('{id}', id)),
-      switchMap(href => this._http.get<TranslationTargetUnitResponse>(href))
+      map((t) => t._links!.unit.href.replace('{id}', id)),
+      switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href))
     );
   }
 
@@ -54,8 +54,8 @@ export class TranslationTargetService {
     const params = createPageParams(query);
     return this.target.pipe(
       first(),
-      map(t => t._links!.units.href),
-      switchMap(href =>
+      map((t) => t._links!.units.href),
+      switchMap((href) =>
         this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
       )
     );
@@ -74,25 +74,25 @@ export class TranslationTargetService {
         debounceTime(500),
         distinctUntilChanged(),
         skip(1),
-        tap(target =>
+        tap((target) =>
           target
             ? controls.state.enable({ emitEvent: false })
             : controls.state.disable({ emitEvent: false })
         ),
-        switchMap(target => this.updateUnit({ ...unit, target, state: controls.state.value }))
+        switchMap((target) => this.updateUnit({ ...unit, target, state: controls.state.value }))
       )
-      .subscribe(r => controls.state.setValue(r.state, { emitEvent: false }));
+      .subscribe((r) => controls.state.setValue(r.state, { emitEvent: false }));
     controls.state.valueChanges
       .pipe(
         takeUntil(until),
         startWith(controls.state.value),
         distinctUntilChanged(),
         skip(1),
-        switchMap(state =>
+        switchMap((state) =>
           this.updateUnit({
             ...unit,
             target: controls.target.value,
-            state
+            state,
           })
         )
       )
@@ -113,8 +113,8 @@ export class TranslationTargetService {
   orphan(id: string) {
     return this.target.pipe(
       first(),
-      map(t => t._links!.orphan.href.replace('{id}', id)),
-      switchMap(href => this._http.get<TranslationTargetUnitResponse>(href))
+      map((t) => t._links!.orphan.href.replace('{id}', id)),
+      switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href))
     );
   }
 
@@ -127,8 +127,8 @@ export class TranslationTargetService {
     const params = createPageParams(query);
     return this.target.pipe(
       first(),
-      map(t => t._links!.orphans.href),
-      switchMap(href =>
+      map((t) => t._links!.orphans.href),
+      switchMap((href) =>
         this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
       )
     );
@@ -145,10 +145,10 @@ export class TranslationTargetService {
       switchMap(() =>
         this.target.pipe(
           first(),
-          switchMap(t => this._translationService.updateTarget(t.language))
+          switchMap((t) => this._translationService.updateTarget(t.language))
         )
       ),
-      map(t => ({ orphansRemaining: t.orphanCount > 0 }))
+      map((t) => ({ orphansRemaining: t.orphanCount > 0 }))
     );
   }
 }

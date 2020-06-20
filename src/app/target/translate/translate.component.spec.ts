@@ -13,7 +13,7 @@ describe('TranslateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TranslateComponent],
-      imports: [NoopAnimationsModule, MatPaginatorModule, MatSortModule, MatTableModule]
+      imports: [NoopAnimationsModule, MatPaginatorModule, MatSortModule, MatTableModule],
     }).compileComponents();
   }));
 

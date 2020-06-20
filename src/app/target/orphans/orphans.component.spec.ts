@@ -13,7 +13,7 @@ describe('OrphansComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [OrphansComponent],
-      imports: [NoopAnimationsModule, MatPaginatorModule, MatSortModule, MatTableModule]
+      imports: [NoopAnimationsModule, MatPaginatorModule, MatSortModule, MatTableModule],
     }).compileComponents();
   }));
 

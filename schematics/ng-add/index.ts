@@ -22,7 +22,7 @@ export function ngAdd(_options: Schema): Rule {
 
     projectWorkspace.architect['t9n'] = {
       builder: 'angular-t9n:t9n',
-      options
+      options,
     };
 
     if (packageScript) {

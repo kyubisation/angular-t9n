@@ -16,34 +16,34 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: TranslateComponent
+        component: TranslateComponent,
       },
       {
         path: 'unit/:unitId',
-        component: UnitComponent
+        component: UnitComponent,
       },
       {
         path: 'import',
-        component: ImportComponent
+        component: ImportComponent,
       },
       {
         path: 'export',
-        component: ExportComponent
+        component: ExportComponent,
       },
       {
         path: 'orphans',
-        component: OrphansComponent
+        component: OrphansComponent,
       },
       {
         path: 'orphans/:orphanId',
-        component: OrphanComponent
-      }
-    ]
-  }
+        component: OrphanComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TargetRoutingModule {}

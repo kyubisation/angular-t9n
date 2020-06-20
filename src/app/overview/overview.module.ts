@@ -25,7 +25,7 @@ import { OverviewComponent } from './overview/overview.component';
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
-    OverviewRoutingModule
-  ]
+    OverviewRoutingModule,
+  ],
 })
 export class OverviewModule {}

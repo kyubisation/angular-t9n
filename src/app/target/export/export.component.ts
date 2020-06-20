@@ -9,7 +9,7 @@ import { ExportService } from '../core/export.service';
   templateUrl: './export.component.html',
   styleUrls: ['./export.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ExportService]
+  providers: [ExportService],
 })
 export class ExportComponent {
   filter: FormGroup;
@@ -17,7 +17,7 @@ export class ExportComponent {
 
   constructor(private _exportService: ExportService, formBuilder: FormBuilder) {
     this.filter = formBuilder.group({
-      state: 'initial'
+      state: 'initial',
     });
   }
 

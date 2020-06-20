@@ -11,7 +11,7 @@ import { TranslationTargetService } from '../core/translation-target.service';
   selector: 't9n-unit',
   templateUrl: './unit.component.html',
   styleUrls: ['./unit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UnitComponent implements OnDestroy {
   unit: Observable<TranslationTargetUnitResponse>;
@@ -26,10 +26,10 @@ export class UnitComponent implements OnDestroy {
   ) {
     this.params = this._route.params.pipe(map(({ unitId, ...params }) => params));
     this.unit = this._route.paramMap.pipe(
-      switchMap(p => this._translationTargetService.unit(p.get('unitId')!)),
+      switchMap((p) => this._translationTargetService.unit(p.get('unitId')!)),
       share()
     );
-    this.form = this.unit.pipe(map(u => this._createForm(u)));
+    this.form = this.unit.pipe(map((u) => this._createForm(u)));
   }
 
   ngOnDestroy(): void {
@@ -43,7 +43,7 @@ export class UnitComponent implements OnDestroy {
       meaning: [{ value: unit.meaning || '-', disabled: true }],
       source: [{ value: unit.source, disabled: true }],
       target: unit.target,
-      state: [{ value: unit.state, disabled: !unit.target }]
+      state: [{ value: unit.state, disabled: !unit.target }],
     });
     this._translationTargetService.updateUnitOnChange(
       unit,

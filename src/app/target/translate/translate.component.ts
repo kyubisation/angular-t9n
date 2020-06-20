@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,7 +22,7 @@ import { TranslateDataSource } from './translate-datasource';
   selector: 't9n-translate',
   templateUrl: './translate.component.html',
   styleUrls: ['./translate.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TranslateComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,7 +48,7 @@ export class TranslateComponent implements AfterViewInit, OnDestroy {
       meaning: '',
       source: '',
       target: '',
-      state: ''
+      state: '',
     });
   }
 

@@ -543,5 +543,5 @@ export const locales = [
   'zh-Hant-MO',
   'zh-Hant',
   'zh',
-  'zu'
+  'zu',
 ];

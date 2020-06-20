@@ -8,7 +8,7 @@ describe('ImportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ImportComponent]
+      declarations: [ImportComponent],
     }).compileComponents();
   }));
 

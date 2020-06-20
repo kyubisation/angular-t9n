@@ -22,7 +22,7 @@ export function createPageParams(query: {
   }
   if (query.filter) {
     params = Object.keys(query.filter)
-      .filter(k => query.filter![k])
+      .filter((k) => query.filter![k])
       .reduce((current, next) => current.set(next, query.filter![next]), params);
   }
 

@@ -14,7 +14,7 @@ export class ImportService {
     const { read, utils } = await import('xlsx');
     const result = new ImportResult();
     const unitRows = await Promise.all(
-      Array.from(files).map(async f => {
+      Array.from(files).map(async (f) => {
         try {
           const binary = await this._readFileAsBinary(f);
           const workbook = read(binary, { type: 'binary' });
@@ -22,8 +22,8 @@ export class ImportService {
           const rows = utils
             .sheet_to_json<string[]>(sheet, { header: 1 })
             .slice(1)
-            .map(row => this._toPartialTargetUnit(row))
-            .filter(u => u.id && u.target);
+            .map((row) => this._toPartialTargetUnit(row))
+            .filter((u) => u.id && u.target);
           if (!rows.length) {
             throw new Error(`${f.name} contains no valid units`);
           }
@@ -39,7 +39,7 @@ export class ImportService {
     await Promise.all(
       unitRows
         .reduce((current, next) => current.concat(next), [])
-        .map(async u => {
+        .map(async (u) => {
           try {
             const response = await this._importUnit(u, state).toPromise();
             result.importedUnits.push(response);
@@ -77,7 +77,7 @@ export class ImportService {
       description,
       meaning,
       source,
-      target
+      target,
     };
   }
 
@@ -88,7 +88,7 @@ export class ImportService {
     return this._translationTargetService
       .unit(unit.id!)
       .pipe(
-        switchMap(u =>
+        switchMap((u) =>
           this._translationTargetService.updateUnit({ ...u, target: unit.target!, state })
         )
       );

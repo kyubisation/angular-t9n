@@ -27,9 +27,9 @@ import { TargetModule } from './target/target.module';
     MatTooltipModule,
     OverviewModule,
     TargetModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
