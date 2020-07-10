@@ -4,9 +4,10 @@ import { Request } from 'express';
 
 import {
   QueryParams,
-  TranslationOrphan,
+  TranslationSourceOrphan,
   TranslationSourceUnit,
   TranslationTarget,
+  TranslationTargetOrphan,
   TranslationTargetUnit,
 } from './models';
 
@@ -33,6 +34,18 @@ export class LinkHelper {
   sourceUnit(unitOrId: TranslationSourceUnit | string) {
     const id = typeof unitOrId === 'string' ? unitOrId : unitOrId.id;
     return `${this._origin}/api/source/units/${id}`;
+  }
+
+  sourceOrphans(query?: QueryParams) {
+    const route = `${this._origin}/api/source/orphans`;
+    return query && Object.keys(query).length
+      ? `${route}?${new URLSearchParams(query).toString()}`
+      : route;
+  }
+
+  sourceOrphan(unitOrId: TranslationSourceOrphan | string) {
+    const id = typeof unitOrId === 'string' ? unitOrId : unitOrId.unit.id;
+    return `${this._origin}/api/source/orphans/${id}`;
   }
 
   targets() {
@@ -62,7 +75,7 @@ export class LinkHelper {
       : route;
   }
 
-  targetOrphan(unitOrId: TranslationOrphan | string, target: TranslationTarget) {
+  targetOrphan(unitOrId: TranslationTargetOrphan | string, target: TranslationTarget) {
     const id = typeof unitOrId === 'string' ? unitOrId : unitOrId.unit.id;
     return `${this._origin}/api/targets/${target.language}/orphans/${id}`;
   }

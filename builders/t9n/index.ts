@@ -13,14 +13,14 @@ import {
   XlfDeserializer,
   XmlParser,
 } from './deserialization';
-import { TranslationSource, TranslationTarget } from './models';
+import { TranslationSource } from './models';
 import {
   AngularI18n,
-  AngularJsonPersistanceStrategy,
-  PersistanceStrategy,
+  AngularJsonPersistenceStrategy,
+  PersistenceStrategy,
   TargetPathBuilder,
   TranslationTargetRegistry,
-} from './persistance';
+} from './persistence';
 import { Schema as Options } from './schema';
 import {
   SerializationOptions,
@@ -37,7 +37,7 @@ export * from './controllers';
 export * from './deserialization';
 export * from './link-helper';
 export * from './models';
-export * from './persistance';
+export * from './persistence';
 export * from './serialization';
 export * from './serialization-strategy';
 export * from './target-info';
@@ -67,15 +67,22 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   }
 
   const xliffVersion = await detectXliffVersion();
+  context.logger.info(`Detected version ${xliffVersion} of XLIFF`);
   const targetPathBuilder = new TargetPathBuilder(targetDirectory, sourceFile);
+  let translationContext: {
+    source: TranslationSource;
+    targetRegistry: TranslationTargetRegistry;
+  } = null!;
   const angularI18n = new AngularI18n(
     host,
     workspaceRoot,
     context.target.project,
-    targetPathBuilder
+    targetPathBuilder,
+    () => translationContext
   );
   const sourceLocale = await angularI18n.sourceLocale();
 
+  context.logger.info(`Loading translations. Depending on the amount, this might take a moment.`);
   const app = await NestFactory.create(
     AppModule.forRoot([
       { provide: logging.Logger, useValue: context.logger.createChild('NestJS') },
@@ -107,9 +114,9 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
       {
         provide: TranslationTargetRegistry,
         useFactory: TRANSLATION_TARGET_REGISTRY_FACTORY,
-        inject: [TranslationSource, SerializationStrategy],
+        inject: [TranslationSource, SerializationStrategy, PersistenceStrategy],
       },
-      { provide: PersistanceStrategy, useClass: AngularJsonPersistanceStrategy },
+      { provide: PersistenceStrategy, useClass: AngularJsonPersistenceStrategy },
     ]),
     {
       cors: true,
@@ -158,18 +165,17 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
 
   async function TRANSLATION_TARGET_REGISTRY_FACTORY(
     source: TranslationSource,
-    serializationStrategy: SerializationStrategy
+    serializationStrategy: SerializationStrategy,
+    persistenceStrategy: PersistenceStrategy
   ): Promise<TranslationTargetRegistry> {
+    const targetRegistry = new TranslationTargetRegistry(source, persistenceStrategy);
     const locales = await angularI18n.locales();
-    const targets = await Promise.all(
+    await Promise.all(
       Object.keys(locales).map(async (language) => {
         const locale = locales[language];
         const targetPath = join(workspaceRoot, locale.translation);
         const result = await serializationStrategy.deserializeTarget(targetPath);
-        const target = new TranslationTarget(source, result.language, result.unitMap);
-        if (locale.baseHref) {
-          target.baseHref = locale.baseHref;
-        }
+        const target = targetRegistry.register(result.language, result.unitMap, locale.baseHref);
 
         const normalizedPath = targetPathBuilder.createPath(target);
         if (targetPath !== normalizedPath) {
@@ -181,14 +187,11 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
           );
           await nodeHost.rename(targetPath, normalizedPath).toPromise();
         }
-
-        return target;
       })
     );
-    await angularI18n.update(source, targets);
-    return targets.reduce(
-      (current, next) => current.set(next.language, next),
-      new TranslationTargetRegistry()
-    );
+
+    translationContext = { source, targetRegistry };
+    await angularI18n.update();
+    return targetRegistry;
   }
 }

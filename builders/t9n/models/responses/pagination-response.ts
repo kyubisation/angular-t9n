@@ -19,7 +19,7 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
     sortables?: { [property: string]: (a: TEntry, b: TEntry) => number };
     filterables?: { [property: string]: (filter: string) => (e: TEntry) => boolean };
   }) {
-    let entries = params.entries;
+    let entries = params.entries.slice();
     const { entriesPerPage, page, sort, ...query } = params.query;
     entries = this._sort(entries, sort, params.sortables);
     entries = this._filter(entries, query, params.filterables);

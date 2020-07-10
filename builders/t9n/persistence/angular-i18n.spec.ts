@@ -1,10 +1,10 @@
-import { join, normalize, relative, workspaces } from '@angular-devkit/core';
-import { SimpleMemoryHost } from '@angular-devkit/core/src/virtual-fs/host';
+import { join, normalize, relative, virtualFs, workspaces } from '@angular-devkit/core';
 
 import { TranslationSource, TranslationTarget } from '../models';
 
 import { AngularI18n } from './angular-i18n';
 import { TargetPathBuilder } from './target-path-builder';
+import { TranslationTargetRegistry } from './translation-target-registry';
 
 describe('AngularI18n', () => {
   const workspaceRoot = normalize(__dirname);
@@ -13,13 +13,18 @@ describe('AngularI18n', () => {
   const angularJsonPath = join(workspaceRoot, 'angular.json');
   const projectName = 'angular-t9n';
   const builder = new TargetPathBuilder(targetDirectory, sourceFile);
-  let memoryHost: SimpleMemoryHost;
+  let memoryHost: virtualFs.SimpleMemoryHost;
   let host: workspaces.WorkspaceHost;
   let angularI18n: AngularI18n;
+  let translationContext: {
+    source: TranslationSource;
+    targetRegistry: TranslationTargetRegistry;
+  };
 
   beforeEach(() => {
-    memoryHost = new SimpleMemoryHost();
+    memoryHost = new virtualFs.SimpleMemoryHost();
     host = workspaces.createWorkspaceHost(memoryHost);
+    translationContext = null!;
   });
 
   describe('with i18n configured', () => {
@@ -32,7 +37,17 @@ describe('AngularI18n', () => {
         },
       };
       await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
-      angularI18n = new AngularI18n(host, workspaceRoot, projectName, builder);
+      angularI18n = new AngularI18n(
+        host,
+        workspaceRoot,
+        projectName,
+        builder,
+        () => translationContext
+      );
+    });
+
+    it('should throw without source', () => {
+      expect(angularI18n.update()).rejects.toThrow();
     });
 
     it('should return the source locale', async () => {
@@ -50,10 +65,16 @@ describe('AngularI18n', () => {
     });
 
     it('should update the angular.json when changed', async () => {
-      await angularI18n.update({ language: 'en-US' } as TranslationSource, [
-        { language: 'de' } as TranslationTarget,
-        { language: 'de-CH' } as TranslationTarget,
-      ]);
+      translationContext = {
+        source: { language: 'en-US' } as TranslationSource,
+        targetRegistry: {
+          values: () => [
+            { language: 'de' } as TranslationTarget,
+            { language: 'de-CH' } as TranslationTarget,
+          ],
+        } as any,
+      };
+      await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
       const dePath = relative(
         workspaceRoot,
@@ -86,7 +107,13 @@ describe('AngularI18n', () => {
         },
       };
       await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
-      angularI18n = new AngularI18n(host, workspaceRoot, projectName, builder);
+      angularI18n = new AngularI18n(
+        host,
+        workspaceRoot,
+        projectName,
+        builder,
+        () => translationContext
+      );
     });
 
     it('should return the source locale', async () => {
@@ -104,10 +131,16 @@ describe('AngularI18n', () => {
     });
 
     it('should update the angular.json when changed', async () => {
-      await angularI18n.update({ language: 'en-US', baseHref: '/en-US/' } as TranslationSource, [
-        { language: 'de', baseHref: '/de/' } as TranslationTarget,
-        { language: 'de-CH', baseHref: '/de-CH/' } as TranslationTarget,
-      ]);
+      translationContext = {
+        source: { language: 'en-US', baseHref: '/en-US/' } as TranslationSource,
+        targetRegistry: {
+          values: () => [
+            { language: 'de', baseHref: '/de/' } as TranslationTarget,
+            { language: 'de-CH', baseHref: '/de-CH/' } as TranslationTarget,
+          ],
+        } as any,
+      };
+      await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
       const dePath = relative(
         workspaceRoot,
@@ -141,7 +174,13 @@ describe('AngularI18n', () => {
       const angularJson = require('../../../angular.json');
       angularJson.projects[projectName].i18n = undefined;
       await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
-      angularI18n = new AngularI18n(host, workspaceRoot, projectName, builder);
+      angularI18n = new AngularI18n(
+        host,
+        workspaceRoot,
+        projectName,
+        builder,
+        () => translationContext
+      );
     });
 
     it('should return undefined for the source locale', async () => {

@@ -34,6 +34,24 @@ describe('LinkHelper', () => {
     expect(linkHelper.sourceUnit('test')).toEqual('/api/source/units/test');
   });
 
+  it('should return the source orphan url with object', () => {
+    expect(linkHelper.sourceOrphan({ unit: { id: 'test' } } as any)).toEqual(
+      '/api/source/orphans/test'
+    );
+  });
+
+  it('should return the source orphan url with string', () => {
+    expect(linkHelper.sourceOrphan('test')).toEqual('/api/source/orphans/test');
+  });
+
+  it('should return the source orphans url', () => {
+    expect(linkHelper.sourceOrphans()).toEqual('/api/source/orphans');
+  });
+
+  it('should return the source orphans url with parameters', () => {
+    expect(linkHelper.sourceOrphans({ test: 'test' })).toEqual('/api/source/orphans?test=test');
+  });
+
   it('should return the targets url', () => {
     expect(linkHelper.targets()).toEqual('/api/targets');
   });
@@ -43,12 +61,12 @@ describe('LinkHelper', () => {
   });
 
   it('should return the target units url', () => {
-    expect(linkHelper.targetUnits({ language: 'en' } as any)).toEqual('/api/target/en/units');
+    expect(linkHelper.targetUnits({ language: 'en' } as any)).toEqual('/api/targets/en/units');
   });
 
   it('should return the target units url with parameters', () => {
     expect(linkHelper.targetUnits({ language: 'en' } as any, { test: 'test' })).toEqual(
-      '/api/target/en/units?test=test'
+      '/api/targets/en/units?test=test'
     );
   });
 
@@ -65,12 +83,12 @@ describe('LinkHelper', () => {
   });
 
   it('should return the target orphans url', () => {
-    expect(linkHelper.targetOrphans({ language: 'en' } as any)).toEqual('/api/target/en/orphans');
+    expect(linkHelper.targetOrphans({ language: 'en' } as any)).toEqual('/api/targets/en/orphans');
   });
 
   it('should return the target orphans url with parameters', () => {
     expect(linkHelper.targetOrphans({ language: 'en' } as any, { test: 'test' })).toEqual(
-      '/api/target/en/orphans?test=test'
+      '/api/targets/en/orphans?test=test'
     );
   });
 

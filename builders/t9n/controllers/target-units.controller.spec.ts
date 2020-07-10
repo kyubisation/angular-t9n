@@ -1,10 +1,10 @@
 import {
+  generateTargets,
   MOCK_LINK_HELPER,
-  MOCK_PERSISTANCE_STRATEGY,
   MOCK_TARGET_DE,
   MOCK_TARGET_REGISTRY,
 } from '../../../test';
-import { TargetUnitResponse } from '../models';
+import { TargetUnitRequest, TargetUnitResponse } from '../models';
 
 import { TargetUnitsController } from './target-units.controller';
 
@@ -12,11 +12,7 @@ describe('TargetUnitsController', () => {
   let controller: TargetUnitsController;
 
   beforeEach(() => {
-    controller = new TargetUnitsController(
-      MOCK_TARGET_REGISTRY,
-      MOCK_PERSISTANCE_STRATEGY,
-      MOCK_LINK_HELPER
-    );
+    controller = new TargetUnitsController(MOCK_TARGET_REGISTRY, MOCK_LINK_HELPER);
   });
 
   it('should return pagination', () => {
@@ -33,16 +29,33 @@ describe('TargetUnitsController', () => {
       const sortedIds = MOCK_TARGET_DE.units
         .slice()
         .sort((a, b) => stringify((a as any)[sort]).localeCompare(stringify((b as any)[sort])))
-        .map((u) => u.id);
+        .map((u) => u.id)
+        .slice(0, 10);
+      expect(responseIds).toEqual(sortedIds);
+    });
+
+    it(`should return second page reverse sorted pagination with ${sort}`, () => {
+      const page = controller.getPagination(MOCK_TARGET_DE.language, {
+        sort: `!${sort}`,
+        page: '1',
+      });
+      const responseIds = (page._embedded!.entries as TargetUnitResponse[]).map((u) => u.id);
+      const stringify = (value: string | number | boolean = '') => value.toString();
+      const sortedIds = MOCK_TARGET_DE.units
+        .slice()
+        .sort((a, b) => stringify((a as any)[sort]).localeCompare(stringify((b as any)[sort])))
+        .reverse()
+        .map((u) => u.id)
+        .slice(10, 20);
       expect(responseIds).toEqual(sortedIds);
     });
   }
 
   for (const filter of ['id', 'description', 'meaning', 'source', 'target', 'state']) {
     it(`should return filtered pagination with ${filter}`, async () => {
-      const unit = MOCK_TARGET_DE.units[0];
+      const unit = MOCK_TARGET_DE.units[1];
       const page = controller.getPagination(MOCK_TARGET_DE.language, {
-        [filter]: (unit as any)[filter],
+        [filter]: (unit as any)[filter].substring(0, 10),
       });
       const responseIds = (page._embedded!.entries as TargetUnitResponse[]).map((u) => u.id);
       const sortedIds = MOCK_TARGET_DE.units
@@ -50,7 +63,8 @@ describe('TargetUnitsController', () => {
         .filter(
           (u) => (u as any)[filter] && (u as any)[filter].toString().includes((unit as any)[filter])
         )
-        .map((u) => u.id);
+        .map((u) => u.id)
+        .slice(0, 10);
       expect(responseIds).toEqual(sortedIds);
     });
   }
@@ -85,5 +99,21 @@ describe('TargetUnitsController', () => {
     expect(() =>
       controller.updateTargetUnit(MOCK_TARGET_DE.language, 'does-not-exist', {} as any)
     ).toThrow();
+  });
+
+  it('should update translation', () => {
+    const { registry } = generateTargets();
+    const target = registry.get('de')!;
+    const unit = target.units[1];
+    const update: TargetUnitRequest = { target: 'updated text', state: 'final' };
+    expect(unit.target).not.toEqual(update.target);
+    expect(unit.state).not.toEqual(update.state);
+    controller = new TargetUnitsController(registry, MOCK_LINK_HELPER);
+    const result = controller.updateTargetUnit(target.language, unit.id, update);
+    expect(result.target).toEqual(update.target);
+    expect(result.state).toEqual(update.state);
+    const updatedUnit = target.units[1];
+    expect(updatedUnit.target).toEqual(update.target);
+    expect(updatedUnit.state).toEqual(update.state);
   });
 });

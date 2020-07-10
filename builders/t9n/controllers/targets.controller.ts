@@ -9,13 +9,12 @@ import {
 
 import { LinkHelper } from '../link-helper';
 import { TargetResponse, TargetsResponse } from '../models';
-import { PersistanceStrategy, TranslationTargetRegistry } from '../persistance';
+import { TranslationTargetRegistry } from '../persistence';
 
 @Controller('targets')
 export class TargetsController {
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _persistanceStrategy: PersistanceStrategy,
     private _linkHelper: LinkHelper
   ) {}
 
@@ -41,7 +40,7 @@ export class TargetsController {
       throw new BadRequestException('Target already exists');
     }
 
-    const target = await this._persistanceStrategy.create(language);
+    const target = await this._translationTargetRegistry.create(language);
     return new TargetResponse(target, this._linkHelper);
   }
 }

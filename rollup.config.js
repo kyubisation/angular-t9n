@@ -31,6 +31,8 @@ function target({ input, exports = 'auto' }) {
       'js-levenshtein',
       'os',
       'path',
+      'rxjs',
+      'rxjs/operators',
       'util',
       'xmldom',
     ],

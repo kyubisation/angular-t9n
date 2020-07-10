@@ -13,8 +13,7 @@
   ],
   "scripts": {
     "ng": "ng",
-    "start:ng": "ng serve",
-    "start:nest": "",
+    "start": "ng serve",
     "build": "npm run build:ng && npm run build:node",
     "build:ng": "ng build --prod",
     "build:node": "rollup --config rollup.config.js",

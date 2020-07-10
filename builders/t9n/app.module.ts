@@ -9,9 +9,11 @@ import {
   TargetsController,
   TargetUnitsController,
 } from './controllers';
+import { SourceOrphansController } from './controllers/source-orphans.controller';
 import { Xlf2Deserializer, XlfDeserializer, XmlParser } from './deserialization';
 import { ProjectGateway } from './gateways/project.gateway';
 import { LinkHelper } from './link-helper';
+import { OrphanRegistry } from './persistence';
 import { Xlf2Serializer, XlfSerializer } from './serialization';
 import { SerializationStrategy } from './serialization-strategy';
 
@@ -25,12 +27,14 @@ import { SerializationStrategy } from './serialization-strategy';
   controllers: [
     AppController,
     SourceUnitsController,
+    SourceOrphansController,
     TargetsController,
     TargetOrphansController,
     TargetUnitsController,
   ],
   providers: [
     LinkHelper,
+    OrphanRegistry,
     ProjectGateway,
     SerializationStrategy,
     XmlParser,

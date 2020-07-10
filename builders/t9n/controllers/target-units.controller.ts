@@ -7,13 +7,12 @@ import {
   TargetUnitResponse,
   TranslationTargetUnit,
 } from '../models';
-import { PersistanceStrategy, TranslationTargetRegistry } from '../persistance';
+import { TranslationTargetRegistry } from '../persistence';
 
 @Controller('targets/:language/units')
 export class TargetUnitsController {
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _persistanceStrategy: PersistanceStrategy,
     private _linkHelper: LinkHelper
   ) {}
 
@@ -33,12 +32,12 @@ export class TargetUnitsController {
       responseMapper: (unit) => new TargetUnitResponse(target, unit, this._linkHelper),
       urlFactory: (query) => this._linkHelper.targetUnits(target, query),
       sortables: {
-        id: (a, b) => (a.id || '').localeCompare(b.id || ''),
+        id: (a, b) => a.id.localeCompare(b.id),
         description: (a, b) => (a.description || '').localeCompare(b.description || ''),
         meaning: (a, b) => (a.meaning || '').localeCompare(b.meaning || ''),
-        source: (a, b) => (a.source || '').localeCompare(b.source || ''),
+        source: (a, b) => a.source.localeCompare(b.source),
         target: (a, b) => (a.target || '').localeCompare(b.target || ''),
-        state: (a, b) => (a.state || '').localeCompare(b.state || ''),
+        state: (a, b) => a.state.localeCompare(b.state),
       },
       filterables: {
         id: (f) => (e) => !!e.id && e.id.includes(f),
@@ -82,10 +81,7 @@ export class TargetUnitsController {
       throw new NotFoundException('Unit does not exist');
     }
 
-    unit.target = body.target;
-    unit.state = body.state;
-    this._persistanceStrategy.update(target);
-
-    return new TargetUnitResponse(target, unit, this._linkHelper);
+    const translatedUnit = target.translateUnit(unit, body);
+    return new TargetUnitResponse(target, translatedUnit, this._linkHelper);
   }
 }

@@ -10,14 +10,13 @@ import {
 } from '@nestjs/common';
 
 import { LinkHelper } from '../link-helper';
-import { OrphanResponse, PaginationResponse, TranslationOrphan } from '../models';
-import { PersistanceStrategy, TranslationTargetRegistry } from '../persistance';
+import { PaginationResponse, TargetOrphanResponse, TranslationTargetOrphan } from '../models';
+import { TranslationTargetRegistry } from '../persistence';
 
 @Controller('targets/:language/orphans')
 export class TargetOrphansController {
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _persistanceStrategy: PersistanceStrategy,
     private _linkHelper: LinkHelper
   ) {}
 
@@ -25,7 +24,7 @@ export class TargetOrphansController {
   getPagination(
     @Param('language') language: string,
     @Query() queryParams: any
-  ): PaginationResponse<TranslationOrphan, OrphanResponse> {
+  ): PaginationResponse<TranslationTargetOrphan, TargetOrphanResponse> {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {
       throw new NotFoundException('Target does not exist');
@@ -34,15 +33,15 @@ export class TargetOrphansController {
     return new PaginationResponse({
       query: queryParams,
       entries: target.orphans,
-      responseMapper: (orphan) => new OrphanResponse(target, orphan, this._linkHelper),
+      responseMapper: (orphan) => new TargetOrphanResponse(target, orphan, this._linkHelper),
       urlFactory: (query) => this._linkHelper.targetOrphans(target, query),
       sortables: {
-        id: (a, b) => (a.unit.id || '').localeCompare(b.unit.id || ''),
+        id: (a, b) => a.unit.id.localeCompare(b.unit.id),
         description: (a, b) => (a.unit.description || '').localeCompare(b.unit.description || ''),
         meaning: (a, b) => (a.unit.meaning || '').localeCompare(b.unit.meaning || ''),
-        source: (a, b) => (a.unit.source || '').localeCompare(b.unit.source || ''),
+        source: (a, b) => a.unit.source.localeCompare(b.unit.source),
         target: (a, b) => (a.unit.target || '').localeCompare(b.unit.target || ''),
-        state: (a, b) => (a.unit.state || '').localeCompare(b.unit.state || ''),
+        state: (a, b) => a.unit.state.localeCompare(b.unit.state),
       },
       filterables: {
         id: (f) => (e) => !!e.unit.id && e.unit.id.includes(f),
@@ -56,7 +55,7 @@ export class TargetOrphansController {
   }
 
   @Get(':id')
-  getOrphan(@Param('language') language: string, @Param('id') id: string): OrphanResponse {
+  getOrphan(@Param('language') language: string, @Param('id') id: string): TargetOrphanResponse {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {
       throw new NotFoundException('Target does not exist');
@@ -67,7 +66,7 @@ export class TargetOrphansController {
       throw new NotFoundException('Orphan does not exist');
     }
 
-    return new OrphanResponse(target, orphan, this._linkHelper);
+    return new TargetOrphanResponse(target, orphan, this._linkHelper);
   }
 
   @Delete(':id')
@@ -83,9 +82,6 @@ export class TargetOrphansController {
       throw new NotFoundException('Orphan does not exist');
     }
 
-    target.orphanMap.delete(id);
-    const index = target.orphans.indexOf(orphan);
-    target.orphans.splice(index, 1);
-    this._persistanceStrategy.update(target);
+    target.deleteOrphan(orphan);
   }
 }

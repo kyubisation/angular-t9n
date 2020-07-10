@@ -4,13 +4,18 @@ import { TranslationSource, TranslationTarget } from '../models';
 
 import { AngularJsonI18n } from './angular-json-i18n';
 import { TargetPathBuilder } from './target-path-builder';
+import { TranslationTargetRegistry } from './translation-target-registry';
 
 export class AngularI18n {
   constructor(
     private _host: workspaces.WorkspaceHost,
     private _workspaceRoot: Path,
     private _projectName: string,
-    private _targetPathBuilder: TargetPathBuilder
+    private _targetPathBuilder: TargetPathBuilder,
+    private _translationContextFactory: () => {
+      source: TranslationSource;
+      targetRegistry: TranslationTargetRegistry;
+    }
   ) {}
 
   async sourceLocale(): Promise<{ code: string; baseHref?: string }> {
@@ -35,7 +40,8 @@ export class AngularI18n {
       );
   }
 
-  async update(source: TranslationSource, targets: TranslationTarget[]) {
+  async update(): Promise<void> {
+    const { source, targetRegistry } = this._translationContextFactory();
     const i18n = await this._readProjectI18n();
     if (typeof i18n.sourceLocale === 'object' || source.baseHref) {
       i18n.sourceLocale = {
@@ -50,7 +56,8 @@ export class AngularI18n {
       i18n.sourceLocale = source.language;
     }
 
-    i18n.locales = targets
+    i18n.locales = targetRegistry
+      .values()
       .sort((a, b) => a.language.localeCompare(b.language))
       .reduce(
         (current, next) => Object.assign(current, { [next.language]: this._i18nLocale(next) }),
@@ -65,6 +72,10 @@ export class AngularI18n {
     }
   }
 
+  createPath(target: TranslationTarget) {
+    return this._targetPathBuilder.createPath(target);
+  }
+
   private async _readProjectI18n(): Promise<AngularJsonI18n> {
     const { project } = await this._readProject();
     return (project.extensions.i18n as any) || {};
@@ -77,7 +88,7 @@ export class AngularI18n {
   }
 
   private _i18nLocale(target: TranslationTarget) {
-    const translation = relative(this._workspaceRoot, this._targetPathBuilder.createPath(target));
+    const translation = relative(this._workspaceRoot, this.createPath(target));
     return target.baseHref && target.baseHref !== target.language
       ? { translation, baseHref: target.baseHref }
       : translation;

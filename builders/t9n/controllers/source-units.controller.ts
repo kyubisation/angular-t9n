@@ -9,7 +9,7 @@ import {
   TranslationSource,
   TranslationSourceUnit,
 } from '../models';
-import { TranslationTargetRegistry } from '../persistance';
+import { TranslationTargetRegistry } from '../persistence';
 
 @Controller('source/units')
 export class SourceUnitsController {

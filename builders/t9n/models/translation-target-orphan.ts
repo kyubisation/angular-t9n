@@ -1,6 +1,6 @@
 import { TranslationTargetUnit } from './translation-target-unit';
 
-export interface TranslationOrphan {
+export interface TranslationTargetOrphan {
   unit: TranslationTargetUnit;
   similar: { distance: number; unit: TranslationTargetUnit }[];
 }

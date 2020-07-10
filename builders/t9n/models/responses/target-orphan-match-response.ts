@@ -4,7 +4,7 @@ import { TranslationTargetUnit } from '../translation-target-unit';
 
 import { TargetUnitResponse } from './target-unit-response';
 
-export class OrphanMatchResponse extends TargetUnitResponse {
+export class TargetOrphanMatchResponse extends TargetUnitResponse {
   constructor(
     readonly distance: number,
     target: TranslationTarget,
