@@ -3,19 +3,19 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Pagination } from '../../core/pagination';
-import { TranslationTargetService } from '../core/translation-target.service';
+import { SourceOrphansService } from '../core/source-orphans.service';
 
-import { TranslateDataSource } from './translate-datasource';
+import { MigrateDataSource } from './migrate-datasource';
 
 @Component({
-  selector: 't9n-translate',
-  templateUrl: './translate.component.html',
-  styleUrls: ['./translate.component.scss'],
+  selector: 't9n-migrate',
+  templateUrl: './migrate.component.html',
+  styleUrls: ['./migrate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TranslateComponent extends Pagination<TranslateDataSource> implements OnInit {
+export class MigrateComponent extends Pagination<MigrateDataSource> implements OnInit {
   constructor(
-    private _translationTargetService: TranslationTargetService,
+    private _sourceOrphansService: SourceOrphansService,
     route: ActivatedRoute,
     router: Router,
     formBuilder: FormBuilder
@@ -28,16 +28,14 @@ export class TranslateComponent extends Pagination<TranslateDataSource> implemen
         description: '',
         meaning: '',
         source: '',
-        target: '',
-        state: '',
       })
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
-    this.dataSource = new TranslateDataSource(
-      this._translationTargetService,
+    this.dataSource = new MigrateDataSource(
+      this._sourceOrphansService,
       this.paginator,
       this.sort,
       this.filter!

@@ -22,7 +22,7 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
     this._logger.info(
       `${this._timestamp()}: Created translation file for ${
         target.language
-      } at ${this._i18n.createPath(target)}`
+      } at ${this._i18n.projectRelativePath(target)}`
     );
   }
 
@@ -31,12 +31,12 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
     this._logger.info(
       `${this._timestamp()}: Updated translation file for ${
         target.language
-      } at ${this._i18n.createPath(target)}`
+      } at ${this._i18n.projectRelativePath(target)}`
     );
   }
 
   private async _write(target: TranslationTarget): Promise<void> {
-    const filePath = this._i18n.createPath(target);
+    const filePath = this._i18n.projectRelativePath(target);
     await this._serializationStrategy.serializeTarget(target, filePath);
     await this._updateProjectI18n();
   }

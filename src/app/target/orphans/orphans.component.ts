@@ -1,18 +1,7 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { TranslationTargetUnitResponse } from '../../../models';
-import { PaginationHelper } from '../core/pagination-helper';
+import { Pagination } from '../../core/pagination';
 import { TranslationTargetService } from '../core/translation-target.service';
 
 import { OrphansDataSource } from './orphans-datasource';
@@ -23,37 +12,21 @@ import { OrphansDataSource } from './orphans-datasource';
   styleUrls: ['./orphans.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrphansComponent implements AfterViewInit, OnDestroy {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<TranslationTargetUnitResponse>;
-  dataSource!: OrphansDataSource;
-  queryParams: Observable<Params>;
-
-  private _paginationHelper: PaginationHelper;
-  private _destroy = new Subject<void>();
-
+export class OrphansComponent extends Pagination<OrphansDataSource> implements OnInit {
   constructor(
     private _translationTargetService: TranslationTargetService,
-    private _router: Router,
-    private _route: ActivatedRoute
+    route: ActivatedRoute,
+    router: Router
   ) {
-    this._paginationHelper = new PaginationHelper(this, this._route, this._router);
-    this.queryParams = this._route.queryParams;
+    super(route, router);
   }
 
-  ngAfterViewInit() {
-    this._paginationHelper.applyAndTrackQueryParamsUntil(this._destroy);
+  ngOnInit() {
+    super.ngOnInit();
     this.dataSource = new OrphansDataSource(
+      this._translationTargetService,
       this.paginator,
-      this.sort,
-      this._translationTargetService
+      this.sort
     );
-    this.table.dataSource = this.dataSource;
-  }
-
-  ngOnDestroy(): void {
-    this._destroy.next();
-    this._destroy.complete();
   }
 }

@@ -18,9 +18,8 @@ import {
 } from 'rxjs/operators';
 
 import { PaginationResponse, TargetResponse, TranslationTargetUnitResponse } from '../../../models';
+import { createPageParams } from '../../core/create-page-params';
 import { TranslationService } from '../../core/translation.service';
-
-import { createPageParams } from './create-page-params';
 
 @Injectable()
 export class TranslationTargetService {

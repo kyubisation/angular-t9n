@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-  <table mat-table matSort i18n-aria-label aria-label="Translation units" [dataSource]="dataSource">
+  <table mat-table matSort i18n-aria-label aria-label="Orphaned units" [dataSource]="dataSource">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Id</th>
       <td
@@ -24,42 +24,14 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Source</th>
       <td mat-cell *matCellDef="let row">{{ row.source }}</td>
     </ng-container>
-    <ng-container matColumnDef="target">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Target</th>
-      <td mat-cell *matCellDef="let row">
-        <mat-form-field appearance="standard">
-          <textarea
-            matInput
-            cdkTextareaAutosize
-            placeholder="Translation"
-            [formControl]="row.target"
-          ></textarea>
-        </mat-form-field>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="state">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>State</th>
-      <td mat-cell *matCellDef="let row">
-        <mat-form-field appearance="standard">
-          <mat-select [formControl]="row.state">
-            <mat-option *ngIf="row.state.value === 'initial'" value="initial" i18n
-              >Initial</mat-option
-            >
-            <mat-option value="translated" i18n>Translated</mat-option>
-            <mat-option value="reviewed" i18n>Reviewed</mat-option>
-            <mat-option value="final" i18n>Final</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <a
-          [routerLink]="['./unit', row.id, queryParams | async]"
+          [routerLink]="['./', row.id, queryParams | async]"
           mat-icon-button
           i18n-matTooltip
-          matTooltip="Edit unit"
+          matTooltip="Migrate orphan"
         >
           <mat-icon>edit</mat-icon>
         </a>
@@ -94,55 +66,21 @@
         </mat-form-field>
       </th>
     </ng-container>
-    <ng-container matColumnDef="target-filter">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
-          <input matInput placeholder="Filter" [formControl]="filter.get('target')" />
-        </mat-form-field>
-      </th>
-    </ng-container>
-    <ng-container matColumnDef="state-filter">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
-          <mat-select [formControl]="filter.get('state')">
-            <mat-option value=""></mat-option>
-            <mat-option value="initial" i18n>Initial</mat-option>
-            <mat-option value="translated" i18n>Translated</mat-option>
-            <mat-option value="reviewed" i18n>Reviewed</mat-option>
-            <mat-option value="final" i18n>Final</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </th>
-    </ng-container>
 
     <tr
       mat-header-row
-      *matHeaderRowDef="
-        ['id', 'description', 'meaning', 'source', 'target', 'state', 'action'];
-        sticky: true
-      "
+      *matHeaderRowDef="['id', 'description', 'meaning', 'source', 'action']; sticky: true"
     ></tr>
     <tr
       mat-header-row
       *matHeaderRowDef="
-        [
-          'id-filter',
-          'description-filter',
-          'meaning-filter',
-          'source-filter',
-          'target-filter',
-          'state-filter',
-          'action'
-        ];
+        ['id-filter', 'description-filter', 'meaning-filter', 'source-filter', 'action'];
         sticky: true
       "
     ></tr>
     <tr
       mat-row
-      *matRowDef="
-        let row;
-        columns: ['id', 'description', 'meaning', 'source', 'target', 'state', 'action']
-      "
+      *matRowDef="let row; columns: ['id', 'description', 'meaning', 'source', 'action']"
     ></tr>
   </table>
 

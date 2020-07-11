@@ -1,0 +1,74 @@
+<h2 i18n>Auto-Migration</h2>
+
+<p i18n>
+  Migrate orphans which are below or equal to the distance threshold. The distance is according to
+  the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">levenshtein algorithm</a>. It
+  will skip the auto-migration for a unit if multiple units with the same distance are found.
+</p>
+
+<form [formGroup]="configuration" (ngSubmit)="autoMigrate()">
+  <mat-form-field appearance="standard">
+    <mat-label i18n>Distance Threshold</mat-label>
+    <input matInput type="number" formControlName="distanceThreshold" required min="0" />
+    <mat-error *ngIf="configuration.get('distanceThreshold')?.errors?.required" i18n
+      >The distance threshold is required</mat-error
+    >
+    <mat-error *ngIf="configuration.get('distanceThreshold')?.errors?.min" i18n
+      >The distance threshold must be greater or equal to 0</mat-error
+    >
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="(loading | async) && configuration.valid"
+    i18n
+  >
+    Auto-Migrate
+  </button>
+</form>
+
+<mat-spinner *ngIf="loading | async"></mat-spinner>
+
+<ng-container *ngIf="migrations | async as migrations">
+  <ng-container *ngIf="!migrations.length">
+    <h4 i18n>No orphans met conditions.</h4>
+  </ng-container>
+
+  <ng-container *ngIf="migrations.length">
+    <h4 i18n>Successful migrations</h4>
+    <div class="mat-elevation-z1">
+      <table mat-table matSort i18n-aria-label aria-label="Similar units" [dataSource]="migrations">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Id</th>
+          <td
+            mat-cell
+            [matTooltip]="row.locations?.join('\n')"
+            [matTooltipDisabled]="!row.locations?.length"
+            matTooltipClass="tooltip-linebreak"
+            *matCellDef="let row"
+          >
+            {{ row.id }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Description</th>
+          <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="meaning">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Meaning</th>
+          <td mat-cell *matCellDef="let row">{{ row.meaning }}</td>
+        </ng-container>
+        <ng-container matColumnDef="source">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Source</th>
+          <td mat-cell *matCellDef="let row">{{ row.source }}</td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['id', 'description', 'meaning', 'source']; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'description', 'meaning', 'source']"></tr>
+      </table></div
+  ></ng-container>
+</ng-container>

@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { I18nExamplesTemplateComponent } from './i18n-examples-template/i18n-examples-template.component';
 import { OverviewModule } from './overview/overview.module';
+import { SourceOrphansModule } from './source-orphans/source-orphans.module';
 import { TargetModule } from './target/target.module';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { TargetModule } from './target/target.module';
     MatTooltipModule,
     OverviewModule,
     TargetModule,
+    SourceOrphansModule,
     AppRoutingModule,
   ],
   providers: [],

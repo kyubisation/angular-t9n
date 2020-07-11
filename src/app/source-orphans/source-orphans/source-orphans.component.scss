@@ -1,0 +1,33 @@
+@import '~@angular/material/theming';
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+h1 {
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding: 20px 24px 0px 16px;
+  text-transform: uppercase;
+}
+
+mat-sidenav-container {
+  height: 100%;
+
+  mat-sidenav {
+    width: 12rem;
+
+    a.active {
+      color: mat-color($mat-indigo, 500);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    mat-card {
+      background-color: mat-color($mat-yellow, 200);
+      margin: 0.5rem;
+    }
+  }
+}

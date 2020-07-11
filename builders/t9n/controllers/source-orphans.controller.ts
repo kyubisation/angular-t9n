@@ -70,7 +70,7 @@ export class SourceOrphansController {
       throw new NotFoundException('Orphan does not exist');
     }
 
-    if (!body) {
+    if (!body || !body.id) {
       this._orphanRegistry.deleteOrphan(orphan);
       return;
     }

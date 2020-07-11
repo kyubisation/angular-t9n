@@ -36,13 +36,13 @@ export class ImportComponent {
     event.preventDefault();
     event.stopPropagation();
     this.dragging = false;
-    if (event.dataTransfer && event.dataTransfer.files.length) {
+    if (event.dataTransfer?.files.length) {
       this._import(event.dataTransfer.files);
     }
   }
 
   onInput(event: Event) {
-    if (event && event.target && (event.target as HTMLInputElement).files) {
+    if ((event?.target as HTMLInputElement)?.files) {
       this._import((event.target as HTMLInputElement).files!);
     }
   }

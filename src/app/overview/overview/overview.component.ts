@@ -28,8 +28,8 @@ export class OverviewComponent {
   ) {
     this.project = websocketService.projectChange.pipe(map((p) => p.project));
     this.sourceFile = websocketService.projectChange.pipe(map((p) => p.sourceFile));
-    this.sourceLanguage = translationService.sourceLanguage;
-    this.unitCount = translationService.unitCount;
+    this.sourceLanguage = translationService.root.pipe(map((r) => r.sourceLanguage));
+    this.unitCount = translationService.root.pipe(map((r) => r.unitCount));
     this.targets = translationService.targets;
   }
 

@@ -10,27 +10,18 @@
   <dt i18n>Source</dt>
   <dd class="source">{{ orphan.source }}</dd>
 
-  <dt i18n>Target</dt>
-  <dd class="target">{{ orphan.target }}</dd>
-
-  <dt i18n>State</dt>
-  <dd>{{ orphan.state | titlecase }}</dd>
+  <dt i18n>Occurs in Targets</dt>
+  <dd class="target">{{ orphan._embedded.locales.join(', ') }}</dd>
 </dl>
 
 <div class="mat-elevation-z1">
-  <table
-    mat-table
-    matSort
-    i18n-aria-label
-    aria-label="Similar units"
-    [dataSource]="similar | async"
-  >
+  <table mat-table matSort aria-label="Similar units" [dataSource]="similar | async">
     <ng-container matColumnDef="distance">
       <th
         mat-header-cell
         *matHeaderCellDef
         i18n-matTooltip
-        matTooltip="Distance according to the levenshtein algorithm"
+        matTooltip="Distance according to the levenshtein comparison"
         i18n
       >
         Distance
@@ -39,7 +30,7 @@
         mat-cell
         *matCellDef="let row"
         i18n-matTooltip
-        matTooltip="Distance according to the levenshtein algorithm"
+        matTooltip="Distance according to the levenshtein comparison"
         i18n
       >
         {{ row.distance }}
@@ -69,14 +60,6 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Source</th>
       <td mat-cell *matCellDef="let row">{{ row.source }}</td>
     </ng-container>
-    <ng-container matColumnDef="target">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Target</th>
-      <td mat-cell *matCellDef="let row">{{ row.target }}</td>
-    </ng-container>
-    <ng-container matColumnDef="state">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>State</th>
-      <td mat-cell *matCellDef="let row">{{ row.state | titlecase }}</td>
-    </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
@@ -95,7 +78,7 @@
     <tr
       mat-header-row
       *matHeaderRowDef="
-        ['distance', 'id', 'description', 'meaning', 'source', 'target', 'state', 'action'];
+        ['distance', 'id', 'description', 'meaning', 'source', 'action'];
         sticky: true
       "
     ></tr>
@@ -103,7 +86,7 @@
       mat-row
       *matRowDef="
         let row;
-        columns: ['distance', 'id', 'description', 'meaning', 'source', 'target', 'state', 'action']
+        columns: ['distance', 'id', 'description', 'meaning', 'source', 'action']
       "
     ></tr>
   </table>

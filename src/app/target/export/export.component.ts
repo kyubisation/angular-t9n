@@ -12,19 +12,17 @@ import { ExportService } from '../core/export.service';
   providers: [ExportService],
 })
 export class ExportComponent {
-  filter: FormGroup;
+  configuration: FormGroup;
   loading = new BehaviorSubject(false);
 
   constructor(private _exportService: ExportService, formBuilder: FormBuilder) {
-    this.filter = formBuilder.group({
+    this.configuration = formBuilder.group({
       state: 'initial',
     });
   }
 
   export() {
     this.loading.next(true);
-    this._exportService
-      .export(this.filter.controls.state.value)
-      .subscribe(() => this.loading.next(false));
+    this._exportService.export(this.configuration.value).subscribe(() => this.loading.next(false));
   }
 }

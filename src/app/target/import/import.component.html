@@ -22,7 +22,7 @@
 </mat-form-field>
 
 <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input #fileInput type="file" multiple accept=".xlsx" (change)="onInput($event)" />
+<input #fileInput type="file" multiple accept=".xlsx,.csv" (change)="onInput($event)" />
 
 <mat-spinner *ngIf="importing | async"></mat-spinner>
 

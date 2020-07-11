@@ -1,10 +1,9 @@
-import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { BehaviorSubject, merge, Observable } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import { TranslationTargetUnitResponse } from '../../../models';
+import { PaginationResponse, TranslationTargetUnitResponse } from '../../../models';
+import { TranslationDataSource } from '../../core/translation-data-source';
 import { TranslationTargetService } from '../core/translation-target.service';
 
 /**
@@ -12,43 +11,23 @@ import { TranslationTargetService } from '../core/translation-target.service';
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class OrphansDataSource extends DataSource<TranslationTargetUnitResponse> {
-  totalEntries: Observable<number>;
-
-  private _totalEntries = new BehaviorSubject(0);
-
+export class OrphansDataSource extends TranslationDataSource<TranslationTargetUnitResponse> {
   constructor(
-    private _paginator: MatPaginator,
-    private _sort: MatSort,
-    private _translationTargetService: TranslationTargetService
+    private _translationTargetService: TranslationTargetService,
+    paginator: MatPaginator,
+    sort: MatSort
   ) {
-    super();
-    this.totalEntries = this._totalEntries.asObservable();
+    super(paginator, sort);
   }
 
-  /**
-   * Connect this data source to the table. The table will only update when
-   * the returned stream emits new items.
-   * @returns A stream of the items to be rendered.
-   */
-  connect(): Observable<TranslationTargetUnitResponse[]> {
-    return merge(this._paginator.page, this._sort.sortChange).pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this._translationTargetService.orphans({
-          page: this._paginator.pageIndex,
-          entriesPerPage: this._paginator.pageSize,
-          sort: this._sort,
-        })
-      ),
-      tap((orphanPage) => this._totalEntries.next(orphanPage.totalEntries)),
-      map((orphanPage) => orphanPage._embedded.entries)
-    );
+  protected _fetchData(
+    paginator: MatPaginator,
+    sort: MatSort
+  ): Observable<PaginationResponse<TranslationTargetUnitResponse>> {
+    return this._translationTargetService.orphans({
+      page: paginator.pageIndex,
+      entriesPerPage: paginator.pageSize,
+      sort: sort,
+    });
   }
-
-  /**
-   *  Called when the table is being destroyed. Use this function, to clean up
-   * any open connections or free any held resources that were set up during connect.
-   */
-  disconnect() {}
 }

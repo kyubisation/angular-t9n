@@ -72,8 +72,8 @@ export class AngularI18n {
     }
   }
 
-  createPath(target: TranslationTarget) {
-    return this._targetPathBuilder.createPath(target);
+  projectRelativePath(target: TranslationTarget) {
+    return relative(this._workspaceRoot, this._targetPathBuilder.createPath(target));
   }
 
   private async _readProjectI18n(): Promise<AngularJsonI18n> {
@@ -88,7 +88,7 @@ export class AngularI18n {
   }
 
   private _i18nLocale(target: TranslationTarget) {
-    const translation = relative(this._workspaceRoot, this.createPath(target));
+    const translation = this.projectRelativePath(target);
     return target.baseHref && target.baseHref !== target.language
       ? { translation, baseHref: target.baseHref }
       : translation;

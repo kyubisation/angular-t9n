@@ -4,7 +4,10 @@
 }
 
 form {
-  display: inline-flex;
-  flex-direction: column;
   margin-bottom: 1rem;
+
+  > button {
+    display: block;
+    margin-top: 2rem;
+  }
 }

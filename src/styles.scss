@@ -21,6 +21,59 @@ dl {
   }
 }
 
+mat-paginator {
+  margin-top: -1px;
+  bottom: 0;
+  position: sticky;
+  z-index: 10;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+table.mat-table {
+  width: 100%;
+
+  th,
+  td {
+    padding-right: 0.5rem;
+  }
+
+  td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    &.mat-column-distance {
+      width: 3rem;
+    }
+
+    &.mat-column-id {
+      width: 15rem;
+    }
+
+    &.mat-column-source {
+      white-space: pre-line;
+    }
+
+    &.mat-column-source,
+    &.mat-column-target {
+      width: 20rem;
+    }
+
+    &.mat-column-description,
+    &.mat-column-meaning,
+    &.mat-column-state {
+      width: 10rem;
+    }
+
+    &.mat-column-action {
+      width: 2rem;
+    }
+  }
+
+  mat-form-field {
+    display: block;
+  }
+}
+
 .tooltip-linebreak.mat-tooltip {
   white-space: pre-line;
   max-width: 40rem;

@@ -9,7 +9,7 @@ import { AngularJsonPersistenceStrategy } from './angular-json-persistence-strat
 
 describe('AngularJsonPersistenceStrategy', () => {
   class MockAngularI18n implements Partial<AngularI18n> {
-    createPath(target: TranslationTarget) {
+    projectRelativePath(target: TranslationTarget) {
       return normalize(`${target.language}.xlf`);
     }
     update(): Promise<void> {

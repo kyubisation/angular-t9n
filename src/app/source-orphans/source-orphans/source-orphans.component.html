@@ -1,0 +1,25 @@
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side">
+    <h1>Orphans</h1>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="./migrate"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        i18n
+        >Migrate</a
+      >
+      <a mat-list-item routerLink="./auto-migration" routerLinkActive="active" i18n
+        >Auto-Migration</a
+      >
+    </mat-nav-list>
+
+    <mat-card i18n>
+      Orphans are translation units whose id is no longer contained in the source file.
+    </mat-card>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

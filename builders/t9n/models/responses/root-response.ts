@@ -15,6 +15,8 @@ export class RootResponse implements Hal {
       .self(linkHelper.root())
       .href('targets', linkHelper.targets())
       .href('sourceUnits', linkHelper.sourceUnits())
+      .href('orphans', linkHelper.sourceOrphans())
+      .templatedHref('orphan', linkHelper.sourceOrphan('{id}'))
       .build();
   }
 }

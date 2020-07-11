@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-  <table mat-table matSort aria-label="Orphaned units">
+  <table mat-table matSort aria-label="Orphaned units" [dataSource]="dataSource">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Id</th>
       <td
@@ -63,10 +63,8 @@
   </table>
 
   <mat-paginator
-    #paginator
-    [length]="dataSource?.totalEntries | async"
-    [pageIndex]="0"
-    [pageSize]="25"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
     [pageSizeOptions]="[25, 50, 100, 250]"
   >
   </mat-paginator>

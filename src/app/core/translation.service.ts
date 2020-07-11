@@ -13,21 +13,18 @@ import { WebsocketService } from './websocket.service';
   providedIn: 'root',
 })
 export class TranslationService {
-  sourceLanguage: Observable<string>;
-  unitCount: Observable<number>;
+  root: Observable<RootResponse>;
   targets: Observable<TargetResponse[]>;
 
   private _rootSubject = new BehaviorSubject<RootResponse | null>(null);
   private _targetsSubject = new BehaviorSubject<TargetsResponse | null>(null);
   private _targetsMap = new BehaviorSubject(new Map<string, TargetResponse>());
-  private _root = this._rootSubject.pipe(filter((r): r is RootResponse => !!r));
   private _targets = this._targetsSubject.pipe(filter((r): r is TargetsResponse => !!r));
 
   constructor(private _http: HttpClient, private _websocketService: WebsocketService) {
-    this.sourceLanguage = this._root.pipe(map((r) => r.sourceLanguage));
-    this.unitCount = this._root.pipe(map((r) => r.unitCount));
+    this.root = this._rootSubject.pipe(filter((r): r is RootResponse => !!r));
     this.targets = this._targetsMap.pipe(map((t) => Array.from(t.values())));
-    this._root
+    this.root
       .pipe(switchMap((r) => this._http.get<TargetsResponse>(r._links!.targets.href)))
       .subscribe((targets) => this._targetsSubject.next(targets));
     this._targets
