@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/kyubisation/angular-t9n/compare/0.3.1...0.3.2) (2020-07-11)
+
+### Features
+
+- implement source orphan migration ([57905e9](https://github.com/kyubisation/angular-t9n/commit/57905e96877aad8a08e46626a198c89cd8494bea))
+- minor usage improvements in root component ([8bacc7f](https://github.com/kyubisation/angular-t9n/commit/8bacc7fb888e77b0a2daae8b97c4e0522d7afa23))
+
+### Bug Fixes
+
+- configure correct websocket address ([cbd7743](https://github.com/kyubisation/angular-t9n/commit/cbd7743ba48e6291d4b85df86169c96f21fc0386))
+- linting ([009fd8a](https://github.com/kyubisation/angular-t9n/commit/009fd8ab27574ccaa8a549c4301e3b37da6cdc5d))
+
 ### [0.3.1](https://github.com/kyubisation/angular-t9n/compare/0.3.0...0.3.1) (2020-01-16)
 
 ### Bug Fixes
