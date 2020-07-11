@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 
 import { TargetResponse } from '../../../models';
 import { TranslationService } from '../../core/translation.service';
@@ -14,7 +14,7 @@ import { AddLanguageModalComponent } from '../add-language-modal/add-language-mo
   styleUrls: ['./overview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit {
   project: Observable<string>;
   sourceFile: Observable<string>;
   sourceLanguage: Observable<string>;
@@ -22,19 +22,32 @@ export class OverviewComponent {
   targets: Observable<TargetResponse[]>;
 
   constructor(
-    private dialog: MatDialog,
-    translationService: TranslationService,
+    private _dialog: MatDialog,
+    private _translationService: TranslationService,
     websocketService: WebsocketService
   ) {
     this.project = websocketService.projectChange.pipe(map((p) => p.project));
     this.sourceFile = websocketService.projectChange.pipe(map((p) => p.sourceFile));
-    this.sourceLanguage = translationService.root.pipe(map((r) => r.sourceLanguage));
-    this.unitCount = translationService.root.pipe(map((r) => r.unitCount));
-    this.targets = translationService.targets;
+    this.sourceLanguage = _translationService.root.pipe(map((r) => r.sourceLanguage));
+    this.unitCount = _translationService.root.pipe(map((r) => r.unitCount));
+    this.targets = _translationService.targets;
+  }
+
+  ngOnInit(): void {
+    this.targets
+      .pipe(
+        take(1),
+        switchMap((targets) =>
+          targets.length
+            ? forkJoin(targets.map((t) => this._translationService.updateTarget(t.language)))
+            : of()
+        )
+      )
+      .subscribe();
   }
 
   openLanguageModal() {
-    this.dialog.open(AddLanguageModalComponent);
+    this._dialog.open(AddLanguageModalComponent);
   }
 
   initialPercentage(target: TargetResponse) {
