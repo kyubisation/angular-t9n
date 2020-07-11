@@ -40,7 +40,6 @@
         *matCellDef="let row"
         i18n-matTooltip
         matTooltip="Distance according to the levenshtein algorithm"
-        i18n
       >
         {{ row.distance }}
       </td>
@@ -110,8 +109,8 @@
 </div>
 
 <div class="actions">
-  <a mat-raised-button color="primary" routerLink=".." [queryParams]="params | async" i18n>
-    <mat-icon>keyboard_backspace</mat-icon> Back
+  <a mat-raised-button color="primary" routerLink=".." [queryParams]="params | async">
+    <mat-icon>keyboard_backspace</mat-icon> <ng-container i18n>Back</ng-container>
   </a>
 
   <button type="button" mat-raised-button color="warn" (click)="delete()" i18n>

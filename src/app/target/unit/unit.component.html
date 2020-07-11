@@ -46,6 +46,6 @@
   </form>
 </ng-container>
 
-<a mat-raised-button color="primary" routerLink="../.." [queryParams]="params | async" i18n>
-  <mat-icon>keyboard_backspace</mat-icon> Back
+<a mat-raised-button color="primary" routerLink="../.." [queryParams]="params | async">
+  <mat-icon>keyboard_backspace</mat-icon> <ng-container i18n>Back</ng-container>
 </a>

@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="de">
   <file original="ng.template" id="ngi18n">
-    <unit id="4177047730710985478">
-      <notes>
-        <note category="location">app/app.component.html:10</note>
-      </notes>
-      <segment state="translated">
-        <source>Translation server is not available. Start the server in the console with the command 'ng run yourProject:t9n'.</source>
-        <target>Übersetzungsserver ist nicht verfügbar. Starte den Server in  der Konsole mit dem Befehl 'ng run deinProjekt:t9n'.</target>
-      </segment>
-    </unit>
     <unit id="82167058490521791">
       <notes>
         <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:2</note>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:24</note>
       </notes>
       <segment state="reviewed">
         <source>Empty example</source>
@@ -61,9 +52,27 @@
         <target>Titel</target>
       </segment>
     </unit>
+    <unit id="2168835922015701630">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="9083455685404174731">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {things} }</source>
+        <target></target>
+      </segment>
+    </unit>
     <unit id="3328635074237601307">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:8</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:9</note>
       </notes>
       <segment state="translated">
         <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
@@ -72,7 +81,7 @@
     </unit>
     <unit id="8180817321131110864">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:8</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:9</note>
       </notes>
       <segment state="translated">
         <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<ph id="0" equiv="INTERPOLATION" disp="{{amount}}"/> of things} }</source>
@@ -81,7 +90,7 @@
     </unit>
     <unit id="8511147241295446916">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:10</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:11</note>
       </notes>
       <segment state="translated">
         <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
@@ -90,16 +99,34 @@
     </unit>
     <unit id="7842238767399919809">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:10</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:11</note>
       </notes>
       <segment state="translated">
         <source>{VAR_SELECT, select, male {male} female {female} other {other} }</source>
         <target>{VAR_SELECT, select, male {männlich} female {weiblich} other {etwas anderes} }</target>
       </segment>
     </unit>
+    <unit id="615032484519668846">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12</note>
+      </notes>
+      <segment state="initial">
+        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="1076465086362097198">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12</note>
+      </notes>
+      <segment state="initial">
+        <source>{VAR_SELECT, select, male {male} female {female} other {<ph id="0" equiv="INTERPOLATION" disp="{{gender}}"/>} }</source>
+        <target></target>
+      </segment>
+    </unit>
     <unit id="685963878805841813">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12,14</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:14,16</note>
       </notes>
       <segment state="translated">
         <source>Updated: <ph id="0" equiv="ICU" disp="{minutes, plural, =0 {...} =1 {...} other {...}}"/>
@@ -109,7 +136,7 @@
     </unit>
     <unit id="2868095629197866953">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12,13</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:14,15</note>
       </notes>
       <segment state="translated">
         <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<ph id="0" equiv="INTERPOLATION" disp="{{minutes}}"/> minutes ago by
@@ -120,25 +147,44 @@
     </unit>
     <unit id="6796106025314020146">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:15</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
       </notes>
       <segment state="translated">
         <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></source>
         <target>Beispiel mit Wert <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></target>
       </segment>
     </unit>
+    <unit id="6636027407356199973">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:18</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ title | titlecase }}"/></source>
+        <target></target>
+      </segment>
+    </unit>
     <unit id="134004861588612618">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:16</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:19</note>
       </notes>
       <segment state="translated">
         <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></source>
         <target>Beispiel mit Bild <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/></target>
       </segment>
     </unit>
+    <unit id="5429384145691392061">
+      <notes>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:21,23</note>
+      </notes>
+      <segment state="initial">
+        <source>Example with images <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/>"/> and
+    <ph id="1" equiv="TAG_IMG_1" type="image" disp="&lt;img/>"/></source>
+        <target></target>
+      </segment>
+    </unit>
     <unit id="7312493194969094694">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:19,28</note>
+        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:26,35</note>
       </notes>
       <segment state="translated">
         <source>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
@@ -201,7 +247,7 @@ quo voluptas nulla pariatur?</target>
     </unit>
     <unit id="6776451739899171940">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:9</note>
+        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:10</note>
       </notes>
       <segment state="translated">
         <source>Language already exists</source>
@@ -210,7 +256,7 @@ quo voluptas nulla pariatur?</target>
     </unit>
     <unit id="2159130950882492111">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:18</note>
+        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:20</note>
       </notes>
       <segment state="translated">
         <source>Cancel</source>
@@ -219,7 +265,7 @@ quo voluptas nulla pariatur?</target>
     </unit>
     <unit id="3249513483374643425">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:19</note>
+        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:21</note>
       </notes>
       <segment state="translated">
         <source>Add</source>
@@ -285,10 +331,10 @@ quo voluptas nulla pariatur?</target>
     <unit id="5706198276541510303">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:31</note>
-        <note category="location">app/target/translate/translate.component.html:54</note>
-        <note category="location">app/target/translate/translate.component.html:116</note>
-        <note category="location">app/target/export/export.component.html:9</note>
-        <note category="location">app/target/unit/unit.component.html:47</note>
+        <note category="location">app/target/translate/translate.component.html:48</note>
+        <note category="location">app/target/translate/translate.component.html:110</note>
+        <note category="location">app/target/export/export.component.html:10</note>
+        <note category="location">app/target/unit/unit.component.html:41</note>
       </notes>
       <segment state="translated">
         <source>Translated</source>
@@ -298,10 +344,10 @@ quo voluptas nulla pariatur?</target>
     <unit id="4467880638322247833">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:35</note>
-        <note category="location">app/target/translate/translate.component.html:55</note>
-        <note category="location">app/target/translate/translate.component.html:117</note>
-        <note category="location">app/target/export/export.component.html:10</note>
-        <note category="location">app/target/unit/unit.component.html:48</note>
+        <note category="location">app/target/translate/translate.component.html:49</note>
+        <note category="location">app/target/translate/translate.component.html:111</note>
+        <note category="location">app/target/export/export.component.html:11</note>
+        <note category="location">app/target/unit/unit.component.html:42</note>
       </notes>
       <segment state="translated">
         <source>Reviewed</source>
@@ -311,10 +357,10 @@ quo voluptas nulla pariatur?</target>
     <unit id="4609200447119745819">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:39</note>
-        <note category="location">app/target/translate/translate.component.html:56</note>
-        <note category="location">app/target/translate/translate.component.html:118</note>
-        <note category="location">app/target/export/export.component.html:11</note>
-        <note category="location">app/target/unit/unit.component.html:49</note>
+        <note category="location">app/target/translate/translate.component.html:50</note>
+        <note category="location">app/target/translate/translate.component.html:112</note>
+        <note category="location">app/target/export/export.component.html:12</note>
+        <note category="location">app/target/unit/unit.component.html:43</note>
       </notes>
       <segment state="translated">
         <source>Final</source>
@@ -333,7 +379,7 @@ quo voluptas nulla pariatur?</target>
     <unit id="7462301153729425254">
       <notes>
         <note category="location">app/overview/overview/overview.component.html:74</note>
-        <note category="location">app/target/export/export.component.html:15</note>
+        <note category="location">app/target/export/export.component.html:16</note>
         <note category="location">app/target/target/target.component.html:13</note>
       </notes>
       <segment state="translated">
@@ -365,7 +411,10 @@ quo voluptas nulla pariatur?</target>
       <notes>
         <note category="location">app/target/translate/translate.component.html:4</note>
         <note category="location">app/target/orphans/orphans.component.html:4</note>
-        <note category="location">app/target/orphan/orphan.component.html:43</note>
+        <note category="location">app/target/orphan/orphan.component.html:49</note>
+        <note category="location">app/source-orphans/migrate/migrate.component.html:4</note>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:43</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:40</note>
       </notes>
       <segment state="translated">
         <source>Id</source>
@@ -378,7 +427,11 @@ quo voluptas nulla pariatur?</target>
         <note category="location">app/target/orphans/orphans.component.html:16</note>
         <note category="location">app/target/unit/unit.component.html:6</note>
         <note category="location">app/target/orphan/orphan.component.html:4</note>
-        <note category="location">app/target/orphan/orphan.component.html:55</note>
+        <note category="location">app/target/orphan/orphan.component.html:61</note>
+        <note category="location">app/source-orphans/migrate/migrate.component.html:16</note>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:55</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:4</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:52</note>
       </notes>
       <segment state="translated">
         <source>Description</source>
@@ -391,7 +444,11 @@ quo voluptas nulla pariatur?</target>
         <note category="location">app/target/orphans/orphans.component.html:20</note>
         <note category="location">app/target/unit/unit.component.html:11</note>
         <note category="location">app/target/orphan/orphan.component.html:7</note>
-        <note category="location">app/target/orphan/orphan.component.html:59</note>
+        <note category="location">app/target/orphan/orphan.component.html:65</note>
+        <note category="location">app/source-orphans/migrate/migrate.component.html:20</note>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:59</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:7</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:56</note>
       </notes>
       <segment state="translated">
         <source>Meaning</source>
@@ -404,7 +461,11 @@ quo voluptas nulla pariatur?</target>
         <note category="location">app/target/orphans/orphans.component.html:24</note>
         <note category="location">app/target/unit/unit.component.html:16</note>
         <note category="location">app/target/orphan/orphan.component.html:10</note>
-        <note category="location">app/target/orphan/orphan.component.html:63</note>
+        <note category="location">app/target/orphan/orphan.component.html:69</note>
+        <note category="location">app/source-orphans/migrate/migrate.component.html:24</note>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:63</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:10</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:60</note>
       </notes>
       <segment state="translated">
         <source>Source</source>
@@ -417,30 +478,19 @@ quo voluptas nulla pariatur?</target>
         <note category="location">app/target/orphans/orphans.component.html:28</note>
         <note category="location">app/target/unit/unit.component.html:31</note>
         <note category="location">app/target/orphan/orphan.component.html:13</note>
-        <note category="location">app/target/orphan/orphan.component.html:67</note>
+        <note category="location">app/target/orphan/orphan.component.html:73</note>
       </notes>
       <segment state="translated">
         <source>Target</source>
         <target>Übersetzung</target>
       </segment>
     </unit>
-    <unit id="8887944298153213372">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:38,42</note>
-      </notes>
-      <segment state="translated">
-        <source>Expected <ph id="0" equiv="INTERPOLATION" disp="{{ placeholders.length }}"/> placeholders
-            <pc id="1" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">info</pc>
-          </source>
-        <target>Es wurden <ph id="0" equiv="INTERPOLATION" disp="{{ placeholders.length }}"/> Platzhalter erwartet <pc id="1" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">info</pc></target>
-      </segment>
-    </unit>
     <unit id="5911214550882917183">
       <notes>
-        <note category="location">app/target/translate/translate.component.html:47</note>
+        <note category="location">app/target/translate/translate.component.html:41</note>
         <note category="location">app/target/orphans/orphans.component.html:32</note>
         <note category="location">app/target/orphan/orphan.component.html:16</note>
-        <note category="location">app/target/orphan/orphan.component.html:71</note>
+        <note category="location">app/target/orphan/orphan.component.html:77</note>
       </notes>
       <segment state="translated">
         <source>State</source>
@@ -449,10 +499,10 @@ quo voluptas nulla pariatur?</target>
     </unit>
     <unit id="2937311350146031865">
       <notes>
-        <note category="location">app/target/translate/translate.component.html:52</note>
-        <note category="location">app/target/translate/translate.component.html:115</note>
-        <note category="location">app/target/export/export.component.html:8</note>
-        <note category="location">app/target/unit/unit.component.html:45</note>
+        <note category="location">app/target/translate/translate.component.html:46</note>
+        <note category="location">app/target/translate/translate.component.html:109</note>
+        <note category="location">app/target/export/export.component.html:9</note>
+        <note category="location">app/target/unit/unit.component.html:39</note>
       </notes>
       <segment state="translated">
         <source>Initial</source>
@@ -461,11 +511,20 @@ quo voluptas nulla pariatur?</target>
     </unit>
     <unit id="7825860436592606655">
       <notes>
-        <note category="location">app/target/translate/translate.component.html:68</note>
+        <note category="location">app/target/translate/translate.component.html:62</note>
       </notes>
       <segment state="translated">
         <source>Edit unit</source>
         <target>Bearbeite Übersetzungseinheit</target>
+      </segment>
+    </unit>
+    <unit id="3504796391691650968">
+      <notes>
+        <note category="location">app/target/translate/translate.component.html:2</note>
+      </notes>
+      <segment state="translated">
+        <source>Translation units</source>
+        <target>Übersetzungseinheiten</target>
       </segment>
     </unit>
     <unit id="1878251664052368569">
@@ -484,6 +543,15 @@ quo voluptas nulla pariatur?</target>
       <segment state="translated">
         <source>Export all translation units or filter by translation state.</source>
         <target>Exportiere alle Übersetzungseinheiten oder filtere nach Übersetzungsstatus.</target>
+      </segment>
+    </unit>
+    <unit id="1616102757855967475">
+      <notes>
+        <note category="location">app/target/export/export.component.html:8</note>
+      </notes>
+      <segment state="translated">
+        <source>All</source>
+        <target>Alle</target>
       </segment>
     </unit>
     <unit id="1613971242435858090">
@@ -510,10 +578,267 @@ quo voluptas nulla pariatur?</target>
     <unit id="1058384379333291031">
       <notes>
         <note category="location">app/target/orphans/orphans.component.html:42</note>
+        <note category="location">app/source-orphans/migrate/migrate.component.html:34</note>
       </notes>
       <segment state="translated">
         <source>Migrate orphan</source>
         <target>Migriere Weisen</target>
+      </segment>
+    </unit>
+    <unit id="7154699141836462400">
+      <notes>
+        <note category="location">app/target/unit/unit.component.html:23</note>
+      </notes>
+      <segment state="translated">
+        <source>Copy source to target</source>
+        <target>Kopiere Original zur Übersetzung</target>
+      </segment>
+    </unit>
+    <unit id="8890553633144307762">
+      <notes>
+        <note category="location">app/target/unit/unit.component.html:50</note>
+        <note category="location">app/target/orphan/orphan.component.html:114</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:97</note>
+      </notes>
+      <segment state="translated">
+        <source>Back</source>
+        <target>Zurück</target>
+      </segment>
+    </unit>
+    <unit id="2590415407309830681">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:35,37</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:26,28</note>
+      </notes>
+      <segment state="translated">
+        <source>
+        Distance
+      </source>
+        <target>Distanz</target>
+      </segment>
+    </unit>
+    <unit id="149862035788373642">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:33</note>
+        <note category="location">app/target/orphan/orphan.component.html:42</note>
+      </notes>
+      <segment state="translated">
+        <source>Distance according to the levenshtein algorithm</source>
+        <target>Distanz nach dem Levenshtein Algorithmus</target>
+      </segment>
+    </unit>
+    <unit id="3645391079809063987">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:44,46</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:35,37</note>
+      </notes>
+      <segment state="initial">
+        <source>
+        <ph id="0" equiv="INTERPOLATION" disp="{{ row.distance }}"/>
+      </source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="7936624992717622100">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:87</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:70</note>
+      </notes>
+      <segment state="translated">
+        <source>Migrate translation and state to this unit and remove this orphan.</source>
+        <target>Migriere Übersetzung und Status zu dieser Übersetzungseinheit und entferne diesen Weisen.</target>
+      </segment>
+    </unit>
+    <unit id="2250356394431390492">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:25</note>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:41</note>
+      </notes>
+      <segment state="translated">
+        <source>Similar units</source>
+        <target>Ähnliche Einheiten</target>
+      </segment>
+    </unit>
+    <unit id="5246620794703463867">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:117,119</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:100,102</note>
+      </notes>
+      <segment state="translated">
+        <source>
+    Delete orphan
+  </source>
+        <target>Lösche Weisen</target>
+      </segment>
+    </unit>
+    <unit id="7596769783947942591">
+      <notes>
+        <note category="location">app/source-orphans/source-orphans/source-orphans.component.html:11</note>
+      </notes>
+      <segment state="translated">
+        <source>Migrate</source>
+        <target>Migriere</target>
+      </segment>
+    </unit>
+    <unit id="8720444212022970709">
+      <notes>
+        <note category="location">app/source-orphans/source-orphans/source-orphans.component.html:14</note>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:1</note>
+      </notes>
+      <segment state="translated">
+        <source>Auto-Migration</source>
+        <target>Auto-Migration</target>
+      </segment>
+    </unit>
+    <unit id="6210415949009398956">
+      <notes>
+        <note category="location">app/source-orphans/source-orphans/source-orphans.component.html:18,20</note>
+      </notes>
+      <segment state="translated">
+        <source>
+      Orphans are translation units whose id is no longer contained in the source file.
+    </source>
+        <target>Weisen sind Übersetzungseinheiten, deren Id nicht mehr in der Originaldatei vorhanden sind.</target>
+      </segment>
+    </unit>
+    <unit id="1422267617953582850">
+      <notes>
+        <note category="location">app/source-orphans/migrate/migrate.component.html:2</note>
+      </notes>
+      <segment state="translated">
+        <source>Orphaned units</source>
+        <target>Verweiste Einheiten</target>
+      </segment>
+    </unit>
+    <unit id="3354447976218397931">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:3,7</note>
+      </notes>
+      <segment state="translated">
+        <source>
+  Migrate orphans which are below or equal to the distance threshold. The distance is according to
+  the <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a>" dispEnd="&lt;/a>">levenshtein algorithm</pc>. It
+  will skip the auto-migration for a unit if multiple units with the same distance are found.
+</source>
+        <target>Migriere Weisen, welche unter oder gleich dem Distanz Schwellenwert sind. Die Distanz entspricht dem <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a>" dispEnd="&lt;/a>">Levenshtein Algorithmus</pc>. Weisen welche mehrere Einheiten mit gleicher Distanz haben, werden übersprungen.</target>
+      </segment>
+    </unit>
+    <unit id="1566498821816930256">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:11</note>
+      </notes>
+      <segment state="translated">
+        <source>Distance Threshold</source>
+        <target>Distanz Schwellenwert</target>
+      </segment>
+    </unit>
+    <unit id="8169327733416527426">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:14</note>
+      </notes>
+      <segment state="translated">
+        <source>The distance threshold is required</source>
+        <target>Der Distanz Schwellenwert muss angegeben werden</target>
+      </segment>
+    </unit>
+    <unit id="5286185694292962955">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:17</note>
+      </notes>
+      <segment state="translated">
+        <source>The distance threshold must be greater or equal to 0</source>
+        <target>Der Distanz Schwellenwert muss grösser oder gleich 0 sein</target>
+      </segment>
+    </unit>
+    <unit id="6106421584531086998">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:26,28</note>
+      </notes>
+      <segment state="translated">
+        <source>
+    Auto-Migrate
+  </source>
+        <target>Auto-Migration</target>
+      </segment>
+    </unit>
+    <unit id="190365802837090999">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:35</note>
+      </notes>
+      <segment state="translated">
+        <source>No orphans met conditions.</source>
+        <target>Kein Weise entsprach den Bedingungen.</target>
+      </segment>
+    </unit>
+    <unit id="693184310236136215">
+      <notes>
+        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:39</note>
+      </notes>
+      <segment state="translated">
+        <source>Successful migrations</source>
+        <target>Erfolgreiche Migrationen</target>
+      </segment>
+    </unit>
+    <unit id="3620242059178560709">
+      <notes>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:13</note>
+      </notes>
+      <segment state="translated">
+        <source>Occurs in Targets</source>
+        <target>Kommt in folgenden Übersetzungen vor</target>
+      </segment>
+    </unit>
+    <unit id="6470405644971425740">
+      <notes>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:24</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:33</note>
+      </notes>
+      <segment state="translated">
+        <source>Distance according to the levenshtein comparison</source>
+        <target>Distanz nach dem Levenshtein Vergleich</target>
+      </segment>
+    </unit>
+    <unit id="5794397576066894195">
+      <notes>
+        <note category="location">app/target/unit/unit.component.html:49,51</note>
+      </notes>
+      <segment state="initial">
+        <source>
+  <pc id="0" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">keyboard_backspace</pc> Back
+</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="4865107392674053470">
+      <notes>
+        <note category="location">app/target/orphan/orphan.component.html:113,115</note>
+        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:96,98</note>
+      </notes>
+      <segment state="initial">
+        <source>
+    <pc id="0" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">keyboard_backspace</pc> Back
+  </source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="4177047730710985478">
+      <notes>
+        <note category="location">app/app.component.html:10</note>
+      </notes>
+      <segment state="translated">
+        <source>Translation server is not available. Start the server in the console with the command 'ng run yourProject:t9n'.</source>
+        <target>Übersetzungsserver ist nicht verfügbar. Starte den Server in  der Konsole mit dem Befehl 'ng run deinProjekt:t9n'.</target>
+      </segment>
+    </unit>
+    <unit id="8887944298153213372">
+      <notes>
+        <note category="location">app/target/translate/translate.component.html:38,42</note>
+      </notes>
+      <segment state="translated">
+        <source>Expected <ph id="0" equiv="INTERPOLATION" disp="{{ placeholders.length }}"/> placeholders
+            <pc id="1" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">info</pc>
+          </source>
+        <target>Es wurden <ph id="0" equiv="INTERPOLATION" disp="{{ placeholders.length }}"/> Platzhalter erwartet <pc id="1" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">info</pc></target>
       </segment>
     </unit>
     <unit id="6083012810085498346">
@@ -536,80 +861,5 @@ quo voluptas nulla pariatur?</target>
         <target></target>
       </segment>
     </unit>
-    <unit id="5794397576066894195">
-      <notes>
-        <note category="location">app/target/unit/unit.component.html:55,57</note>
-      </notes>
-      <segment state="initial">
-        <source>
-  <pc id="0" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">keyboard_backspace</pc> Back
-</source>
-        <target></target>
-      </segment>
-    </unit>
-    <unit id="2590415407309830681">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:29,31</note>
-      </notes>
-      <segment state="initial">
-        <source>
-        Distance
-      </source>
-        <target></target>
-      </segment>
-    </unit>
-    <unit id="6470405644971425740">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:27</note>
-        <note category="location">app/target/orphan/orphan.component.html:36</note>
-      </notes>
-      <segment state="initial">
-        <source>Distance according to the levenshtein comparison</source>
-        <target></target>
-      </segment>
-    </unit>
-    <unit id="3645391079809063987">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:38,40</note>
-      </notes>
-      <segment state="initial">
-        <source>
-        <ph id="0" equiv="INTERPOLATION" disp="{{ row.distance }}"/>
-      </source>
-        <target></target>
-      </segment>
-    </unit>
-    <unit id="7936624992717622100">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:81</note>
-      </notes>
-      <segment state="initial">
-        <source>Migrate translation and state to this unit and remove this orphan.</source>
-        <target></target>
-      </segment>
-    </unit>
-    <unit id="4865107392674053470">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:107,109</note>
-      </notes>
-      <segment state="initial">
-        <source>
-    <pc id="0" equivStart="START_TAG_MAT-ICON" equivEnd="CLOSE_TAG_MAT-ICON" type="other" dispStart="&lt;mat-icon>" dispEnd="&lt;/mat-icon>">keyboard_backspace</pc> Back
-  </source>
-        <target></target>
-      </segment>
-    </unit>
-    <unit id="5246620794703463867">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:111,113</note>
-      </notes>
-      <segment state="initial">
-        <source>
-    Delete orphan
-  </source>
-        <target></target>
-      </segment>
-    </unit>
   </file>
 </xliff>
-
