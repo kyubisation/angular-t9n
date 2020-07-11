@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.5](https://github.com/kyubisation/angular-t9n/compare/0.3.4...0.3.5) (2020-07-11)
+
+### Bug Fixes
+
+- update target information on opening overview ([b3f36ff](https://github.com/kyubisation/angular-t9n/commit/b3f36ff9e1e6afd383e55bfa9cc9e8869fcd46eb))
+
 ### [0.3.4](https://github.com/kyubisation/angular-t9n/compare/0.3.3...0.3.4) (2020-07-11)
 
 ### Bug Fixes
