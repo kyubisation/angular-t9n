@@ -39,7 +39,6 @@
   "files": [
     "{builders,schematics}/**/*.{json,js,d.ts}",
     "builders/t9n/client/*",
-    "app/**/*.*",
     "!tsconfig.json"
   ],
   "dependencies": {
