@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.4](https://github.com/kyubisation/angular-t9n/compare/0.3.3...0.3.4) (2020-07-11)
+
+### Bug Fixes
+
+- correct package includes ([25677b0](https://github.com/kyubisation/angular-t9n/commit/25677b0bd23b3985e6f2512232e0bfca8f6d6346))
+
 ### [0.3.3](https://github.com/kyubisation/angular-t9n/compare/0.3.2...0.3.3) (2020-07-11)
 
 ### [0.3.2](https://github.com/kyubisation/angular-t9n/compare/0.3.1...0.3.2) (2020-07-11)
