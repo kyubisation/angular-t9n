@@ -14,7 +14,7 @@
     "translationFile": {
       "type": "string",
       "format": "path",
-      "default": "src/messages.xlf",
+      "default": "messages.xlf",
       "description": "The file path to the root translation file.",
       "x-prompt": "Path to the root translation file?"
     },
