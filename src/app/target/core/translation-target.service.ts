@@ -8,11 +8,11 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  first,
   map,
   skip,
   startWith,
   switchMap,
+  take,
   takeUntil,
   tap,
 } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export class TranslationTargetService {
 
   unit(id: string) {
     return this.target.pipe(
-      first(),
+      take(1),
       map((t) => t._links!.unit.href.replace('{id}', id)),
       switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href))
     );
@@ -52,7 +52,7 @@ export class TranslationTargetService {
   }) {
     const params = createPageParams(query);
     return this.target.pipe(
-      first(),
+      take(1),
       map((t) => t._links!.units.href),
       switchMap((href) =>
         this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
@@ -111,7 +111,7 @@ export class TranslationTargetService {
 
   orphan(id: string) {
     return this.target.pipe(
-      first(),
+      take(1),
       map((t) => t._links!.orphan.href.replace('{id}', id)),
       switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href))
     );
@@ -125,7 +125,7 @@ export class TranslationTargetService {
   }) {
     const params = createPageParams(query);
     return this.target.pipe(
-      first(),
+      take(1),
       map((t) => t._links!.orphans.href),
       switchMap((href) =>
         this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
@@ -143,7 +143,7 @@ export class TranslationTargetService {
     return this._http.delete(orphan._links!.self.href).pipe(
       switchMap(() =>
         this.target.pipe(
-          first(),
+          take(1),
           switchMap((t) => this._translationService.updateTarget(t.language))
         )
       ),

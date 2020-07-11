@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { first, map, startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap, take } from 'rxjs/operators';
 
 import { locales } from '../../../locales';
 import { TranslationService } from '../../core/translation.service';
@@ -53,7 +53,7 @@ export class AddLanguageModalComponent {
 
   private _targetExists(control: AbstractControl) {
     return this._translationService.targets.pipe(
-      first(),
+      take(1),
       map((targets) =>
         targets.some((t) => t.language === control.value) ? { target: true } : null
       )
