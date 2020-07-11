@@ -37,7 +37,7 @@
     "url": "https://github.com/kyubisation/angular-t9n/issues"
   },
   "files": [
-    "{builders,schematics}/*/*.{json,js,d.ts}",
+    "{builders,schematics}/**/*.{json,js,d.ts}",
     "builders/t9n/client/*",
     "app/**/*.*",
     "!tsconfig.json"
