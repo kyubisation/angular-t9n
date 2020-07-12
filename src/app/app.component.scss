@@ -4,19 +4,9 @@
   padding-top: 64px;
 }
 
-.service-down-error {
-  display: none;
-}
-
 :host(.service-down) {
-  .service-down-error {
-    display: inline-block;
-  }
-
-  main {
-    opacity: 0.5;
-    pointer-events: none;
-  }
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 mat-toolbar {
