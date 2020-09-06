@@ -1,5 +1,5 @@
 import { LinkHelper } from '../../link-helper';
-import { Hal, HalLink, Links } from '../hal';
+import { Hal, HalLink, LinkBuilder } from '../hal';
 import { TranslationTarget } from '../translation-target';
 
 export class TargetResponse implements Hal {
@@ -24,7 +24,7 @@ export class TargetResponse implements Hal {
     this.finalCount = counter.final;
     this.orphanCount = target.orphans.length;
 
-    this._links = new Links()
+    this._links = new LinkBuilder()
       .self(linkHelper.target(target.language))
       .href('units', linkHelper.targetUnits(target))
       .templatedHref('unit', linkHelper.targetUnit('{id}', target))

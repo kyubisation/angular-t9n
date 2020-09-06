@@ -12,7 +12,9 @@ import {
 
 import { LinkHelper } from '../link-helper';
 import {
+  FilterableBuilder,
   PaginationResponse,
+  SortableBuilder,
   SourceOrphanRequest,
   SourceOrphanResponse,
   TranslationSource,
@@ -22,6 +24,14 @@ import { OrphanRegistry } from '../persistence';
 
 @Controller('source/orphans')
 export class SourceOrphansController {
+  private _sourceOrphanSortables = new SortableBuilder<TranslationSourceOrphan>((o) => o.unit)
+    .addSortables('id', 'source')
+    .addSafeSortables('description', 'meaning')
+    .build();
+  private _sourceOrphanFilterables = new FilterableBuilder<TranslationSourceOrphan>((o) => o.unit)
+    .addFilterables('id', 'description', 'meaning', 'source')
+    .build();
+
   constructor(
     private _source: TranslationSource,
     private _orphanRegistry: OrphanRegistry,
@@ -37,18 +47,8 @@ export class SourceOrphansController {
       entries: this._orphanRegistry.orphans,
       responseMapper: (orphan) => new SourceOrphanResponse(orphan, this._linkHelper),
       urlFactory: (query) => this._linkHelper.sourceOrphans(query),
-      sortables: {
-        id: (a, b) => a.unit.id.localeCompare(b.unit.id),
-        description: (a, b) => (a.unit.description || '').localeCompare(b.unit.description || ''),
-        meaning: (a, b) => (a.unit.meaning || '').localeCompare(b.unit.meaning || ''),
-        source: (a, b) => a.unit.source.localeCompare(b.unit.source),
-      },
-      filterables: {
-        id: (f) => (e) => !!e.unit.id && e.unit.id.includes(f),
-        description: (f) => (e) => !!e.unit.description && e.unit.description.includes(f),
-        meaning: (f) => (e) => !!e.unit.meaning && e.unit.meaning.includes(f),
-        source: (f) => (e) => !!e.unit.source && e.unit.source.includes(f),
-      },
+      sortables: this._sourceOrphanSortables,
+      filterables: this._sourceOrphanFilterables,
     });
   }
 

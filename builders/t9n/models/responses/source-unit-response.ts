@@ -1,5 +1,5 @@
 import { LinkHelper } from '../../link-helper';
-import { Hal, HalLink, Links } from '../hal';
+import { Hal, HalLink, LinkBuilder } from '../hal';
 import { TranslationSourceUnit } from '../translation-source-unit';
 
 export class SourceUnitResponse implements TranslationSourceUnit, Hal {
@@ -13,6 +13,6 @@ export class SourceUnitResponse implements TranslationSourceUnit, Hal {
 
   constructor(unit: TranslationSourceUnit, linkHelper: LinkHelper) {
     Object.assign(this, { ...unit });
-    this._links = new Links().self(linkHelper.sourceUnit(unit)).build();
+    this._links = new LinkBuilder().self(linkHelper.sourceUnit(unit)).build();
   }
 }

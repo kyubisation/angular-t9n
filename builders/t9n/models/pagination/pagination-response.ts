@@ -1,5 +1,8 @@
-import { Hal, HalLink, Links } from '../hal';
+import { Hal, HalLink, LinkBuilder } from '../hal';
 import { QueryParams } from '../requests';
+
+import { Filterables } from './filterables';
+import { Sortables } from './sortables';
 
 const PAGE_PLACEHOLDER = 'PAGE_PLACEHOLDER';
 
@@ -16,8 +19,8 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
     entries: TEntry[];
     responseMapper: (entry: TEntry) => TResponse;
     urlFactory: (query: QueryParams) => string;
-    sortables?: { [property: string]: (a: TEntry, b: TEntry) => number };
-    filterables?: { [property: string]: (filter: string) => (e: TEntry) => boolean };
+    sortables?: Sortables<TEntry>;
+    filterables?: Filterables<TEntry>;
   }) {
     let entries = params.entries.slice();
     const { entriesPerPage, page, sort, ...query } = params.query;
@@ -29,7 +32,7 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
     this.totalEntries = entries.length;
     this.totalPages = Math.ceil(entries.length / this.entriesPerPage);
     const lastPage = this.totalPages - 1;
-    this._links = new Links()
+    this._links = new LinkBuilder()
       .self(params.urlFactory(params.query))
       .hrefWhen(this.currentPage > 0, 'first', () =>
         params.urlFactory({ ...params.query, page: '0' })
@@ -56,11 +59,7 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
     };
   }
 
-  private _sort(
-    entries: TEntry[],
-    sort: string | undefined,
-    sortables?: { [property: string]: (a: TEntry, b: TEntry) => number }
-  ) {
+  private _sort(entries: TEntry[], sort: string | undefined, sortables?: Sortables<TEntry>) {
     if (!sort || !sortables) {
       return entries;
     }
@@ -82,7 +81,7 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
   private _filter(
     entries: TEntry[],
     query: { [key: string]: string },
-    filterables?: { [property: string]: (filter: string) => (e: TEntry) => boolean }
+    filterables?: Filterables<TEntry>
   ) {
     if (!filterables) {
       return entries;

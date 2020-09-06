@@ -1,6 +1,6 @@
 import { HalLink } from './hal-link';
 
-export class Links {
+export class LinkBuilder {
   private _links: { [key: string]: HalLink } = {};
 
   self(href: string) {

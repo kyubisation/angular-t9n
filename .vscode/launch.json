@@ -17,6 +17,19 @@
       "name": "t9n xlf",
       "program": "${workspaceFolder}/node_modules/@angular/cli/bin/ng",
       "args": ["run", "angular-t9n:t9n", "-c", "xlf"]
+    },
+    {
+      "name": "Debug Jest Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/jest/bin/jest.js",
+        "--runInBand"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
     }
   ]
 }

@@ -52,7 +52,7 @@ describe('SourceOrphansController', () => {
         .map((o) => o.unit)
         .slice()
         .filter(
-          (u) => (u as any)[filter] && (u as any)[filter].toString().includes((unit as any)[filter])
+          (u) => !!(u as any)[filter]?.toUpperCase().includes((unit as any)[filter].toUpperCase())
         )
         .map((u) => u.id)
         .slice(0, 10);

@@ -2,7 +2,9 @@ import { Body, Controller, Get, NotFoundException, Param, Put, Query } from '@ne
 
 import { LinkHelper } from '../link-helper';
 import {
+  FilterableBuilder,
   PaginationResponse,
+  SortableBuilder,
   TargetUnitRequest,
   TargetUnitResponse,
   TranslationTargetUnit,
@@ -11,6 +13,14 @@ import { TranslationTargetRegistry } from '../persistence';
 
 @Controller('targets/:language/units')
 export class TargetUnitsController {
+  private _targetUnitSortables = new SortableBuilder<TranslationTargetUnit>()
+    .addSortables('id', 'source', 'state')
+    .addSafeSortables('description', 'meaning', 'target')
+    .build();
+  private _targetUnitFilterables = new FilterableBuilder<TranslationTargetUnit>()
+    .addFilterables('id', 'description', 'meaning', 'source', 'target', 'state')
+    .build();
+
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
     private _linkHelper: LinkHelper
@@ -31,22 +41,8 @@ export class TargetUnitsController {
       entries: target.units,
       responseMapper: (unit) => new TargetUnitResponse(target, unit, this._linkHelper),
       urlFactory: (query) => this._linkHelper.targetUnits(target, query),
-      sortables: {
-        id: (a, b) => a.id.localeCompare(b.id),
-        description: (a, b) => (a.description || '').localeCompare(b.description || ''),
-        meaning: (a, b) => (a.meaning || '').localeCompare(b.meaning || ''),
-        source: (a, b) => a.source.localeCompare(b.source),
-        target: (a, b) => (a.target || '').localeCompare(b.target || ''),
-        state: (a, b) => a.state.localeCompare(b.state),
-      },
-      filterables: {
-        id: (f) => (e) => !!e.id && e.id.includes(f),
-        description: (f) => (e) => !!e.description && e.description.includes(f),
-        meaning: (f) => (e) => !!e.meaning && e.meaning.includes(f),
-        source: (f) => (e) => !!e.source && e.source.includes(f),
-        target: (f) => (e) => !!e.target && e.target.includes(f),
-        state: (f) => (e) => !!e.state && e.state.includes(f),
-      },
+      sortables: this._targetUnitSortables,
+      filterables: this._targetUnitFilterables,
     });
   }
 

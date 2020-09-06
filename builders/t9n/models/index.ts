@@ -1,3 +1,5 @@
+export * from './hal';
+export * from './pagination';
 export * from './requests';
 export * from './responses';
 export * from './translation-source';

@@ -10,11 +10,25 @@ import {
 } from '@nestjs/common';
 
 import { LinkHelper } from '../link-helper';
-import { PaginationResponse, TargetOrphanResponse, TranslationTargetOrphan } from '../models';
+import {
+  FilterableBuilder,
+  PaginationResponse,
+  SortableBuilder,
+  TargetOrphanResponse,
+  TranslationTargetOrphan,
+} from '../models';
 import { TranslationTargetRegistry } from '../persistence';
 
 @Controller('targets/:language/orphans')
 export class TargetOrphansController {
+  private _targetOrphanSortables = new SortableBuilder<TranslationTargetOrphan>((o) => o.unit)
+    .addSortables('id', 'source', 'state')
+    .addSafeSortables('description', 'meaning', 'target')
+    .build();
+  private _targetOrphanFilterables = new FilterableBuilder<TranslationTargetOrphan>((o) => o.unit)
+    .addFilterables('id', 'description', 'meaning', 'source', 'target', 'state')
+    .build();
+
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
     private _linkHelper: LinkHelper
@@ -35,22 +49,8 @@ export class TargetOrphansController {
       entries: target.orphans,
       responseMapper: (orphan) => new TargetOrphanResponse(target, orphan, this._linkHelper),
       urlFactory: (query) => this._linkHelper.targetOrphans(target, query),
-      sortables: {
-        id: (a, b) => a.unit.id.localeCompare(b.unit.id),
-        description: (a, b) => (a.unit.description || '').localeCompare(b.unit.description || ''),
-        meaning: (a, b) => (a.unit.meaning || '').localeCompare(b.unit.meaning || ''),
-        source: (a, b) => a.unit.source.localeCompare(b.unit.source),
-        target: (a, b) => (a.unit.target || '').localeCompare(b.unit.target || ''),
-        state: (a, b) => a.unit.state.localeCompare(b.unit.state),
-      },
-      filterables: {
-        id: (f) => (e) => !!e.unit.id && e.unit.id.includes(f),
-        description: (f) => (e) => !!e.unit.description && e.unit.description.includes(f),
-        meaning: (f) => (e) => !!e.unit.meaning && e.unit.meaning.includes(f),
-        source: (f) => (e) => !!e.unit.source && e.unit.source.includes(f),
-        target: (f) => (e) => !!e.unit.target && e.unit.target.includes(f),
-        state: (f) => (e) => !!e.unit.state && e.unit.state.includes(f),
-      },
+      sortables: this._targetOrphanSortables,
+      filterables: this._targetOrphanFilterables,
     });
   }
 
