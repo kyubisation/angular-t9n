@@ -174,18 +174,22 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
       Object.keys(locales).map(async (language) => {
         const locale = locales[language];
         const targetPath = join(workspaceRoot, locale.translation);
-        const result = await serializationStrategy.deserializeTarget(targetPath);
-        const target = targetRegistry.register(result.language, result.unitMap, locale.baseHref);
+        if (host.isFile(targetPath)) {
+          const result = await serializationStrategy.deserializeTarget(targetPath);
+          const target = targetRegistry.register(result.language, result.unitMap, locale.baseHref);
 
-        const normalizedPath = targetPathBuilder.createPath(target);
-        if (targetPath !== normalizedPath) {
-          context.logger.info(
-            `Normalizing path for ${target.language}\n => Moving ${relative(
-              workspaceRoot,
-              targetPath
-            )} to ${relative(workspaceRoot, normalizedPath)}`
-          );
-          await nodeHost.rename(targetPath, normalizedPath).toPromise();
+          const normalizedPath = targetPathBuilder.createPath(target);
+          if (targetPath !== normalizedPath) {
+            context.logger.info(
+              `Normalizing path for ${target.language}\n => Moving ${relative(
+                workspaceRoot,
+                targetPath
+              )} to ${relative(workspaceRoot, normalizedPath)}`
+            );
+            await nodeHost.rename(targetPath, normalizedPath).toPromise();
+          }
+        } else {
+          await targetRegistry.create(language, locale.baseHref);
         }
       })
     );
