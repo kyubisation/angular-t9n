@@ -1,10 +1,10 @@
 import { join, normalize, relative, virtualFs, workspaces } from '@angular-devkit/core';
 
-import { TranslationSource, TranslationTarget } from '../models';
+import { TranslationSource, TranslationTarget } from '../../models';
+import { TargetPathBuilder } from '../target-path-builder';
+import { TranslationTargetRegistry } from '../translation-target-registry';
 
 import { AngularI18n } from './angular-i18n';
-import { TargetPathBuilder } from './target-path-builder';
-import { TranslationTargetRegistry } from './translation-target-registry';
 
 describe('AngularI18n', () => {
   const workspaceRoot = normalize(__dirname);
@@ -27,24 +27,29 @@ describe('AngularI18n', () => {
     translationContext = null!;
   });
 
+  async function setupI18n(i18n: any) {
+    const angularJson = require('../../../../angular.json');
+    angularJson.projects[projectName].i18n = i18n;
+    await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
+    angularI18n = new AngularI18n(
+      host,
+      workspaceRoot,
+      projectName,
+      builder,
+      () => translationContext
+    );
+  }
+
   describe('with i18n configured', () => {
-    beforeEach(async () => {
-      const angularJson = require('../../../angular.json');
-      angularJson.projects[projectName].i18n = {
-        sourceLocale: 'en',
-        locales: {
-          de: 'src/locale/xlf2/messages.de.xlf',
-        },
-      };
-      await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
-      angularI18n = new AngularI18n(
-        host,
-        workspaceRoot,
-        projectName,
-        builder,
-        () => translationContext
-      );
-    });
+    beforeEach(
+      async () =>
+        await setupI18n({
+          sourceLocale: 'en',
+          locales: {
+            de: 'src/locale/xlf2/messages.de.xlf',
+          },
+        })
+    );
 
     it('should throw without source', () => {
       expect(angularI18n.update()).rejects.toThrow();
@@ -60,7 +65,7 @@ describe('AngularI18n', () => {
       const locales = await angularI18n.locales();
       expect(Object.keys(locales)).toEqual(['de']);
       const deLocale = locales.de;
-      expect(deLocale.translation).toEqual('src/locale/xlf2/messages.de.xlf');
+      expect(deLocale.translation).toEqual(['src/locale/xlf2/messages.de.xlf']);
       expect(deLocale.baseHref).toBeUndefined();
     });
 
@@ -76,45 +81,68 @@ describe('AngularI18n', () => {
       };
       await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
-      const dePath = relative(
-        workspaceRoot,
-        builder.createPath({ language: 'de' } as TranslationTarget)
-      );
-      const deChPath = relative(
-        workspaceRoot,
-        builder.createPath({ language: 'de-CH' } as TranslationTarget)
-      );
+      const dePath = relative(workspaceRoot, builder.createPath('de'));
+      const deChPath = relative(workspaceRoot, builder.createPath('de-CH'));
       expect(ngJson.projects[projectName].i18n).toEqual({
         sourceLocale: 'en-US',
-        locales: { de: dePath, 'de-CH': deChPath },
+        locales: { de: ['src/locale/xlf2/messages.de.xlf', dePath], 'de-CH': deChPath },
+      });
+    });
+  });
+
+  describe('with i18n configured without locales', () => {
+    beforeEach(
+      async () =>
+        await setupI18n({
+          sourceLocale: {
+            baseHref: '/en/',
+            language: 'en-US',
+          },
+        })
+    );
+
+    it('should update the angular.json when changed', async () => {
+      translationContext = {
+        source: { language: 'en-US' } as TranslationSource,
+        targetRegistry: {
+          values: () => [{ language: 'de' } as TranslationTarget],
+        } as any,
+      };
+      await angularI18n.update();
+      const ngJson = JSON.parse(await host.readFile(angularJsonPath));
+      const dePath = relative(workspaceRoot, builder.createPath('de'));
+      expect(ngJson.projects[projectName].i18n).toEqual({
+        sourceLocale: {
+          baseHref: '/en/',
+          code: 'en-US',
+        },
+        locales: { de: dePath },
       });
     });
   });
 
   describe('with i18n configured with baseHref', () => {
-    beforeEach(async () => {
-      const angularJson = require('../../../angular.json');
-      angularJson.projects[projectName].i18n = {
-        sourceLocale: {
-          code: 'en',
-          baseHref: '/en/',
-        },
-        locales: {
-          de: {
-            translation: 'src/locale/xlf2/messages.de.xlf',
-            baseHref: '/de/',
+    beforeEach(
+      async () =>
+        await setupI18n({
+          sourceLocale: {
+            code: 'en',
+            baseHref: '/en/',
           },
-        },
-      };
-      await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
-      angularI18n = new AngularI18n(
-        host,
-        workspaceRoot,
-        projectName,
-        builder,
-        () => translationContext
-      );
-    });
+          locales: {
+            de: {
+              translation: 'locales/xlf2/messages.de.xlf',
+              baseHref: '/de/',
+            },
+            'de-CH': {
+              translation: ['locales/xlf2/messages.de-CH.xlf', 'locales/xlf2/messages2.de-CH.xlf'],
+              baseHref: '/de-CH/',
+            },
+            fr: 'locales/xlf2/messages.fr.xlf',
+            'fr-CH': ['locales/xlf2/messages.fr-CH.xlf', 'locales/xlf2/messages2.fr-CH.xlf'],
+          },
+        })
+    );
 
     it('should return the source locale', async () => {
       const sourceLocale = await angularI18n.sourceLocale();
@@ -124,9 +152,9 @@ describe('AngularI18n', () => {
 
     it('should return the target locales', async () => {
       const locales = await angularI18n.locales();
-      expect(Object.keys(locales)).toEqual(['de']);
+      expect(Object.keys(locales)).toEqual(['de', 'de-CH', 'fr', 'fr-CH']);
       const deLocale = locales.de;
-      expect(deLocale.translation).toEqual('src/locale/xlf2/messages.de.xlf');
+      expect(deLocale.translation).toEqual(['locales/xlf2/messages.de.xlf']);
       expect(deLocale.baseHref).toEqual('/de/');
     });
 
@@ -142,14 +170,8 @@ describe('AngularI18n', () => {
       };
       await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
-      const dePath = relative(
-        workspaceRoot,
-        builder.createPath({ language: 'de' } as TranslationTarget)
-      );
-      const deChPath = relative(
-        workspaceRoot,
-        builder.createPath({ language: 'de-CH' } as TranslationTarget)
-      );
+      const dePath = relative(workspaceRoot, builder.createPath('de'));
+      const deChPath = relative(workspaceRoot, builder.createPath('de-CH'));
       expect(ngJson.projects[projectName].i18n).toEqual({
         sourceLocale: {
           code: 'en-US',
@@ -157,11 +179,15 @@ describe('AngularI18n', () => {
         },
         locales: {
           de: {
-            translation: dePath,
+            translation: ['locales/xlf2/messages.de.xlf', dePath],
             baseHref: '/de/',
           },
           'de-CH': {
-            translation: deChPath,
+            translation: [
+              'locales/xlf2/messages.de-CH.xlf',
+              'locales/xlf2/messages2.de-CH.xlf',
+              deChPath,
+            ],
             baseHref: '/de-CH/',
           },
         },
@@ -170,18 +196,7 @@ describe('AngularI18n', () => {
   });
 
   describe('without i18n configured', () => {
-    beforeEach(async () => {
-      const angularJson = require('../../../angular.json');
-      angularJson.projects[projectName].i18n = undefined;
-      await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
-      angularI18n = new AngularI18n(
-        host,
-        workspaceRoot,
-        projectName,
-        builder,
-        () => translationContext
-      );
-    });
+    beforeEach(async () => await setupI18n(undefined));
 
     it('should return undefined for the source locale', async () => {
       const sourceLocale = await angularI18n.sourceLocale();

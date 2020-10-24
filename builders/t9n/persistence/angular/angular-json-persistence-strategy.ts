@@ -1,11 +1,11 @@
 import { logging } from '@angular-devkit/core';
 import { Injectable } from '@nestjs/common';
 
-import { TranslationTarget } from '../models';
-import { SerializationStrategy } from '../serialization-strategy';
+import { TranslationTarget } from '../../models';
+import { SerializationStrategy } from '../../serialization-strategy';
+import { PersistenceStrategy } from '../persistence-strategy';
 
 import { AngularI18n } from './angular-i18n';
-import { PersistenceStrategy } from './persistence-strategy';
 
 @Injectable()
 export class AngularJsonPersistenceStrategy extends PersistenceStrategy {

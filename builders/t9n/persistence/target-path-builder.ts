@@ -15,7 +15,8 @@ export class TargetPathBuilder {
     );
   }
 
-  createPath(target: TranslationTarget) {
-    return join(this._targetDirectory, `${this._basename}.${target.language}${this._extension}`);
+  createPath(target: TranslationTarget | string) {
+    const language = typeof target === 'string' ? target : target.language;
+    return join(this._targetDirectory, `${this._basename}.${language}${this._extension}`);
   }
 }

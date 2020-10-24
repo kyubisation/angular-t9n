@@ -13,7 +13,7 @@ import {
   XlfDeserializer,
   XmlParser,
 } from './deserialization';
-import { TranslationSource } from './models';
+import { TranslationSource, TranslationTarget } from './models';
 import {
   AngularI18n,
   AngularJsonPersistenceStrategy,
@@ -173,23 +173,22 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     await Promise.all(
       Object.keys(locales).map(async (language) => {
         const locale = locales[language];
-        const targetPath = join(workspaceRoot, locale.translation);
-        if (host.isFile(targetPath)) {
-          const result = await serializationStrategy.deserializeTarget(targetPath);
-          const target = targetRegistry.register(result.language, result.unitMap, locale.baseHref);
-
-          const normalizedPath = targetPathBuilder.createPath(target);
-          if (targetPath !== normalizedPath) {
-            context.logger.info(
-              `Normalizing path for ${target.language}\n => Moving ${relative(
-                workspaceRoot,
-                targetPath
-              )} to ${relative(workspaceRoot, normalizedPath)}`
-            );
-            await nodeHost.rename(targetPath, normalizedPath).toPromise();
-          }
-        } else {
+        const normalizedPath = targetPathBuilder.createPath(language);
+        const relativePath = relative(workspaceRoot, normalizedPath);
+        if (locale.translation.every((t) => join(workspaceRoot, t) !== normalizedPath)) {
+          context.logger.warn(
+            `Expected translation file ${relativePath} not found listed in i18n! It will be created and added to the i18n entry.`
+          );
+          const target = await targetRegistry.create(language, locale.baseHref);
+          await importExistingTranslationUnits(target, locale.translation, serializationStrategy);
+        } else if (!host.isFile(normalizedPath)) {
+          context.logger.warn(
+            `Expected translation file ${relativePath} does not exist! It will be created.`
+          );
           await targetRegistry.create(language, locale.baseHref);
+        } else {
+          const result = await serializationStrategy.deserializeTarget(normalizedPath);
+          targetRegistry.register(result.language, result.unitMap, locale.baseHref);
         }
       })
     );
@@ -197,5 +196,22 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     translationContext = { source, targetRegistry };
     await angularI18n.update();
     return targetRegistry;
+  }
+
+  async function importExistingTranslationUnits(
+    target: TranslationTarget,
+    translationFiles: string[],
+    serializationStrategy: SerializationStrategy
+  ) {
+    for (const translation of translationFiles) {
+      const targetPath = join(workspaceRoot, translation);
+      const result = await serializationStrategy.deserializeTarget(targetPath);
+      result.unitMap.forEach((unit, key) => {
+        const targetUnit = target.unitMap.get(key);
+        if (targetUnit) {
+          target.translateUnit(targetUnit, unit);
+        }
+      });
+    }
   }
 }

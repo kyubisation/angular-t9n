@@ -1,8 +1,8 @@
 import { logging, normalize, Path } from '@angular-devkit/core';
 
-import { MOCK_TARGET_DE } from '../../../test';
-import { TranslationTarget } from '../models';
-import { SerializationStrategy } from '../serialization-strategy';
+import { MOCK_TARGET_DE } from '../../../../test';
+import { TranslationTarget } from '../../models';
+import { SerializationStrategy } from '../../serialization-strategy';
 
 import { AngularI18n } from './angular-i18n';
 import { AngularJsonPersistenceStrategy } from './angular-json-persistence-strategy';

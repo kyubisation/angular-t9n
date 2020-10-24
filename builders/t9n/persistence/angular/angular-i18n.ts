@@ -1,10 +1,10 @@
 import { Path, relative, workspaces } from '@angular-devkit/core';
 
-import { TranslationSource, TranslationTarget } from '../models';
+import { TranslationSource, TranslationTarget } from '../../models';
+import { TargetPathBuilder } from '../target-path-builder';
+import { TranslationTargetRegistry } from '../translation-target-registry';
 
-import { AngularJsonI18n } from './angular-json-i18n';
-import { TargetPathBuilder } from './target-path-builder';
-import { TranslationTargetRegistry } from './translation-target-registry';
+import { AngularJsonI18n, AngularJsonI18nLocale } from './angular-json-i18n';
 
 export class AngularI18n {
   constructor(
@@ -25,7 +25,7 @@ export class AngularI18n {
       : { code: i18n.sourceLocale || '' };
   }
 
-  async locales(): Promise<{ [locale: string]: { translation: string; baseHref?: string } }> {
+  async locales(): Promise<{ [locale: string]: { translation: string[]; baseHref?: string } }> {
     const i18n = await this._readProjectI18n();
     const locales = i18n.locales || {};
     return Object.keys(locales)
@@ -33,10 +33,9 @@ export class AngularI18n {
       .reduce(
         (current, next) =>
           Object.assign(current, {
-            [next]:
-              typeof locales[next] === 'object' ? locales[next] : { translation: locales[next] },
+            [next]: this._normalizeI18nLocale(locales[next]),
           }),
-        {} as { [locale: string]: { translation: string; baseHref?: string } }
+        {} as { [locale: string]: { translation: string[]; baseHref?: string } }
       );
   }
 
@@ -56,11 +55,15 @@ export class AngularI18n {
       i18n.sourceLocale = source.language;
     }
 
+    const locales = i18n.locales ?? {};
     i18n.locales = targetRegistry
       .values()
       .sort((a, b) => a.language.localeCompare(b.language))
       .reduce(
-        (current, next) => Object.assign(current, { [next.language]: this._i18nLocale(next) }),
+        (current, next) =>
+          Object.assign(current, {
+            [next.language]: this._i18nLocale(next, locales[next.language]),
+          }),
         {}
       );
 
@@ -87,10 +90,33 @@ export class AngularI18n {
     return { workspace, project };
   }
 
-  private _i18nLocale(target: TranslationTarget) {
-    const translation = this.projectRelativePath(target);
+  private _i18nLocale(target: TranslationTarget, locale: AngularJsonI18nLocale | undefined) {
+    const translationPath = this.projectRelativePath(target);
+    const normalizedLocale = locale ? this._normalizeI18nLocale(locale) : { translation: [] };
+    if (!normalizedLocale.translation.includes(translationPath)) {
+      normalizedLocale.translation.push(translationPath);
+    }
+
+    const translation =
+      normalizedLocale.translation.length === 1
+        ? normalizedLocale.translation[0]
+        : normalizedLocale.translation;
     return target.baseHref && target.baseHref !== target.language
       ? { translation, baseHref: target.baseHref }
       : translation;
+  }
+
+  private _normalizeI18nLocale(
+    locale: AngularJsonI18nLocale
+  ): { translation: string[]; baseHref?: string } {
+    if (typeof locale === 'string') {
+      return { translation: [locale] };
+    } else if (Array.isArray(locale)) {
+      return { translation: locale };
+    } else if (!Array.isArray(locale.translation)) {
+      return { ...locale, translation: [locale.translation] };
+    } else {
+      return locale as { translation: string[]; baseHref?: string };
+    }
   }
 }
