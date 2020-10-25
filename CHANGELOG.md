@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.1.0](https://github.com/kyubisation/angular-t9n/compare/10.0.0...10.1.0) (2020-10-25)
+
+### Features
+
+- create target xlf file if it does not exist ([a0fa5c5](https://github.com/kyubisation/angular-t9n/commit/a0fa5c540c479c6ea53d9598a6b0927d01c89402))
+- have filter be case insensitive ([663abb4](https://github.com/kyubisation/angular-t9n/commit/663abb443c7f8653973386b5d2b09c6e31f1b45f))
+- support multiple translation files in the i18n section of angular.json ([13cedfc](https://github.com/kyubisation/angular-t9n/commit/13cedfc2124b5351ba46f5dc2c094600812e7159))
+
 ## [10.0.0](https://github.com/kyubisation/angular-t9n/compare/0.3.5...10.0.0) (2020-07-12)
 
 ### [0.3.5](https://github.com/kyubisation/angular-t9n/compare/0.3.4...0.3.5) (2020-07-11)
