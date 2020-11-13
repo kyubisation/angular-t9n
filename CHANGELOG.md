@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.0.0](https://github.com/kyubisation/angular-t9n/compare/10.1.0...11.0.0) (2020-11-13)
+
+### ⚠ BREAKING CHANGES
+
+- This package now requires the Angular 11 CLI
+
+### build
+
+- update to Angular 11 ([936ff59](https://github.com/kyubisation/angular-t9n/commit/936ff59d53a253547bdeb8f4704c9c6a3b904ff2))
+
 ## [10.1.0](https://github.com/kyubisation/angular-t9n/compare/10.0.0...10.1.0) (2020-10-25)
 
 ### Features
