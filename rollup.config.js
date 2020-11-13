@@ -24,7 +24,7 @@ function target({ input, exports = 'auto' }) {
       '@nestjs/platform-ws',
       '@nestjs/websockets',
       '@nestjs/serve-static',
-      '@schematics/angular/utility/config',
+      '@schematics/angular/utility/workspace',
       '@schematics/angular/utility/workspace-models',
       'class-validator',
       'fs',
