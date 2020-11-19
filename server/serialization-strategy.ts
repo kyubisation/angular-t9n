@@ -1,4 +1,3 @@
-import { Path } from '@angular-devkit/core';
 import { Injectable } from '@nestjs/common';
 
 import { TranslationDeserializationResult, TranslationDeserializer } from './deserialization';
@@ -15,20 +14,20 @@ export class SerializationStrategy {
   ) {}
 
   async deserializeSource(
-    path: Path
+    path: string
   ): Promise<TranslationDeserializationResult<TranslationSourceUnit>> {
     const content = await this._host.readFile(path);
     return this._deserializer.deserializeSource(content);
   }
 
   async deserializeTarget(
-    path: Path
+    path: string
   ): Promise<TranslationDeserializationResult<TranslationTargetUnit>> {
     const content = await this._host.readFile(path);
     return this._deserializer.deserializeTarget(content);
   }
 
-  async serializeTarget(target: TranslationTarget, path: Path): Promise<void> {
+  async serializeTarget(target: TranslationTarget, path: string): Promise<void> {
     const content = this._serializer.serializeTarget(target);
     await this._host.writeFile(path, content);
   }

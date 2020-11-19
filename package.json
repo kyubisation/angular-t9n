@@ -2,6 +2,9 @@
   "name": "angular-t9n",
   "version": "11.0.0",
   "description": "A translation tool for Angular i18n",
+  "bin": {
+    "ng-t9n": "./bin/cli.js"
+  },
   "keywords": [
     "angular",
     "i18n",
@@ -14,6 +17,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "clean": "rimraf coverage {bin,builders,schematics}/**/index.{js,d.ts}",
     "build": "npm run build:ng && npm run build:node",
     "build:ng": "ng build --prod",
     "build:node": "rollup --config rollup.config.js",
@@ -37,8 +41,8 @@
     "url": "https://github.com/kyubisation/angular-t9n/issues"
   },
   "files": [
-    "{builders,schematics}/**/*.{json,js,d.ts}",
-    "builders/t9n/client/*",
+    "{bin,builders,schematics}/**/*.{json,js,d.ts}",
+    "server/client/*",
     "!tsconfig.json"
   ],
   "dependencies": {
@@ -52,6 +56,7 @@
     "class-validator": "^0.12.2",
     "js-levenshtein": "^1.1.6",
     "reflect-metadata": "^0.1.13",
+    "rxjs": "~6.5.5",
     "xmldom": "^0.3.0"
   },
   "devDependencies": {
@@ -77,7 +82,7 @@
     "@types/jasminewd2": "~2.0.8",
     "@types/jest": "^26.0.15",
     "@types/js-levenshtein": "^1.1.0",
-    "@types/node": "^10.17.42",
+    "@types/node": "^12.19.6",
     "@types/supertest": "^2.0.10",
     "@types/ws": "^7.2.7",
     "@types/xmldom": "^0.1.30",
@@ -97,7 +102,6 @@
     "protractor": "~7.0.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.33.1",
-    "rxjs": "~6.5.5",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "ts-loader": "^8.0.11",

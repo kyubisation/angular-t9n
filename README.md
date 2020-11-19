@@ -28,3 +28,10 @@ The following properties can be configured in the `t9n` section in the `angular.
 ## Usage
 
 Run `ng run {projectName}:t9n`, where `{projectName}` is the name of the project in the `angular.json` file, to start the translation app and open your browser at [http://localhost:4300/](http://localhost:4300/).
+
+### Standalone Usage
+
+This library can also be used without an angular.json.
+Install the package globally via `npm install angular-t9n --global` or `yarn global add angular-t9n`.
+
+Create a config file with `ng-t9n init [name-of-config]` and start a translation server with `ng-t9n path/to/config/file.json`.

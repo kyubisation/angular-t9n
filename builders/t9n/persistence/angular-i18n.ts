@@ -1,8 +1,11 @@
-import { Path, relative, workspaces } from '@angular-devkit/core';
+import { normalize, Path, relative, workspaces } from '@angular-devkit/core';
 
-import { TranslationSource, TranslationTarget } from '../../models';
-import { TargetPathBuilder } from '../target-path-builder';
-import { TranslationTargetRegistry } from '../translation-target-registry';
+import {
+  TargetPathBuilder,
+  TranslationSource,
+  TranslationTarget,
+  TranslationTargetRegistry,
+} from '../../../server';
 
 import { AngularJsonI18n, AngularJsonI18nLocale } from './angular-json-i18n';
 
@@ -76,7 +79,7 @@ export class AngularI18n {
   }
 
   projectRelativePath(target: TranslationTarget) {
-    return relative(this._workspaceRoot, this._targetPathBuilder.createPath(target));
+    return relative(this._workspaceRoot, normalize(this._targetPathBuilder.createPath(target)));
   }
 
   private async _readProjectI18n(): Promise<AngularJsonI18n> {

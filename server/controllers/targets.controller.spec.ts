@@ -1,4 +1,4 @@
-import { MOCK_LINK_HELPER, MOCK_TARGET_DE, MOCK_TARGET_REGISTRY } from '../../../test';
+import { MOCK_LINK_HELPER, MOCK_TARGET_DE, MOCK_TARGET_REGISTRY } from '../../test';
 
 import { TargetsController } from './targets.controller';
 

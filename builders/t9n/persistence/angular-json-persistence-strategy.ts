@@ -1,9 +1,12 @@
 import { logging } from '@angular-devkit/core';
 import { Injectable } from '@nestjs/common';
 
-import { TranslationTarget } from '../../models';
-import { SerializationStrategy } from '../../serialization-strategy';
-import { PersistenceStrategy } from '../persistence-strategy';
+import {
+  PersistenceStrategy,
+  SerializationStrategy,
+  timestamp,
+  TranslationTarget,
+} from '../../../server';
 
 import { AngularI18n } from './angular-i18n';
 
@@ -20,7 +23,7 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
   async create(target: TranslationTarget): Promise<void> {
     await this._write(target);
     this._logger.info(
-      `${this._timestamp()}: Created translation file for ${
+      `${timestamp()}: Created translation file for ${
         target.language
       } at ${this._i18n.projectRelativePath(target)}`
     );
@@ -29,7 +32,7 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
   async update(target: TranslationTarget): Promise<void> {
     await this._write(target);
     this._logger.info(
-      `${this._timestamp()}: Updated translation file for ${
+      `${timestamp()}: Updated translation file for ${
         target.language
       } at ${this._i18n.projectRelativePath(target)}`
     );
@@ -43,13 +46,5 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
 
   private async _updateProjectI18n(): Promise<void> {
     await this._i18n.update();
-  }
-
-  private _timestamp() {
-    const now = new Date();
-    const pad = (value: number) => value.toString().padStart(2, '0');
-    const date = [now.getFullYear(), now.getMonth() + 1, now.getDate()].map(pad).join('-');
-    const time = [now.getHours(), now.getMinutes(), now.getSeconds()].map(pad).join(':');
-    return `${date} ${time}`;
   }
 }

@@ -2,6 +2,8 @@ import ts from '@wessberg/rollup-plugin-ts';
 
 export default [
   target({ input: './builders/t9n/index.ts', exports: 'named' }),
+  target({ input: './bin/index.ts' }),
+  target({ input: './server/index.ts' }),
   target({ input: './schematics/ng-add/index.ts' }),
   target({ input: './schematics/resolve-ng-locales/index.ts' }),
 ];
@@ -35,6 +37,9 @@ function target({ input, exports = 'auto' }) {
       'rxjs/operators',
       'util',
       'xmldom',
+      '../../../server',
+      '../../server',
+      '../server',
     ],
     plugins: [
       ts({

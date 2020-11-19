@@ -1,15 +1,15 @@
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 
-import { Xlf2Deserializer, XmlParser } from '../deserialization';
+import { XlfDeserializer, XmlParser } from '../deserialization';
 import { TranslationSource, TranslationTarget } from '../models';
 
-import { Xlf2Serializer } from './xlf2-serializer';
+import { XlfSerializer } from './xlf-serializer';
 
-describe('Xlf2Serializer', () => {
-  const deserializer = new Xlf2Deserializer(new XmlParser());
-  const serializer = new Xlf2Serializer({ includeContextInTarget: true });
-  const xlfTestPath = resolve(__dirname, '../../../test/xlf2');
+describe('XlfSerializer', () => {
+  const deserializer = new XlfDeserializer(new XmlParser());
+  const serializer = new XlfSerializer({ includeContextInTarget: true });
+  const xlfTestPath = resolve(__dirname, '../../test/xlf');
   const sourceFile = join(xlfTestPath, 'messages.xlf');
   const targetFile = join(xlfTestPath, 'messages.de.xlf');
   let source: TranslationSource;

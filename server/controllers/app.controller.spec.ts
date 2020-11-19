@@ -1,4 +1,4 @@
-import { MOCK_LINK_HELPER, MOCK_SOURCE } from '../../../test';
+import { MOCK_LINK_HELPER, MOCK_SOURCE } from '../../test';
 
 import { AppController } from './app.controller';
 

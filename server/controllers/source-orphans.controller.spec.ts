@@ -1,4 +1,4 @@
-import { generateOrphans, MOCK_LINK_HELPER } from '../../../test';
+import { generateOrphans, MOCK_LINK_HELPER } from '../../test';
 import { SourceOrphanResponse } from '../models';
 import { OrphanRegistry } from '../persistence';
 

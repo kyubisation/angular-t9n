@@ -1,4 +1,4 @@
-import { basename, extname, join, Path } from '@angular-devkit/core';
+import { basename, extname, join } from 'path';
 
 import { TranslationTarget } from '../models';
 
@@ -6,7 +6,7 @@ export class TargetPathBuilder {
   private readonly _basename: string;
   private readonly _extension: string;
 
-  constructor(private readonly _targetDirectory: Path, sourceFile: Path) {
+  constructor(private readonly _targetDirectory: string, sourceFile: string) {
     this._extension = extname(sourceFile);
     const sourceFileBasename = basename(sourceFile);
     this._basename = sourceFileBasename.substring(

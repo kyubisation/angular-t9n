@@ -1,4 +1,4 @@
-import { MOCK_SOURCE, TestScheduler } from '../../../test';
+import { MOCK_SOURCE, TestScheduler } from '../../test';
 import { TranslationTarget, TranslationTargetUnit } from '../models';
 
 import { PersistenceStrategy } from './persistence-strategy';

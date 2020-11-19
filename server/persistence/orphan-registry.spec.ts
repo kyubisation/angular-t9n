@@ -1,4 +1,4 @@
-import { generateOrphans } from '../../../test';
+import { generateOrphans } from '../../test';
 import { TranslationSource } from '../models';
 
 import { OrphanRegistry } from './orphan-registry';

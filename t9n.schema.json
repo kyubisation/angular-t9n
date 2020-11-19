@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ng-t9n Config",
+  "type": "object",
+  "properties": {
+    "translationFile": {
+      "type": "string",
+      "description": "The path to the translation file from current working directory"
+    },
+    "targetTranslationPath": {
+      "type": "string",
+      "description": "The path to the directory of the target translation files"
+    },
+    "includeContextInTarget": {
+      "type": "boolean",
+      "description": "Whether to include the context in the target files"
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port on which to host angular-t9n"
+    }
+  },
+  "required": ["translationFile"]
+}

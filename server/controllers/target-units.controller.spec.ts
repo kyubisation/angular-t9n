@@ -3,7 +3,7 @@ import {
   MOCK_LINK_HELPER,
   MOCK_TARGET_DE,
   MOCK_TARGET_REGISTRY,
-} from '../../../test';
+} from '../../test';
 import { TargetUnitRequest, TargetUnitResponse } from '../models';
 
 import { TargetUnitsController } from './target-units.controller';

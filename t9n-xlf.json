@@ -1,0 +1,7 @@
+{
+  "$schema": "https://github.com/kyubisation/angular-t9n/blob/master/tslint.json",
+  "translationFile": "src/locale/xlf/messages.xlf",
+  "targetTranslationPath": "",
+  "includeContextInTarget": true,
+  "port": 4300
+}

@@ -6,42 +6,31 @@ import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { dirname } from 'path';
 
-import { AppModule } from './app.module';
 import {
-  TranslationDeserializer,
-  Xlf2Deserializer,
-  XlfDeserializer,
-  XmlParser,
-} from './deserialization';
-import { TranslationSource, TranslationTarget } from './models';
-import {
-  AngularI18n,
-  AngularJsonPersistenceStrategy,
+  AppModule,
   PersistenceStrategy,
-  TargetPathBuilder,
-  TranslationTargetRegistry,
-} from './persistence';
-import { Schema as Options } from './schema';
-import {
   SerializationOptions,
+  SerializationStrategy,
+  TargetInfo,
+  TargetPathBuilder,
+  TranslationDeserializer,
   TranslationSerializer,
+  TranslationSource,
+  TranslationTarget,
+  TranslationTargetRegistry,
+  WorkspaceHost,
+  Xlf2Deserializer,
   Xlf2Serializer,
+  XlfDeserializer,
   XlfSerializer,
-} from './serialization';
-import { SerializationStrategy } from './serialization-strategy';
-import { TargetInfo } from './target-info';
-import { WorkspaceHost } from './workspace-host';
+  XmlParser,
+} from '../../server';
 
-export * from './app.module';
-export * from './controllers';
-export * from './deserialization';
-export * from './link-helper';
-export * from './models';
+import { AngularI18n, AngularJsonPersistenceStrategy } from './persistence';
+import { Schema as Options } from './schema';
+
+export * from '../../server';
 export * from './persistence';
-export * from './serialization';
-export * from './serialization-strategy';
-export * from './target-info';
-export * from './workspace-host';
 export { Schema as t9nOptions } from './schema';
 
 export default createBuilder<Options & json.JsonObject, BuilderOutput>(t9n);
@@ -126,7 +115,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   app.setGlobalPrefix('api');
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, whitelist: true }));
-  await app.listen(options.port, () =>
+  await app.listen(options.port ?? 4300, () =>
     context.logger.info(`Translation server started: http://localhost:${options.port}\n`)
   );
   return new Promise(() => {});
@@ -173,7 +162,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     await Promise.all(
       Object.keys(locales).map(async (language) => {
         const locale = locales[language];
-        const normalizedPath = targetPathBuilder.createPath(language);
+        const normalizedPath = normalize(targetPathBuilder.createPath(language));
         const relativePath = relative(workspaceRoot, normalizedPath);
         if (locale.translation.every((t) => join(workspaceRoot, t) !== normalizedPath)) {
           context.logger.warn(

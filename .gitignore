@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/builders/t9n/client
+/server/client
 /dist
 /tmp
 /out-tsc
@@ -39,9 +39,12 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-t9n/**/*.js
-t9n/**/*.map
-t9n/**/*.d.ts
+bin/**/*.js
+bin/**/*.map
+bin/**/*.d.ts
+server/**/*.js
+server/**/*.map
+server/**/*.d.ts
 schematics/**/*.js
 schematics/**/*.map
 schematics/**/*.d.ts

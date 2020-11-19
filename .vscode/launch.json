@@ -19,6 +19,18 @@
       "args": ["run", "angular-t9n:t9n", "-c", "xlf"]
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "t9n xlf cli",
+      "runtimeArgs": [
+        "${workspaceRoot}/bin/cli.js",
+        "t9n-xlf.json"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
+    {
       "name": "Debug Jest Tests",
       "type": "node",
       "request": "launch",

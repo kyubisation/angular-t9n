@@ -1,6 +1,1 @@
-export interface Schema {
-  translationFile: string;
-  targetTranslationPath: string;
-  includeContextInTarget: boolean;
-  port: number;
-}
+export { Options as Schema } from '../../server';

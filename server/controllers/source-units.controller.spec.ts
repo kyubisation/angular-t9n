@@ -1,4 +1,4 @@
-import { MOCK_LINK_HELPER, MOCK_SOURCE, MOCK_TARGET_REGISTRY } from '../../../test';
+import { MOCK_LINK_HELPER, MOCK_SOURCE, MOCK_TARGET_REGISTRY } from '../../test';
 
 import { SourceUnitsController } from './source-units.controller';
 

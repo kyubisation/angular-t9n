@@ -1,8 +1,11 @@
 import { join, normalize, relative, virtualFs, workspaces } from '@angular-devkit/core';
 
-import { TranslationSource, TranslationTarget } from '../../models';
-import { TargetPathBuilder } from '../target-path-builder';
-import { TranslationTargetRegistry } from '../translation-target-registry';
+import {
+  TargetPathBuilder,
+  TranslationSource,
+  TranslationTarget,
+  TranslationTargetRegistry,
+} from '../../../server';
 
 import { AngularI18n } from './angular-i18n';
 
@@ -28,7 +31,7 @@ describe('AngularI18n', () => {
   });
 
   async function setupI18n(i18n: any) {
-    const angularJson = require('../../../../angular.json');
+    const angularJson = require('../../../angular.json');
     angularJson.projects[projectName].i18n = i18n;
     await host.writeFile(angularJsonPath, JSON.stringify(angularJson));
     angularI18n = new AngularI18n(
@@ -81,8 +84,8 @@ describe('AngularI18n', () => {
       };
       await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
-      const dePath = relative(workspaceRoot, builder.createPath('de'));
-      const deChPath = relative(workspaceRoot, builder.createPath('de-CH'));
+      const dePath = relative(workspaceRoot, normalize(builder.createPath('de')));
+      const deChPath = relative(workspaceRoot, normalize(builder.createPath('de-CH')));
       expect(ngJson.projects[projectName].i18n).toEqual({
         sourceLocale: 'en-US',
         locales: { de: ['src/locale/xlf2/messages.de.xlf', dePath], 'de-CH': deChPath },
@@ -110,7 +113,7 @@ describe('AngularI18n', () => {
       };
       await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
-      const dePath = relative(workspaceRoot, builder.createPath('de'));
+      const dePath = relative(workspaceRoot, normalize(builder.createPath('de')));
       expect(ngJson.projects[projectName].i18n).toEqual({
         sourceLocale: {
           baseHref: '/en/',
@@ -170,8 +173,8 @@ describe('AngularI18n', () => {
       };
       await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
-      const dePath = relative(workspaceRoot, builder.createPath('de'));
-      const deChPath = relative(workspaceRoot, builder.createPath('de-CH'));
+      const dePath = relative(workspaceRoot, normalize(builder.createPath('de')));
+      const deChPath = relative(workspaceRoot, normalize(builder.createPath('de-CH')));
       expect(ngJson.projects[projectName].i18n).toEqual({
         sourceLocale: {
           code: 'en-US',
