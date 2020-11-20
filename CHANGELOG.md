@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.1.0](https://github.com/kyubisation/angular-t9n/compare/11.0.0...11.1.0) (2020-11-20)
+
+### Features
+
+- add standalone variant ([2436d4f](https://github.com/kyubisation/angular-t9n/commit/2436d4f661981c26a85502e5b20cf460e0f034c4))
+
 ## [11.0.0](https://github.com/kyubisation/angular-t9n/compare/10.1.0...11.0.0) (2020-11-13)
 
 ### ⚠ BREAKING CHANGES
