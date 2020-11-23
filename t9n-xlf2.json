@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/kyubisation/angular-t9n/blob/master/tslint.json",
+  "$schema": "https://raw.githubusercontent.com/kyubisation/angular-t9n/master/t9n.schema.json",
   "translationFile": "src/locale/xlf2/messages.xlf",
   "targetTranslationPath": "",
   "includeContextInTarget": true,
