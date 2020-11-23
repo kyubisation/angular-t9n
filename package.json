@@ -17,7 +17,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "clean": "rimraf coverage {bin,builders,schematics}/**/index.{js,d.ts}",
+    "clean": "rimraf coverage {bin,builders,schematics,server}/**/index.{js,d.ts}",
     "build": "npm run build:ng && npm run build:node",
     "build:ng": "ng build --prod",
     "build:node": "rollup --config rollup.config.js",
@@ -41,7 +41,7 @@
     "url": "https://github.com/kyubisation/angular-t9n/issues"
   },
   "files": [
-    "{bin,builders,schematics}/**/*.{json,js,d.ts}",
+    "{bin,builders,schematics,server}/**/*.{json,js,d.ts}",
     "server/client/*",
     "!tsconfig.json"
   ],
