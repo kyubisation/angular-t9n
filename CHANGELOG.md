@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.1.2](https://github.com/kyubisation/angular-t9n/compare/11.1.1...11.1.2) (2020-11-23)
+
+### Bug Fixes
+
+- use correct json schema for init ([69ea706](https://github.com/kyubisation/angular-t9n/commit/69ea706bc520250d64102bdda6de2c5e91cbd1b6))
+
 ### [11.1.1](https://github.com/kyubisation/angular-t9n/compare/11.1.0...11.1.1) (2020-11-23)
 
 ### Bug Fixes
