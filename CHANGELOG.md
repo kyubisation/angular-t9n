@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.1.1](https://github.com/kyubisation/angular-t9n/compare/11.1.0...11.1.1) (2020-11-23)
+
+### Bug Fixes
+
+- add server script to package files ([d11e37f](https://github.com/kyubisation/angular-t9n/commit/d11e37f8b6f243c294749e000d7ff0d755b4194f))
+
 ## [11.1.0](https://github.com/kyubisation/angular-t9n/compare/11.0.0...11.1.0) (2020-11-20)
 
 ### Features
