@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.1.3](https://github.com/kyubisation/angular-t9n/compare/11.1.2...11.1.3) (2021-02-09)
+
+### Bug Fixes
+
+- synchronize sources ([beab5c7](https://github.com/kyubisation/angular-t9n/commit/beab5c704f42b5d111b6308c89b41abe343e31e0))
+
 ### [11.1.2](https://github.com/kyubisation/angular-t9n/compare/11.1.1...11.1.2) (2020-11-23)
 
 ### Bug Fixes
