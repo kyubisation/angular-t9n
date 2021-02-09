@@ -78,4 +78,42 @@ describe('TranslationTargetRegistry', () => {
     const target = registry.register('de', new Map<string, TranslationTargetUnit>(), baseHref);
     expect(target.baseHref).toEqual(baseHref);
   });
+
+  it('should update stale source with only whitespace change', () => {
+    const sourceUnit = MOCK_SOURCE.units[0];
+    const sourceWithWhitespace = sourceUnit.source + ' ';
+    let unit: TranslationTargetUnit = {
+      ...sourceUnit,
+      source: sourceWithWhitespace,
+      target: sourceWithWhitespace,
+      state: 'translated',
+    };
+    expect(unit.source).toEqual(sourceWithWhitespace);
+    const target = registry.register(
+      'de',
+      new Map<string, TranslationTargetUnit>().set(unit.id, unit)
+    );
+    unit = target.unitMap.get(unit.id)!;
+    expect(unit.source).toEqual(sourceUnit.source);
+    expect(unit.state).toEqual('translated');
+  });
+
+  it('should update stale source and state with textual change', () => {
+    const sourceUnit = MOCK_SOURCE.units[0];
+    const sourceWithTextChange = sourceUnit.source + ' test';
+    let unit: TranslationTargetUnit = {
+      ...sourceUnit,
+      source: sourceWithTextChange,
+      target: sourceWithTextChange,
+      state: 'translated',
+    };
+    expect(unit.source).toEqual(sourceWithTextChange);
+    const target = registry.register(
+      'de',
+      new Map<string, TranslationTargetUnit>().set(unit.id, unit)
+    );
+    unit = target.unitMap.get(unit.id)!;
+    expect(unit.source).toEqual(sourceUnit.source);
+    expect(unit.state).toEqual('initial');
+  });
 });

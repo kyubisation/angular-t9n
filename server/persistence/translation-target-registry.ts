@@ -22,6 +22,7 @@ export class TranslationTargetRegistry {
     target.changed
       .pipe(debounceTime(300))
       .subscribe(() => this._persistenceStrategy.update(target));
+    this._synchronizeSources(target);
     this._targets.set(language, target);
     return target;
   }
@@ -46,5 +47,29 @@ export class TranslationTargetRegistry {
 
   values(): TranslationTarget[] {
     return Array.from(this._targets.values());
+  }
+
+  private _synchronizeSources(target: TranslationTarget) {
+    let changeRequired = false;
+    for (const unit of target.units) {
+      const sourceUnit = target.source.unitMap.get(unit.id)!;
+      if (unit.source !== sourceUnit.source) {
+        if (
+          this._normalizeWhitespace(unit.source) !== this._normalizeWhitespace(sourceUnit.source)
+        ) {
+          unit.state = 'initial';
+        }
+        unit.source = sourceUnit.source;
+        changeRequired = true;
+      }
+    }
+
+    if (changeRequired) {
+      this._persistenceStrategy.update(target);
+    }
+  }
+
+  private _normalizeWhitespace(value: string) {
+    return value.replace(/\s+/g, ' ').trim();
   }
 }

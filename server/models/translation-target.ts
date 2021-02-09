@@ -92,8 +92,12 @@ export class TranslationTarget {
   }
 
   private _calculateDistance(a: TranslationTargetUnit, b: TranslationTargetUnit) {
-    const sourceA = a.source.replace(/\s+/g, ' ').trim();
-    const sourceB = b.source.replace(/\s+/g, ' ').trim();
+    const sourceA = this._normalizeWhitespace(a.source);
+    const sourceB = this._normalizeWhitespace(b.source);
     return levenshtein(sourceA, sourceB);
+  }
+
+  private _normalizeWhitespace(value: string) {
+    return value.replace(/\s+/g, ' ').trim();
   }
 }
