@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 :host {
   display: block;
@@ -9,7 +9,7 @@
 }
 
 :host(.dragging) {
-  background-color: mat-color($mat-indigo, 100);
+  background-color: mat.get-color-from-palette(mat.$indigo-palette, 100);
 }
 
 button {

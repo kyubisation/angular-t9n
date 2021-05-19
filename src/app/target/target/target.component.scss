@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 :host {
   display: block;
@@ -21,12 +21,12 @@ mat-sidenav-container {
     width: 12rem;
 
     a.active {
-      color: mat-color($mat-indigo, 500);
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
       background-color: rgba(0, 0, 0, 0.05);
     }
 
     mat-card {
-      background-color: mat-color($mat-yellow, 200);
+      background-color: mat.get-color-from-palette(mat.$yellow-palette, 200);
       margin: 0.5rem;
     }
   }

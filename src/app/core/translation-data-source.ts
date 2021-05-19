@@ -52,7 +52,7 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
   ): Observable<PaginationResponse<TFetchResponse>>;
 
   protected _mapPaginationResponse(page: PaginationResponse<TFetchResponse>): T[] {
-    return (page._embedded.entries as unknown) as T[];
+    return page._embedded.entries as unknown as T[];
   }
 
   private _updatePaginator(length: number) {

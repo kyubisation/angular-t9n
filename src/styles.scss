@@ -1,5 +1,5 @@
+@use '~@angular/material' as mat;
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/theming';
 
 html,
 body {
@@ -80,14 +80,14 @@ table.mat-table {
 }
 
 .mat-autocomplete-panel {
-  scrollbar-color: mat-color($mat-indigo, 500) transparent;
+  scrollbar-color: mat.get-color-from-palette(mat.$indigo-palette, 500) transparent;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
     width: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: mat-color($mat-indigo, 500);
+    background-color: mat.get-color-from-palette(mat.$indigo-palette, 500);
   }
   &::-webkit-scrollbar-track {
     background-color: transparent;

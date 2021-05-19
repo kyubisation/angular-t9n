@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
-  <file original="ng.template" id="ngi18n">
+  <file id="ngi18n" original="ng.template">
     <unit id="82167058490521791">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:2</note>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:24</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:2</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:24</note>
       </notes>
       <segment>
         <source>Empty example</source>
@@ -12,7 +12,7 @@
     </unit>
     <unit id="exampleId">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:3</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:3</note>
       </notes>
       <segment>
         <source>Example with id</source>
@@ -20,8 +20,8 @@
     </unit>
     <unit id="8206782399116601364">
       <notes>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:4</note>
         <note category="description">description</note>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:4</note>
       </notes>
       <segment>
         <source>Example with description</source>
@@ -29,9 +29,9 @@
     </unit>
     <unit id="6148908020771771708">
       <notes>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:5</note>
         <note category="description">descriptionMeaning</note>
         <note category="meaning">meaning</note>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:5</note>
       </notes>
       <segment>
         <source>Example with description/meaning</source>
@@ -39,9 +39,9 @@
     </unit>
     <unit id="4022307138323826581">
       <notes>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:6</note>
         <note category="description">titleDescription</note>
         <note category="meaning">titleMeaning</note>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:6</note>
       </notes>
       <segment>
         <source>Title</source>
@@ -49,89 +49,89 @@
     </unit>
     <unit id="2168835922015701630">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:7</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:7</note>
       </notes>
       <segment>
-        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {nothing} =1 {one thing} other {things}}"/></source>
       </segment>
     </unit>
     <unit id="9083455685404174731">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:7</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:7</note>
       </notes>
       <segment>
-        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {things} }</source>
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {things}}</source>
       </segment>
     </unit>
     <unit id="3328635074237601307">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:9</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:9</note>
       </notes>
       <segment>
-        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <source>Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {nothing} =1 {one thing} other {{{amount}} of things}}"/></source>
       </segment>
     </unit>
     <unit id="8180817321131110864">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:9</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:9</note>
       </notes>
       <segment>
-        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<ph id="0" equiv="INTERPOLATION" disp="{{amount}}"/> of things} }</source>
+        <source>{VAR_PLURAL, plural, =0 {nothing} =1 {one thing} other {<ph id="0" equiv="INTERPOLATION"/> of things}}</source>
       </segment>
     </unit>
     <unit id="8511147241295446916">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:11</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:11</note>
       </notes>
       <segment>
-        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
+        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {male} female {female} other {other}}"/></source>
       </segment>
     </unit>
     <unit id="7842238767399919809">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:11</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:11</note>
       </notes>
       <segment>
-        <source>{VAR_SELECT, select, male {male} female {female} other {other} }</source>
+        <source>{VAR_SELECT, select, male {male} female {female} other {other}}</source>
       </segment>
     </unit>
     <unit id="615032484519668846">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:12</note>
       </notes>
       <segment>
-        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {...} female {...} other {...}}"/></source>
+        <source>The author is <ph id="0" equiv="ICU" disp="{gender, select, male {male} female {female} other {{{gender}}}}"/></source>
       </segment>
     </unit>
     <unit id="1076465086362097198">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:12</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:12</note>
       </notes>
       <segment>
-        <source>{VAR_SELECT, select, male {male} female {female} other {<ph id="0" equiv="INTERPOLATION" disp="{{gender}}"/>} }</source>
+        <source>{VAR_SELECT, select, male {male} female {female} other {<ph id="0" equiv="INTERPOLATION"/>}}</source>
       </segment>
     </unit>
     <unit id="685963878805841813">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:14,16</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:14,16</note>
       </notes>
       <segment>
-        <source>Updated: <ph id="0" equiv="ICU" disp="{minutes, plural, =0 {...} =1 {...} other {...}}"/>
-  </source>
+        <source>Updated: <ph id="0" equiv="ICU" disp="{minutes, plural, =0 {just now} =1 {one minute ago} other {{{minutes}} minutes ago by
+    {gender, select, male {male} female {female} other {other}}}}"/> </source>
       </segment>
     </unit>
     <unit id="2868095629197866953">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:14,15</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:14,15</note>
       </notes>
       <segment>
-        <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<ph id="0" equiv="INTERPOLATION" disp="{{minutes}}"/> minutes ago by
-    {VAR_SELECT, select, male {male} female {female} other {other} }} }</source>
+        <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<ph id="0" equiv="INTERPOLATION"/> minutes ago by
+    {VAR_SELECT, select, male {male} female {female} other {other}}}}</source>
       </segment>
     </unit>
     <unit id="6796106025314020146">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:17</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:17</note>
       </notes>
       <segment>
         <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ minutes }}"/></source>
@@ -139,7 +139,7 @@
     </unit>
     <unit id="6636027407356199973">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:18</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:18</note>
       </notes>
       <segment>
         <source>Example with value <ph id="0" equiv="INTERPOLATION" disp="{{ title | titlecase }}"/></source>
@@ -147,41 +147,32 @@
     </unit>
     <unit id="134004861588612618">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:19</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:19</note>
       </notes>
       <segment>
-        <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/&gt;"/></source>
+        <source>Example with image <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img src=&quot;favicon.ico&quot; alt=&quot;It&apos;s a favicon&quot; /&gt;"/></source>
       </segment>
     </unit>
     <unit id="5429384145691392061">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:21,23</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:21,23</note>
       </notes>
       <segment>
-        <source>Example with images <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img/&gt;"/> and
-    <ph id="1" equiv="TAG_IMG_1" type="image" disp="&lt;img/&gt;"/></source>
+        <source>Example with images <ph id="0" equiv="TAG_IMG" type="image" disp="&lt;img src=&quot;favicon.ico&quot; alt=&quot;It&apos;s a favicon&quot; /&gt;"/> and <ph id="1" equiv="TAG_IMG_1" type="image" disp="&lt;img src=&quot;favicon2.ico&quot; alt=&quot;It&apos;s another favicon&quot;
+  /&gt;"/></source>
       </segment>
     </unit>
     <unit id="7312493194969094694">
       <notes>
-        <note category="location">app/i18n-examples-template/i18n-examples-template.component.html:26,35</note>
+        <note category="location">src/app/i18n-examples-template/i18n-examples-template.component.html:26,35</note>
       </notes>
       <segment>
-        <source>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-    beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-    odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-    sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-    voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-    laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui
-    in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
-    quo voluptas nulla pariatur?</source>
+        <source>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</source>
       </segment>
     </unit>
     <unit id="1469567505183139782">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:1</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:1</note>
       </notes>
       <segment>
         <source>Add language</source>
@@ -189,7 +180,7 @@
     </unit>
     <unit id="3984634337177426062">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:4</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:4</note>
       </notes>
       <segment>
         <source>Pattern must match <pc id="0" equivStart="START_TAG_CODE" equivEnd="CLOSE_TAG_CODE" type="other" dispStart="&lt;code&gt;" dispEnd="&lt;/code&gt;">\w[\w-]+</pc></source>
@@ -197,7 +188,7 @@
     </unit>
     <unit id="3156628842537908813">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:5</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:5</note>
       </notes>
       <segment>
         <source>(e.g. en, en-GB or en-US-POSIX)</source>
@@ -205,7 +196,7 @@
     </unit>
     <unit id="1197382251759457717">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:8</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:8</note>
       </notes>
       <segment>
         <source>Invalid pattern</source>
@@ -213,7 +204,7 @@
     </unit>
     <unit id="6776451739899171940">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:10</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:10</note>
       </notes>
       <segment>
         <source>Language already exists</source>
@@ -221,7 +212,7 @@
     </unit>
     <unit id="2159130950882492111">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:20</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:20</note>
       </notes>
       <segment>
         <source>Cancel</source>
@@ -229,7 +220,7 @@
     </unit>
     <unit id="3249513483374643425">
       <notes>
-        <note category="location">app/overview/add-language-modal/add-language-modal.component.html:21</note>
+        <note category="location">src/app/overview/add-language-modal/add-language-modal.component.html:21</note>
       </notes>
       <segment>
         <source>Add</source>
@@ -237,7 +228,7 @@
     </unit>
     <unit id="8117668572148231876">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:2</note>
+        <note category="location">src/app/overview/overview/overview.component.html:2</note>
       </notes>
       <segment>
         <source>Project</source>
@@ -245,7 +236,7 @@
     </unit>
     <unit id="5107130829363524213">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:5</note>
+        <note category="location">src/app/overview/overview/overview.component.html:5</note>
       </notes>
       <segment>
         <source>Source file</source>
@@ -253,7 +244,7 @@
     </unit>
     <unit id="385982183017076711">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:8</note>
+        <note category="location">src/app/overview/overview/overview.component.html:8</note>
       </notes>
       <segment>
         <source>Source language</source>
@@ -261,7 +252,7 @@
     </unit>
     <unit id="3394811368671123309">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:11</note>
+        <note category="location">src/app/overview/overview/overview.component.html:11</note>
       </notes>
       <segment>
         <source>Amount of translation units</source>
@@ -269,17 +260,16 @@
     </unit>
     <unit id="2416989963799836747">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:17,19</note>
+        <note category="location">src/app/overview/overview/overview.component.html:18,19</note>
       </notes>
       <segment>
-        <source>
-  Add Language
+        <source> Add Language
 </source>
       </segment>
     </unit>
     <unit id="4209965168477516892">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:27</note>
+        <note category="location">src/app/overview/overview/overview.component.html:27</note>
       </notes>
       <segment>
         <source>Untranslated</source>
@@ -287,11 +277,11 @@
     </unit>
     <unit id="5706198276541510303">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:31</note>
-        <note category="location">app/target/translate/translate.component.html:48</note>
-        <note category="location">app/target/translate/translate.component.html:110</note>
-        <note category="location">app/target/export/export.component.html:10</note>
-        <note category="location">app/target/unit/unit.component.html:41</note>
+        <note category="location">src/app/overview/overview/overview.component.html:31</note>
+        <note category="location">src/app/target/export/export.component.html:10</note>
+        <note category="location">src/app/target/translate/translate.component.html:48</note>
+        <note category="location">src/app/target/translate/translate.component.html:110</note>
+        <note category="location">src/app/target/unit/unit.component.html:41</note>
       </notes>
       <segment>
         <source>Translated</source>
@@ -299,11 +289,11 @@
     </unit>
     <unit id="4467880638322247833">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:35</note>
-        <note category="location">app/target/translate/translate.component.html:49</note>
-        <note category="location">app/target/translate/translate.component.html:111</note>
-        <note category="location">app/target/export/export.component.html:11</note>
-        <note category="location">app/target/unit/unit.component.html:42</note>
+        <note category="location">src/app/overview/overview/overview.component.html:35</note>
+        <note category="location">src/app/target/export/export.component.html:11</note>
+        <note category="location">src/app/target/translate/translate.component.html:49</note>
+        <note category="location">src/app/target/translate/translate.component.html:111</note>
+        <note category="location">src/app/target/unit/unit.component.html:42</note>
       </notes>
       <segment>
         <source>Reviewed</source>
@@ -311,11 +301,11 @@
     </unit>
     <unit id="4609200447119745819">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:39</note>
-        <note category="location">app/target/translate/translate.component.html:50</note>
-        <note category="location">app/target/translate/translate.component.html:112</note>
-        <note category="location">app/target/export/export.component.html:12</note>
-        <note category="location">app/target/unit/unit.component.html:43</note>
+        <note category="location">src/app/overview/overview/overview.component.html:39</note>
+        <note category="location">src/app/target/export/export.component.html:12</note>
+        <note category="location">src/app/target/translate/translate.component.html:50</note>
+        <note category="location">src/app/target/translate/translate.component.html:112</note>
+        <note category="location">src/app/target/unit/unit.component.html:43</note>
       </notes>
       <segment>
         <source>Final</source>
@@ -323,7 +313,7 @@
     </unit>
     <unit id="7585826646011739428">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:68</note>
+        <note category="location">src/app/overview/overview/overview.component.html:68</note>
       </notes>
       <segment>
         <source>Edit</source>
@@ -331,9 +321,9 @@
     </unit>
     <unit id="7462301153729425254">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:74</note>
-        <note category="location">app/target/export/export.component.html:16</note>
-        <note category="location">app/target/target/target.component.html:13</note>
+        <note category="location">src/app/overview/overview/overview.component.html:74</note>
+        <note category="location">src/app/target/export/export.component.html:16</note>
+        <note category="location">src/app/target/target/target.component.html:13</note>
       </notes>
       <segment>
         <source>Export</source>
@@ -341,8 +331,8 @@
     </unit>
     <unit id="1071721880474488785">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:81</note>
-        <note category="location">app/target/target/target.component.html:14</note>
+        <note category="location">src/app/overview/overview/overview.component.html:81</note>
+        <note category="location">src/app/target/target/target.component.html:14</note>
       </notes>
       <segment>
         <source>Import</source>
@@ -350,304 +340,34 @@
     </unit>
     <unit id="1724892236454928633">
       <notes>
-        <note category="location">app/overview/overview/overview.component.html:91</note>
-        <note category="location">app/target/target/target.component.html:21</note>
+        <note category="location">src/app/overview/overview/overview.component.html:91</note>
+        <note category="location">src/app/target/target/target.component.html:21</note>
       </notes>
       <segment>
         <source>Orphans</source>
       </segment>
     </unit>
-    <unit id="7286430803380181008">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:4</note>
-        <note category="location">app/target/orphans/orphans.component.html:4</note>
-        <note category="location">app/target/orphan/orphan.component.html:49</note>
-        <note category="location">app/source-orphans/migrate/migrate.component.html:4</note>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:43</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:40</note>
-      </notes>
-      <segment>
-        <source>Id</source>
-      </segment>
-    </unit>
-    <unit id="4902817035128594900">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:16</note>
-        <note category="location">app/target/orphans/orphans.component.html:16</note>
-        <note category="location">app/target/unit/unit.component.html:6</note>
-        <note category="location">app/target/orphan/orphan.component.html:4</note>
-        <note category="location">app/target/orphan/orphan.component.html:61</note>
-        <note category="location">app/source-orphans/migrate/migrate.component.html:16</note>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:55</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:4</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:52</note>
-      </notes>
-      <segment>
-        <source>Description</source>
-      </segment>
-    </unit>
-    <unit id="2984907873245479480">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:20</note>
-        <note category="location">app/target/orphans/orphans.component.html:20</note>
-        <note category="location">app/target/unit/unit.component.html:11</note>
-        <note category="location">app/target/orphan/orphan.component.html:7</note>
-        <note category="location">app/target/orphan/orphan.component.html:65</note>
-        <note category="location">app/source-orphans/migrate/migrate.component.html:20</note>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:59</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:7</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:56</note>
-      </notes>
-      <segment>
-        <source>Meaning</source>
-      </segment>
-    </unit>
-    <unit id="9155608366859514313">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:24</note>
-        <note category="location">app/target/orphans/orphans.component.html:24</note>
-        <note category="location">app/target/unit/unit.component.html:16</note>
-        <note category="location">app/target/orphan/orphan.component.html:10</note>
-        <note category="location">app/target/orphan/orphan.component.html:69</note>
-        <note category="location">app/source-orphans/migrate/migrate.component.html:24</note>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:63</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:10</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:60</note>
-      </notes>
-      <segment>
-        <source>Source</source>
-      </segment>
-    </unit>
-    <unit id="4854396465510517671">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:28</note>
-        <note category="location">app/target/orphans/orphans.component.html:28</note>
-        <note category="location">app/target/unit/unit.component.html:31</note>
-        <note category="location">app/target/orphan/orphan.component.html:13</note>
-        <note category="location">app/target/orphan/orphan.component.html:73</note>
-      </notes>
-      <segment>
-        <source>Target</source>
-      </segment>
-    </unit>
-    <unit id="5911214550882917183">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:41</note>
-        <note category="location">app/target/orphans/orphans.component.html:32</note>
-        <note category="location">app/target/orphan/orphan.component.html:16</note>
-        <note category="location">app/target/orphan/orphan.component.html:77</note>
-      </notes>
-      <segment>
-        <source>State</source>
-      </segment>
-    </unit>
-    <unit id="2937311350146031865">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:46</note>
-        <note category="location">app/target/translate/translate.component.html:109</note>
-        <note category="location">app/target/export/export.component.html:9</note>
-        <note category="location">app/target/unit/unit.component.html:39</note>
-      </notes>
-      <segment>
-        <source>Initial</source>
-      </segment>
-    </unit>
-    <unit id="7825860436592606655">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:62</note>
-      </notes>
-      <segment>
-        <source>Edit unit</source>
-      </segment>
-    </unit>
-    <unit id="3504796391691650968">
-      <notes>
-        <note category="location">app/target/translate/translate.component.html:2</note>
-      </notes>
-      <segment>
-        <source>Translation units</source>
-      </segment>
-    </unit>
-    <unit id="1878251664052368569">
-      <notes>
-        <note category="location">app/target/export/export.component.html:1</note>
-      </notes>
-      <segment>
-        <source>Export translation units to Excel</source>
-      </segment>
-    </unit>
-    <unit id="5724896985467124877">
-      <notes>
-        <note category="location">app/target/export/export.component.html:3</note>
-      </notes>
-      <segment>
-        <source>Export all translation units or filter by translation state.</source>
-      </segment>
-    </unit>
-    <unit id="1616102757855967475">
-      <notes>
-        <note category="location">app/target/export/export.component.html:8</note>
-      </notes>
-      <segment>
-        <source>All</source>
-      </segment>
-    </unit>
-    <unit id="1613971242435858090">
-      <notes>
-        <note category="location">app/target/target/target.component.html:11</note>
-      </notes>
-      <segment>
-        <source>Translate</source>
-      </segment>
-    </unit>
-    <unit id="8128328859314736211">
-      <notes>
-        <note category="location">app/target/target/target.component.html:25,28</note>
-      </notes>
-      <segment>
-        <source>
-      Orphans are translation units whose id is no longer contained in the source file. Migrate them
-      in the orphans section.
-    </source>
-      </segment>
-    </unit>
-    <unit id="1058384379333291031">
-      <notes>
-        <note category="location">app/target/orphans/orphans.component.html:42</note>
-        <note category="location">app/source-orphans/migrate/migrate.component.html:34</note>
-      </notes>
-      <segment>
-        <source>Migrate orphan</source>
-      </segment>
-    </unit>
-    <unit id="7154699141836462400">
-      <notes>
-        <note category="location">app/target/unit/unit.component.html:23</note>
-      </notes>
-      <segment>
-        <source>Copy source to target</source>
-      </segment>
-    </unit>
-    <unit id="8890553633144307762">
-      <notes>
-        <note category="location">app/target/unit/unit.component.html:50</note>
-        <note category="location">app/target/orphan/orphan.component.html:114</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:97</note>
-      </notes>
-      <segment>
-        <source>Back</source>
-      </segment>
-    </unit>
-    <unit id="2590415407309830681">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:35,37</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:26,28</note>
-      </notes>
-      <segment>
-        <source>
-        Distance
-      </source>
-      </segment>
-    </unit>
-    <unit id="149862035788373642">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:33</note>
-        <note category="location">app/target/orphan/orphan.component.html:42</note>
-      </notes>
-      <segment>
-        <source>Distance according to the levenshtein algorithm</source>
-      </segment>
-    </unit>
-    <unit id="3645391079809063987">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:44,46</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:35,37</note>
-      </notes>
-      <segment>
-        <source>
-        <ph id="0" equiv="INTERPOLATION" disp="{{ row.distance }}"/>
-      </source>
-      </segment>
-    </unit>
-    <unit id="7936624992717622100">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:87</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:70</note>
-      </notes>
-      <segment>
-        <source>Migrate translation and state to this unit and remove this orphan.</source>
-      </segment>
-    </unit>
-    <unit id="2250356394431390492">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:25</note>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:41</note>
-      </notes>
-      <segment>
-        <source>Similar units</source>
-      </segment>
-    </unit>
-    <unit id="5246620794703463867">
-      <notes>
-        <note category="location">app/target/orphan/orphan.component.html:117,119</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:100,102</note>
-      </notes>
-      <segment>
-        <source>
-    Delete orphan
-  </source>
-      </segment>
-    </unit>
-    <unit id="7596769783947942591">
-      <notes>
-        <note category="location">app/source-orphans/source-orphans/source-orphans.component.html:11</note>
-      </notes>
-      <segment>
-        <source>Migrate</source>
-      </segment>
-    </unit>
     <unit id="8720444212022970709">
       <notes>
-        <note category="location">app/source-orphans/source-orphans/source-orphans.component.html:14</note>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:1</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:1</note>
+        <note category="location">src/app/source-orphans/source-orphans/source-orphans.component.html:14</note>
       </notes>
       <segment>
         <source>Auto-Migration</source>
       </segment>
     </unit>
-    <unit id="6210415949009398956">
-      <notes>
-        <note category="location">app/source-orphans/source-orphans/source-orphans.component.html:18,20</note>
-      </notes>
-      <segment>
-        <source>
-      Orphans are translation units whose id is no longer contained in the source file.
-    </source>
-      </segment>
-    </unit>
-    <unit id="1422267617953582850">
-      <notes>
-        <note category="location">app/source-orphans/migrate/migrate.component.html:2</note>
-      </notes>
-      <segment>
-        <source>Orphaned units</source>
-      </segment>
-    </unit>
     <unit id="3354447976218397931">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:3,7</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:4,7</note>
       </notes>
       <segment>
-        <source>
-  Migrate orphans which are below or equal to the distance threshold. The distance is according to
-  the <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a&gt;" dispEnd="&lt;/a&gt;">levenshtein algorithm</pc>. It
-  will skip the auto-migration for a unit if multiple units with the same distance are found.
+        <source> Migrate orphans which are below or equal to the distance threshold. The distance is according to the <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a href=&quot;https://en.wikipedia.org/wiki/Levenshtein_distance&quot;&gt;" dispEnd="&lt;/a&gt;">levenshtein algorithm</pc>. It will skip the auto-migration for a unit if multiple units with the same distance are found.
 </source>
       </segment>
     </unit>
     <unit id="1566498821816930256">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:11</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:11</note>
       </notes>
       <segment>
         <source>Distance Threshold</source>
@@ -655,7 +375,7 @@
     </unit>
     <unit id="8169327733416527426">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:14</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:14</note>
       </notes>
       <segment>
         <source>The distance threshold is required</source>
@@ -663,7 +383,7 @@
     </unit>
     <unit id="5286185694292962955">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:17</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:17</note>
       </notes>
       <segment>
         <source>The distance threshold must be greater or equal to 0</source>
@@ -671,17 +391,15 @@
     </unit>
     <unit id="6106421584531086998">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:26,28</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:27,28</note>
       </notes>
       <segment>
-        <source>
-    Auto-Migrate
-  </source>
+        <source> Auto-Migrate </source>
       </segment>
     </unit>
     <unit id="190365802837090999">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:35</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:35</note>
       </notes>
       <segment>
         <source>No orphans met conditions.</source>
@@ -689,15 +407,102 @@
     </unit>
     <unit id="693184310236136215">
       <notes>
-        <note category="location">app/source-orphans/auto-migrate/auto-migrate.component.html:39</note>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:39</note>
       </notes>
       <segment>
         <source>Successful migrations</source>
       </segment>
     </unit>
+    <unit id="2250356394431390492">
+      <notes>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:41</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:25</note>
+      </notes>
+      <segment>
+        <source>Similar units</source>
+      </segment>
+    </unit>
+    <unit id="7286430803380181008">
+      <notes>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:43</note>
+        <note category="location">src/app/source-orphans/migrate/migrate.component.html:4</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:39</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:48</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:4</note>
+        <note category="location">src/app/target/translate/translate.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Id</source>
+      </segment>
+    </unit>
+    <unit id="4902817035128594900">
+      <notes>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:55</note>
+        <note category="location">src/app/source-orphans/migrate/migrate.component.html:16</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:4</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:51</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:4</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:60</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:16</note>
+        <note category="location">src/app/target/translate/translate.component.html:16</note>
+        <note category="location">src/app/target/unit/unit.component.html:6</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="2984907873245479480">
+      <notes>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:59</note>
+        <note category="location">src/app/source-orphans/migrate/migrate.component.html:20</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:7</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:55</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:7</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:64</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:20</note>
+        <note category="location">src/app/target/translate/translate.component.html:20</note>
+        <note category="location">src/app/target/unit/unit.component.html:11</note>
+      </notes>
+      <segment>
+        <source>Meaning</source>
+      </segment>
+    </unit>
+    <unit id="9155608366859514313">
+      <notes>
+        <note category="location">src/app/source-orphans/auto-migrate/auto-migrate.component.html:63</note>
+        <note category="location">src/app/source-orphans/migrate/migrate.component.html:24</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:10</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:59</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:10</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:68</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:24</note>
+        <note category="location">src/app/target/translate/translate.component.html:24</note>
+        <note category="location">src/app/target/unit/unit.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Source</source>
+      </segment>
+    </unit>
+    <unit id="1422267617953582850">
+      <notes>
+        <note category="location">src/app/source-orphans/migrate/migrate.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Orphaned units</source>
+      </segment>
+    </unit>
+    <unit id="1058384379333291031">
+      <notes>
+        <note category="location">src/app/source-orphans/migrate/migrate.component.html:34</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Migrate orphan</source>
+      </segment>
+    </unit>
     <unit id="3620242059178560709">
       <notes>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:13</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:13</note>
       </notes>
       <segment>
         <source>Occurs in Targets</source>
@@ -705,11 +510,171 @@
     </unit>
     <unit id="6470405644971425740">
       <notes>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:24</note>
-        <note category="location">app/source-orphans/source-orphan/source-orphan.component.html:33</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:24</note>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:33</note>
       </notes>
       <segment>
         <source>Distance according to the levenshtein comparison</source>
+      </segment>
+    </unit>
+    <unit id="2590415407309830681">
+      <notes>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:27,28</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:36,37</note>
+      </notes>
+      <segment>
+        <source> Distance </source>
+      </segment>
+    </unit>
+    <unit id="7936624992717622100">
+      <notes>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:69</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:86</note>
+      </notes>
+      <segment>
+        <source>Migrate translation and state to this unit and remove this orphan.</source>
+      </segment>
+    </unit>
+    <unit id="8890553633144307762">
+      <notes>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:96</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:113</note>
+        <note category="location">src/app/target/unit/unit.component.html:50</note>
+      </notes>
+      <segment>
+        <source>Back</source>
+      </segment>
+    </unit>
+    <unit id="5246620794703463867">
+      <notes>
+        <note category="location">src/app/source-orphans/source-orphan/source-orphan.component.html:100,101</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:117,118</note>
+      </notes>
+      <segment>
+        <source> Delete orphan </source>
+      </segment>
+    </unit>
+    <unit id="7596769783947942591">
+      <notes>
+        <note category="location">src/app/source-orphans/source-orphans/source-orphans.component.html:11</note>
+      </notes>
+      <segment>
+        <source>Migrate</source>
+      </segment>
+    </unit>
+    <unit id="6210415949009398956">
+      <notes>
+        <note category="location">src/app/source-orphans/source-orphans/source-orphans.component.html:19,20</note>
+      </notes>
+      <segment>
+        <source> Orphans are translation units whose id is no longer contained in the source file. </source>
+      </segment>
+    </unit>
+    <unit id="1878251664052368569">
+      <notes>
+        <note category="location">src/app/target/export/export.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Export translation units to Excel</source>
+      </segment>
+    </unit>
+    <unit id="5724896985467124877">
+      <notes>
+        <note category="location">src/app/target/export/export.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Export all translation units or filter by translation state.</source>
+      </segment>
+    </unit>
+    <unit id="1616102757855967475">
+      <notes>
+        <note category="location">src/app/target/export/export.component.html:8</note>
+      </notes>
+      <segment>
+        <source>All</source>
+      </segment>
+    </unit>
+    <unit id="2937311350146031865">
+      <notes>
+        <note category="location">src/app/target/export/export.component.html:9</note>
+        <note category="location">src/app/target/translate/translate.component.html:46</note>
+        <note category="location">src/app/target/translate/translate.component.html:109</note>
+        <note category="location">src/app/target/unit/unit.component.html:39</note>
+      </notes>
+      <segment>
+        <source>Initial</source>
+      </segment>
+    </unit>
+    <unit id="4854396465510517671">
+      <notes>
+        <note category="location">src/app/target/orphan/orphan.component.html:13</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:72</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:28</note>
+        <note category="location">src/app/target/translate/translate.component.html:28</note>
+        <note category="location">src/app/target/unit/unit.component.html:31</note>
+      </notes>
+      <segment>
+        <source>Target</source>
+      </segment>
+    </unit>
+    <unit id="5911214550882917183">
+      <notes>
+        <note category="location">src/app/target/orphan/orphan.component.html:16</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:76</note>
+        <note category="location">src/app/target/orphans/orphans.component.html:32</note>
+        <note category="location">src/app/target/translate/translate.component.html:41</note>
+      </notes>
+      <segment>
+        <source>State</source>
+      </segment>
+    </unit>
+    <unit id="149862035788373642">
+      <notes>
+        <note category="location">src/app/target/orphan/orphan.component.html:33</note>
+        <note category="location">src/app/target/orphan/orphan.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Distance according to the levenshtein algorithm</source>
+      </segment>
+    </unit>
+    <unit id="1613971242435858090">
+      <notes>
+        <note category="location">src/app/target/target/target.component.html:11</note>
+      </notes>
+      <segment>
+        <source>Translate</source>
+      </segment>
+    </unit>
+    <unit id="8128328859314736211">
+      <notes>
+        <note category="location">src/app/target/target/target.component.html:26,28</note>
+      </notes>
+      <segment>
+        <source> Orphans are translation units whose id is no longer contained in the source file. Migrate them in the orphans section. </source>
+      </segment>
+    </unit>
+    <unit id="3504796391691650968">
+      <notes>
+        <note category="location">src/app/target/translate/translate.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Translation units</source>
+      </segment>
+    </unit>
+    <unit id="7825860436592606655">
+      <notes>
+        <note category="location">src/app/target/translate/translate.component.html:62</note>
+      </notes>
+      <segment>
+        <source>Edit unit</source>
+      </segment>
+    </unit>
+    <unit id="7154699141836462400">
+      <notes>
+        <note category="location">src/app/target/unit/unit.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Copy source to target</source>
       </segment>
     </unit>
   </file>

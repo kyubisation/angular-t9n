@@ -1,6 +1,6 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
 import { join, json, logging, normalize, relative, workspaces } from '@angular-devkit/core';
-import { NodeJsAsyncHost } from '@angular-devkit/core/node';
+import { NodeJsSyncHost } from '@angular-devkit/core/node';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
@@ -40,7 +40,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     throw new Error('To run this builder context.target is required!');
   }
 
-  const nodeHost = new NodeJsAsyncHost();
+  const nodeHost = new NodeJsSyncHost();
   const host = workspaces.createWorkspaceHost(nodeHost);
   const workspaceRoot = normalize(context.workspaceRoot);
   const sourceFile = join(workspaceRoot, options.translationFile);

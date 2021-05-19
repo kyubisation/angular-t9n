@@ -31,7 +31,7 @@ describe('AngularJsonPersistenceStrategy', () => {
     persistenceStrategy = new AngularJsonPersistenceStrategy(
       new MockAngularI18n() as AngularI18n,
       new logging.NullLogger(),
-      (serializationStrategy as unknown) as SerializationStrategy
+      serializationStrategy as unknown as SerializationStrategy
     );
   });
 

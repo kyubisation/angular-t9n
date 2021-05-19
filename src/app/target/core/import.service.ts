@@ -69,9 +69,13 @@ export class ImportService {
     });
   }
 
-  private _toPartialTargetUnit([id, description, meaning, source, target]: string[]): Partial<
-    TranslationTargetUnitResponse
-  > {
+  private _toPartialTargetUnit([
+    id,
+    description,
+    meaning,
+    source,
+    target,
+  ]: string[]): Partial<TranslationTargetUnitResponse> {
     return {
       id,
       description,

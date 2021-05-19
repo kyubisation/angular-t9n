@@ -109,9 +109,10 @@ export class AngularI18n {
       : translation;
   }
 
-  private _normalizeI18nLocale(
-    locale: AngularJsonI18nLocale
-  ): { translation: string[]; baseHref?: string } {
+  private _normalizeI18nLocale(locale: AngularJsonI18nLocale): {
+    translation: string[];
+    baseHref?: string;
+  } {
     if (typeof locale === 'string') {
       return { translation: [locale] };
     } else if (Array.isArray(locale)) {
