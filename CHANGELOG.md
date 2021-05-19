@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.0.0](https://github.com/kyubisation/angular-t9n/compare/11.1.3...12.0.0) (2021-05-19)
+
+### ⚠ BREAKING CHANGES
+
+- This package now depends on Angular 12 schematics.
+
+- update to Angular 12 and latest nestjs release ([9dcd53d](https://github.com/kyubisation/angular-t9n/commit/9dcd53db95717e55fa74551acc9f592b75265669))
+
 ### [11.1.3](https://github.com/kyubisation/angular-t9n/compare/11.1.2...11.1.3) (2021-02-09)
 
 ### Bug Fixes
