@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "angular-t9n-ng-add",
+  "$id": "angular-t9n-ng-add",
   "title": "Angular t9n ng-add",
   "type": "object",
   "properties": {

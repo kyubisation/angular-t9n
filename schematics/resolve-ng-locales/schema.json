@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "angular-t9n-resolve-ng-locales",
+  "$id": "angular-t9n-resolve-ng-locales",
   "title": "Angular t9n locale resolver",
   "description": "Resolves the available locales from the @angular/common package",
   "type": "object",
