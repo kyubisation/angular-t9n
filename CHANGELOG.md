@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.0.0](https://github.com/kyubisation/angular-t9n/compare/12.0.0...13.0.0) (2021-12-12)
+
+### Bug Fixes
+
+- use $id instead of id in schemas ([#8](https://github.com/kyubisation/angular-t9n/issues/8)) ([8099484](https://github.com/kyubisation/angular-t9n/commit/809948484b6b28b6d568606c548f4f184bd57ece)), closes [#7](https://github.com/kyubisation/angular-t9n/issues/7)
+
 ## [12.0.0](https://github.com/kyubisation/angular-t9n/compare/11.1.3...12.0.0) (2021-05-19)
 
 ### ⚠ BREAKING CHANGES
