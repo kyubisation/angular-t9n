@@ -11,17 +11,6 @@ import {
   TranslationTargetUnit,
 } from '../builders/t9n';
 
-export class TestScheduler extends VirtualTimeScheduler {
-  constructor() {
-    super();
-    (asyncScheduler as any).constructor.delegate = this;
-  }
-
-  destroy() {
-    (asyncScheduler as any).constructor.delegate = undefined;
-  }
-}
-
 const generated = generateTargets();
 export const MOCK_SOURCE = deepFreeze(generated.source);
 export const MOCK_TARGET_DE = deepFreeze(generated.registry.get('de')!);

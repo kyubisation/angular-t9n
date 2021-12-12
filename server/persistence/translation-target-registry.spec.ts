@@ -1,4 +1,5 @@
-import { MOCK_SOURCE, TestScheduler } from '../../test';
+import { TestScheduler } from 'rxjs/testing';
+import { MOCK_SOURCE } from '../../test';
 import { TranslationTarget, TranslationTargetUnit } from '../models';
 
 import { PersistenceStrategy } from './persistence-strategy';
@@ -18,20 +19,14 @@ describe('TranslationTargetRegistry', () => {
     }
   }
 
-  let scheduler: TestScheduler;
   let enTarget: TranslationTarget;
   let registry: TranslationTargetRegistry;
   let persistence: MockPersistenceStrategy;
 
   beforeEach(() => {
-    scheduler = new TestScheduler();
     persistence = new MockPersistenceStrategy();
     registry = new TranslationTargetRegistry(MOCK_SOURCE, persistence);
     enTarget = registry.register('en', new Map<string, TranslationTargetUnit>());
-  });
-
-  afterEach(() => {
-    scheduler.destroy();
   });
 
   it('should return undefined on a get with no entry', () => {
@@ -67,10 +62,13 @@ describe('TranslationTargetRegistry', () => {
   });
 
   it('should call update on persistence strategy when a change occurs', () => {
-    const unit = enTarget.units[0];
-    enTarget.translateUnit(unit, { target: 'test', state: 'translated' });
-    scheduler.flush();
-    expect(persistence.updated.map((t) => t.language)).toEqual([enTarget.language]);
+    const testScheduler = new TestScheduler((actual, expected) => expect(actual).toEqual(expected));
+    testScheduler.run(() => {
+      const unit = enTarget.units[0];
+      enTarget.translateUnit(unit, { target: 'test', state: 'translated' });
+      testScheduler.flush();
+      expect(persistence.updated.map((t) => t.language)).toEqual([enTarget.language]);
+    });
   });
 
   it('should assign baseHref if provided', () => {

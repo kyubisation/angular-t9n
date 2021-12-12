@@ -52,6 +52,7 @@ schematics/**/*.d.ts
 builders/**/*.js
 builders/**/*.map
 builders/**/*.d.ts
+.husky/_
 
 # System Files
 .DS_Store
