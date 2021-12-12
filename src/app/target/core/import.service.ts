@@ -41,7 +41,7 @@ export class ImportService {
         .reduce((current, next) => current.concat(next), [])
         .map(async (u) => {
           try {
-            const response = await this._importUnit(u, state).toPromise();
+            const response = (await this._importUnit(u, state).toPromise())!;
             result.importedUnits.push(response);
           } catch {
             result.failedUnits.push(u);
