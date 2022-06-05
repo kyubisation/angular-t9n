@@ -1,5 +1,5 @@
 import { Directive, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -18,7 +18,11 @@ export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
 
   protected _destroy = new Subject<void>();
 
-  constructor(private _route: ActivatedRoute, private _router: Router, public filter?: FormGroup) {
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    public filter?: UntypedFormGroup
+  ) {
     const queryParams = this._route.snapshot.queryParamMap;
     this.queryParams = this._route.queryParams;
     this.pageSize = this._toInteger(queryParams.get('entriesPerPage'));

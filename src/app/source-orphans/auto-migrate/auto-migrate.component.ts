@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
 import { TranslationSourceUnitResponse } from '../../../models';
@@ -12,11 +12,14 @@ import { SourceOrphansService } from '../core/source-orphans.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoMigrateComponent {
-  configuration: FormGroup;
+  configuration: UntypedFormGroup;
   loading = new BehaviorSubject(false);
   migrations = new BehaviorSubject<TranslationSourceUnitResponse[] | null>(null);
 
-  constructor(private _sourceOrphansService: SourceOrphansService, formBuilder: FormBuilder) {
+  constructor(
+    private _sourceOrphansService: SourceOrphansService,
+    formBuilder: UntypedFormBuilder
+  ) {
     this.configuration = formBuilder.group({
       distanceThreshold: [0, [Validators.min(0), Validators.required]],
     });

@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ export class MigrateDataSource extends TranslationDataSource<TranslationSourceUn
     private _sourceOrphansService: SourceOrphansService,
     paginator: MatPaginator,
     sort: MatSort,
-    filter: FormGroup
+    filter: UntypedFormGroup
   ) {
     super(paginator, sort, filter);
   }
@@ -20,7 +20,7 @@ export class MigrateDataSource extends TranslationDataSource<TranslationSourceUn
   protected _fetchData(
     paginator: MatPaginator,
     sort: MatSort,
-    filter: FormGroup | undefined
+    filter: UntypedFormGroup | undefined
   ): Observable<PaginationResponse<TranslationSourceUnitResponse>> {
     return this._sourceOrphansService.orphans({
       page: paginator.pageIndex,

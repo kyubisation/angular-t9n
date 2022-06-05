@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Observable, Subject } from 'rxjs';
@@ -17,7 +17,7 @@ export class TranslateDataSource extends TranslationDataSource<
     private _translationTargetService: TranslationTargetService,
     paginator: MatPaginator,
     sort: MatSort,
-    filter: FormGroup
+    filter: UntypedFormGroup
   ) {
     super(paginator, sort, filter);
   }
@@ -25,7 +25,7 @@ export class TranslateDataSource extends TranslationDataSource<
   protected _fetchData(
     paginator: MatPaginator,
     sort: MatSort,
-    filter?: FormGroup | undefined
+    filter?: UntypedFormGroup | undefined
   ): Observable<PaginationResponse<TranslationTargetUnitResponse>> {
     this._destroy.next();
     return this._translationTargetService.units({
@@ -42,8 +42,8 @@ export class TranslateDataSource extends TranslationDataSource<
     return page._embedded!.entries.map((u) => {
       const unit: FormTargetUnit = {
         ...u,
-        target: new FormControl(u.target),
-        state: new FormControl({ value: u.state, disabled: !u.target }),
+        target: new UntypedFormControl(u.target),
+        state: new UntypedFormControl({ value: u.state, disabled: !u.target }),
       };
       this._translationTargetService.updateUnitOnChange(u, unit, this._destroy);
       unit.target.markAsTouched();

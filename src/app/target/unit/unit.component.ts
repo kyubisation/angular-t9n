@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, share, switchMap } from 'rxjs/operators';
@@ -16,13 +16,13 @@ import { TranslationTargetService } from '../core/translation-target.service';
 export class UnitComponent implements OnDestroy {
   unit: Observable<TranslationTargetUnitResponse>;
   params: Observable<Params>;
-  form: Observable<FormGroup>;
+  form: Observable<UntypedFormGroup>;
   private _destroy = new Subject<void>();
 
   constructor(
     private _translationTargetService: TranslationTargetService,
     private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder
+    private _formBuilder: UntypedFormBuilder
   ) {
     this.params = this._route.params.pipe(map(({ unitId, ...params }) => params));
     this.unit = this._route.paramMap.pipe(

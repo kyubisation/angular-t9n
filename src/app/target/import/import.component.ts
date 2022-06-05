@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
 import { ImportResult } from '../core/import-result';
@@ -16,7 +16,7 @@ export class ImportComponent {
   @HostBinding('class.dragging') dragging = false;
   importing = new BehaviorSubject(false);
   importResult = new BehaviorSubject<ImportResult | undefined>(undefined);
-  targetState = new FormControl('translated');
+  targetState = new UntypedFormControl('translated');
 
   constructor(private _importService: ImportService) {}
 

@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/collections';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EMPTY, merge, Observable, Subject } from 'rxjs';
@@ -14,7 +14,7 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
   constructor(
     private _paginator: MatPaginator,
     private _sort: MatSort,
-    private _filter?: FormGroup
+    private _filter?: UntypedFormGroup
   ) {
     super();
   }
@@ -48,7 +48,7 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
   protected abstract _fetchData(
     paginator: MatPaginator,
     sort: MatSort,
-    filter?: FormGroup | undefined
+    filter?: UntypedFormGroup | undefined
   ): Observable<PaginationResponse<TFetchResponse>>;
 
   protected _mapPaginationResponse(page: PaginationResponse<TFetchResponse>): T[] {

@@ -135,9 +135,8 @@
       }
     }
   },
-  "defaultProject": "angular-t9n",
   "cli": {
     "analytics": "8b634d96-e479-4c86-941f-7a18382b3c88",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

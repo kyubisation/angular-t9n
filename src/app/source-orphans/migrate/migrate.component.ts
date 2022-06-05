@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Pagination } from '../../core/pagination';
@@ -18,7 +18,7 @@ export class MigrateComponent extends Pagination<MigrateDataSource> implements O
     private _sourceOrphansService: SourceOrphansService,
     route: ActivatedRoute,
     router: Router,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     super(
       route,

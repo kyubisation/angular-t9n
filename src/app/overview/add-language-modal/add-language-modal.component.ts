@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith, switchMap, take } from 'rxjs/operators';
@@ -13,13 +13,13 @@ import { TranslationService } from '../../core/translation.service';
   styleUrls: ['./add-language-modal.component.scss'],
 })
 export class AddLanguageModalComponent {
-  form: FormGroup;
+  form: UntypedFormGroup;
   locales: Observable<string[]>;
 
   constructor(
     private _dialogRef: MatDialogRef<AddLanguageModalComponent>,
     private _translationService: TranslationService,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.form = formBuilder.group({
       language: [

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
 import { ExportService } from '../core/export.service';
@@ -12,10 +12,10 @@ import { ExportService } from '../core/export.service';
   providers: [ExportService],
 })
 export class ExportComponent {
-  configuration: FormGroup;
+  configuration: UntypedFormGroup;
   loading = new BehaviorSubject(false);
 
-  constructor(private _exportService: ExportService, formBuilder: FormBuilder) {
+  constructor(private _exportService: ExportService, formBuilder: UntypedFormBuilder) {
     this.configuration = formBuilder.group({
       state: 'initial',
     });
