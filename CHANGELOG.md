@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.0.0](https://github.com/kyubisation/angular-t9n/compare/13.0.0...14.0.0) (2022-06-05)
+
+### ⚠ BREAKING CHANGES
+
+- Switch to Angular 14
+
+- update to Angular 14 ([5aa3de8](https://github.com/kyubisation/angular-t9n/commit/5aa3de8a5135dacd76d9248edd98b4baa6eea652))
+
 ## [13.0.0](https://github.com/kyubisation/angular-t9n/compare/12.0.0...13.0.0) (2021-12-12)
 
 ### Bug Fixes
