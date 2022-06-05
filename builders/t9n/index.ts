@@ -46,6 +46,13 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   const sourceFile = join(workspaceRoot, options.translationFile);
   const targetTranslationPath = options.targetTranslationPath || dirname(options.translationFile);
   const targetDirectory = join(workspaceRoot, targetTranslationPath);
+  context.logger.info('angular-t9n');
+  context.logger.info('===========');
+  context.logger.info(` - workspace root:   ${workspaceRoot}`);
+  context.logger.info(` - source file:      ${sourceFile}`);
+  context.logger.info(` - target directory: ${targetDirectory}`);
+  context.logger.info('');
+
   if (!(await host.isFile(sourceFile))) {
     return { success: false, error: `${options.translationFile} does not exist or is not a file!` };
   } else if (!(await host.isDirectory(targetDirectory))) {
@@ -136,20 +143,27 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   async function TRANSLATION_SOURCE_FACTORY(
     serializationStrategy: SerializationStrategy
   ): Promise<TranslationSource> {
-    const result = await serializationStrategy.deserializeSource(sourceFile);
-    if (result.language && sourceLocale.code && result.language !== sourceLocale.code) {
-      context.logger.warn(
-        `Source locale in angular.json is ${sourceLocale} but in the ` +
-          ` source file ${sourceFile} it is ${result.language}.`
-      );
-    }
+    try {
+      context.logger.info(`Attempting to serialize source file ${sourceFile}`);
+      const result = await serializationStrategy.deserializeSource(sourceFile);
+      if (result.language && sourceLocale.code && result.language !== sourceLocale.code) {
+        context.logger.warn(
+          `Source locale in angular.json is ${sourceLocale} but in the ` +
+            ` source file ${sourceFile} it is ${result.language}.`
+        );
+      }
 
-    const source = new TranslationSource(sourceLocale.code || result.language, result.unitMap);
-    if (sourceLocale.baseHref) {
-      source.baseHref = sourceLocale.baseHref;
-    }
+      const source = new TranslationSource(sourceLocale.code || result.language, result.unitMap);
+      if (sourceLocale.baseHref) {
+        source.baseHref = sourceLocale.baseHref;
+      }
 
-    return source;
+      context.logger.info(`Successfully serialized source file ${sourceFile}`);
+      return source;
+    } catch (e) {
+      context.logger.error(`Failed to serialize source file ${sourceFile}`);
+      throw e;
+    }
   }
 
   async function TRANSLATION_TARGET_REGISTRY_FACTORY(
@@ -157,34 +171,41 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     serializationStrategy: SerializationStrategy,
     persistenceStrategy: PersistenceStrategy
   ): Promise<TranslationTargetRegistry> {
-    const targetRegistry = new TranslationTargetRegistry(source, persistenceStrategy);
-    const locales = await angularI18n.locales();
-    await Promise.all(
-      Object.keys(locales).map(async (language) => {
-        const locale = locales[language];
-        const normalizedPath = normalize(targetPathBuilder.createPath(language));
-        const relativePath = relative(workspaceRoot, normalizedPath);
-        if (locale.translation.every((t) => join(workspaceRoot, t) !== normalizedPath)) {
-          context.logger.warn(
-            `Expected translation file ${relativePath} not found listed in i18n! It will be created and added to the i18n entry.`
-          );
-          const target = await targetRegistry.create(language, locale.baseHref);
-          await importExistingTranslationUnits(target, locale.translation, serializationStrategy);
-        } else if (!host.isFile(normalizedPath)) {
-          context.logger.warn(
-            `Expected translation file ${relativePath} does not exist! It will be created.`
-          );
-          await targetRegistry.create(language, locale.baseHref);
-        } else {
-          const result = await serializationStrategy.deserializeTarget(normalizedPath);
-          targetRegistry.register(result.language, result.unitMap, locale.baseHref);
-        }
-      })
-    );
+    try {
+      context.logger.info(`Attempting to serialize target files`);
+      const targetRegistry = new TranslationTargetRegistry(source, persistenceStrategy);
+      translationContext = { source, targetRegistry };
+      const locales = await angularI18n.locales();
+      await Promise.all(
+        Object.keys(locales).map(async (language) => {
+          const locale = locales[language];
+          const normalizedPath = normalize(targetPathBuilder.createPath(language));
+          const relativePath = relative(workspaceRoot, normalizedPath);
+          if (locale.translation.every((t) => join(workspaceRoot, t) !== normalizedPath)) {
+            context.logger.warn(
+              `Expected translation file ${relativePath} not found listed in i18n! It will be created and added to the i18n entry.`
+            );
+            const target = await targetRegistry.create(language, locale.baseHref);
+            await importExistingTranslationUnits(target, locale.translation, serializationStrategy);
+          } else if (!host.isFile(normalizedPath)) {
+            context.logger.warn(
+              `Expected translation file ${relativePath} does not exist! It will be created.`
+            );
+            await targetRegistry.create(language, locale.baseHref);
+          } else {
+            const result = await serializationStrategy.deserializeTarget(normalizedPath);
+            targetRegistry.register(result.language, result.unitMap, locale.baseHref);
+          }
+        })
+      );
 
-    translationContext = { source, targetRegistry };
-    await angularI18n.update();
-    return targetRegistry;
+      await angularI18n.update();
+      context.logger.info(`Successfully serialized target files`);
+      return targetRegistry;
+    } catch (e) {
+      context.logger.error(`Failed to serialize target files`);
+      throw e;
+    }
   }
 
   async function importExistingTranslationUnits(
