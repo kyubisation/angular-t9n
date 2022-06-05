@@ -1,4 +1,4 @@
-import ts from '@wessberg/rollup-plugin-ts';
+import ts from 'rollup-plugin-ts';
 
 export default [
   target({ input: './builders/t9n/index.ts', exports: 'named' }),
