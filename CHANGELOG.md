@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [15.0.0](https://github.com/kyubisation/angular-t9n/compare/14.0.0...15.0.0) (2022-11-19)
+
+### ⚠ BREAKING CHANGES
+
+- Requires Angular 15 with this update.
+
+### Features
+
+- update to Angular 15 ([#30](https://github.com/kyubisation/angular-t9n/issues/30)) ([cb94dcf](https://github.com/kyubisation/angular-t9n/commit/cb94dcfa4f21cdf82564cefe625dc99261f376d3))
+
 ## [14.0.0](https://github.com/kyubisation/angular-t9n/compare/13.0.0...14.0.0) (2022-06-05)
 
 ### ⚠ BREAKING CHANGES
