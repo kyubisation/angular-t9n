@@ -6,13 +6,11 @@ describe('SourceOrphanComponent', () => {
   let component: SourceOrphanComponent;
   let fixture: ComponentFixture<SourceOrphanComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [SourceOrphanComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [SourceOrphanComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SourceOrphanComponent);

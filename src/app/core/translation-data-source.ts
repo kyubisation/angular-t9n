@@ -1,6 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { UntypedFormGroup } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 import { EMPTY, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, map, switchMap, tap } from 'rxjs/operators';

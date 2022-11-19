@@ -12,6 +12,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "lib": ["es2018", "dom"],
-    "types": ["jest", "js-levenshtein", "node", "xmldom"]
+    "types": ["jest", "js-levenshtein", "node"]
   }
 }

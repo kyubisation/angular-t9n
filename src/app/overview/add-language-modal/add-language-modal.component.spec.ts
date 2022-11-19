@@ -6,13 +6,11 @@ describe('AddLanguageModalComponent', () => {
   let component: AddLanguageModalComponent;
   let fixture: ComponentFixture<AddLanguageModalComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [AddLanguageModalComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [AddLanguageModalComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AddLanguageModalComponent);

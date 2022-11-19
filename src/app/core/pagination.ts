@@ -1,6 +1,6 @@
 import { Directive, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EMPTY, merge, Observable, Subject } from 'rxjs';
