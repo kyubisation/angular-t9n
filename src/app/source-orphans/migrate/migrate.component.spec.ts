@@ -6,13 +6,11 @@ describe('MigrateComponent', () => {
   let component: MigrateComponent;
   let fixture: ComponentFixture<MigrateComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [MigrateComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MigrateComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MigrateComponent);

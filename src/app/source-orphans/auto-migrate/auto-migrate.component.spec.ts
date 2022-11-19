@@ -6,13 +6,11 @@ describe('AutoMigrateComponent', () => {
   let component: AutoMigrateComponent;
   let fixture: ComponentFixture<AutoMigrateComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [AutoMigrateComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [AutoMigrateComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AutoMigrateComponent);
