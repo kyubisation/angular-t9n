@@ -57,7 +57,6 @@
     "class-validator": "^0.13.2",
     "js-levenshtein": "^1.1.6",
     "reflect-metadata": "^0.1.13",
-    "rollup-plugin-ts": "^3.0.1",
     "rxjs": "~7.5.5",
     "@xmldom/xmldom": "^0.8.6"
   },
@@ -106,6 +105,7 @@
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.0",
+    "rollup-plugin-ts": "^3.0.1",
     "standard-version": "^9.3.2",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.4.0",
