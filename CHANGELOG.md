@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [15.0.1](https://github.com/kyubisation/angular-t9n/compare/15.0.0...15.0.1) (2022-11-24)
+
+### Bug Fixes
+
+- remove rollup-plugin-ts from dependencies ([2299cf5](https://github.com/kyubisation/angular-t9n/commit/2299cf53b91af737252930560cf614cbebc13749))
+
 ## [15.0.0](https://github.com/kyubisation/angular-t9n/compare/14.0.0...15.0.0) (2022-11-19)
 
 ### ⚠ BREAKING CHANGES

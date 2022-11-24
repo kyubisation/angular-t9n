@@ -1,6 +1,6 @@
 {
   "name": "angular-t9n",
-  "version": "15.0.0",
+  "version": "15.0.1",
   "description": "A translation tool for Angular i18n",
   "bin": {
     "ng-t9n": "./bin/cli.js"
