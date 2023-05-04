@@ -3,7 +3,7 @@
 <p i18n>Export all translation units or filter by translation state.</p>
 
 <form [formGroup]="configuration" (ngSubmit)="export()">
-  <mat-form-field appearance="standard">
+  <mat-form-field>
     <mat-select formControlName="state">
       <mat-option value="" i18n>All</mat-option>
       <mat-option value="initial" i18n>Initial</mat-option>

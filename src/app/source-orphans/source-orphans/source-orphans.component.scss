@@ -28,6 +28,7 @@ mat-sidenav-container {
     mat-card {
       background-color: mat.get-color-from-palette(mat.$yellow-palette, 200);
       margin: 0.5rem;
+      padding: 0.25rem;
     }
   }
 }

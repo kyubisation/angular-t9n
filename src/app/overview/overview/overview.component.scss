@@ -23,14 +23,13 @@ table {
 :host > div {
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
 
   mat-card {
     flex: 0 20rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
 
-    mat-card-actions a {
-      margin-right: 0;
+    mat-card-actions {
+      gap: 0.125rem;
     }
   }
 }

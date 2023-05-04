@@ -18,9 +18,18 @@ mat-toolbar {
     flex: 1 1 auto;
   }
 
+  a:hover,
+  a:focus {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
   a img {
     padding-right: 0.2rem;
   }
+}
+
+.mat-mdc-button-base:not(:disabled) {
+  color: inherit;
 }
 
 main {

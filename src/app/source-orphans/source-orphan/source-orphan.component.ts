@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, share, switchMap, tap } from 'rxjs/operators';

@@ -29,7 +29,7 @@ mat-paginator {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-table.mat-table {
+table.mat-mdc-table {
   width: 100%;
 
   th,
@@ -74,12 +74,12 @@ table.mat-table {
   }
 }
 
-.tooltip-linebreak.mat-tooltip {
+.tooltip-linebreak.mat-mdc-tooltip {
   white-space: pre-line;
   max-width: 40rem;
 }
 
-.mat-autocomplete-panel {
+.mat-mdc-autocomplete-panel {
   scrollbar-color: mat.get-color-from-palette(mat.$indigo-palette, 500) transparent;
   scrollbar-width: thin;
 

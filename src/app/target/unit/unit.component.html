@@ -2,17 +2,17 @@
 
 <ng-container *ngIf="form | async as formGroup">
   <form [formGroup]="formGroup">
-    <mat-form-field appearance="standard">
+    <mat-form-field>
       <mat-label i18n>Description</mat-label>
       <input matInput formControlName="description" />
     </mat-form-field>
 
-    <mat-form-field appearance="standard">
+    <mat-form-field>
       <mat-label i18n>Meaning</mat-label>
       <input matInput formControlName="meaning" />
     </mat-form-field>
 
-    <mat-form-field appearance="standard">
+    <mat-form-field>
       <mat-label i18n>Source</mat-label>
       <textarea matInput formControlName="source" cdkTextareaAutosize></textarea>
       <button
@@ -27,12 +27,12 @@
       </button>
     </mat-form-field>
 
-    <mat-form-field appearance="standard">
+    <mat-form-field>
       <mat-label i18n>Target</mat-label>
       <textarea matInput formControlName="target" cdkTextareaAutosize></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="standard">
+    <mat-form-field>
       <mat-label>State</mat-label>
       <mat-select formControlName="state">
         <mat-option *ngIf="formGroup.get('state').value === 'initial'" value="initial" i18n

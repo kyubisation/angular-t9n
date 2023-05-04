@@ -22,7 +22,7 @@
     "build": "yarn -s build:ng && yarn -s build:node",
     "build:ng": "ng build --configuration production",
     "build:node": "rollup --config rollup.config.js",
-    "format": "prettier --write **/*",
+    "format": "prettier --ignore-unknown --write **/*",
     "test": "yarn -s test:node",
     "test:node": "jest",
     "lint": "ng lint",
@@ -151,7 +151,7 @@
   },
   "lint-staged": {
     "*.{js,ts,css,scss,json,md,html}": [
-      "prettier --write"
+      "prettier --write --ignore-unknown"
     ]
   }
 }
