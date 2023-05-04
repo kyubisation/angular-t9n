@@ -7,7 +7,7 @@
 </p>
 
 <form [formGroup]="configuration" (ngSubmit)="autoMigrate()">
-  <mat-form-field appearance="standard">
+  <mat-form-field>
     <mat-label i18n>Distance Threshold</mat-label>
     <input matInput type="number" formControlName="distanceThreshold" required min="0" />
     <mat-error *ngIf="configuration.get('distanceThreshold')?.errors?.required" i18n

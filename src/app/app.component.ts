@@ -1,9 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import {
-  MatLegacySnackBar as MatSnackBar,
-  MatLegacySnackBarRef as MatSnackBarRef,
-  LegacySimpleSnackBar as SimpleSnackBar,
-} from '@angular/material/legacy-snack-bar';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 
 import { WebsocketService } from './core/websocket.service';
 

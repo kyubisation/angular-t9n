@@ -22,7 +22,7 @@
       >
     </mat-nav-list>
 
-    <mat-card *ngIf="(target | async)?.orphanCount" i18n>
+    <mat-card appearance="outlined" *ngIf="(target | async)?.orphanCount" i18n>
       Orphans are translation units whose id is no longer contained in the source file. Migrate them
       in the orphans section.
     </mat-card>

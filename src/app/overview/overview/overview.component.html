@@ -19,8 +19,10 @@
 </button>
 
 <div>
-  <mat-card *ngFor="let target of targets | async">
-    <mat-card-title>{{ target.language }}</mat-card-title>
+  <mat-card appearance="outlined" *ngFor="let target of targets | async">
+    <mat-card-header>
+      <mat-card-title>{{ target.language }}</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
       <table>
         <tr>

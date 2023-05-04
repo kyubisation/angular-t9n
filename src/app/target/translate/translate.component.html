@@ -27,7 +27,7 @@
     <ng-container matColumnDef="target">
       <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Target</th>
       <td mat-cell *matCellDef="let row">
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <textarea
             matInput
             cdkTextareaAutosize
@@ -40,7 +40,7 @@
     <ng-container matColumnDef="state">
       <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>State</th>
       <td mat-cell *matCellDef="let row">
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-select [formControl]="row.state">
             <mat-option *ngIf="row.state.value === 'initial'" value="initial" i18n
               >Initial</mat-option
@@ -68,42 +68,42 @@
 
     <ng-container matColumnDef="id-filter">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <input matInput placeholder="Filter" [formControl]="filter.get('id')" />
         </mat-form-field>
       </th>
     </ng-container>
     <ng-container matColumnDef="description-filter">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <input matInput placeholder="Filter" [formControl]="filter.get('description')" />
         </mat-form-field>
       </th>
     </ng-container>
     <ng-container matColumnDef="meaning-filter">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <input matInput placeholder="Filter" [formControl]="filter.get('meaning')" />
         </mat-form-field>
       </th>
     </ng-container>
     <ng-container matColumnDef="source-filter">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <input matInput placeholder="Filter" [formControl]="filter.get('source')" />
         </mat-form-field>
       </th>
     </ng-container>
     <ng-container matColumnDef="target-filter">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <input matInput placeholder="Filter" [formControl]="filter.get('target')" />
         </mat-form-field>
       </th>
     </ng-container>
     <ng-container matColumnDef="state-filter">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-select [formControl]="filter.get('state')">
             <mat-option value=""></mat-option>
             <mat-option value="initial" i18n>Initial</mat-option>

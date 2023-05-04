@@ -16,3 +16,5 @@ server/client/*
 schematics/*/index.js
 schematics/*/index.d.ts
 yarn.lock
+test/xlf
+test/xlf2
