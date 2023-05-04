@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [15.0.2](https://github.com/kyubisation/angular-t9n/compare/15.0.1...15.0.2) (2023-05-04)
+
+### Bug Fixes
+
+- apply mdc migration and fix styles ([#39](https://github.com/kyubisation/angular-t9n/issues/39)) ([8dab948](https://github.com/kyubisation/angular-t9n/commit/8dab948cda31688177e25e06dd30aed4d59f1396))
+
 ### [15.0.1](https://github.com/kyubisation/angular-t9n/compare/15.0.0...15.0.1) (2022-11-24)
 
 ### Bug Fixes
