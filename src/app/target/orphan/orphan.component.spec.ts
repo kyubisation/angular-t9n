@@ -8,7 +8,7 @@ describe('OrphanComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [OrphanComponent],
+      imports: [OrphanComponent],
     }).compileComponents();
   }));
 

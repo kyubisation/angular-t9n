@@ -1,5 +1,10 @@
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterLink } from '@angular/router';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
@@ -13,6 +18,17 @@ import { AddLanguageModalComponent } from '../add-language-modal/add-language-mo
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatTooltipModule,
+    RouterLink,
+    NgFor,
+    NgIf,
+  ],
 })
 export class OverviewComponent implements OnInit {
   project: Observable<string>;

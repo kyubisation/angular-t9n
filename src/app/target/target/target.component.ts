@@ -1,5 +1,9 @@
+import { NgIf, AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
@@ -13,6 +17,17 @@ import { TranslationTargetService } from '../core/translation-target.service';
   styleUrls: ['./target.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TranslationTargetService],
+  standalone: true,
+  imports: [
+    MatSidenavModule,
+    MatListModule,
+    RouterLink,
+    RouterLinkActive,
+    NgIf,
+    MatCardModule,
+    RouterOutlet,
+    AsyncPipe,
+  ],
 })
 export class TargetComponent {
   target: Observable<TargetResponse>;

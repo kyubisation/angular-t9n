@@ -1,5 +1,18 @@
+import { NgIf, AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BehaviorSubject } from 'rxjs';
 
 import { TranslationSourceUnitResponse } from '../../../models';
@@ -10,6 +23,19 @@ import { SourceOrphansService } from '../core/source-orphans.service';
   templateUrl: './auto-migrate.component.html',
   styleUrls: ['./auto-migrate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgIf,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatTooltipModule,
+    AsyncPipe,
+  ],
 })
 export class AutoMigrateComponent {
   configuration: UntypedFormGroup;

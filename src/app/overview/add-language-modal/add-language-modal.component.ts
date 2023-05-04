@@ -1,6 +1,18 @@
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs';
 import { map, startWith, switchMap, take } from 'rxjs/operators';
 
@@ -11,6 +23,19 @@ import { TranslationService } from '../../core/translation.service';
   selector: 't9n-add-language-modal',
   templateUrl: './add-language-modal.component.html',
   styleUrls: ['./add-language-modal.component.scss'],
+  standalone: true,
+  imports: [
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    NgIf,
+    NgFor,
+    MatOptionModule,
+    MatButtonModule,
+    AsyncPipe,
+  ],
 })
 export class AddLanguageModalComponent {
   form: UntypedFormGroup;

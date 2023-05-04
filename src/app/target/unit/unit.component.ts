@@ -1,6 +1,20 @@
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { NgIf, AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, share, switchMap } from 'rxjs/operators';
 
@@ -12,6 +26,21 @@ import { TranslationTargetService } from '../core/translation-target.service';
   templateUrl: './unit.component.html',
   styleUrls: ['./unit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TextFieldModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatSelectModule,
+    MatOptionModule,
+    RouterLink,
+    AsyncPipe,
+  ],
 })
 export class UnitComponent implements OnDestroy {
   unit: Observable<TranslationTargetUnitResponse>;
