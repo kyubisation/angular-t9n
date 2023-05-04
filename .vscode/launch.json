@@ -22,10 +22,7 @@
       "type": "node",
       "request": "launch",
       "name": "t9n xlf cli",
-      "runtimeArgs": [
-        "${workspaceRoot}/bin/cli.js",
-        "t9n-xlf.json"
-      ],
+      "runtimeArgs": ["${workspaceRoot}/bin/cli.js", "t9n-xlf.json"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "port": 9229

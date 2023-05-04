@@ -1,13 +1,19 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter, Routes } from '@angular/router';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { routes as overviewRoutes } from './app/overview/overview-routing';
+import { routes as sourceOrphanRoutes } from './app/source-orphans/source-orphans-routing';
+import { routes as targetRoutes } from './app/target/target-routing';
 
-if (environment.production) {
-  enableProdMode();
-}
+const routes: Routes = [...overviewRoutes, ...sourceOrphanRoutes, ...targetRoutes];
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(routes),
+  ],
+}).catch((err) => console.error(err));

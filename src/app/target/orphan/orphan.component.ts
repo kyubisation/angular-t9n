@@ -1,6 +1,12 @@
+import { NgIf, AsyncPipe, TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, share, switchMap, tap } from 'rxjs/operators';
 
@@ -13,6 +19,18 @@ import { TranslationTargetService } from '../core/translation-target.service';
   templateUrl: './orphan.component.html',
   styleUrls: ['./orphan.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    MatTableModule,
+    MatSortModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    AsyncPipe,
+    TitleCasePipe,
+  ],
 })
 export class OrphanComponent implements OnDestroy {
   orphan: Observable<TranslationTargetUnitResponse>;

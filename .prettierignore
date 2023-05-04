@@ -1,10 +1,9 @@
+.angular/*
 .github/*
 browserslist
 LICENSE
 coverage
 app/*
-package-lock.json
-.*
 *.ico
 *.xlf
 *.svg
@@ -16,5 +15,6 @@ server/client/*
 schematics/*/index.js
 schematics/*/index.d.ts
 yarn.lock
+package-lock.json
 test/xlf
 test/xlf2

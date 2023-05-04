@@ -8,7 +8,7 @@ describe('MigrateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MigrateComponent],
+      imports: [MigrateComponent],
     }).compileComponents();
   }));
 
