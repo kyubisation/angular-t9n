@@ -36,7 +36,7 @@ describe('LinkHelper', () => {
 
   it('should return the source orphan url with object', () => {
     expect(linkHelper.sourceOrphan({ unit: { id: 'test' } } as any)).toEqual(
-      '/api/source/orphans/test'
+      '/api/source/orphans/test',
     );
   });
 
@@ -66,19 +66,19 @@ describe('LinkHelper', () => {
 
   it('should return the target units url with parameters', () => {
     expect(linkHelper.targetUnits({ language: 'en' } as any, { test: 'test' })).toEqual(
-      '/api/targets/en/units?test=test'
+      '/api/targets/en/units?test=test',
     );
   });
 
   it('should return the target unit url with object', () => {
     expect(linkHelper.targetUnit({ id: 'test' } as any, { language: 'en' } as any)).toEqual(
-      '/api/targets/en/units/test'
+      '/api/targets/en/units/test',
     );
   });
 
   it('should return the source unit url with string', () => {
     expect(linkHelper.targetUnit('test', { language: 'en' } as any)).toEqual(
-      '/api/targets/en/units/test'
+      '/api/targets/en/units/test',
     );
   });
 
@@ -88,19 +88,19 @@ describe('LinkHelper', () => {
 
   it('should return the target orphans url with parameters', () => {
     expect(linkHelper.targetOrphans({ language: 'en' } as any, { test: 'test' })).toEqual(
-      '/api/targets/en/orphans?test=test'
+      '/api/targets/en/orphans?test=test',
     );
   });
 
   it('should return the target orphan url with object', () => {
     expect(
-      linkHelper.targetOrphan({ unit: { id: 'test' } } as any, { language: 'en' } as any)
+      linkHelper.targetOrphan({ unit: { id: 'test' } } as any, { language: 'en' } as any),
     ).toEqual('/api/targets/en/orphans/test');
   });
 
   it('should return the source orphan url with string', () => {
     expect(linkHelper.targetOrphan('test', { language: 'en' } as any)).toEqual(
-      '/api/targets/en/orphans/test'
+      '/api/targets/en/orphans/test',
     );
   });
 });

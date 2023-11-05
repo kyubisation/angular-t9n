@@ -18,24 +18,24 @@ export class TranslationTarget {
   constructor(
     readonly source: TranslationSource,
     readonly language: string,
-    unitMap: Map<string, TranslationTargetUnit>
+    unitMap: Map<string, TranslationTargetUnit>,
   ) {
     this.changed = this._changedSubject.asObservable();
     this.units = this._generateTargetUnits(unitMap);
     this.unitMap = this.units.reduce(
       (current, next) => current.set(next.id, next),
-      new Map<string, TranslationTargetUnit>()
+      new Map<string, TranslationTargetUnit>(),
     );
     this.orphans = this._findOrphans(unitMap);
     this.orphanMap = this.orphans.reduce(
       (current, next) => current.set(next.unit.id, next),
-      new Map<string, TranslationTargetOrphan>()
+      new Map<string, TranslationTargetOrphan>(),
     );
   }
 
   translateUnit(
     unit: TranslationTargetUnit,
-    update: Pick<TranslationTargetUnit, 'target' | 'state'>
+    update: Pick<TranslationTargetUnit, 'target' | 'state'>,
   ) {
     unit.target = update.target;
     unit.state = update.state;
@@ -59,7 +59,7 @@ export class TranslationTarget {
   }
 
   private _generateTargetUnits(
-    unitMap: Map<string, TranslationTargetUnit>
+    unitMap: Map<string, TranslationTargetUnit>,
   ): TranslationTargetUnit[] {
     return this.source.units.map(
       (u) =>
@@ -68,7 +68,7 @@ export class TranslationTarget {
           source: u.source,
           state: 'initial',
           target: '',
-        }
+        },
     );
   }
 

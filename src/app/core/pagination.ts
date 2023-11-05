@@ -21,7 +21,7 @@ export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    public filter?: UntypedFormGroup
+    public filter?: UntypedFormGroup,
   ) {
     const queryParams = this._route.snapshot.queryParamMap;
     this.queryParams = this._route.queryParams;
@@ -86,9 +86,9 @@ export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
             .filter((k) => filter.get(k)!.value)
             .reduce(
               (current, next) => Object.assign(current, { [next]: filter.get(next)!.value }),
-              {}
+              {},
             )
-        : undefined
+        : undefined,
     );
     this._router.navigate([], {
       relativeTo: this._route,

@@ -5,7 +5,10 @@ import { RootResponse, TranslationSource } from '../models';
 
 @Controller()
 export class AppController {
-  constructor(private _translationSource: TranslationSource, private _linkHelper: LinkHelper) {}
+  constructor(
+    private _translationSource: TranslationSource,
+    private _linkHelper: LinkHelper,
+  ) {}
 
   @Get()
   root(): RootResponse {

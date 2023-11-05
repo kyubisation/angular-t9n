@@ -61,7 +61,8 @@ describe('TargetUnitsController', () => {
       const sortedIds = MOCK_TARGET_DE.units
         .slice()
         .filter(
-          (u) => (u as any)[filter] && (u as any)[filter].toString().includes((unit as any)[filter])
+          (u) =>
+            (u as any)[filter] && (u as any)[filter].toString().includes((unit as any)[filter]),
         )
         .map((u) => u.id)
         .slice(0, 10);
@@ -91,13 +92,13 @@ describe('TargetUnitsController', () => {
 
   it('should throw on updating target unit with non-existant target', () => {
     expect(() =>
-      controller.updateTargetUnit('does-not-exist', 'does-not-exist', {} as any)
+      controller.updateTargetUnit('does-not-exist', 'does-not-exist', {} as any),
     ).toThrow();
   });
 
   it('should throw on updating target unit with non-existant target orphan', () => {
     expect(() =>
-      controller.updateTargetUnit(MOCK_TARGET_DE.language, 'does-not-exist', {} as any)
+      controller.updateTargetUnit(MOCK_TARGET_DE.language, 'does-not-exist', {} as any),
     ).toThrow();
   });
 

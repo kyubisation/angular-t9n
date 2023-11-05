@@ -10,18 +10,18 @@ export class SerializationStrategy {
   constructor(
     private readonly _host: WorkspaceHost,
     private readonly _serializer: TranslationSerializer,
-    private readonly _deserializer: TranslationDeserializer
+    private readonly _deserializer: TranslationDeserializer,
   ) {}
 
   async deserializeSource(
-    path: string
+    path: string,
   ): Promise<TranslationDeserializationResult<TranslationSourceUnit>> {
     const content = await this._host.readFile(path);
     return this._deserializer.deserializeSource(content);
   }
 
   async deserializeTarget(
-    path: string
+    path: string,
   ): Promise<TranslationDeserializationResult<TranslationTargetUnit>> {
     const content = await this._host.readFile(path);
     return this._deserializer.deserializeTarget(content);

@@ -73,23 +73,23 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-t9n:build"
+            "buildTarget": "angular-t9n:build"
           },
           "configurations": {
             "de": {
-              "browserTarget": "angular-t9n:build:de"
+              "buildTarget": "angular-t9n:build:de"
             },
             "production": {
-              "browserTarget": "angular-t9n:build:production"
+              "buildTarget": "angular-t9n:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-t9n:build",
             "format": "xlf2",
-            "outputPath": "src/locale/xlf2"
+            "outputPath": "src/locale/xlf2",
+            "buildTarget": "angular-t9n:build"
           },
           "configurations": {
             "xlf": {

@@ -16,12 +16,12 @@ export class SourceUnitsController {
   constructor(
     private _translationSource: TranslationSource,
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _linkHelper: LinkHelper
+    private _linkHelper: LinkHelper,
   ) {}
 
   @Get()
   getPagination(
-    @Query() queryParams: QueryParams
+    @Query() queryParams: QueryParams,
   ): PaginationResponse<TranslationSourceUnit, SourceUnitResponse> {
     return new PaginationResponse({
       query: queryParams,
@@ -54,10 +54,10 @@ export class SourceUnitsController {
           [next.language]: new TargetUnitResponse(
             next,
             next.unitMap.get(unit.id)!,
-            this._linkHelper
+            this._linkHelper,
           ),
         }),
-      {} as { [language: string]: TargetUnitResponse }
+      {} as { [language: string]: TargetUnitResponse },
     );
   }
 }

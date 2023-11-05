@@ -16,21 +16,21 @@ describe('Xlf2Deserializer', () => {
   it('should fail with invalid xliff version', () => {
     const content = readFileSync(invalidVersionFile, 'utf8');
     expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^Expected the xliff tag to have a version attribute with value '2.0'/
+      /^Expected the xliff tag to have a version attribute with value '2.0'/,
     );
   });
 
   it('should fail with missing source language', () => {
     const content = readFileSync(missingSourceLanguageFile, 'utf8');
     expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^Expected the xliff tag to have a srcLang attribute/
+      /^Expected the xliff tag to have a srcLang attribute/,
     );
   });
 
   it('should fail with encoding mismatch', () => {
     const content = readFileSync(encodingMismatchFile, 'utf8');
     expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^angular-t9n only supports UTF-8/
+      /^angular-t9n only supports UTF-8/,
     );
   });
 
@@ -61,7 +61,7 @@ describe('Xlf2Deserializer', () => {
       const result = deserializer.deserializeSource(content);
       const unit = result.unitMap.get('exampleId')!;
       expect(unit.source).toEqual(
-        'Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>'
+        'Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
       expect(unit.locations).toEqual([
         'app/i18n-examples-template/i18n-examples-template.component.html:3',
@@ -105,10 +105,10 @@ describe('Xlf2Deserializer', () => {
       const result = deserializer.deserializeTarget(content);
       const unit = result.unitMap.get('exampleId')!;
       expect(unit.source).toEqual(
-        'Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>'
+        'Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
       expect(unit.target).toEqual(
-        'Beispiel mit <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>'
+        'Beispiel mit <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
       expect(unit.state).toEqual('reviewed');
       expect(unit.locations).toEqual([

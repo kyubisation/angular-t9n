@@ -12,13 +12,16 @@ import { TranslationService } from '../../core/translation.service';
   providedIn: 'root',
 })
 export class SourceOrphansService {
-  constructor(private _translationService: TranslationService, private _http: HttpClient) {}
+  constructor(
+    private _translationService: TranslationService,
+    private _http: HttpClient,
+  ) {}
 
   orphan(id: string) {
     return this._translationService.root.pipe(
       take(1),
       map((r) => r._links!.orphan.href.replace('{id}', id)),
-      switchMap((href) => this._http.get<TranslationSourceUnitResponse>(href))
+      switchMap((href) => this._http.get<TranslationSourceUnitResponse>(href)),
     );
   }
 
@@ -33,8 +36,8 @@ export class SourceOrphansService {
       take(1),
       map((t) => t._links!.orphans.href),
       switchMap((href) =>
-        this._http.get<PaginationResponse<TranslationSourceUnitResponse>>(href, { params })
-      )
+        this._http.get<PaginationResponse<TranslationSourceUnitResponse>>(href, { params }),
+      ),
     );
   }
 
@@ -44,7 +47,7 @@ export class SourceOrphansService {
 
   migrateOrphan(
     orphan: TranslationSourceUnitResponse,
-    unit: TranslationSourceUnitResponse
+    unit: TranslationSourceUnitResponse,
   ): Observable<void> {
     return this._http.request<void>('DELETE', orphan._links!.self.href, { body: unit });
   }
@@ -56,7 +59,7 @@ export class SourceOrphansService {
           .filter((o) => this._canMigrate(o, distanceThreshold))
           .map((o) => this.migrateOrphan(o, (o._embedded!.similar as any)[0]).pipe(mapTo(o)));
         return migrateableOrphans.length ? forkJoin(migrateableOrphans) : of([]);
-      })
+      }),
     );
   }
 
@@ -65,10 +68,10 @@ export class SourceOrphansService {
       switchMap((pageResponse) =>
         pageResponse._links!.next
           ? this._fetchOrphans(++page).pipe(
-              map((entries) => pageResponse._embedded.entries.concat(entries))
+              map((entries) => pageResponse._embedded.entries.concat(entries)),
             )
-          : of(pageResponse._embedded.entries)
-      )
+          : of(pageResponse._embedded.entries),
+      ),
     );
   }
 

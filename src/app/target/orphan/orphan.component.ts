@@ -43,13 +43,13 @@ export class OrphanComponent implements OnDestroy {
     private _translationTargetService: TranslationTargetService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
   ) {
     this.params = this._route.params.pipe(map(({ orphanId, ...params }) => params));
     this.orphan = this._route.paramMap.pipe(
       switchMap((p) => this._translationTargetService.orphan(p.get('orphanId')!)),
       tap((o) => (this._orphan = o)),
-      share()
+      share(),
     );
     this.similar = this.orphan.pipe(map((o) => o._embedded!.similar as OrphanMatchResponse[]));
   }
@@ -66,7 +66,7 @@ export class OrphanComponent implements OnDestroy {
 
     this._orphanAction(
       this._translationTargetService.migrateOrphan(this._orphan!, unit),
-      `Migrated orphan ${this._orphan!.id} to unit ${unit.id}`
+      `Migrated orphan ${this._orphan!.id} to unit ${unit.id}`,
     );
   }
 
@@ -77,7 +77,7 @@ export class OrphanComponent implements OnDestroy {
 
     this._orphanAction(
       this._translationTargetService.deleteOrphan(this._orphan!),
-      `Deleted orphan ${this._orphan!.id}`
+      `Deleted orphan ${this._orphan!.id}`,
     );
   }
 
@@ -85,8 +85,8 @@ export class OrphanComponent implements OnDestroy {
     action
       .pipe(
         switchMap(({ orphansRemaining }) =>
-          this._router.navigate([orphansRemaining ? '..' : '../..'], { relativeTo: this._route })
-        )
+          this._router.navigate([orphansRemaining ? '..' : '../..'], { relativeTo: this._route }),
+        ),
       )
       .subscribe(() => this._snackbar.open(message, undefined, { duration: 2500 }));
   }

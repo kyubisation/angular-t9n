@@ -9,7 +9,7 @@ export class TargetOrphanMatchResponse extends TargetUnitResponse {
     readonly distance: number,
     target: TranslationTarget,
     unit: TranslationTargetUnit,
-    linkHelper: LinkHelper
+    linkHelper: LinkHelper,
   ) {
     super(target, unit, linkHelper);
   }

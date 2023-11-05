@@ -11,7 +11,7 @@ export class TranslationTargetRegistry {
 
   constructor(
     private readonly _source: TranslationSource,
-    private readonly _persistenceStrategy: PersistenceStrategy
+    private readonly _persistenceStrategy: PersistenceStrategy,
   ) {}
 
   register(language: string, units: Map<string, TranslationTargetUnit>, baseHref?: string) {

@@ -31,14 +31,14 @@ export class OrphanRegistry {
             })),
             targetOrphans: new Map<TranslationTarget, TranslationTargetOrphan>().set(
               translationTarget,
-              orphan
+              orphan,
             ),
           });
         }
       }
     }
     this.orphans = Array.from(this.orphanMap.values()).sort((a, b) =>
-      a.unit.id.localeCompare(b.unit.id)
+      a.unit.id.localeCompare(b.unit.id),
     );
   }
 

@@ -15,7 +15,7 @@ import { TranslationTargetRegistry } from '../persistence';
 export class TargetsController {
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _linkHelper: LinkHelper
+    private _linkHelper: LinkHelper,
   ) {}
 
   @Get()

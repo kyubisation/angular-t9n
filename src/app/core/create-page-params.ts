@@ -17,7 +17,7 @@ export function createPageParams(query: {
   if (query.sort && query.sort.active && query.sort.direction) {
     params = params.set(
       'sort',
-      `${query.sort.direction === 'desc' ? '!' : ''}${query.sort.active}`
+      `${query.sort.direction === 'desc' ? '!' : ''}${query.sort.active}`,
     );
   }
   if (query.filter) {

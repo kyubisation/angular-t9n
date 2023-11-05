@@ -15,7 +15,7 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
   constructor(
     private readonly _i18n: AngularI18n,
     private readonly _logger: logging.Logger,
-    private readonly _serializationStrategy: SerializationStrategy
+    private readonly _serializationStrategy: SerializationStrategy,
   ) {
     super();
   }
@@ -25,7 +25,7 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
     this._logger.info(
       `${timestamp()}: Created translation file for ${
         target.language
-      } at ${this._i18n.projectRelativePath(target)}`
+      } at ${this._i18n.projectRelativePath(target)}`,
     );
   }
 
@@ -34,7 +34,7 @@ export class AngularJsonPersistenceStrategy extends PersistenceStrategy {
     this._logger.info(
       `${timestamp()}: Updated translation file for ${
         target.language
-      } at ${this._i18n.projectRelativePath(target)}`
+      } at ${this._i18n.projectRelativePath(target)}`,
     );
   }
 

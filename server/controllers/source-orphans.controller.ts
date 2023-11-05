@@ -35,12 +35,12 @@ export class SourceOrphansController {
   constructor(
     private _source: TranslationSource,
     private _orphanRegistry: OrphanRegistry,
-    private _linkHelper: LinkHelper
+    private _linkHelper: LinkHelper,
   ) {}
 
   @Get()
   getPagination(
-    @Query() queryParams: any
+    @Query() queryParams: any,
   ): PaginationResponse<TranslationSourceOrphan, SourceOrphanResponse> {
     return new PaginationResponse({
       query: queryParams,

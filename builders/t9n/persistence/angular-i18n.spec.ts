@@ -39,7 +39,7 @@ describe('AngularI18n', () => {
       workspaceRoot,
       projectName,
       builder,
-      () => translationContext
+      () => translationContext,
     );
   }
 
@@ -51,7 +51,7 @@ describe('AngularI18n', () => {
           locales: {
             de: 'src/locale/xlf2/messages.de.xlf',
           },
-        })
+        }),
     );
 
     it('should throw without source', () => {
@@ -101,7 +101,7 @@ describe('AngularI18n', () => {
             baseHref: '/en/',
             language: 'en-US',
           },
-        })
+        }),
     );
 
     it('should update the angular.json when changed', async () => {
@@ -144,7 +144,7 @@ describe('AngularI18n', () => {
             fr: 'locales/xlf2/messages.fr.xlf',
             'fr-CH': ['locales/xlf2/messages.fr-CH.xlf', 'locales/xlf2/messages2.fr-CH.xlf'],
           },
-        })
+        }),
     );
 
     it('should return the source locale', async () => {

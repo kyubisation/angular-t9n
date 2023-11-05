@@ -20,7 +20,7 @@ export class Xlf2Deserializer extends XlfDeserializerBase {
       .map((u) => this._deserializeSourceUnit(u as Element))
       .reduce(
         (current, next) => current.set(next.id, next),
-        new Map<string, TranslationSourceUnit>()
+        new Map<string, TranslationSourceUnit>(),
       );
     return { language, unitMap };
   }
@@ -35,7 +35,7 @@ export class Xlf2Deserializer extends XlfDeserializerBase {
       .map((u) => this._deserializeTargetUnit(u as Element))
       .reduce(
         (current, next) => current.set(next.id, next),
-        new Map<string, TranslationTargetUnit>()
+        new Map<string, TranslationTargetUnit>(),
       );
     return { language, unitMap };
   }
@@ -44,11 +44,11 @@ export class Xlf2Deserializer extends XlfDeserializerBase {
     super._assertXliff(doc);
     if (doc.documentElement.getAttribute('version') !== '2.0') {
       throw new Error(
-        `Expected the xliff tag to have a version attribute with value '2.0' (<xliff version="2.0" ...)`
+        `Expected the xliff tag to have a version attribute with value '2.0' (<xliff version="2.0" ...)`,
       );
     } else if (!doc.documentElement.getAttribute('srcLang')) {
       throw new Error(
-        `Expected the xliff tag to have a srcLang attribute (e.g. <xliff srcLang="en" ...)`
+        `Expected the xliff tag to have a srcLang attribute (e.g. <xliff srcLang="en" ...)`,
       );
     }
   }

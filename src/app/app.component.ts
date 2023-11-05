@@ -36,7 +36,7 @@ export class AppComponent {
     websocketService.project.subscribe((p) => {
       if (!this.serviceDown && !p) {
         snackbarRef = snackbar.open(
-          `Translation server is not available. Start it by running the command 'ng run yourProject:t9n' in your console.`
+          `Translation server is not available. Start it by running the command 'ng run yourProject:t9n' in your console.`,
         );
       } else if (this.serviceDown && p) {
         snackbarRef?.dismiss();

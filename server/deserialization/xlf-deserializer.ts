@@ -19,7 +19,7 @@ export class XlfDeserializer extends XlfDeserializerBase {
       .map((u) => this._deserializeSourceUnit(u))
       .reduce(
         (current, next) => current.set(next.id, next),
-        new Map<string, TranslationSourceUnit>()
+        new Map<string, TranslationSourceUnit>(),
       );
     return { language, unitMap };
   }
@@ -33,7 +33,7 @@ export class XlfDeserializer extends XlfDeserializerBase {
       .map((u) => this._deserializeTargetUnit(u))
       .reduce(
         (current, next) => current.set(next.id, next),
-        new Map<string, TranslationTargetUnit>()
+        new Map<string, TranslationTargetUnit>(),
       );
     return { language, unitMap };
   }
@@ -42,11 +42,11 @@ export class XlfDeserializer extends XlfDeserializerBase {
     super._assertXliff(doc);
     if (doc.documentElement.getAttribute('version') !== '1.2') {
       throw new Error(
-        `Expected the xliff tag to have a version attribute with value '1.2' (<xliff version="1.2" ...)`
+        `Expected the xliff tag to have a version attribute with value '1.2' (<xliff version="1.2" ...)`,
       );
     } else if (!this._getFileNode(doc).getAttribute('source-language')) {
       throw new Error(
-        `Expected the file tag to have a source-language attribute (e.g. <file source-language="en" ...)`
+        `Expected the file tag to have a source-language attribute (e.g. <file source-language="en" ...)`,
       );
     }
   }
@@ -76,7 +76,7 @@ export class XlfDeserializer extends XlfDeserializerBase {
 
     const contextGroups = Array.from(unitElement.getElementsByTagName('context-group')).filter(
       (e) =>
-        e.getAttribute('purpose') === 'location' && e.getElementsByTagName('context').length === 2
+        e.getAttribute('purpose') === 'location' && e.getElementsByTagName('context').length === 2,
     );
     if (contextGroups.length) {
       unit.locations = contextGroups
@@ -87,7 +87,7 @@ export class XlfDeserializer extends XlfDeserializerBase {
         }))
         .filter((c) => c.sourcefile && c.linenumber)
         .map(
-          (c) => `${this._convertToString(c.sourcefile!)}:${this._convertToString(c.linenumber!)}`
+          (c) => `${this._convertToString(c.sourcefile!)}:${this._convertToString(c.linenumber!)}`,
         );
     }
 

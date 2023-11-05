@@ -23,13 +23,13 @@ export class TargetUnitsController {
 
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _linkHelper: LinkHelper
+    private _linkHelper: LinkHelper,
   ) {}
 
   @Get()
   getPagination(
     @Param('language') language: string,
-    @Query() queryParams: any
+    @Query() queryParams: any,
   ): PaginationResponse<TranslationTargetUnit, TargetUnitResponse> {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {
@@ -65,7 +65,7 @@ export class TargetUnitsController {
   updateTargetUnit(
     @Param('language') language: string,
     @Param('id') id: string,
-    @Body() body: TargetUnitRequest
+    @Body() body: TargetUnitRequest,
   ): TargetUnitResponse {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {

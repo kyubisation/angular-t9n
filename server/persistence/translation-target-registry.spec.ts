@@ -89,7 +89,7 @@ describe('TranslationTargetRegistry', () => {
     expect(unit.source).toEqual(sourceWithWhitespace);
     const target = registry.register(
       'de',
-      new Map<string, TranslationTargetUnit>().set(unit.id, unit)
+      new Map<string, TranslationTargetUnit>().set(unit.id, unit),
     );
     unit = target.unitMap.get(unit.id)!;
     expect(unit.source).toEqual(sourceUnit.source);
@@ -108,7 +108,7 @@ describe('TranslationTargetRegistry', () => {
     expect(unit.source).toEqual(sourceWithTextChange);
     const target = registry.register(
       'de',
-      new Map<string, TranslationTargetUnit>().set(unit.id, unit)
+      new Map<string, TranslationTargetUnit>().set(unit.id, unit),
     );
     unit = target.unitMap.get(unit.id)!;
     expect(unit.source).toEqual(sourceUnit.source);

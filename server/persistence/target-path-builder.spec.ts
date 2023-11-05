@@ -11,7 +11,7 @@ describe('TargetPathBuilder', () => {
   it('should return the expected path with target', () => {
     const builder = new TargetPathBuilder(targetDirectory, sourceFile);
     expect(builder.createPath({ language: 'en' } as TranslationTarget)).toEqual(
-      join(targetDirectory, 'messages.en.xlf')
+      join(targetDirectory, 'messages.en.xlf'),
     );
   });
 

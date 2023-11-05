@@ -12,7 +12,7 @@ import {
 export class PatternPersistenceStrategy extends PersistenceStrategy {
   constructor(
     private readonly _targetPathBuilder: TargetPathBuilder,
-    private readonly _serializationStrategy: SerializationStrategy
+    private readonly _serializationStrategy: SerializationStrategy,
   ) {
     super();
   }
@@ -22,7 +22,7 @@ export class PatternPersistenceStrategy extends PersistenceStrategy {
     console.log(
       `${timestamp()}: Created translation file for ${
         target.language
-      } at ${this._targetPathBuilder.createPath(target)}`
+      } at ${this._targetPathBuilder.createPath(target)}`,
     );
   }
 
@@ -31,7 +31,7 @@ export class PatternPersistenceStrategy extends PersistenceStrategy {
     console.log(
       `${timestamp()}: Updated translation file for ${
         target.language
-      } at ${this._targetPathBuilder.createPath(target)}`
+      } at ${this._targetPathBuilder.createPath(target)}`,
     );
   }
 

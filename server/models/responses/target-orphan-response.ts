@@ -15,7 +15,7 @@ export class TargetOrphanResponse extends TargetUnitResponse {
       similar: orphan.similar
         .slice(0, 10)
         .map(
-          ({ distance, unit }) => new TargetOrphanMatchResponse(distance, target, unit, linkHelper)
+          ({ distance, unit }) => new TargetOrphanMatchResponse(distance, target, unit, linkHelper),
         ),
     };
   }

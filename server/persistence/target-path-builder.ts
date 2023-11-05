@@ -6,12 +6,15 @@ export class TargetPathBuilder {
   private readonly _basename: string;
   private readonly _extension: string;
 
-  constructor(private readonly _targetDirectory: string, sourceFile: string) {
+  constructor(
+    private readonly _targetDirectory: string,
+    sourceFile: string,
+  ) {
     this._extension = extname(sourceFile);
     const sourceFileBasename = basename(sourceFile);
     this._basename = sourceFileBasename.substring(
       0,
-      sourceFileBasename.length - this._extension.length
+      sourceFileBasename.length - this._extension.length,
     );
   }
 

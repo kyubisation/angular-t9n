@@ -27,7 +27,7 @@ ${units
         <source>${u.source}</source>
         <target>${u.target}</target>
       </segment>
-    </unit>`
+    </unit>`,
   )
   .join('\n')}
   </file>

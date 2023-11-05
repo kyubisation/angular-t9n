@@ -18,7 +18,7 @@ export class AngularI18n {
     private _translationContextFactory: () => {
       source: TranslationSource;
       targetRegistry: TranslationTargetRegistry;
-    }
+    },
   ) {}
 
   async sourceLocale(): Promise<{ code: string; baseHref?: string }> {
@@ -38,7 +38,7 @@ export class AngularI18n {
           Object.assign(current, {
             [next]: this._normalizeI18nLocale(locales[next]),
           }),
-        {} as { [locale: string]: { translation: string[]; baseHref?: string } }
+        {} as { [locale: string]: { translation: string[]; baseHref?: string } },
       );
   }
 
@@ -67,7 +67,7 @@ export class AngularI18n {
           Object.assign(current, {
             [next.language]: this._i18nLocale(next, locales[next.language]),
           }),
-        {}
+        {},
       );
 
     const { project, workspace } = await this._readProject();

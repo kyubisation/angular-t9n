@@ -32,7 +32,10 @@ export class ExportComponent {
   configuration: UntypedFormGroup;
   loading = new BehaviorSubject(false);
 
-  constructor(private _exportService: ExportService, formBuilder: UntypedFormBuilder) {
+  constructor(
+    private _exportService: ExportService,
+    formBuilder: UntypedFormBuilder,
+  ) {
     this.configuration = formBuilder.group({
       state: 'initial',
     });

@@ -48,7 +48,7 @@ export class TranslateComponent extends Pagination<TranslateDataSource> implemen
     private _translationTargetService: TranslationTargetService,
     route: ActivatedRoute,
     router: Router,
-    formBuilder: UntypedFormBuilder
+    formBuilder: UntypedFormBuilder,
   ) {
     super(
       route,
@@ -60,7 +60,7 @@ export class TranslateComponent extends Pagination<TranslateDataSource> implemen
         source: '',
         target: '',
         state: '',
-      })
+      }),
     );
   }
 
@@ -70,7 +70,7 @@ export class TranslateComponent extends Pagination<TranslateDataSource> implemen
       this._translationTargetService,
       this.paginator,
       this.sort,
-      this.filter!
+      this.filter!,
     );
   }
 }

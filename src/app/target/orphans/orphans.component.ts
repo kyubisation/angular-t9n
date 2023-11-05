@@ -35,7 +35,7 @@ export class OrphansComponent extends Pagination<OrphansDataSource> implements O
   constructor(
     private _translationTargetService: TranslationTargetService,
     route: ActivatedRoute,
-    router: Router
+    router: Router,
   ) {
     super(route, router);
   }
@@ -45,7 +45,7 @@ export class OrphansComponent extends Pagination<OrphansDataSource> implements O
     this.dataSource = new OrphansDataSource(
       this._translationTargetService,
       this.paginator,
-      this.sort
+      this.sort,
     );
   }
 }
