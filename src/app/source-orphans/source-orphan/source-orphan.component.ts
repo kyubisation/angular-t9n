@@ -42,13 +42,13 @@ export class SourceOrphanComponent implements OnDestroy {
     private _sourceOrphanService: SourceOrphansService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
   ) {
     this.params = this._route.params.pipe(map(({ orphanId, ...params }) => params));
     this.orphan = this._route.paramMap.pipe(
       switchMap((p) => this._sourceOrphanService.orphan(p.get('orphanId')!)),
       tap((o) => (this._orphan = o)),
-      share()
+      share(),
     );
     this.similar = this.orphan.pipe(map((o) => o._embedded!.similar as OrphanMatchResponse[]));
   }
@@ -65,7 +65,7 @@ export class SourceOrphanComponent implements OnDestroy {
 
     this._orphanAction(
       this._sourceOrphanService.migrateOrphan(this._orphan!, unit),
-      `Migrated orphan ${this._orphan!.id} to unit ${unit.id}`
+      `Migrated orphan ${this._orphan!.id} to unit ${unit.id}`,
     );
   }
 
@@ -76,7 +76,7 @@ export class SourceOrphanComponent implements OnDestroy {
 
     this._orphanAction(
       this._sourceOrphanService.deleteOrphan(this._orphan!),
-      `Deleted orphan ${this._orphan!.id}`
+      `Deleted orphan ${this._orphan!.id}`,
     );
   }
 

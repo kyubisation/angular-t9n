@@ -21,7 +21,7 @@ export class ExportService {
               Meaning: meaning,
               Source: source,
               Target: target,
-            }))
+            })),
           ),
           switchMap(async (entries) => {
             const { utils, writeFile } = await import('xlsx');
@@ -30,9 +30,9 @@ export class ExportService {
             const workbook = utils.book_new();
             utils.book_append_sheet(workbook, sheet, t.language);
             writeFile(workbook, `t9n-${t.language}-${config.state || 'all'}.xlsx`);
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   }
 
@@ -43,10 +43,10 @@ export class ExportService {
         switchMap((pageResponse) =>
           pageResponse._links!.next
             ? this._fetchUnits(++page).pipe(
-                map((entries) => pageResponse._embedded.entries.concat(entries))
+                map((entries) => pageResponse._embedded.entries.concat(entries)),
               )
-            : of(pageResponse._embedded.entries)
-        )
+            : of(pageResponse._embedded.entries),
+        ),
       );
   }
 }

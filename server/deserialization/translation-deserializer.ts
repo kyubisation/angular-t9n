@@ -4,9 +4,9 @@ import { TranslationDeserializationResult } from './translation-deserialization-
 
 export abstract class TranslationDeserializer {
   abstract deserializeSource(
-    content: string
+    content: string,
   ): TranslationDeserializationResult<TranslationSourceUnit>;
   abstract deserializeTarget(
-    content: string
+    content: string,
   ): TranslationDeserializationResult<TranslationTargetUnit>;
 }

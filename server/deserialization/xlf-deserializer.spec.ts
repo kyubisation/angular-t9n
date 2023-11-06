@@ -16,21 +16,21 @@ describe('XlfDeserializer', () => {
   it('should fail with invalid xliff version', () => {
     const content = readFileSync(invalidVersionFile, 'utf8');
     expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^Expected the xliff tag to have a version attribute with value '1.2'/
+      /^Expected the xliff tag to have a version attribute with value '1.2'/,
     );
   });
 
   it('should fail with missing source language', () => {
     const content = readFileSync(missingSourceLanguageFile, 'utf8');
     expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^Expected the file tag to have a source-language attribute/
+      /^Expected the file tag to have a source-language attribute/,
     );
   });
 
   it('should fail with encoding mismatch', () => {
     const content = readFileSync(encodingMismatchFile, 'utf8');
     expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^angular-t9n only supports UTF-8/
+      /^angular-t9n only supports UTF-8/,
     );
   });
 
@@ -64,7 +64,7 @@ describe('XlfDeserializer', () => {
       const result = deserializer.deserializeSource(content);
       const unit = result.unitMap.get('exampleId')!;
       expect(unit.source).toEqual(
-        'Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/>'
+        'Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
       expect(unit.locations).toEqual([
         'app/i18n-examples-template/i18n-examples-template.component.html:3',
@@ -108,10 +108,10 @@ describe('XlfDeserializer', () => {
       const result = deserializer.deserializeTarget(content);
       const unit = result.unitMap.get('exampleId')!;
       expect(unit.source).toEqual(
-        'Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/>'
+        'Example with <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
       expect(unit.target).toEqual(
-        'Beispiel mit <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/>'
+        'Beispiel mit <x id="ICU" equiv-text="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
       expect(unit.state).toEqual('reviewed');
       expect(unit.locations).toEqual([

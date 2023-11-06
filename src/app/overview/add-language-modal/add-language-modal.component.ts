@@ -44,7 +44,7 @@ export class AddLanguageModalComponent {
   constructor(
     private _dialogRef: MatDialogRef<AddLanguageModalComponent>,
     private _translationService: TranslationService,
-    formBuilder: UntypedFormBuilder
+    formBuilder: UntypedFormBuilder,
   ) {
     this.form = formBuilder.group({
       language: [
@@ -59,10 +59,10 @@ export class AddLanguageModalComponent {
       switchMap((filteredLocales) =>
         this._translationService.targets.pipe(
           map((targets) => targets.map((t) => t.language)),
-          map((t) => filteredLocales.filter((l) => t.indexOf(l) < 0))
-        )
+          map((t) => filteredLocales.filter((l) => t.indexOf(l) < 0)),
+        ),
       ),
-      map((l) => l.slice(0, 20))
+      map((l) => l.slice(0, 20)),
     );
   }
 
@@ -80,8 +80,8 @@ export class AddLanguageModalComponent {
     return this._translationService.targets.pipe(
       take(1),
       map((targets) =>
-        targets.some((t) => t.language === control.value) ? { target: true } : null
-      )
+        targets.some((t) => t.language === control.value) ? { target: true } : null,
+      ),
     );
   }
 }

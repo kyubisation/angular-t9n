@@ -12,7 +12,7 @@ export class MigrateDataSource extends TranslationDataSource<TranslationSourceUn
     private _sourceOrphansService: SourceOrphansService,
     paginator: MatPaginator,
     sort: MatSort,
-    filter: UntypedFormGroup
+    filter: UntypedFormGroup,
   ) {
     super(paginator, sort, filter);
   }
@@ -20,7 +20,7 @@ export class MigrateDataSource extends TranslationDataSource<TranslationSourceUn
   protected _fetchData(
     paginator: MatPaginator,
     sort: MatSort,
-    filter: UntypedFormGroup | undefined
+    filter: UntypedFormGroup | undefined,
   ): Observable<PaginationResponse<TranslationSourceUnitResponse>> {
     return this._sourceOrphansService.orphans({
       page: paginator.pageIndex,

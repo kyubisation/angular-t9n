@@ -51,12 +51,12 @@ export class UnitComponent implements OnDestroy {
   constructor(
     private _translationTargetService: TranslationTargetService,
     private _route: ActivatedRoute,
-    private _formBuilder: UntypedFormBuilder
+    private _formBuilder: UntypedFormBuilder,
   ) {
     this.params = this._route.params.pipe(map(({ unitId, ...params }) => params));
     this.unit = this._route.paramMap.pipe(
       switchMap((p) => this._translationTargetService.unit(p.get('unitId')!)),
-      share()
+      share(),
     );
     this.form = this.unit.pipe(map((u) => this._createForm(u)));
   }
@@ -77,7 +77,7 @@ export class UnitComponent implements OnDestroy {
     this._translationTargetService.updateUnitOnChange(
       unit,
       form.controls as { target: AbstractControl; state: AbstractControl },
-      this._destroy
+      this._destroy,
     );
     form.controls.target.markAsTouched();
     return form;

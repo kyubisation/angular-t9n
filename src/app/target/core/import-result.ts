@@ -9,7 +9,7 @@ export class ImportResult {
     this.failedFiles.sort();
     const unitSorter = (
       a: Partial<TranslationTargetUnitResponse>,
-      b: Partial<TranslationTargetUnitResponse>
+      b: Partial<TranslationTargetUnitResponse>,
     ) => a.id!.localeCompare(b.id!);
     this.failedUnits.sort(unitSorter);
     this.importedUnits.sort(unitSorter);

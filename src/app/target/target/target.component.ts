@@ -32,10 +32,13 @@ import { TranslationTargetService } from '../core/translation-target.service';
 export class TargetComponent {
   target: Observable<TargetResponse>;
 
-  constructor(private _route: ActivatedRoute, private _translationService: TranslationService) {
+  constructor(
+    private _route: ActivatedRoute,
+    private _translationService: TranslationService,
+  ) {
     this.target = this._route.params.pipe(
       switchMap((p) => this._translationService.target(p.language)),
-      filter((t): t is TargetResponse => !!t)
+      filter((t): t is TargetResponse => !!t),
     );
   }
 }

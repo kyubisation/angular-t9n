@@ -34,7 +34,7 @@ export class ImportService {
           result.failedFiles.push(f.name);
           return [] as Partial<TranslationTargetUnitResponse>[];
         }
-      })
+      }),
     );
     await Promise.all(
       unitRows
@@ -46,7 +46,7 @@ export class ImportService {
           } catch {
             result.failedUnits.push(u);
           }
-        })
+        }),
     );
     return result.sort();
   }
@@ -87,14 +87,14 @@ export class ImportService {
 
   private _importUnit(
     unit: Partial<TranslationTargetUnitResponse>,
-    state: 'translated' | 'reviewed' | 'final'
+    state: 'translated' | 'reviewed' | 'final',
   ) {
     return this._translationTargetService
       .unit(unit.id!)
       .pipe(
         switchMap((u) =>
-          this._translationTargetService.updateUnit({ ...u, target: unit.target!, state })
-        )
+          this._translationTargetService.updateUnit({ ...u, target: unit.target!, state }),
+        ),
       );
   }
 }

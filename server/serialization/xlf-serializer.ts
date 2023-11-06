@@ -24,9 +24,9 @@ ${units
     (u) => `      <trans-unit id="${u.id}" datatype="html">
         <source>${u.source}</source>
         <target state="${this._transformState(u.state)}">${u.target}</target>${
-      !this._options.includeContextInTarget ? '' : this._serializeNotes(u, target)
-    }
-      </trans-unit>`
+          !this._options.includeContextInTarget ? '' : this._serializeNotes(u, target)
+        }
+      </trans-unit>`,
   )
   .join('\n')}
     </body>

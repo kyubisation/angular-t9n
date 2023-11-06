@@ -103,13 +103,13 @@ export async function t9nStandalone(options: Options, currentWorkingDirectory?: 
     {
       cors: true,
       logger: ['error', 'warn'],
-    }
+    },
   );
   app.setGlobalPrefix('api');
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, whitelist: true }));
   await app.listen(options.port ?? 4300, () =>
-    console.log(`Translation server started: http://localhost:${options.port}\n`)
+    console.log(`Translation server started: http://localhost:${options.port}\n`),
   );
   return new Promise(() => {});
 
@@ -127,7 +127,7 @@ export async function t9nStandalone(options: Options, currentWorkingDirectory?: 
   }
 
   async function TRANSLATION_SOURCE_FACTORY(
-    serializationStrategy: SerializationStrategy
+    serializationStrategy: SerializationStrategy,
   ): Promise<TranslationSource> {
     const result = await serializationStrategy.deserializeSource(sourceFile);
     return new TranslationSource(result.language, result.unitMap);
@@ -136,7 +136,7 @@ export async function t9nStandalone(options: Options, currentWorkingDirectory?: 
   async function TRANSLATION_TARGET_REGISTRY_FACTORY(
     source: TranslationSource,
     serializationStrategy: SerializationStrategy,
-    persistenceStrategy: PersistenceStrategy
+    persistenceStrategy: PersistenceStrategy,
   ): Promise<TranslationTargetRegistry> {
     const targetRegistry = new TranslationTargetRegistry(source, persistenceStrategy);
     await Promise.all(
@@ -157,7 +157,7 @@ export async function t9nStandalone(options: Options, currentWorkingDirectory?: 
             console.log(`Detected ${relative(workspaceRoot, targetPath)}`);
             targetRegistry.register(result.language, result.unitMap);
           } catch {}
-        })
+        }),
     );
     return targetRegistry;
   }

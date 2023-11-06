@@ -31,13 +31,13 @@ export class TargetOrphansController {
 
   constructor(
     private _translationTargetRegistry: TranslationTargetRegistry,
-    private _linkHelper: LinkHelper
+    private _linkHelper: LinkHelper,
   ) {}
 
   @Get()
   getPagination(
     @Param('language') language: string,
-    @Query() queryParams: any
+    @Query() queryParams: any,
   ): PaginationResponse<TranslationTargetOrphan, TargetOrphanResponse> {
     const target = this._translationTargetRegistry.get(language);
     if (!target) {

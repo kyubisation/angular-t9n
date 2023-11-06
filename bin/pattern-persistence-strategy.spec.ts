@@ -25,7 +25,7 @@ describe('PatternPersistenceStrategy', () => {
     mockSerialization = new MockSerialization();
     persistence = new PatternPersistenceStrategy(
       builder,
-      mockSerialization as SerializationStrategy
+      mockSerialization as SerializationStrategy,
     );
   });
 

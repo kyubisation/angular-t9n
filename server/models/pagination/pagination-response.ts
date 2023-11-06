@@ -35,22 +35,22 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
     this._links = new LinkBuilder()
       .self(params.urlFactory(params.query))
       .hrefWhen(this.currentPage > 0, 'first', () =>
-        params.urlFactory({ ...params.query, page: '0' })
+        params.urlFactory({ ...params.query, page: '0' }),
       )
       .hrefWhen(this.currentPage > 0, 'previous', () =>
-        params.urlFactory({ ...params.query, page: `${this.currentPage - 1}` })
+        params.urlFactory({ ...params.query, page: `${this.currentPage - 1}` }),
       )
       .templatedHref(
         'page',
         params
           .urlFactory({ ...params.query, page: PAGE_PLACEHOLDER })
-          .replace(PAGE_PLACEHOLDER, '{page}')
+          .replace(PAGE_PLACEHOLDER, '{page}'),
       )
       .hrefWhen(this.currentPage < lastPage, 'next', () =>
-        params.urlFactory({ ...params.query, page: `${this.currentPage + 1}` })
+        params.urlFactory({ ...params.query, page: `${this.currentPage + 1}` }),
       )
       .hrefWhen(this.currentPage < lastPage, 'last', () =>
-        params.urlFactory({ ...params.query, page: `${lastPage}` })
+        params.urlFactory({ ...params.query, page: `${lastPage}` }),
       )
       .build();
     const start = this.currentPage * this.entriesPerPage;
@@ -81,7 +81,7 @@ export class PaginationResponse<TEntry, TResponse> implements Hal {
   private _filter(
     entries: TEntry[],
     query: { [key: string]: string },
-    filterables?: Filterables<TEntry>
+    filterables?: Filterables<TEntry>,
   ) {
     if (!filterables) {
       return entries;

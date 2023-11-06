@@ -17,7 +17,7 @@ export class TranslateDataSource extends TranslationDataSource<
     private _translationTargetService: TranslationTargetService,
     paginator: MatPaginator,
     sort: MatSort,
-    filter: UntypedFormGroup
+    filter: UntypedFormGroup,
   ) {
     super(paginator, sort, filter);
   }
@@ -25,7 +25,7 @@ export class TranslateDataSource extends TranslationDataSource<
   protected _fetchData(
     paginator: MatPaginator,
     sort: MatSort,
-    filter?: UntypedFormGroup | undefined
+    filter?: UntypedFormGroup | undefined,
   ): Observable<PaginationResponse<TranslationTargetUnitResponse>> {
     this._destroy.next();
     return this._translationTargetService.units({
@@ -37,7 +37,7 @@ export class TranslateDataSource extends TranslationDataSource<
   }
 
   protected _mapPaginationResponse(
-    page: PaginationResponse<TranslationTargetUnitResponse>
+    page: PaginationResponse<TranslationTargetUnitResponse>,
   ): FormTargetUnit[] {
     return page._embedded!.entries.map((u) => {
       const unit: FormTargetUnit = {

@@ -47,7 +47,8 @@ describe('TargetOrphansController', () => {
         .map((o) => o.unit)
         .slice()
         .filter(
-          (u) => (u as any)[filter] && (u as any)[filter].toString().includes((unit as any)[filter])
+          (u) =>
+            (u as any)[filter] && (u as any)[filter].toString().includes((unit as any)[filter]),
         )
         .map((u) => u.id)
         .slice(0, 10);

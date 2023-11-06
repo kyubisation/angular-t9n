@@ -4,7 +4,10 @@ export class TranslationSource {
   readonly units: TranslationSourceUnit[];
   baseHref?: string;
 
-  constructor(readonly language: string, readonly unitMap: Map<string, TranslationSourceUnit>) {
+  constructor(
+    readonly language: string,
+    readonly unitMap: Map<string, TranslationSourceUnit>,
+  ) {
     this.units = Array.from(this.unitMap.values());
   }
 }

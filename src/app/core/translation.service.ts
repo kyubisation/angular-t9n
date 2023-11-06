@@ -21,7 +21,10 @@ export class TranslationService {
   private _targetsMap = new BehaviorSubject(new Map<string, TargetResponse>());
   private _targets = this._targetsSubject.pipe(filter((r): r is TargetsResponse => !!r));
 
-  constructor(private _http: HttpClient, private _websocketService: WebsocketService) {
+  constructor(
+    private _http: HttpClient,
+    private _websocketService: WebsocketService,
+  ) {
     this.root = this._rootSubject.pipe(filter((r): r is RootResponse => !!r));
     this.targets = this._targetsMap.pipe(map((t) => Array.from(t.values())));
     this.root
@@ -44,7 +47,7 @@ export class TranslationService {
       take(1),
       map((r) => this._targetHref(r, language)),
       switchMap((href) => this._http.post<TargetResponse>(href, {})),
-      tap((t) => this._updateTarget(t))
+      tap((t) => this._updateTarget(t)),
     );
   }
 
@@ -52,7 +55,7 @@ export class TranslationService {
     return this._targets.pipe(
       map((r) => this._targetHref(r, language)),
       switchMap((href) => this._http.get<TargetResponse>(href)),
-      tap((t) => this._updateTarget(t))
+      tap((t) => this._updateTarget(t)),
     );
   }
 
@@ -60,14 +63,14 @@ export class TranslationService {
     return combineLatest(
       targetsResponse.languages
         .map((l) => this._targetHref(targetsResponse, l))
-        .map((href) => this._http.get<TargetResponse>(href))
+        .map((href) => this._http.get<TargetResponse>(href)),
     ).pipe(
       map((targets) =>
         targets.reduce(
           (current, next) => current.set(next.language, next),
-          new Map<string, TargetResponse>()
-        )
-      )
+          new Map<string, TargetResponse>(),
+        ),
+      ),
     );
   }
 
@@ -78,7 +81,7 @@ export class TranslationService {
   private _updateTarget(target: TargetResponse) {
     const targets = new Map<string, TargetResponse>(this._targetsMap.value).set(
       target.language,
-      target
+      target,
     );
     this._targetsMap.next(targets);
   }

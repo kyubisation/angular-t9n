@@ -14,7 +14,7 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
   constructor(
     private _paginator: MatPaginator,
     private _sort: MatSort,
-    private _filter?: UntypedFormGroup
+    private _filter?: UntypedFormGroup,
   ) {
     super();
   }
@@ -30,12 +30,12 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
       this._internalPageChanges,
       this._paginator.initialized,
       this._sort.sortChange,
-      this._filter ? this._filter.valueChanges : EMPTY
+      this._filter ? this._filter.valueChanges : EMPTY,
     ).pipe(
       debounceTime(100),
       switchMap(() => this._fetchData(this._paginator, this._sort, this._filter)),
       tap((page) => this._updatePaginator(page.totalEntries)),
-      map((page) => this._mapPaginationResponse(page))
+      map((page) => this._mapPaginationResponse(page)),
     );
   }
 
@@ -48,7 +48,7 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
   protected abstract _fetchData(
     paginator: MatPaginator,
     sort: MatSort,
-    filter?: UntypedFormGroup | undefined
+    filter?: UntypedFormGroup | undefined,
   ): Observable<PaginationResponse<TFetchResponse>>;
 
   protected _mapPaginationResponse(page: PaginationResponse<TFetchResponse>): T[] {

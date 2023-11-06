@@ -74,7 +74,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     workspaceRoot,
     context.target.project,
     targetPathBuilder,
-    () => translationContext
+    () => translationContext,
   );
   const sourceLocale = await angularI18n.sourceLocale();
 
@@ -88,7 +88,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
         useValue: new TargetInfo(
           context.target.project,
           options.translationFile,
-          sourceLocale.code
+          sourceLocale.code,
         ),
       },
       { provide: SerializationOptions, useValue: options },
@@ -117,13 +117,13 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
     {
       cors: true,
       logger: ['error', 'warn'],
-    }
+    },
   );
   app.setGlobalPrefix('api');
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, whitelist: true }));
   await app.listen(options.port ?? 4300, () =>
-    context.logger.info(`Translation server started: http://localhost:${options.port}\n`)
+    context.logger.info(`Translation server started: http://localhost:${options.port}\n`),
   );
   return new Promise(() => {});
 
@@ -141,7 +141,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   }
 
   async function TRANSLATION_SOURCE_FACTORY(
-    serializationStrategy: SerializationStrategy
+    serializationStrategy: SerializationStrategy,
   ): Promise<TranslationSource> {
     try {
       context.logger.info(`Attempting to serialize source file ${sourceFile}`);
@@ -149,7 +149,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
       if (result.language && sourceLocale.code && result.language !== sourceLocale.code) {
         context.logger.warn(
           `Source locale in angular.json is ${sourceLocale} but in the ` +
-            ` source file ${sourceFile} it is ${result.language}.`
+            ` source file ${sourceFile} it is ${result.language}.`,
         );
       }
 
@@ -169,7 +169,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   async function TRANSLATION_TARGET_REGISTRY_FACTORY(
     source: TranslationSource,
     serializationStrategy: SerializationStrategy,
-    persistenceStrategy: PersistenceStrategy
+    persistenceStrategy: PersistenceStrategy,
   ): Promise<TranslationTargetRegistry> {
     try {
       context.logger.info(`Attempting to serialize target files`);
@@ -183,20 +183,20 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
           const relativePath = relative(workspaceRoot, normalizedPath);
           if (locale.translation.every((t) => join(workspaceRoot, t) !== normalizedPath)) {
             context.logger.warn(
-              `Expected translation file ${relativePath} not found listed in i18n! It will be created and added to the i18n entry.`
+              `Expected translation file ${relativePath} not found listed in i18n! It will be created and added to the i18n entry.`,
             );
             const target = await targetRegistry.create(language, locale.baseHref);
             await importExistingTranslationUnits(target, locale.translation, serializationStrategy);
           } else if (!host.isFile(normalizedPath)) {
             context.logger.warn(
-              `Expected translation file ${relativePath} does not exist! It will be created.`
+              `Expected translation file ${relativePath} does not exist! It will be created.`,
             );
             await targetRegistry.create(language, locale.baseHref);
           } else {
             const result = await serializationStrategy.deserializeTarget(normalizedPath);
             targetRegistry.register(result.language, result.unitMap, locale.baseHref);
           }
-        })
+        }),
       );
 
       await angularI18n.update();
@@ -211,7 +211,7 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
   async function importExistingTranslationUnits(
     target: TranslationTarget,
     translationFiles: string[],
-    serializationStrategy: SerializationStrategy
+    serializationStrategy: SerializationStrategy,
   ) {
     for (const translation of translationFiles) {
       const targetPath = join(workspaceRoot, translation);

@@ -40,7 +40,7 @@ export class OverviewComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _translationService: TranslationService,
-    websocketService: WebsocketService
+    websocketService: WebsocketService,
   ) {
     this.project = websocketService.projectChange.pipe(map((p) => p.project));
     this.sourceFile = websocketService.projectChange.pipe(map((p) => p.sourceFile));
@@ -56,8 +56,8 @@ export class OverviewComponent implements OnInit {
         switchMap((targets) =>
           targets.length
             ? forkJoin(targets.map((t) => this._translationService.updateTarget(t.language)))
-            : of()
-        )
+            : of(),
+        ),
       )
       .subscribe();
   }

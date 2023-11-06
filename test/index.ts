@@ -33,8 +33,8 @@ export function generateSource(language = 'en') {
     language,
     generateSourceUnit().reduce(
       (units, unit) => units.set(unit.id, unit),
-      new Map<string, TranslationSourceUnit>()
-    )
+      new Map<string, TranslationSourceUnit>(),
+    ),
   );
 }
 

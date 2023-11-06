@@ -41,7 +41,7 @@ export class MigrateComponent extends Pagination<MigrateDataSource> implements O
     private _sourceOrphansService: SourceOrphansService,
     route: ActivatedRoute,
     router: Router,
-    formBuilder: UntypedFormBuilder
+    formBuilder: UntypedFormBuilder,
   ) {
     super(
       route,
@@ -51,7 +51,7 @@ export class MigrateComponent extends Pagination<MigrateDataSource> implements O
         description: '',
         meaning: '',
         source: '',
-      })
+      }),
     );
   }
 
@@ -61,7 +61,7 @@ export class MigrateComponent extends Pagination<MigrateDataSource> implements O
       this._sourceOrphansService,
       this.paginator,
       this.sort,
-      this.filter!
+      this.filter!,
     );
   }
 }

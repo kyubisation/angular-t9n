@@ -14,7 +14,7 @@ describe('SourceOrphansController', () => {
     controller = new SourceOrphansController(
       result.source,
       result.orphanRegistry,
-      MOCK_LINK_HELPER
+      MOCK_LINK_HELPER,
     );
   });
 
@@ -42,7 +42,7 @@ describe('SourceOrphansController', () => {
   for (const filter of ['id', 'description', 'meaning', 'source']) {
     it(`should return filtered pagination with ${filter}`, async () => {
       const unit = orphanRegistry.orphans.find(
-        (o) => o.unit.id && o.unit.description && o.unit.meaning && o.unit.source
+        (o) => o.unit.id && o.unit.description && o.unit.meaning && o.unit.source,
       )!.unit;
       const page = controller.getPagination({
         [filter]: (unit as any)[filter].substring(0, 10),
@@ -52,7 +52,7 @@ describe('SourceOrphansController', () => {
         .map((o) => o.unit)
         .slice()
         .filter(
-          (u) => !!(u as any)[filter]?.toUpperCase().includes((unit as any)[filter].toUpperCase())
+          (u) => !!(u as any)[filter]?.toUpperCase().includes((unit as any)[filter].toUpperCase()),
         )
         .map((u) => u.id)
         .slice(0, 10);
@@ -91,11 +91,11 @@ describe('SourceOrphansController', () => {
     const targets = Array.from(orphan.targetOrphans.keys());
     const migrateId = targets[0].units[1].id;
     orphan.targetOrphans.forEach((o, target) =>
-      expect(target.unitMap.get(migrateId)!.target).not.toEqual(o.unit.target)
+      expect(target.unitMap.get(migrateId)!.target).not.toEqual(o.unit.target),
     );
     controller.deleteOrphan(orphan.unit.id, { id: migrateId });
     orphan.targetOrphans.forEach((o, target) =>
-      expect(target.unitMap.get(migrateId)!.target).toEqual(o.unit.target)
+      expect(target.unitMap.get(migrateId)!.target).toEqual(o.unit.target),
     );
   });
 });

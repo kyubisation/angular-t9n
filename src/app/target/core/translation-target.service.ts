@@ -28,11 +28,11 @@ export class TranslationTargetService {
   constructor(
     private _translationService: TranslationService,
     private _activatedRoute: ActivatedRoute,
-    private _http: HttpClient
+    private _http: HttpClient,
   ) {
     this.target = this._activatedRoute.params.pipe(
       switchMap((p) => this._translationService.target(p.language)),
-      filter((t): t is TargetResponse => !!t)
+      filter((t): t is TargetResponse => !!t),
     );
   }
 
@@ -40,7 +40,7 @@ export class TranslationTargetService {
     return this.target.pipe(
       take(1),
       map((t) => t._links!.unit.href.replace('{id}', id)),
-      switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href))
+      switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href)),
     );
   }
 
@@ -55,15 +55,15 @@ export class TranslationTargetService {
       take(1),
       map((t) => t._links!.units.href),
       switchMap((href) =>
-        this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
-      )
+        this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params }),
+      ),
     );
   }
 
   updateUnitOnChange(
     unit: TranslationTargetUnitResponse,
     controls: { target: AbstractControl; state: AbstractControl },
-    until: Observable<void>
+    until: Observable<void>,
   ) {
     // The startWith, skip combination is necessary to deal with an IE11 bug
     controls.target.valueChanges
@@ -76,9 +76,9 @@ export class TranslationTargetService {
         tap((target) =>
           target
             ? controls.state.enable({ emitEvent: false })
-            : controls.state.disable({ emitEvent: false })
+            : controls.state.disable({ emitEvent: false }),
         ),
-        switchMap((target) => this.updateUnit({ ...unit, target, state: controls.state.value }))
+        switchMap((target) => this.updateUnit({ ...unit, target, state: controls.state.value })),
       )
       .subscribe((r) => controls.state.setValue(r.state, { emitEvent: false }));
     controls.state.valueChanges
@@ -92,8 +92,8 @@ export class TranslationTargetService {
             ...unit,
             target: controls.target.value,
             state,
-          })
-        )
+          }),
+        ),
       )
       .subscribe();
   }
@@ -113,7 +113,7 @@ export class TranslationTargetService {
     return this.target.pipe(
       take(1),
       map((t) => t._links!.orphan.href.replace('{id}', id)),
-      switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href))
+      switchMap((href) => this._http.get<TranslationTargetUnitResponse>(href)),
     );
   }
 
@@ -128,14 +128,14 @@ export class TranslationTargetService {
       take(1),
       map((t) => t._links!.orphans.href),
       switchMap((href) =>
-        this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params })
-      )
+        this._http.get<PaginationResponse<TranslationTargetUnitResponse>>(href, { params }),
+      ),
     );
   }
 
   migrateOrphan(orphan: TranslationTargetUnitResponse, unit: TranslationTargetUnitResponse) {
     return this.updateUnit({ ...unit, target: orphan.target, state: orphan.state }).pipe(
-      switchMap(() => this.deleteOrphan(orphan))
+      switchMap(() => this.deleteOrphan(orphan)),
     );
   }
 
@@ -144,10 +144,10 @@ export class TranslationTargetService {
       switchMap(() =>
         this.target.pipe(
           take(1),
-          switchMap((t) => this._translationService.updateTarget(t.language))
-        )
+          switchMap((t) => this._translationService.updateTarget(t.language)),
+        ),
       ),
-      map((t) => ({ orphansRemaining: t.orphanCount > 0 }))
+      map((t) => ({ orphansRemaining: t.orphanCount > 0 })),
     );
   }
 }

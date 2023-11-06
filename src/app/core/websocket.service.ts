@@ -13,7 +13,7 @@ import { ProjectInfo } from './project-info';
 export class WebsocketService {
   private readonly _projectSubject = new BehaviorSubject<ProjectInfo | null>(null);
   readonly project = this._projectSubject.pipe(
-    distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
+    distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
   );
   readonly projectChange = this.project.pipe(filter((p): p is ProjectInfo => !!p));
 

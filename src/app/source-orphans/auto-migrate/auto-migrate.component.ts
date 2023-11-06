@@ -44,7 +44,7 @@ export class AutoMigrateComponent {
 
   constructor(
     private _sourceOrphansService: SourceOrphansService,
-    formBuilder: UntypedFormBuilder
+    formBuilder: UntypedFormBuilder,
   ) {
     this.configuration = formBuilder.group({
       distanceThreshold: [0, [Validators.min(0), Validators.required]],

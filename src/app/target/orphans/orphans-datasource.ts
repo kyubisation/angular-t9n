@@ -15,14 +15,14 @@ export class OrphansDataSource extends TranslationDataSource<TranslationTargetUn
   constructor(
     private _translationTargetService: TranslationTargetService,
     paginator: MatPaginator,
-    sort: MatSort
+    sort: MatSort,
   ) {
     super(paginator, sort);
   }
 
   protected _fetchData(
     paginator: MatPaginator,
-    sort: MatSort
+    sort: MatSort,
   ): Observable<PaginationResponse<TranslationTargetUnitResponse>> {
     return this._translationTargetService.orphans({
       page: paginator.pageIndex,
