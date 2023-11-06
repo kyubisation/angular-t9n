@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [17.0.0-next.0](https://github.com/kyubisation/angular-t9n/compare/16.0.0...17.0.0-next.0) (2023-11-06)
+
+### ⚠ BREAKING CHANGES
+
+- This library now uses Angular 17
+
+### Features
+
+- upgrade to Angular 17 ([#42](https://github.com/kyubisation/angular-t9n/issues/42)) ([a6d5471](https://github.com/kyubisation/angular-t9n/commit/a6d5471382a7aa49943eabf350a34c6c3129904c))
+
 ## [16.0.0](https://github.com/kyubisation/angular-t9n/compare/15.0.2...16.0.0) (2023-05-04)
 
 ### ⚠ BREAKING CHANGES
