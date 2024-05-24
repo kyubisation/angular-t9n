@@ -80,14 +80,14 @@ table.mat-mdc-table {
 }
 
 .mat-mdc-autocomplete-panel {
-  scrollbar-color: mat.get-color-from-palette(mat.$indigo-palette, 500) transparent;
+  scrollbar-color: mat.m2-get-color-from-palette(mat.$m2-indigo-palette, 500) transparent;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
     width: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+    background-color: mat.m2-get-color-from-palette(mat.$m2-indigo-palette, 500);
   }
   &::-webkit-scrollbar-track {
     background-color: transparent;

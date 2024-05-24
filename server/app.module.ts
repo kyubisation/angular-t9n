@@ -1,6 +1,7 @@
+import { join } from 'path';
+
 import { DynamicModule, Module, Provider } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 import {
   AppController,
@@ -20,7 +21,7 @@ import { SerializationStrategy } from './serialization-strategy';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, 'client'),
+      rootPath: join(__dirname, 'client', 'browser'),
       exclude: ['/api*'],
     }),
   ],

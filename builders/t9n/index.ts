@@ -1,10 +1,11 @@
+import { dirname } from 'path';
+
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
 import { join, json, logging, normalize, relative, workspaces } from '@angular-devkit/core';
 import { NodeJsSyncHost } from '@angular-devkit/core/node';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { dirname } from 'path';
 
 import {
   AppModule,
