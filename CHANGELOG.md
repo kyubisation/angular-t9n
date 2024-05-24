@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [18.0.0](https://github.com/kyubisation/angular-t9n/compare/17.0.0...18.0.0) (2024-05-24)
+
+### ⚠ BREAKING CHANGES
+
+- Upgrade to Angular 18
+
+### Features
+
+- upgrade to Angular 18 ([#48](https://github.com/kyubisation/angular-t9n/issues/48)) ([33d0713](https://github.com/kyubisation/angular-t9n/commit/33d07139e56fb81ff6036663c3e849d2b51280ce))
+
 ## [17.0.0](https://github.com/kyubisation/angular-t9n/compare/17.0.0-next.0...17.0.0) (2023-11-08)
 
 ## [17.0.0-next.0](https://github.com/kyubisation/angular-t9n/compare/16.0.0...17.0.0-next.0) (2023-11-06)
