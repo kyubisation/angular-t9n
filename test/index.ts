@@ -55,8 +55,8 @@ export function generateTargets(languages: string[] = ['de']) {
       ? pivot < 4
         ? 'translated'
         : pivot < 6
-        ? 'reviewed'
-        : 'final'
+          ? 'reviewed'
+          : 'final'
       : 'initial';
 
     return { ...unit, target, state } as TranslationTargetUnit;

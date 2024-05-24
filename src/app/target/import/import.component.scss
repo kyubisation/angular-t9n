@@ -9,7 +9,7 @@
 }
 
 :host(.dragging) {
-  background-color: mat.get-color-from-palette(mat.$indigo-palette, 100);
+  background-color: mat.m2-get-color-from-palette(mat.$m2-indigo-palette, 100);
 }
 
 button {

@@ -21,12 +21,12 @@ mat-sidenav-container {
     width: 12rem;
 
     a.active {
-      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+      color: mat.m2-get-color-from-palette(mat.$m2-indigo-palette, 500);
       background-color: rgba(0, 0, 0, 0.05);
     }
 
     mat-card {
-      background-color: mat.get-color-from-palette(mat.$yellow-palette, 200);
+      background-color: mat.m2-get-color-from-palette(mat.$m2-yellow-palette, 200);
       margin: 0.5rem;
       padding: 0.25rem;
     }
