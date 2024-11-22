@@ -17,7 +17,6 @@ import { TranslationTargetService } from '../core/translation-target.service';
   styleUrls: ['./target.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TranslationTargetService],
-  standalone: true,
   imports: [
     MatSidenavModule,
     MatListModule,

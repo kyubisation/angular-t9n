@@ -18,7 +18,6 @@ import { AddLanguageModalComponent } from '../add-language-modal/add-language-mo
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
     MatButtonModule,

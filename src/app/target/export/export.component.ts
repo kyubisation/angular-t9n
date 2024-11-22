@@ -16,7 +16,6 @@ import { ExportService } from '../core/export.service';
   styleUrls: ['./export.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ExportService],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

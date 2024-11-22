@@ -23,7 +23,6 @@ import { SourceOrphansService } from '../core/source-orphans.service';
   templateUrl: './auto-migrate.component.html',
   styleUrls: ['./auto-migrate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

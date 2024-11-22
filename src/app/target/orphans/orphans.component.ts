@@ -18,7 +18,6 @@ import { OrphansDataSource } from './orphans-datasource';
   templateUrl: './orphans.component.html',
   styleUrls: ['./orphans.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatTableModule,
     MatSortModule,

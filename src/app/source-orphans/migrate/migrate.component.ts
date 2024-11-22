@@ -21,7 +21,6 @@ import { MigrateDataSource } from './migrate-datasource';
   templateUrl: './migrate.component.html',
   styleUrls: ['./migrate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatTableModule,
     MatSortModule,

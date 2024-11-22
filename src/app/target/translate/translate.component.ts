@@ -24,7 +24,6 @@ import { TranslateDataSource } from './translate-datasource';
   templateUrl: './translate.component.html',
   styleUrls: ['./translate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatTableModule,
     MatSortModule,

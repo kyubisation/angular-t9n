@@ -19,7 +19,6 @@ import { SourceOrphansService } from '../core/source-orphans.service';
   templateUrl: './source-orphan.component.html',
   styleUrls: ['./source-orphan.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NgIf,
     MatTableModule,
