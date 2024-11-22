@@ -1,6 +1,16 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [19.0.0](https://github.com/kyubisation/angular-t9n/compare/18.0.0...19.0.0) (2024-11-22)
+
+### ⚠ BREAKING CHANGES
+
+- Update to Angular 19
+
+### Features
+
+- update to Angular 19 ([#49](https://github.com/kyubisation/angular-t9n/issues/49)) ([b40f7dd](https://github.com/kyubisation/angular-t9n/commit/b40f7dd4a16dd7761f5713f4dc1f2dc6656cac0e))
 
 ## [18.0.0](https://github.com/kyubisation/angular-t9n/compare/17.0.0...18.0.0) (2024-05-24)
 
