@@ -26,7 +26,6 @@ import { TranslationTargetService } from '../core/translation-target.service';
   templateUrl: './unit.component.html',
   styleUrls: ['./unit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NgIf,
     ReactiveFormsModule,

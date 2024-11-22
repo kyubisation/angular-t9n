@@ -9,7 +9,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './source-orphans.component.html',
   styleUrls: ['./source-orphans.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatSidenavModule,
     MatListModule,

@@ -17,7 +17,6 @@ import { WebsocketService } from './core/websocket.service';
   selector: 't9n-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
   imports: [
     MatToolbarModule,
     MatButtonModule,

@@ -19,7 +19,6 @@ import { TranslationTargetService } from '../core/translation-target.service';
   templateUrl: './orphan.component.html',
   styleUrls: ['./orphan.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NgIf,
     MatTableModule,

@@ -20,7 +20,6 @@ import { ImportService } from '../core/import.service';
   styleUrls: ['./import.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ImportService],
-  standalone: true,
   imports: [
     RouterLink,
     MatFormFieldModule,
