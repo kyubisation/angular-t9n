@@ -99,9 +99,7 @@ export class TranslationTargetService {
   }
 
   updateUnit(unit: Partial<TranslationTargetUnitResponse>) {
-    if (unit.target === '' && unit.state !== 'initial') {
-      unit.state = 'initial';
-    } else if (unit.target !== '' && unit.state === 'initial') {
+    if (unit.target !== '' && unit.state === 'initial') {
       unit.state = 'translated';
     }
 

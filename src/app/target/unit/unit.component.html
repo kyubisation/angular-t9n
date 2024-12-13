@@ -35,9 +35,7 @@
     <mat-form-field>
       <mat-label>State</mat-label>
       <mat-select formControlName="state">
-        <mat-option *ngIf="formGroup.get('state').value === 'initial'" value="initial" i18n
-          >Initial</mat-option
-        >
+        <mat-option value="initial" i18n>Initial</mat-option>
         <mat-option value="translated" i18n>Translated</mat-option>
         <mat-option value="reviewed" i18n>Reviewed</mat-option>
         <mat-option value="final" i18n>Final</mat-option>

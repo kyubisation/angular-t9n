@@ -43,7 +43,7 @@ export class TranslateDataSource extends TranslationDataSource<
       const unit: FormTargetUnit = {
         ...u,
         target: new UntypedFormControl(u.target),
-        state: new UntypedFormControl({ value: u.state, disabled: !u.target }),
+        state: new UntypedFormControl(u.state),
       };
       this._translationTargetService.updateUnitOnChange(u, unit, this._destroy);
       unit.target.markAsTouched();

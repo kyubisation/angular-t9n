@@ -71,7 +71,7 @@ export class UnitComponent implements OnDestroy {
       meaning: [{ value: unit.meaning || '-', disabled: true }],
       source: [{ value: unit.source, disabled: true }],
       target: unit.target,
-      state: [{ value: unit.state, disabled: !unit.target }],
+      state: unit.state,
     });
     this._translationTargetService.updateUnitOnChange(
       unit,

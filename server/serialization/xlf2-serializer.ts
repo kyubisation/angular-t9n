@@ -25,7 +25,11 @@ ${units
     }
       <segment state="${u.state}">
         <source>${u.source}</source>
-        <target>${u.target}</target>
+        ${
+          u.state === 'initial' && (!u.target || u.target === '')
+            ? `` // Don't include target if it is "initial" and empty
+            : `<target>${u.target}</target>`
+        }
       </segment>
     </unit>`,
   )
