@@ -85,7 +85,11 @@ export class Xlf2Deserializer extends XlfDeserializerBase {
   }
 
   private _extractTarget(segment: Element) {
-    return this._convertToString(segment.getElementsByTagName('target')[0]);
+    const node = segment.getElementsByTagName('target')[0];
+    if (!node) {
+      return '';
+    }
+    return this._convertToString(node);
   }
 
   private _extractNote(notes: Element, category: string): string[] {

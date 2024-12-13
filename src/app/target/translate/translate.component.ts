@@ -1,5 +1,5 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +33,6 @@ import { TranslateDataSource } from './translate-datasource';
     TextFieldModule,
     ReactiveFormsModule,
     MatSelectModule,
-    NgIf,
     MatOptionModule,
     MatButtonModule,
     RouterLink,
