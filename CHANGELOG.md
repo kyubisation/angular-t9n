@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [19.1.1](https://github.com/kyubisation/angular-t9n/compare/19.1.0...19.1.1) (2025-04-11)
+
+### Bug Fixes
+
+- read subPath from angular.json ([#52](https://github.com/kyubisation/angular-t9n/issues/52)) ([22e007a](https://github.com/kyubisation/angular-t9n/commit/22e007a04ed6345c2711276a7382f76fa5d96718))
+
 ## [19.1.0](https://github.com/kyubisation/angular-t9n/compare/19.0.0...19.1.0) (2025-04-11)
 
 ### Features
