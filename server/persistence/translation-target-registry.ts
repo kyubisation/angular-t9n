@@ -14,10 +14,18 @@ export class TranslationTargetRegistry {
     private readonly _persistenceStrategy: PersistenceStrategy,
   ) {}
 
-  register(language: string, units: Map<string, TranslationTargetUnit>, baseHref?: string) {
+  register(
+    language: string,
+    units: Map<string, TranslationTargetUnit>,
+    baseHref?: string,
+    subPath?: string,
+  ) {
     const target = new TranslationTarget(this._source, language, units);
     if (baseHref) {
       target.baseHref = baseHref;
+    }
+    if (subPath) {
+      target.subPath = subPath;
     }
     target.changed
       .pipe(debounceTime(300))
@@ -27,8 +35,13 @@ export class TranslationTargetRegistry {
     return target;
   }
 
-  async create(language: string, baseHref?: string) {
-    const target = this.register(language, new Map<string, TranslationTargetUnit>(), baseHref);
+  async create(language: string, baseHref?: string, subPath?: string) {
+    const target = this.register(
+      language,
+      new Map<string, TranslationTargetUnit>(),
+      baseHref,
+      subPath,
+    );
     await this._persistenceStrategy.create(target);
     return target;
   }

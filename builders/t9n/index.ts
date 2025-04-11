@@ -158,6 +158,9 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
       if (sourceLocale.baseHref) {
         source.baseHref = sourceLocale.baseHref;
       }
+      if (sourceLocale.subPath) {
+        source.subPath = sourceLocale.subPath;
+      }
 
       context.logger.info(`Successfully serialized source file ${sourceFile}`);
       return source;

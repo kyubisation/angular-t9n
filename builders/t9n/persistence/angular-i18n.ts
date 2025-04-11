@@ -7,7 +7,13 @@ import {
   TranslationTargetRegistry,
 } from '../../../server';
 
-import { AngularJsonI18n, AngularJsonI18nLocale } from './angular-json-i18n';
+import {
+  AngularJsonI18n,
+  AngularJsonI18nLocale,
+  AngularJsonI18nLocaleMultipleTranslationsObject,
+  AngularJsonI18nLocaleObject,
+  AngularJsonI18nSourceLocaleObject,
+} from './angular-json-i18n';
 
 export class AngularI18n {
   constructor(
@@ -21,14 +27,14 @@ export class AngularI18n {
     },
   ) {}
 
-  async sourceLocale(): Promise<{ code: string; baseHref?: string }> {
+  async sourceLocale(): Promise<AngularJsonI18nSourceLocaleObject> {
     const i18n = await this._readProjectI18n();
     return typeof i18n.sourceLocale === 'object'
       ? i18n.sourceLocale
       : { code: i18n.sourceLocale || '' };
   }
 
-  async locales(): Promise<{ [locale: string]: { translation: string[]; baseHref?: string } }> {
+  async locales(): Promise<{ [locale: string]: AngularJsonI18nLocaleMultipleTranslationsObject }> {
     const i18n = await this._readProjectI18n();
     const locales = i18n.locales || {};
     return Object.keys(locales)
@@ -38,22 +44,26 @@ export class AngularI18n {
           Object.assign(current, {
             [next]: this._normalizeI18nLocale(locales[next]),
           }),
-        {} as { [locale: string]: { translation: string[]; baseHref?: string } },
+        {} as { [locale: string]: AngularJsonI18nLocaleMultipleTranslationsObject },
       );
   }
 
   async update(): Promise<void> {
     const { source, targetRegistry } = this._translationContextFactory();
     const i18n = await this._readProjectI18n();
-    if (typeof i18n.sourceLocale === 'object' || source.baseHref) {
-      i18n.sourceLocale = {
-        code: source.language,
-        baseHref:
-          source.baseHref ||
-          (typeof i18n.sourceLocale === 'object'
-            ? i18n.sourceLocale.baseHref
-            : `/${source.language}/`),
-      };
+    if (typeof i18n.sourceLocale === 'object' || source.baseHref || source.subPath) {
+      const sourceLocale: AngularJsonI18nSourceLocaleObject = { code: source.language };
+      if (source.baseHref) {
+        sourceLocale.baseHref = source.baseHref;
+      } else if (typeof i18n.sourceLocale === 'object' && i18n.sourceLocale.baseHref) {
+        sourceLocale.baseHref = i18n.sourceLocale.baseHref;
+      }
+      if (source.subPath) {
+        sourceLocale.subPath = source.subPath;
+      } else if (typeof i18n.sourceLocale === 'object' && i18n.sourceLocale.subPath) {
+        sourceLocale.subPath = i18n.sourceLocale.subPath;
+      }
+      i18n.sourceLocale = sourceLocale;
     } else {
       i18n.sourceLocale = source.language;
     }
@@ -93,7 +103,10 @@ export class AngularI18n {
     return { workspace, project };
   }
 
-  private _i18nLocale(target: TranslationTarget, locale: AngularJsonI18nLocale | undefined) {
+  private _i18nLocale(
+    target: TranslationTarget,
+    locale: AngularJsonI18nLocale | undefined,
+  ): AngularJsonI18nLocale {
     const translationPath = this.projectRelativePath(target);
     const normalizedLocale = locale ? this._normalizeI18nLocale(locale) : { translation: [] };
     if (!normalizedLocale.translation.includes(translationPath)) {
@@ -104,15 +117,26 @@ export class AngularI18n {
       normalizedLocale.translation.length === 1
         ? normalizedLocale.translation[0]
         : normalizedLocale.translation;
-    return target.baseHref && target.baseHref !== target.language
-      ? { translation, baseHref: target.baseHref }
-      : translation;
+    if (
+      (!target.baseHref || target.baseHref === target.language) &&
+      (!target.subPath || target.subPath === target.language)
+    ) {
+      return translation;
+    }
+    const result: AngularJsonI18nLocaleObject = { translation };
+    if (target.baseHref && target.baseHref !== target.language) {
+      result.baseHref = target.baseHref;
+    }
+    if (target.subPath && target.subPath !== target.language) {
+      result.subPath = target.subPath;
+    }
+
+    return result;
   }
 
-  private _normalizeI18nLocale(locale: AngularJsonI18nLocale): {
-    translation: string[];
-    baseHref?: string;
-  } {
+  private _normalizeI18nLocale(
+    locale: AngularJsonI18nLocale,
+  ): AngularJsonI18nLocaleMultipleTranslationsObject {
     if (typeof locale === 'string') {
       return { translation: [locale] };
     } else if (Array.isArray(locale)) {
@@ -120,7 +144,7 @@ export class AngularI18n {
     } else if (!Array.isArray(locale.translation)) {
       return { ...locale, translation: [locale.translation] };
     } else {
-      return locale as { translation: string[]; baseHref?: string };
+      return locale as AngularJsonI18nLocaleMultipleTranslationsObject;
     }
   }
 }
