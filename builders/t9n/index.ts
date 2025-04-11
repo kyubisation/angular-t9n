@@ -189,16 +189,21 @@ export async function t9n(options: Options, context: BuilderContext): Promise<Bu
             context.logger.warn(
               `Expected translation file ${relativePath} not found listed in i18n! It will be created and added to the i18n entry.`,
             );
-            const target = await targetRegistry.create(language, locale.baseHref);
+            const target = await targetRegistry.create(language, locale.baseHref, locale.subPath);
             await importExistingTranslationUnits(target, locale.translation, serializationStrategy);
           } else if (!host.isFile(normalizedPath)) {
             context.logger.warn(
               `Expected translation file ${relativePath} does not exist! It will be created.`,
             );
-            await targetRegistry.create(language, locale.baseHref);
+            await targetRegistry.create(language, locale.baseHref, locale.subPath);
           } else {
             const result = await serializationStrategy.deserializeTarget(normalizedPath);
-            targetRegistry.register(result.language, result.unitMap, locale.baseHref);
+            targetRegistry.register(
+              result.language,
+              result.unitMap,
+              locale.baseHref,
+              locale.subPath,
+            );
           }
         }),
       );
