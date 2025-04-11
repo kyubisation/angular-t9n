@@ -42,9 +42,13 @@
     "url": "https://github.com/kyubisation/angular-t9n/issues"
   },
   "files": [
-    "{bin,builders,schematics,server}/**/*.{json,js,d.ts}",
+    "bin/*.js",
+    "builders/builders.json",
+    "builders/*/*.{js,json}",
+    "schematics/collection.json",
+    "schematics/*/*.{js,json}",
     "server/client/*",
-    "!tsconfig.json"
+    "server/index.js"
   ],
   "dependencies": {
     "@nestjs/common": "^10.4.15",
@@ -53,6 +57,7 @@
     "@nestjs/platform-ws": "^10.4.15",
     "@nestjs/serve-static": "^4.0.2",
     "@nestjs/websockets": "^10.4.15",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@xmldom/xmldom": "^0.9.6",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -106,7 +111,6 @@
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "rollup": "^4.28.1",
-    "rollup-plugin-ts": "^3.4.5",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",

@@ -12,6 +12,7 @@ export class TranslationTarget {
   readonly orphans: TranslationTargetOrphan[];
   readonly orphanMap: Map<string, TranslationTargetOrphan>;
   baseHref?: string;
+  subPath?: string;
 
   private _changedSubject = new Subject<void>();
 

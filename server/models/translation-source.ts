@@ -3,6 +3,7 @@ import { TranslationSourceUnit } from './translation-source-unit';
 export class TranslationSource {
   readonly units: TranslationSourceUnit[];
   baseHref?: string;
+  subPath?: string;
 
   constructor(
     readonly language: string,

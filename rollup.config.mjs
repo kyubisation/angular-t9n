@@ -1,4 +1,4 @@
-import ts from 'rollup-plugin-ts';
+import ts from '@rollup/plugin-typescript';
 
 export default [
   target({ input: './builders/t9n/index.ts', exports: 'named' }),
@@ -43,7 +43,6 @@ function target({ input, exports = 'auto' }) {
     ],
     plugins: [
       ts({
-        browserslist: false,
         tsconfig: 'tsconfig.node.json',
       }),
     ],
