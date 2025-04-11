@@ -198,6 +198,98 @@ describe('AngularI18n', () => {
     });
   });
 
+  describe('with i18n configured with subPath', () => {
+    beforeEach(
+      async () =>
+        await setupI18n({
+          sourceLocale: {
+            code: 'en-CH',
+            subPath: 'en',
+          },
+          locales: {
+            'de-CH': {
+              translation: [
+                'src/locales/messages.de-CH.xlf',
+                'node_modules/@sbb-esta/angular/i18n/xlf2/messages.de-CH.xlf',
+              ],
+              subPath: 'de',
+            },
+            'fr-CH': {
+              translation: [
+                'src/locales/messages.fr-CH.xlf',
+                'node_modules/@sbb-esta/angular/i18n/xlf2/messages.fr-CH.xlf',
+              ],
+              subPath: 'fr',
+            },
+            'it-CH': {
+              translation: [
+                'src/locales/messages.it-CH.xlf',
+                'node_modules/@sbb-esta/angular/i18n/xlf2/messages.it-CH.xlf',
+              ],
+              subPath: 'it',
+            },
+          },
+        }),
+    );
+
+    it('should return the source locale', async () => {
+      const sourceLocale = await angularI18n.sourceLocale();
+      expect(sourceLocale.code).toEqual('en-CH');
+      expect(sourceLocale.subPath).toEqual('en');
+    });
+
+    it('should return the target locales', async () => {
+      const locales = await angularI18n.locales();
+      expect(Object.keys(locales)).toEqual(['de-CH', 'fr-CH', 'it-CH']);
+      const deLocale = locales['de-CH'];
+      expect(deLocale.translation).toEqual([
+        'src/locales/messages.de-CH.xlf',
+        'node_modules/@sbb-esta/angular/i18n/xlf2/messages.de-CH.xlf',
+      ]);
+      expect(deLocale.subPath).toEqual('de');
+    });
+
+    it('should update the angular.json when changed', async () => {
+      translationContext = {
+        source: { language: 'en-CH', subPath: 'en' } as TranslationSource,
+        targetRegistry: {
+          values: () => [
+            { language: 'de-CH', subPath: 'de' } as TranslationTarget,
+            { language: 'fr-CH', subPath: 'fr' } as TranslationTarget,
+          ],
+        } as any,
+      };
+      await angularI18n.update();
+      const ngJson = JSON.parse(await host.readFile(angularJsonPath));
+      const deChPath = relative(workspaceRoot, normalize(builder.createPath('de-CH')));
+      const frChPath = relative(workspaceRoot, normalize(builder.createPath('fr-CH')));
+      expect(ngJson.projects[projectName].i18n).toEqual({
+        sourceLocale: {
+          code: 'en-CH',
+          subPath: 'en',
+        },
+        locales: {
+          'de-CH': {
+            translation: [
+              'src/locales/messages.de-CH.xlf',
+              'node_modules/@sbb-esta/angular/i18n/xlf2/messages.de-CH.xlf',
+              deChPath,
+            ],
+            subPath: 'de',
+          },
+          'fr-CH': {
+            translation: [
+              'src/locales/messages.fr-CH.xlf',
+              'node_modules/@sbb-esta/angular/i18n/xlf2/messages.fr-CH.xlf',
+              frChPath,
+            ],
+            subPath: 'fr',
+          },
+        },
+      });
+    });
+  });
+
   describe('without i18n configured', () => {
     beforeEach(async () => await setupI18n(undefined));
 
