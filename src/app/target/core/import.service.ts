@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 
 import { TranslationTargetUnitResponse } from '../../../models';
@@ -8,7 +8,7 @@ import { TranslationTargetService } from './translation-target.service';
 
 @Injectable()
 export class ImportService {
-  constructor(private _translationTargetService: TranslationTargetService) {}
+  private _translationTargetService = inject(TranslationTargetService);
 
   async import(files: FileList, state: 'translated' | 'reviewed' | 'final') {
     const { read, utils } = await import('xlsx');

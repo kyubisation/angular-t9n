@@ -1,5 +1,5 @@
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -31,11 +31,12 @@ import { OrphansDataSource } from './orphans-datasource';
   ],
 })
 export class OrphansComponent extends Pagination<OrphansDataSource> implements OnInit {
-  constructor(
-    private _translationTargetService: TranslationTargetService,
-    route: ActivatedRoute,
-    router: Router,
-  ) {
+  private _translationTargetService = inject(TranslationTargetService);
+
+  constructor() {
+    const route = inject(ActivatedRoute);
+    const router = inject(Router);
+
     super(route, router);
   }
 

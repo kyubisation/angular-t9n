@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, mapTo, switchMap, take } from 'rxjs/operators';
@@ -12,10 +12,8 @@ import { TranslationService } from '../../core/translation.service';
   providedIn: 'root',
 })
 export class SourceOrphansService {
-  constructor(
-    private _translationService: TranslationService,
-    private _http: HttpClient,
-  ) {}
+  private _translationService = inject(TranslationService);
+  private _http = inject(HttpClient);
 
   orphan(id: string) {
     return this._translationService.root.pipe(

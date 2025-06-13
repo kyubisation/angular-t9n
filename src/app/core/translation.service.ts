@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
@@ -13,6 +13,9 @@ import { WebsocketService } from './websocket.service';
   providedIn: 'root',
 })
 export class TranslationService {
+  private _http = inject(HttpClient);
+  private _websocketService = inject(WebsocketService);
+
   root: Observable<RootResponse>;
   targets: Observable<TargetResponse[]>;
 
@@ -21,10 +24,7 @@ export class TranslationService {
   private _targetsMap = new BehaviorSubject(new Map<string, TargetResponse>());
   private _targets = this._targetsSubject.pipe(filter((r): r is TargetsResponse => !!r));
 
-  constructor(
-    private _http: HttpClient,
-    private _websocketService: WebsocketService,
-  ) {
+  constructor() {
     this.root = this._rootSubject.pipe(filter((r): r is RootResponse => !!r));
     this.targets = this._targetsMap.pipe(map((t) => Array.from(t.values())));
     this.root

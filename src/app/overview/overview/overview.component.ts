@@ -1,5 +1,5 @@
 import { NgFor, NgIf, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -30,17 +30,19 @@ import { AddLanguageModalComponent } from '../add-language-modal/add-language-mo
   ],
 })
 export class OverviewComponent implements OnInit {
+  private _dialog = inject(MatDialog);
+  private _translationService = inject(TranslationService);
+
   project: Observable<string>;
   sourceFile: Observable<string>;
   sourceLanguage: Observable<string>;
   unitCount: Observable<number>;
   targets: Observable<TargetResponse[]>;
 
-  constructor(
-    private _dialog: MatDialog,
-    private _translationService: TranslationService,
-    websocketService: WebsocketService,
-  ) {
+  constructor() {
+    const _translationService = this._translationService;
+    const websocketService = inject(WebsocketService);
+
     this.project = websocketService.projectChange.pipe(map((p) => p.project));
     this.sourceFile = websocketService.projectChange.pipe(map((p) => p.sourceFile));
     this.sourceLanguage = _translationService.root.pipe(map((r) => r.sourceLanguage));

@@ -1,6 +1,6 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { NgIf, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -42,16 +42,16 @@ import { TranslationTargetService } from '../core/translation-target.service';
   ],
 })
 export class UnitComponent implements OnDestroy {
+  private _translationTargetService = inject(TranslationTargetService);
+  private _route = inject(ActivatedRoute);
+  private _formBuilder = inject(UntypedFormBuilder);
+
   unit: Observable<TranslationTargetUnitResponse>;
   params: Observable<Params>;
   form: Observable<UntypedFormGroup>;
   private _destroy = new Subject<void>();
 
-  constructor(
-    private _translationTargetService: TranslationTargetService,
-    private _route: ActivatedRoute,
-    private _formBuilder: UntypedFormBuilder,
-  ) {
+  constructor() {
     this.params = this._route.params.pipe(map(({ unitId, ...params }) => params));
     this.unit = this._route.paramMap.pipe(
       switchMap((p) => this._translationTargetService.unit(p.get('unitId')!)),

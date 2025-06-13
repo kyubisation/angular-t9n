@@ -1,5 +1,5 @@
 import { NgIf, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -29,12 +29,12 @@ import { TranslationTargetService } from '../core/translation-target.service';
   ],
 })
 export class TargetComponent {
+  private _route = inject(ActivatedRoute);
+  private _translationService = inject(TranslationService);
+
   target: Observable<TargetResponse>;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _translationService: TranslationService,
-  ) {
+  constructor() {
     this.target = this._route.params.pipe(
       switchMap((p) => this._translationService.target(p.language)),
       filter((t): t is TargetResponse => !!t),

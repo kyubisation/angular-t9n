@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,12 +36,13 @@ import { MigrateDataSource } from './migrate-datasource';
   ],
 })
 export class MigrateComponent extends Pagination<MigrateDataSource> implements OnInit {
-  constructor(
-    private _sourceOrphansService: SourceOrphansService,
-    route: ActivatedRoute,
-    router: Router,
-    formBuilder: UntypedFormBuilder,
-  ) {
+  private _sourceOrphansService = inject(SourceOrphansService);
+
+  constructor() {
+    const route = inject(ActivatedRoute);
+    const router = inject(Router);
+    const formBuilder = inject(UntypedFormBuilder);
+
     super(
       route,
       router,

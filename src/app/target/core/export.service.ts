@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { TranslationTargetService } from './translation-target.service';
 
 @Injectable()
 export class ExportService {
-  constructor(private _translationTargetService: TranslationTargetService) {}
+  private _translationTargetService = inject(TranslationTargetService);
 
   export(config: { state: string }): Observable<void> {
     return this._translationTargetService.target.pipe(
