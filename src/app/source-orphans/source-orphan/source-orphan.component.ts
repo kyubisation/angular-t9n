@@ -1,5 +1,5 @@
 import { NgIf, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -31,18 +31,18 @@ import { SourceOrphansService } from '../core/source-orphans.service';
   ],
 })
 export class SourceOrphanComponent implements OnDestroy {
+  private _sourceOrphanService = inject(SourceOrphansService);
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _snackbar = inject(MatSnackBar);
+
   orphan: Observable<TranslationSourceUnitResponse>;
   params: Observable<Params>;
   similar: Observable<OrphanMatchResponse[]>;
   private _destroy = new Subject<void>();
   private _orphan?: TranslationSourceUnitResponse;
 
-  constructor(
-    private _sourceOrphanService: SourceOrphansService,
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _snackbar: MatSnackBar,
-  ) {
+  constructor() {
     this.params = this._route.params.pipe(map(({ orphanId, ...params }) => params));
     this.orphan = this._route.paramMap.pipe(
       switchMap((p) => this._sourceOrphanService.orphan(p.get('orphanId')!)),

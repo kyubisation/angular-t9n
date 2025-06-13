@@ -1,4 +1,4 @@
-import { Directive, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Directive, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
@@ -9,6 +9,10 @@ import { takeUntil } from 'rxjs/operators';
 @Directive()
 // tslint:disable-next-line: directive-class-suffix
 export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  filter?: UntypedFormGroup;
+
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   dataSource!: TDataSource;
@@ -18,16 +22,15 @@ export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
 
   protected _destroy = new Subject<void>();
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    public filter?: UntypedFormGroup,
-  ) {
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(filter?: UntypedFormGroup) {
+    this.filter = filter;
     const queryParams = this._route.snapshot.queryParamMap;
     this.queryParams = this._route.queryParams;
     this.pageSize = this._toInteger(queryParams.get('entriesPerPage'));
     this.pageIndex = this._toInteger(queryParams.get('page'));
   }
+
   ngOnInit(): void {
     this._applyCurrentSort();
     this._applyCurrentFilter();

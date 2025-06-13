@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SortDirection } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
@@ -23,13 +23,13 @@ import { TranslationService } from '../../core/translation.service';
 
 @Injectable()
 export class TranslationTargetService {
+  private _translationService = inject(TranslationService);
+  private _activatedRoute = inject(ActivatedRoute);
+  private _http = inject(HttpClient);
+
   target: Observable<TargetResponse>;
 
-  constructor(
-    private _translationService: TranslationService,
-    private _activatedRoute: ActivatedRoute,
-    private _http: HttpClient,
-  ) {
+  constructor() {
     this.target = this._activatedRoute.params.pipe(
       switchMap((p) => this._translationService.target(p.language)),
       filter((t): t is TargetResponse => !!t),

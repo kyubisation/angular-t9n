@@ -1,5 +1,5 @@
 import { NgIf, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -28,13 +28,14 @@ import { ExportService } from '../core/export.service';
   ],
 })
 export class ExportComponent {
+  private _exportService = inject(ExportService);
+
   configuration: UntypedFormGroup;
   loading = new BehaviorSubject(false);
 
-  constructor(
-    private _exportService: ExportService,
-    formBuilder: UntypedFormBuilder,
-  ) {
+  constructor() {
+    const formBuilder = inject(UntypedFormBuilder);
+
     this.configuration = formBuilder.group({
       state: 'initial',
     });

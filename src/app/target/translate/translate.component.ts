@@ -1,6 +1,6 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { Pagination } from '../../core/pagination';
 import { TranslationTargetService } from '../core/translation-target.service';
@@ -42,16 +42,11 @@ import { TranslateDataSource } from './translate-datasource';
   ],
 })
 export class TranslateComponent extends Pagination<TranslateDataSource> implements OnInit {
-  constructor(
-    private _translationTargetService: TranslationTargetService,
-    route: ActivatedRoute,
-    router: Router,
-    formBuilder: UntypedFormBuilder,
-  ) {
+  private _translationTargetService = inject(TranslationTargetService);
+
+  constructor() {
     super(
-      route,
-      router,
-      formBuilder.group({
+      inject(UntypedFormBuilder).group({
         id: '',
         description: '',
         meaning: '',

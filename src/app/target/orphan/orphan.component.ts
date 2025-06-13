@@ -1,5 +1,5 @@
 import { NgIf, AsyncPipe, TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -32,18 +32,18 @@ import { TranslationTargetService } from '../core/translation-target.service';
   ],
 })
 export class OrphanComponent implements OnDestroy {
+  private _translationTargetService = inject(TranslationTargetService);
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _snackbar = inject(MatSnackBar);
+
   orphan: Observable<TranslationTargetUnitResponse>;
   params: Observable<Params>;
   similar: Observable<OrphanMatchResponse[]>;
   private _destroy = new Subject<void>();
   private _orphan?: TranslationTargetUnitResponse;
 
-  constructor(
-    private _translationTargetService: TranslationTargetService,
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _snackbar: MatSnackBar,
-  ) {
+  constructor() {
     this.params = this._route.params.pipe(map(({ orphanId, ...params }) => params));
     this.orphan = this._route.paramMap.pipe(
       switchMap((p) => this._translationTargetService.orphan(p.get('orphanId')!)),

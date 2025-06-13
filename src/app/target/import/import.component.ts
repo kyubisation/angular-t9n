@@ -1,5 +1,11 @@
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  inject,
+} from '@angular/core';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -36,12 +42,12 @@ import { ImportService } from '../core/import.service';
   ],
 })
 export class ImportComponent {
+  private _importService = inject(ImportService);
+
   @HostBinding('class.dragging') dragging = false;
   importing = new BehaviorSubject(false);
   importResult = new BehaviorSubject<ImportResult | undefined>(undefined);
   targetState = new UntypedFormControl('translated');
-
-  constructor(private _importService: ImportService) {}
 
   @HostListener('dragover', ['$event']) onDragOver(event: Event) {
     event.preventDefault();

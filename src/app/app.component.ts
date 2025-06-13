@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -30,7 +30,10 @@ import { WebsocketService } from './core/websocket.service';
 export class AppComponent {
   @HostBinding('class.service-down') serviceDown = false;
 
-  constructor(websocketService: WebsocketService, snackbar: MatSnackBar) {
+  constructor() {
+    const websocketService = inject(WebsocketService);
+    const snackbar = inject(MatSnackBar);
+
     let snackbarRef: MatSnackBarRef<SimpleSnackBar>;
     websocketService.project.subscribe((p) => {
       if (!this.serviceDown && !p) {

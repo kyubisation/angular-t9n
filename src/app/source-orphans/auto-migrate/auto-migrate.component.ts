@@ -1,5 +1,5 @@
 import { NgIf, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -37,14 +37,15 @@ import { SourceOrphansService } from '../core/source-orphans.service';
   ],
 })
 export class AutoMigrateComponent {
+  private _sourceOrphansService = inject(SourceOrphansService);
+
   configuration: UntypedFormGroup;
   loading = new BehaviorSubject(false);
   migrations = new BehaviorSubject<TranslationSourceUnitResponse[] | null>(null);
 
-  constructor(
-    private _sourceOrphansService: SourceOrphansService,
-    formBuilder: UntypedFormBuilder,
-  ) {
+  constructor() {
+    const formBuilder = inject(UntypedFormBuilder);
+
     this.configuration = formBuilder.group({
       distanceThreshold: [0, [Validators.min(0), Validators.required]],
     });

@@ -1,5 +1,5 @@
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -37,14 +37,15 @@ import { TranslationService } from '../../core/translation.service';
   ],
 })
 export class AddLanguageModalComponent {
+  private _dialogRef = inject<MatDialogRef<AddLanguageModalComponent>>(MatDialogRef);
+  private _translationService = inject(TranslationService);
+
   form: UntypedFormGroup;
   locales: Observable<string[]>;
 
-  constructor(
-    private _dialogRef: MatDialogRef<AddLanguageModalComponent>,
-    private _translationService: TranslationService,
-    formBuilder: UntypedFormBuilder,
-  ) {
+  constructor() {
+    const formBuilder = inject(UntypedFormBuilder);
+
     this.form = formBuilder.group({
       language: [
         '',
