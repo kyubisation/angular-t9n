@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
-  filter? = inject(UntypedFormGroup);
+  filter?: UntypedFormGroup;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -22,12 +22,15 @@ export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
 
   protected _destroy = new Subject<void>();
 
-  constructor() {
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(filter?: UntypedFormGroup) {
+    this.filter = filter;
     const queryParams = this._route.snapshot.queryParamMap;
     this.queryParams = this._route.queryParams;
     this.pageSize = this._toInteger(queryParams.get('entriesPerPage'));
     this.pageIndex = this._toInteger(queryParams.get('page'));
   }
+
   ngOnInit(): void {
     this._applyCurrentSort();
     this._applyCurrentFilter();

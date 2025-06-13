@@ -6,7 +6,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { Pagination } from '../../core/pagination';
 import { TranslationTargetService } from '../core/translation-target.service';
@@ -32,13 +32,6 @@ import { OrphansDataSource } from './orphans-datasource';
 })
 export class OrphansComponent extends Pagination<OrphansDataSource> implements OnInit {
   private _translationTargetService = inject(TranslationTargetService);
-
-  constructor() {
-    const route = inject(ActivatedRoute);
-    const router = inject(Router);
-
-    super(route, router);
-  }
 
   ngOnInit() {
     super.ngOnInit();

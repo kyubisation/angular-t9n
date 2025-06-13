@@ -9,7 +9,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { Pagination } from '../../core/pagination';
 import { SourceOrphansService } from '../core/source-orphans.service';
@@ -39,14 +39,8 @@ export class MigrateComponent extends Pagination<MigrateDataSource> implements O
   private _sourceOrphansService = inject(SourceOrphansService);
 
   constructor() {
-    const route = inject(ActivatedRoute);
-    const router = inject(Router);
-    const formBuilder = inject(UntypedFormBuilder);
-
     super(
-      route,
-      router,
-      formBuilder.group({
+      inject(UntypedFormBuilder).group({
         id: '',
         description: '',
         meaning: '',
