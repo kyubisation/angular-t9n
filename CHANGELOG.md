@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [20.0.1](https://github.com/kyubisation/angular-t9n/compare/20.0.0...20.0.1) (2025-08-18)
+
 ## [20.0.0](https://github.com/kyubisation/angular-t9n/compare/19.1.1...20.0.0) (2025-06-13)
 
 ### ⚠ BREAKING CHANGES
