@@ -37,17 +37,12 @@ import { MigrateDataSource } from './migrate-datasource';
 })
 export class MigrateComponent extends Pagination<MigrateDataSource> implements OnInit {
   private _sourceOrphansService = inject(SourceOrphansService);
-
-  constructor() {
-    super(
-      inject(UntypedFormBuilder).group({
-        id: '',
-        description: '',
-        meaning: '',
-        source: '',
-      }),
-    );
-  }
+  filter = inject(UntypedFormBuilder).group({
+    id: '',
+    description: '',
+    meaning: '',
+    source: '',
+  });
 
   ngOnInit(): void {
     super.ngOnInit();

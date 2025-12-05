@@ -1,18 +1,17 @@
 <h2>{{ (orphan | async)?.id }}</h2>
 
-<dl *ngIf="orphan | async as orphan">
-  <dt i18n>Description</dt>
-  <dd>{{ orphan.description || '-' }}</dd>
-
-  <dt i18n>Meaning</dt>
-  <dd>{{ orphan.meaning || '-' }}</dd>
-
-  <dt i18n>Source</dt>
-  <dd class="source">{{ orphan.source }}</dd>
-
-  <dt i18n>Occurs in Targets</dt>
-  <dd class="target">{{ orphan._embedded.locales.join(', ') }}</dd>
-</dl>
+@if (orphan | async; as orphan) {
+  <dl>
+    <dt i18n>Description</dt>
+    <dd>{{ orphan.description || '-' }}</dd>
+    <dt i18n>Meaning</dt>
+    <dd>{{ orphan.meaning || '-' }}</dd>
+    <dt i18n>Source</dt>
+    <dd class="source">{{ orphan.source }}</dd>
+    <dt i18n>Occurs in Targets</dt>
+    <dd class="target">{{ orphan._embedded.locales.join(', ') }}</dd>
+  </dl>
+}
 
 <div class="mat-elevation-z1">
   <table mat-table matSort aria-label="Similar units" [dataSource]="similar | async">

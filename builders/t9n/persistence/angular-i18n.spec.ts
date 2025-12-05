@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { join, normalize, relative, virtualFs, workspaces } from '@angular-devkit/core';
 
 import {
@@ -54,22 +56,24 @@ describe('AngularI18n', () => {
         }),
     );
 
-    it('should throw without source', () => {
-      expect(angularI18n.update()).rejects.toThrow();
+    it('should throw without source', async () => {
+      await assert.rejects(async () => {
+        await angularI18n.update();
+      });
     });
 
     it('should return the source locale', async () => {
       const sourceLocale = await angularI18n.sourceLocale();
-      expect(sourceLocale.code).toEqual('en');
-      expect(sourceLocale.baseHref).toBeUndefined();
+      assert.equal(sourceLocale.code, 'en');
+      assert.equal(sourceLocale.baseHref, undefined);
     });
 
     it('should return the target locales', async () => {
       const locales = await angularI18n.locales();
-      expect(Object.keys(locales)).toEqual(['de']);
+      assert.deepEqual(Object.keys(locales), ['de']);
       const deLocale = locales.de;
-      expect(deLocale.translation).toEqual(['src/locale/xlf2/messages.de.xlf']);
-      expect(deLocale.baseHref).toBeUndefined();
+      assert.deepEqual(deLocale.translation, ['src/locale/xlf2/messages.de.xlf']);
+      assert.equal(deLocale.baseHref, undefined);
     });
 
     it('should update the angular.json when changed', async () => {
@@ -86,7 +90,7 @@ describe('AngularI18n', () => {
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
       const dePath = relative(workspaceRoot, normalize(builder.createPath('de')));
       const deChPath = relative(workspaceRoot, normalize(builder.createPath('de-CH')));
-      expect(ngJson.projects[projectName].i18n).toEqual({
+      assert.deepEqual(ngJson.projects[projectName].i18n, {
         sourceLocale: 'en-US',
         locales: { de: ['src/locale/xlf2/messages.de.xlf', dePath], 'de-CH': deChPath },
       });
@@ -114,7 +118,7 @@ describe('AngularI18n', () => {
       await angularI18n.update();
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
       const dePath = relative(workspaceRoot, normalize(builder.createPath('de')));
-      expect(ngJson.projects[projectName].i18n).toEqual({
+      assert.deepEqual(ngJson.projects[projectName].i18n, {
         sourceLocale: {
           baseHref: '/en/',
           code: 'en-US',
@@ -149,16 +153,16 @@ describe('AngularI18n', () => {
 
     it('should return the source locale', async () => {
       const sourceLocale = await angularI18n.sourceLocale();
-      expect(sourceLocale.code).toEqual('en');
-      expect(sourceLocale.baseHref).toEqual('/en/');
+      assert.equal(sourceLocale.code, 'en');
+      assert.equal(sourceLocale.baseHref, '/en/');
     });
 
     it('should return the target locales', async () => {
       const locales = await angularI18n.locales();
-      expect(Object.keys(locales)).toEqual(['de', 'de-CH', 'fr', 'fr-CH']);
+      assert.deepEqual(Object.keys(locales), ['de', 'de-CH', 'fr', 'fr-CH']);
       const deLocale = locales.de;
-      expect(deLocale.translation).toEqual(['locales/xlf2/messages.de.xlf']);
-      expect(deLocale.baseHref).toEqual('/de/');
+      assert.deepEqual(deLocale.translation, ['locales/xlf2/messages.de.xlf']);
+      assert.equal(deLocale.baseHref, '/de/');
     });
 
     it('should update the angular.json when changed', async () => {
@@ -175,7 +179,7 @@ describe('AngularI18n', () => {
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
       const dePath = relative(workspaceRoot, normalize(builder.createPath('de')));
       const deChPath = relative(workspaceRoot, normalize(builder.createPath('de-CH')));
-      expect(ngJson.projects[projectName].i18n).toEqual({
+      assert.deepEqual(ngJson.projects[projectName].i18n, {
         sourceLocale: {
           code: 'en-US',
           baseHref: '/en-US/',
@@ -234,19 +238,19 @@ describe('AngularI18n', () => {
 
     it('should return the source locale', async () => {
       const sourceLocale = await angularI18n.sourceLocale();
-      expect(sourceLocale.code).toEqual('en-CH');
-      expect(sourceLocale.subPath).toEqual('en');
+      assert.equal(sourceLocale.code, 'en-CH');
+      assert.equal(sourceLocale.subPath, 'en');
     });
 
     it('should return the target locales', async () => {
       const locales = await angularI18n.locales();
-      expect(Object.keys(locales)).toEqual(['de-CH', 'fr-CH', 'it-CH']);
+      assert.deepEqual(Object.keys(locales), ['de-CH', 'fr-CH', 'it-CH']);
       const deLocale = locales['de-CH'];
-      expect(deLocale.translation).toEqual([
+      assert.deepEqual(deLocale.translation, [
         'src/locales/messages.de-CH.xlf',
         'node_modules/@sbb-esta/angular/i18n/xlf2/messages.de-CH.xlf',
       ]);
-      expect(deLocale.subPath).toEqual('de');
+      assert.equal(deLocale.subPath, 'de');
     });
 
     it('should update the angular.json when changed', async () => {
@@ -263,7 +267,7 @@ describe('AngularI18n', () => {
       const ngJson = JSON.parse(await host.readFile(angularJsonPath));
       const deChPath = relative(workspaceRoot, normalize(builder.createPath('de-CH')));
       const frChPath = relative(workspaceRoot, normalize(builder.createPath('fr-CH')));
-      expect(ngJson.projects[projectName].i18n).toEqual({
+      assert.deepEqual(ngJson.projects[projectName].i18n, {
         sourceLocale: {
           code: 'en-CH',
           subPath: 'en',
@@ -295,13 +299,13 @@ describe('AngularI18n', () => {
 
     it('should return undefined for the source locale', async () => {
       const sourceLocale = await angularI18n.sourceLocale();
-      expect(sourceLocale.code).toEqual('');
-      expect(sourceLocale.baseHref).toBeUndefined();
+      assert.equal(sourceLocale.code, '');
+      assert.equal(sourceLocale.baseHref, undefined);
     });
 
     it('should return the target locales', async () => {
       const locales = await angularI18n.locales();
-      expect(Object.keys(locales)).toEqual([]);
+      assert.deepEqual(Object.keys(locales), []);
     });
   });
 });

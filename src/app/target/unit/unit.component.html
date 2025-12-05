@@ -1,17 +1,15 @@
 <h2>{{ (unit | async)?.id }}</h2>
 
-<ng-container *ngIf="form | async as formGroup">
+@if (form | async; as formGroup) {
   <form [formGroup]="formGroup">
     <mat-form-field>
       <mat-label i18n>Description</mat-label>
       <input matInput formControlName="description" />
     </mat-form-field>
-
     <mat-form-field>
       <mat-label i18n>Meaning</mat-label>
       <input matInput formControlName="meaning" />
     </mat-form-field>
-
     <mat-form-field>
       <mat-label i18n>Source</mat-label>
       <textarea matInput formControlName="source" cdkTextareaAutosize></textarea>
@@ -26,12 +24,10 @@
         <mat-icon>file_copy</mat-icon>
       </button>
     </mat-form-field>
-
     <mat-form-field>
       <mat-label i18n>Target</mat-label>
       <textarea matInput formControlName="target" cdkTextareaAutosize></textarea>
     </mat-form-field>
-
     <mat-form-field>
       <mat-label>State</mat-label>
       <mat-select formControlName="state">
@@ -42,7 +38,7 @@
       </mat-select>
     </mat-form-field>
   </form>
-</ng-container>
+}
 
 <a mat-raised-button color="primary" routerLink="../.." [queryParams]="params | async">
   <mat-icon>keyboard_backspace</mat-icon> <ng-container i18n>Back</ng-container>

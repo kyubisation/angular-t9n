@@ -1,4 +1,4 @@
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -22,7 +22,6 @@ import { TranslationTargetService } from '../core/translation-target.service';
     MatListModule,
     RouterLink,
     RouterLinkActive,
-    NgIf,
     MatCardModule,
     RouterOutlet,
     AsyncPipe,

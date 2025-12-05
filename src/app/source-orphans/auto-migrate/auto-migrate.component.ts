@@ -1,4 +1,4 @@
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -27,7 +27,6 @@ import { SourceOrphansService } from '../core/source-orphans.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    NgIf,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatTableModule,

@@ -12,20 +12,17 @@
       >
       <a mat-list-item routerLink="./export" routerLinkActive="active" i18n>Export</a>
       <a mat-list-item routerLink="./import" routerLinkActive="active" i18n>Import</a>
-      <a
-        *ngIf="(target | async)?.orphanCount"
-        mat-list-item
-        routerLink="./orphans"
-        routerLinkActive="active"
-        i18n
-        >Orphans</a
-      >
+      @if ((target | async)?.orphanCount) {
+        <a mat-list-item routerLink="./orphans" routerLinkActive="active" i18n>Orphans</a>
+      }
     </mat-nav-list>
 
-    <mat-card appearance="outlined" *ngIf="(target | async)?.orphanCount" i18n>
-      Orphans are translation units whose id is no longer contained in the source file. Migrate them
-      in the orphans section.
-    </mat-card>
+    @if ((target | async)?.orphanCount) {
+      <mat-card appearance="outlined" i18n>
+        Orphans are translation units whose id is no longer contained in the source file. Migrate
+        them in the orphans section.
+      </mat-card>
+    }
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

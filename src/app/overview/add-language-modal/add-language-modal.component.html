@@ -5,14 +5,16 @@
     <p i18n>(e.g. en, en-GB or en-US-POSIX)</p>
     <mat-form-field>
       <input matInput formControlName="language" [matAutocomplete]="localeAutocomplete" />
-      <mat-error *ngIf="form.get('language')?.errors?.pattern" i18n>Invalid pattern</mat-error>
-      <mat-error *ngIf="form.get('language')?.errors?.target" i18n
-        >Language already exists</mat-error
-      >
+      @if (form.get('language')?.errors?.pattern) {
+        <mat-error i18n>Invalid pattern</mat-error>
+      }
+      @if (form.get('language')?.errors?.target) {
+        <mat-error i18n>Language already exists</mat-error>
+      }
       <mat-autocomplete #localeAutocomplete>
-        <mat-option *ngFor="let locale of locales | async" [value]="locale">{{
-          locale
-        }}</mat-option>
+        @for (locale of locales | async; track locale) {
+          <mat-option [value]="locale">{{ locale }}</mat-option>
+        }
       </mat-autocomplete>
     </mat-form-field>
   </mat-dialog-content>

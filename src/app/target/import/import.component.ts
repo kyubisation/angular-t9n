@@ -1,4 +1,4 @@
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,11 +33,9 @@ import { ImportService } from '../core/import.service';
     ReactiveFormsModule,
     MatOptionModule,
     MatButtonModule,
-    NgIf,
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatListModule,
-    NgFor,
     AsyncPipe,
   ],
 })

@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { normalize, virtualFs, workspaces } from '@angular-devkit/core';
 
 import { TranslationDeserializationResult, TranslationDeserializer } from './deserialization';
@@ -43,18 +45,18 @@ describe('SerializationStrategy', () => {
   it('should deserialize source', async () => {
     await host.writeFile(path, '');
     const result = await serializationStrategy.deserializeSource(path);
-    expect(result).toEqual(expectedSourceResult);
+    assert.deepEqual(result, expectedSourceResult);
   });
 
   it('should deserialize target', async () => {
     await host.writeFile(path, '');
     const result = await serializationStrategy.deserializeTarget(path);
-    expect(result).toEqual(expectedTargetResult);
+    assert.deepEqual(result, expectedTargetResult);
   });
 
   it('should serialize target', async () => {
     await serializationStrategy.serializeTarget({} as any, path);
     const content = await host.readFile(path);
-    expect(content).toEqual(expectedTargetContent);
+    assert.equal(content, expectedTargetContent);
   });
 });

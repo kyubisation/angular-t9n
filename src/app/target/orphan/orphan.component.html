@@ -1,21 +1,19 @@
 <h2>{{ (orphan | async)?.id }}</h2>
 
-<dl *ngIf="orphan | async as orphan">
-  <dt i18n>Description</dt>
-  <dd>{{ orphan.description || '-' }}</dd>
-
-  <dt i18n>Meaning</dt>
-  <dd>{{ orphan.meaning || '-' }}</dd>
-
-  <dt i18n>Source</dt>
-  <dd class="source">{{ orphan.source }}</dd>
-
-  <dt i18n>Target</dt>
-  <dd class="target">{{ orphan.target }}</dd>
-
-  <dt i18n>State</dt>
-  <dd>{{ orphan.state | titlecase }}</dd>
-</dl>
+@if (orphan | async; as orphan) {
+  <dl>
+    <dt i18n>Description</dt>
+    <dd>{{ orphan.description || '-' }}</dd>
+    <dt i18n>Meaning</dt>
+    <dd>{{ orphan.meaning || '-' }}</dd>
+    <dt i18n>Source</dt>
+    <dd class="source">{{ orphan.source }}</dd>
+    <dt i18n>Target</dt>
+    <dd class="target">{{ orphan.target }}</dd>
+    <dt i18n>State</dt>
+    <dd>{{ orphan.state | titlecase }}</dd>
+  </dl>
+}
 
 <div class="mat-elevation-z1">
   <table

@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { TestScheduler } from 'rxjs/testing';
 import { MOCK_SOURCE } from '../../test';
 import { TranslationTarget, TranslationTargetUnit } from '../models';
@@ -30,51 +32,59 @@ describe('TranslationTargetRegistry', () => {
   });
 
   it('should return undefined on a get with no entry', () => {
-    expect(registry.get('de')).toBeUndefined();
+    assert.equal(registry.get('de'), undefined);
   });
 
   it('should return entry if found', () => {
-    expect(registry.get('en')).toEqual(enTarget);
+    assert.deepEqual(registry.get('en'), enTarget);
   });
 
   it('should return true on has if entry exists', () => {
-    expect(registry.has('en')).toBeTruthy();
+    assert.equal(registry.has('en'), true);
   });
 
   it('should return all keys', () => {
-    expect(registry.keys()).toEqual(['en']);
+    assert.deepEqual(registry.keys(), ['en']);
   });
 
   it('should return all values', () => {
-    expect(registry.values()).toEqual([enTarget]);
+    assert.deepEqual(registry.values(), [enTarget]);
   });
 
   it('should return new target without creating on register', () => {
     const target = registry.register('de', new Map<string, TranslationTargetUnit>());
-    expect(target).toBeDefined();
-    expect(persistence.created.length).toEqual(0);
+    assert.ok(target !== undefined);
+    assert.equal(persistence.created.length, 0);
   });
 
   it('should return new target with creating in persistence on create', async () => {
     const target = await registry.create('de');
-    expect(target).toBeDefined();
-    expect(persistence.created.map((t) => t.language)).toEqual([target.language]);
+    assert.ok(target !== undefined);
+    assert.deepEqual(
+      persistence.created.map((t) => t.language),
+      [target.language],
+    );
   });
 
   it('should call update on persistence strategy when a change occurs', () => {
-    const testScheduler = new TestScheduler((actual, expected) => expect(actual).toEqual(expected));
+    const testScheduler = new TestScheduler((actual, expected) =>
+      assert.deepEqual(actual, expected),
+    );
     testScheduler.run(() => {
       const unit = enTarget.units[0];
       enTarget.translateUnit(unit, { target: 'test', state: 'translated' });
       testScheduler.flush();
-      expect(persistence.updated.map((t) => t.language)).toEqual([enTarget.language]);
+      assert.deepEqual(
+        persistence.updated.map((t) => t.language),
+        [enTarget.language],
+      );
     });
   });
 
   it('should assign baseHref if provided', () => {
     const baseHref = '/de/';
     const target = registry.register('de', new Map<string, TranslationTargetUnit>(), baseHref);
-    expect(target.baseHref).toEqual(baseHref);
+    assert.equal(target.baseHref, baseHref);
   });
 
   it('should update stale source with only whitespace change', () => {
@@ -86,14 +96,14 @@ describe('TranslationTargetRegistry', () => {
       target: sourceWithWhitespace,
       state: 'translated',
     };
-    expect(unit.source).toEqual(sourceWithWhitespace);
+    assert.equal(unit.source, sourceWithWhitespace);
     const target = registry.register(
       'de',
       new Map<string, TranslationTargetUnit>().set(unit.id, unit),
     );
     unit = target.unitMap.get(unit.id)!;
-    expect(unit.source).toEqual(sourceUnit.source);
-    expect(unit.state).toEqual('translated');
+    assert.equal(unit.source, sourceUnit.source);
+    assert.equal(unit.state, 'translated');
   });
 
   it('should update stale source and state with textual change', () => {
@@ -105,13 +115,13 @@ describe('TranslationTargetRegistry', () => {
       target: sourceWithTextChange,
       state: 'translated',
     };
-    expect(unit.source).toEqual(sourceWithTextChange);
+    assert.equal(unit.source, sourceWithTextChange);
     const target = registry.register(
       'de',
       new Map<string, TranslationTargetUnit>().set(unit.id, unit),
     );
     unit = target.unitMap.get(unit.id)!;
-    expect(unit.source).toEqual(sourceUnit.source);
-    expect(unit.state).toEqual('initial');
+    assert.equal(unit.source, sourceUnit.source);
+    assert.equal(unit.state, 'initial');
   });
 });

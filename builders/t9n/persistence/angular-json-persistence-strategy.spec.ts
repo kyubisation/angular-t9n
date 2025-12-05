@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { logging, normalize, Path } from '@angular-devkit/core';
 
 import { SerializationStrategy, TranslationTarget } from '../../../server';
@@ -37,13 +39,13 @@ describe('AngularJsonPersistenceStrategy', () => {
 
   it('should create target', async () => {
     await persistenceStrategy.create(MOCK_TARGET_DE);
-    expect(serializationStrategy.serializedTargets.length).toEqual(1);
-    expect(serializationStrategy.serializedTargets[0]).toEqual(MOCK_TARGET_DE);
+    assert.equal(serializationStrategy.serializedTargets.length, 1);
+    assert.deepEqual(serializationStrategy.serializedTargets[0], MOCK_TARGET_DE);
   });
 
   it('should update a target', async () => {
     await persistenceStrategy.update(MOCK_TARGET_DE);
-    expect(serializationStrategy.serializedTargets.length).toEqual(1);
-    expect(serializationStrategy.serializedTargets[0]).toEqual(MOCK_TARGET_DE);
+    assert.equal(serializationStrategy.serializedTargets.length, 1);
+    assert.deepEqual(serializationStrategy.serializedTargets[0], MOCK_TARGET_DE);
   });
 });

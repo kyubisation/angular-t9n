@@ -1,4 +1,4 @@
-import { NgFor, NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -25,8 +25,6 @@ import { AddLanguageModalComponent } from '../add-language-modal/add-language-mo
     MatDialogModule,
     MatTooltipModule,
     RouterLink,
-    NgFor,
-    NgIf,
   ],
 })
 export class OverviewComponent implements OnInit {

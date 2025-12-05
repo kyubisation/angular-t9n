@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { generateOrphans, MOCK_LINK_HELPER } from '../../test';
 import { SourceOrphanResponse } from '../models';
 import { OrphanRegistry } from '../persistence';
@@ -20,8 +22,8 @@ describe('SourceOrphansController', () => {
 
   it('should return pagination', () => {
     const response = controller.getPagination({});
-    expect(response.currentPage).toEqual(0);
-    expect(response.totalEntries).toEqual(orphanRegistry.orphans.length);
+    assert.equal(response.currentPage, 0);
+    assert.equal(response.totalEntries, orphanRegistry.orphans.length);
   });
 
   for (const sort of ['id', 'description', 'meaning', 'source']) {
@@ -35,7 +37,7 @@ describe('SourceOrphansController', () => {
         .sort((a, b) => stringify((a as any)[sort]).localeCompare(stringify((b as any)[sort])))
         .map((u) => u.id)
         .slice(0, 10);
-      expect(responseIds).toEqual(sortedIds);
+      assert.deepEqual(responseIds, sortedIds);
     });
   }
 
@@ -56,34 +58,34 @@ describe('SourceOrphansController', () => {
         )
         .map((u) => u.id)
         .slice(0, 10);
-      expect(responseIds).toEqual(sortedIds);
+      assert.deepEqual(responseIds, sortedIds);
     });
   }
 
   it('should return source orphan', () => {
     const orphan = orphanRegistry.orphans[0];
     const response = controller.getOrphan(orphan.unit.id);
-    expect(response.id).toEqual(orphan.unit.id);
-    expect(response.source).toEqual(orphan.unit.source);
+    assert.equal(response.id, orphan.unit.id);
+    assert.equal(response.source, orphan.unit.source);
   });
 
   it('should throw on getting non-existant orphan', () => {
-    expect(() => controller.getOrphan('does-not-exist')).toThrow();
+    assert.throws(() => controller.getOrphan('does-not-exist'));
   });
 
   it('should throw on deleting non-existant orphan', () => {
-    expect(() => controller.deleteOrphan('does-not-exist')).toThrow();
+    assert.throws(() => controller.deleteOrphan('does-not-exist'));
   });
 
   it('should throw on migrating to non-existant unit', () => {
     const orphan = orphanRegistry.orphans[0];
-    expect(() => controller.deleteOrphan(orphan.unit.id, { id: 'does-not-exist' })).toThrow();
+    assert.throws(() => controller.deleteOrphan(orphan.unit.id, { id: 'does-not-exist' }));
   });
 
   it('should delete orphan with no body', () => {
     const orphan = orphanRegistry.orphans[0];
     controller.deleteOrphan(orphan.unit.id);
-    expect(orphanRegistry.orphanMap.has(orphan.unit.id)).toBeFalsy();
+    assert.equal(orphanRegistry.orphanMap.has(orphan.unit.id), false);
   });
 
   it('should migrate orphan with body', () => {
@@ -91,11 +93,11 @@ describe('SourceOrphansController', () => {
     const targets = Array.from(orphan.targetOrphans.keys());
     const migrateId = targets[0].units[1].id;
     orphan.targetOrphans.forEach((o, target) =>
-      expect(target.unitMap.get(migrateId)!.target).not.toEqual(o.unit.target),
+      assert.notEqual(target.unitMap.get(migrateId)!.target, o.unit.target),
     );
     controller.deleteOrphan(orphan.unit.id, { id: migrateId });
     orphan.targetOrphans.forEach((o, target) =>
-      expect(target.unitMap.get(migrateId)!.target).toEqual(o.unit.target),
+      assert.equal(target.unitMap.get(migrateId)!.target, o.unit.target),
     );
   });
 });
