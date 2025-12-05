@@ -22,9 +22,7 @@ export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
 
   protected _destroy = new Subject<void>();
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(filter?: UntypedFormGroup) {
-    this.filter = filter;
+  constructor() {
     const queryParams = this._route.snapshot.queryParamMap;
     this.queryParams = this._route.queryParams;
     this.pageSize = this._toInteger(queryParams.get('entriesPerPage'));

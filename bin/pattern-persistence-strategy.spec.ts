@@ -1,3 +1,5 @@
+import { describe, it, beforeEach, afterEach, mock } from 'node:test';
+import assert from 'node:assert/strict';
 import { mkdirSync, mkdtempSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
@@ -34,16 +36,16 @@ describe('PatternPersistenceStrategy', () => {
   });
 
   it('should call serialization with create', async () => {
-    const spy = jest.spyOn(mockSerialization, 'serializeTarget');
+    const spy = mock.method(mockSerialization, 'serializeTarget');
     await persistence.create(MOCK_TARGET_DE);
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
+    assert.equal(spy.mock.callCount() > 0, true);
+    spy.mock.restore();
   });
 
   it('should call serialization with update', async () => {
-    const spy = jest.spyOn(mockSerialization, 'serializeTarget');
+    const spy = mock.method(mockSerialization, 'serializeTarget');
     await persistence.update(MOCK_TARGET_DE);
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
+    assert.equal(spy.mock.callCount() > 0, true);
+    spy.mock.restore();
   });
 });

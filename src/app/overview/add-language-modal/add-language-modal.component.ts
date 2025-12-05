@@ -1,4 +1,4 @@
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -29,8 +29,6 @@ import { TranslationService } from '../../core/translation.service';
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    NgIf,
-    NgFor,
     MatOptionModule,
     MatButtonModule,
     AsyncPipe,

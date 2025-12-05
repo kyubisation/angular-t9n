@@ -1,4 +1,4 @@
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,7 +22,6 @@ import { ExportService } from '../core/export.service';
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
-    NgIf,
     MatProgressSpinnerModule,
     AsyncPipe,
   ],

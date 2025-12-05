@@ -1,5 +1,5 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -27,7 +27,6 @@ import { TranslationTargetService } from '../core/translation-target.service';
   styleUrls: ['./unit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NgIf,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,

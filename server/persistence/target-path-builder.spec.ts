@@ -1,3 +1,5 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import { join } from 'path';
 
 import { TranslationTarget } from '../models';
@@ -10,13 +12,14 @@ describe('TargetPathBuilder', () => {
 
   it('should return the expected path with target', () => {
     const builder = new TargetPathBuilder(targetDirectory, sourceFile);
-    expect(builder.createPath({ language: 'en' } as TranslationTarget)).toEqual(
+    assert.equal(
+      builder.createPath({ language: 'en' } as TranslationTarget),
       join(targetDirectory, 'messages.en.xlf'),
     );
   });
 
   it('should return the expected path with string', () => {
     const builder = new TargetPathBuilder(targetDirectory, sourceFile);
-    expect(builder.createPath('en')).toEqual(join(targetDirectory, 'messages.en.xlf'));
+    assert.equal(builder.createPath('en'), join(targetDirectory, 'messages.en.xlf'));
   });
 });

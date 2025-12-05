@@ -16,4 +16,6 @@
   <button mat-raised-button color="primary" [disabled]="loading | async" i18n>Export</button>
 </form>
 
-<mat-spinner *ngIf="loading | async"></mat-spinner>
+@if (loading | async) {
+  <mat-spinner></mat-spinner>
+}

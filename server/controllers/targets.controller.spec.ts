@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { MOCK_LINK_HELPER, MOCK_TARGET_DE, MOCK_TARGET_REGISTRY } from '../../test';
 
 import { TargetsController } from './targets.controller';
@@ -11,24 +13,24 @@ describe('TargetsController', () => {
 
   it('should return targets response', () => {
     const response = controller.targets();
-    expect(response.languages).toEqual(MOCK_TARGET_REGISTRY.keys());
+    assert.deepEqual(response.languages, MOCK_TARGET_REGISTRY.keys());
   });
 
   it('should return target response', () => {
     const response = controller.target(MOCK_TARGET_DE.language);
-    expect(response.language).toEqual(MOCK_TARGET_DE.language);
+    assert.equal(response.language, MOCK_TARGET_DE.language);
   });
 
   it('should throw on non-existant target', () => {
-    expect(() => controller.target('does-not-exist')).toThrow();
+    assert.throws(() => controller.target('does-not-exist'));
   });
 
-  it('should throw on creating existing target', () => {
-    expect(controller.createTarget(MOCK_TARGET_DE.language)).rejects.toThrow();
+  it('should throw on creating existing target', async () => {
+    await assert.rejects(controller.createTarget(MOCK_TARGET_DE.language));
   });
 
   it('should create a target', async () => {
     const target = await controller.createTarget('fr');
-    expect(target.language).toEqual('fr');
+    assert.equal(target.language, 'fr');
   });
 });

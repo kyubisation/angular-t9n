@@ -24,39 +24,54 @@
 <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
 <input #fileInput type="file" multiple accept=".xlsx,.csv" (change)="onInput($event)" />
 
-<mat-spinner *ngIf="importing | async"></mat-spinner>
+@if (importing | async) {
+  <mat-spinner></mat-spinner>
+}
 
-<ng-container *ngIf="importResult | async as result">
+@if (importResult | async; as result) {
   <h3>Import result</h3>
   <mat-accordion multi="true">
-    <mat-expansion-panel *ngIf="result.failedFiles.length">
-      <mat-expansion-panel-header
-        >Files for which the import failed (e.g. invalid, empty or malformed
-        file)</mat-expansion-panel-header
-      >
-      <mat-list>
-        <mat-list-item *ngFor="let file of result.failedFiles">{{ file }}</mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="result.failedUnits.length">
-      <mat-expansion-panel-header
-        >Units for which the import failed (e.g. unit id does not exist)</mat-expansion-panel-header
-      >
-      <mat-list>
-        <mat-list-item *ngFor="let unit of result.failedUnits">
-          <h4 mat-line>{{ unit.id }}</h4>
-          <p mat-line>{{ unit.source }}</p>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="result.importedUnits.length">
-      <mat-expansion-panel-header>Imported units</mat-expansion-panel-header>
-      <mat-list>
-        <mat-list-item *ngFor="let unit of result.importedUnits">
-          <h4 mat-line>{{ unit.id }}</h4>
-          <p mat-line>{{ unit.source }}</p>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
+    @if (result.failedFiles.length) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header
+          >Files for which the import failed (e.g. invalid, empty or malformed
+          file)</mat-expansion-panel-header
+        >
+        <mat-list>
+          @for (file of result.failedFiles; track file) {
+            <mat-list-item>{{ file }}</mat-list-item>
+          }
+        </mat-list>
+      </mat-expansion-panel>
+    }
+    @if (result.failedUnits.length) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header
+          >Units for which the import failed (e.g. unit id does not
+          exist)</mat-expansion-panel-header
+        >
+        <mat-list>
+          @for (unit of result.failedUnits; track unit) {
+            <mat-list-item>
+              <h4 mat-line>{{ unit.id }}</h4>
+              <p mat-line>{{ unit.source }}</p>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-expansion-panel>
+    }
+    @if (result.importedUnits.length) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>Imported units</mat-expansion-panel-header>
+        <mat-list>
+          @for (unit of result.importedUnits; track unit) {
+            <mat-list-item>
+              <h4 mat-line>{{ unit.id }}</h4>
+              <p mat-line>{{ unit.source }}</p>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-expansion-panel>
+    }
   </mat-accordion>
-</ng-container>
+}

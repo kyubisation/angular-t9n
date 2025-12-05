@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { generateOrphans } from '../../test';
 import { TranslationSource } from '../models';
 
@@ -15,52 +17,64 @@ describe('OrphanRegistry', () => {
 
   it('should delete orphan', () => {
     for (const orphan of [...orphanRegistry.orphans]) {
-      expect(orphan.targetOrphans.size).toBeGreaterThan(0);
+      assert.ok(orphan.targetOrphans.size > 0);
       for (const [target] of orphan.targetOrphans) {
-        expect(target.orphanMap.has(orphan.unit.id)).toBeTruthy();
-        expect(target.orphans.find((o) => o.unit.id === orphan.unit.id)).toBeDefined();
+        assert.equal(target.orphanMap.has(orphan.unit.id), true);
+        assert.ok(target.orphans.find((o) => o.unit.id === orphan.unit.id) !== undefined);
       }
       orphanRegistry.deleteOrphan(orphan);
       for (const [target] of orphan.targetOrphans) {
-        expect(target.orphanMap.has(orphan.unit.id)).toBeFalsy();
-        expect(target.orphans.find((o) => o.unit.id === orphan.unit.id)).toBeUndefined();
+        assert.equal(target.orphanMap.has(orphan.unit.id), false);
+        assert.equal(
+          target.orphans.find((o) => o.unit.id === orphan.unit.id),
+          undefined,
+        );
       }
-      expect(orphanRegistry.orphanMap.has(orphan.unit.id)).toBeFalsy();
-      expect(orphanRegistry.orphans.find((o) => o.unit.id === orphan.unit.id)).toBeUndefined();
+      assert.equal(orphanRegistry.orphanMap.has(orphan.unit.id), false);
+      assert.equal(
+        orphanRegistry.orphans.find((o) => o.unit.id === orphan.unit.id),
+        undefined,
+      );
     }
 
-    expect(orphanRegistry.orphans.length).toBe(0);
+    assert.equal(orphanRegistry.orphans.length, 0);
   });
 
   it('should migrate orphan', () => {
     for (const orphan of [...orphanRegistry.orphans]) {
       const unit = source.units[0];
       orphanRegistry.migrateOrphan(orphan, unit);
-      expect(orphan.targetOrphans.size).toBeGreaterThan(0);
+      assert.ok(orphan.targetOrphans.size > 0);
       for (const [target, targetOrphan] of orphan.targetOrphans) {
-        expect(target.orphanMap.has(orphan.unit.id)).toBeFalsy();
-        expect(target.orphans.find((o) => o.unit.id === orphan.unit.id)).toBeUndefined();
+        assert.equal(target.orphanMap.has(orphan.unit.id), false);
+        assert.equal(
+          target.orphans.find((o) => o.unit.id === orphan.unit.id),
+          undefined,
+        );
         const migratedUnit = target.unitMap.get(unit.id)!;
-        expect(migratedUnit.target).toEqual(targetOrphan.unit.target);
-        expect(migratedUnit.state).toEqual(targetOrphan.unit.state);
+        assert.equal(migratedUnit.target, targetOrphan.unit.target);
+        assert.equal(migratedUnit.state, targetOrphan.unit.state);
       }
-      expect(orphanRegistry.orphanMap.has(orphan.unit.id)).toBeFalsy();
-      expect(orphanRegistry.orphans.find((o) => o.unit.id === orphan.unit.id)).toBeUndefined();
+      assert.equal(orphanRegistry.orphanMap.has(orphan.unit.id), false);
+      assert.equal(
+        orphanRegistry.orphans.find((o) => o.unit.id === orphan.unit.id),
+        undefined,
+      );
     }
 
-    expect(orphanRegistry.orphans.length).toBe(0);
+    assert.equal(orphanRegistry.orphans.length, 0);
   });
 
   it('should ignore deleted orphan', () => {
     const orphan = orphanRegistry.orphans[0];
     orphanRegistry.deleteOrphan(orphan);
-    expect(() => orphanRegistry.deleteOrphan(orphan)).not.toThrow();
+    orphanRegistry.deleteOrphan(orphan);
   });
 
   it('should ignore migrated orphan', () => {
     const orphan = orphanRegistry.orphans[0];
     const unit = source.units[0];
     orphanRegistry.deleteOrphan(orphan);
-    expect(() => orphanRegistry.migrateOrphan(orphan, unit)).not.toThrow();
+    orphanRegistry.migrateOrphan(orphan, unit);
   });
 });

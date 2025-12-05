@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 
@@ -26,6 +28,6 @@ describe('XlfSerializer', () => {
 
   it('should serialize a target', () => {
     const result = serializer.serializeTarget(target);
-    expect(readFileSync(targetFile, 'utf-8')).toEqual(result);
+    assert.equal(readFileSync(targetFile, 'utf-8'), result);
   });
 });

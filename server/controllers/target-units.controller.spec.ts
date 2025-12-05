@@ -1,3 +1,5 @@
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
 import {
   generateTargets,
   MOCK_LINK_HELPER,
@@ -17,8 +19,8 @@ describe('TargetUnitsController', () => {
 
   it('should return pagination', () => {
     const response = controller.getPagination(MOCK_TARGET_DE.language, {});
-    expect(response.currentPage).toEqual(0);
-    expect(response.totalEntries).toEqual(MOCK_TARGET_DE.units.length);
+    assert.equal(response.currentPage, 0);
+    assert.equal(response.totalEntries, MOCK_TARGET_DE.units.length);
   });
 
   for (const sort of ['id', 'description', 'meaning', 'source', 'target', 'state']) {
@@ -31,7 +33,7 @@ describe('TargetUnitsController', () => {
         .sort((a, b) => stringify((a as any)[sort]).localeCompare(stringify((b as any)[sort])))
         .map((u) => u.id)
         .slice(0, 10);
-      expect(responseIds).toEqual(sortedIds);
+      assert.deepEqual(responseIds, sortedIds);
     });
 
     it(`should return second page reverse sorted pagination with ${sort}`, () => {
@@ -47,7 +49,7 @@ describe('TargetUnitsController', () => {
         .reverse()
         .map((u) => u.id)
         .slice(10, 20);
-      expect(responseIds).toEqual(sortedIds);
+      assert.deepEqual(responseIds, sortedIds);
     });
   }
 
@@ -66,40 +68,38 @@ describe('TargetUnitsController', () => {
         )
         .map((u) => u.id)
         .slice(0, 10);
-      expect(responseIds).toEqual(sortedIds);
+      assert.deepEqual(responseIds, sortedIds);
     });
   }
 
   it('should throw on non-existant target', () => {
-    expect(() => controller.getPagination('does-not-exist', {})).toThrow();
+    assert.throws(() => controller.getPagination('does-not-exist', {}));
   });
 
   it('should return target unit', () => {
     const unit = MOCK_TARGET_DE.units[0];
     const response = controller.getTargetUnit(MOCK_TARGET_DE.language, unit.id);
-    expect(response.id).toEqual(unit.id);
-    expect(response.source).toEqual(unit.source);
-    expect(response.target).toEqual(unit.target);
+    assert.equal(response.id, unit.id);
+    assert.equal(response.source, unit.source);
+    assert.equal(response.target, unit.target);
   });
 
   it('should throw on getting unit with non-existant target', () => {
-    expect(() => controller.getTargetUnit('does-not-exist', 'does-not-exist')).toThrow();
+    assert.throws(() => controller.getTargetUnit('does-not-exist', 'does-not-exist'));
   });
 
   it('should throw on getting unit with non-existant target unit', () => {
-    expect(() => controller.getTargetUnit(MOCK_TARGET_DE.language, 'does-not-exist')).toThrow();
+    assert.throws(() => controller.getTargetUnit(MOCK_TARGET_DE.language, 'does-not-exist'));
   });
 
   it('should throw on updating target unit with non-existant target', () => {
-    expect(() =>
-      controller.updateTargetUnit('does-not-exist', 'does-not-exist', {} as any),
-    ).toThrow();
+    assert.throws(() => controller.updateTargetUnit('does-not-exist', 'does-not-exist', {} as any));
   });
 
   it('should throw on updating target unit with non-existant target orphan', () => {
-    expect(() =>
+    assert.throws(() =>
       controller.updateTargetUnit(MOCK_TARGET_DE.language, 'does-not-exist', {} as any),
-    ).toThrow();
+    );
   });
 
   it('should update translation', () => {
@@ -107,14 +107,14 @@ describe('TargetUnitsController', () => {
     const target = registry.get('de')!;
     const unit = target.units[1];
     const update: TargetUnitRequest = { target: 'updated text', state: 'final' };
-    expect(unit.target).not.toEqual(update.target);
-    expect(unit.state).not.toEqual(update.state);
+    assert.notEqual(unit.target, update.target);
+    assert.notEqual(unit.state, update.state);
     controller = new TargetUnitsController(registry, MOCK_LINK_HELPER);
     const result = controller.updateTargetUnit(target.language, unit.id, update);
-    expect(result.target).toEqual(update.target);
-    expect(result.state).toEqual(update.state);
+    assert.equal(result.target, update.target);
+    assert.equal(result.state, update.state);
     const updatedUnit = target.units[1];
-    expect(updatedUnit.target).toEqual(update.target);
-    expect(updatedUnit.state).toEqual(update.state);
+    assert.equal(updatedUnit.target, update.target);
+    assert.equal(updatedUnit.state, update.state);
   });
 });

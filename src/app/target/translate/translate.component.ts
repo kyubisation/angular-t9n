@@ -43,19 +43,14 @@ import { TranslateDataSource } from './translate-datasource';
 })
 export class TranslateComponent extends Pagination<TranslateDataSource> implements OnInit {
   private _translationTargetService = inject(TranslationTargetService);
-
-  constructor() {
-    super(
-      inject(UntypedFormBuilder).group({
-        id: '',
-        description: '',
-        meaning: '',
-        source: '',
-        target: '',
-        state: '',
-      }),
-    );
-  }
+  filter = inject(UntypedFormBuilder).group({
+    id: '',
+    description: '',
+    meaning: '',
+    source: '',
+    target: '',
+    state: '',
+  });
 
   ngOnInit() {
     super.ngOnInit();

@@ -1,4 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import type WebSocket from 'ws';
 
 import { TargetInfo } from '../target-info';
@@ -6,18 +7,9 @@ import { TargetInfo } from '../target-info';
 import { ProjectGateway } from './project.gateway';
 
 describe('ProjectGateway', () => {
-  let gateway: ProjectGateway;
-  const info = new TargetInfo('test', 'file', 'en');
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [ProjectGateway, { provide: TargetInfo, useValue: info }],
-    }).compile();
-
-    gateway = module.get<ProjectGateway>(ProjectGateway);
-  });
-
   it('should emit target info on connecting', () => {
+    const info = new TargetInfo('test', 'file', 'en');
+    const gateway = new ProjectGateway(info);
     let sentValue: any;
     const ws: Partial<WebSocket> = {
       send(value: any) {
@@ -25,6 +17,7 @@ describe('ProjectGateway', () => {
       },
     };
     gateway.handleConnection(ws as WebSocket);
-    expect(sentValue).toEqual(JSON.stringify(info));
+    const expected = JSON.stringify(info);
+    assert.equal(sentValue, expected);
   });
 });

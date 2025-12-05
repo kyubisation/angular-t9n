@@ -1,26 +1,28 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import { LinkBuilder } from './link-builder';
 
 describe('LinkBuilder', () => {
   it('should build undefined with no input', () => {
-    expect(new LinkBuilder().build()).toBeUndefined();
+    assert.equal(new LinkBuilder().build(), undefined);
   });
 
   it('should build the self link', () => {
-    expect(new LinkBuilder().self('test').build()).toEqual({ self: { href: 'test' } });
+    assert.deepEqual(new LinkBuilder().self('test').build(), { self: { href: 'test' } });
   });
 
   it('should build a href with a condition', () => {
-    expect(new LinkBuilder().hrefWhen(true, 'test', () => 'test').build()).toEqual({
+    assert.deepEqual(new LinkBuilder().hrefWhen(true, 'test', () => 'test').build(), {
       test: { href: 'test' },
     });
   });
 
   it('should not build a href with a negative condition', () => {
-    expect(new LinkBuilder().hrefWhen(false, 'test', () => 'test').build()).toBeUndefined();
+    assert.equal(new LinkBuilder().hrefWhen(false, 'test', () => 'test').build(), undefined);
   });
 
   it('should build a templated href', () => {
-    expect(new LinkBuilder().templatedHref('test', 'test').build()).toEqual({
+    assert.deepEqual(new LinkBuilder().templatedHref('test', 'test').build(), {
       test: { href: 'test', templated: true },
     });
   });

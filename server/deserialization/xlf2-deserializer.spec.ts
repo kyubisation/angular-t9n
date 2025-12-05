@@ -1,3 +1,5 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 
@@ -15,23 +17,23 @@ describe('Xlf2Deserializer', () => {
 
   it('should fail with invalid xliff version', () => {
     const content = readFileSync(invalidVersionFile, 'utf8');
-    expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^Expected the xliff tag to have a version attribute with value '2.0'/,
-    );
+    assert.throws(() => deserializer.deserializeSource(content), {
+      message: /^Expected the xliff tag to have a version attribute with value '2.0'/,
+    });
   });
 
   it('should fail with missing source language', () => {
     const content = readFileSync(missingSourceLanguageFile, 'utf8');
-    expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^Expected the xliff tag to have a srcLang attribute/,
-    );
+    assert.throws(() => deserializer.deserializeSource(content), {
+      message: /^Expected the xliff tag to have a srcLang attribute/,
+    });
   });
 
   it('should fail with encoding mismatch', () => {
     const content = readFileSync(encodingMismatchFile, 'utf8');
-    expect(() => deserializer.deserializeSource(content)).toThrow(
-      /^angular-t9n only supports UTF-8/,
-    );
+    assert.throws(() => deserializer.deserializeSource(content), {
+      message: /^angular-t9n only supports UTF-8/,
+    });
   });
 
   describe('should deserialize xlf 2.0 source', () => {
@@ -39,19 +41,19 @@ describe('Xlf2Deserializer', () => {
 
     it('language', () => {
       const result = deserializer.deserializeSource(content);
-      expect(result.language).toEqual('en');
+      assert.equal(result.language, 'en');
     });
 
     it('units', () => {
       const result = deserializer.deserializeSource(content);
-      expect(Array.from(result.unitMap.keys())).toEqual(['82167058490521791', 'exampleId']);
+      assert.deepEqual(Array.from(result.unitMap.keys()), ['82167058490521791', 'exampleId']);
     });
 
     it('unit 82167058490521791', () => {
       const result = deserializer.deserializeSource(content);
       const unit = result.unitMap.get('82167058490521791')!;
-      expect(unit.source).toEqual('Empty example');
-      expect(unit.locations).toEqual([
+      assert.equal(unit.source, 'Empty example');
+      assert.deepEqual(unit.locations, [
         'app/i18n-examples-template/i18n-examples-template.component.html:2',
         'app/i18n-examples-template/i18n-examples-template.component.html:17',
       ]);
@@ -60,14 +62,15 @@ describe('Xlf2Deserializer', () => {
     it('unit exampleId', () => {
       const result = deserializer.deserializeSource(content);
       const unit = result.unitMap.get('exampleId')!;
-      expect(unit.source).toEqual(
+      assert.equal(
+        unit.source,
         'Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
-      expect(unit.locations).toEqual([
+      assert.deepEqual(unit.locations, [
         'app/i18n-examples-template/i18n-examples-template.component.html:3',
       ]);
-      expect(unit.description).toEqual('titleDescription');
-      expect(unit.meaning).toEqual('titleMeaning');
+      assert.equal(unit.description, 'titleDescription');
+      assert.equal(unit.meaning, 'titleMeaning');
     });
   });
 
@@ -76,12 +79,12 @@ describe('Xlf2Deserializer', () => {
 
     it('language', () => {
       const result = deserializer.deserializeTarget(content);
-      expect(result.language).toEqual('de');
+      assert.equal(result.language, 'de');
     });
 
     it('units', () => {
       const result = deserializer.deserializeTarget(content);
-      expect(Array.from(result.unitMap.keys())).toEqual([
+      assert.deepEqual(Array.from(result.unitMap.keys()), [
         '82167058490521791',
         'exampleId',
         'translated',
@@ -92,10 +95,10 @@ describe('Xlf2Deserializer', () => {
     it('unit 82167058490521791', () => {
       const result = deserializer.deserializeTarget(content);
       const unit = result.unitMap.get('82167058490521791')!;
-      expect(unit.source).toEqual('Empty example');
-      expect(unit.target).toEqual('Leeres Beispiel');
-      expect(unit.state).toEqual('initial');
-      expect(unit.locations).toEqual([
+      assert.equal(unit.source, 'Empty example');
+      assert.equal(unit.target, 'Leeres Beispiel');
+      assert.equal(unit.state, 'initial');
+      assert.deepEqual(unit.locations, [
         'app/i18n-examples-template/i18n-examples-template.component.html:2',
         'app/i18n-examples-template/i18n-examples-template.component.html:17',
       ]);
@@ -104,30 +107,32 @@ describe('Xlf2Deserializer', () => {
     it('unit exampleId', () => {
       const result = deserializer.deserializeTarget(content);
       const unit = result.unitMap.get('exampleId')!;
-      expect(unit.source).toEqual(
+      assert.equal(
+        unit.source,
         'Example with <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
-      expect(unit.target).toEqual(
+      assert.equal(
+        unit.target,
         'Beispiel mit <ph id="0" equiv="ICU" disp="{amount, plural, =0 {...} =1 {...} other {...}}"/>',
       );
-      expect(unit.state).toEqual('reviewed');
-      expect(unit.locations).toEqual([
+      assert.equal(unit.state, 'reviewed');
+      assert.deepEqual(unit.locations, [
         'app/i18n-examples-template/i18n-examples-template.component.html:3',
       ]);
-      expect(unit.description).toEqual('titleDescription');
-      expect(unit.meaning).toEqual('titleMeaning');
+      assert.equal(unit.description, 'titleDescription');
+      assert.equal(unit.meaning, 'titleMeaning');
     });
 
     it('unit translated', () => {
       const result = deserializer.deserializeTarget(content);
       const unit = result.unitMap.get('translated')!;
-      expect(unit.state).toEqual('translated');
+      assert.equal(unit.state, 'translated');
     });
 
     it('unit final', () => {
       const result = deserializer.deserializeTarget(content);
       const unit = result.unitMap.get('final')!;
-      expect(unit.state).toEqual('final');
+      assert.equal(unit.state, 'final');
     });
   });
 });
