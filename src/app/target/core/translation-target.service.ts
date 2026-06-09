@@ -48,7 +48,7 @@ export class TranslationTargetService {
     page?: number;
     entriesPerPage?: number;
     sort?: { active: string; direction: SortDirection };
-    filter?: { [property: string]: string };
+    filter?: Record<string, string>;
   }) {
     const params = createPageParams(query);
     return this.target.pipe(
@@ -119,7 +119,7 @@ export class TranslationTargetService {
     page?: number;
     entriesPerPage?: number;
     sort?: { active: string; direction: SortDirection };
-    filter?: { [property: string]: string };
+    filter?: Record<string, string>;
   }) {
     const params = createPageParams(query);
     return this.target.pipe(

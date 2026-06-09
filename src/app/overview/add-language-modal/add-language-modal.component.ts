@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -23,6 +23,7 @@ import { TranslationService } from '../../core/translation.service';
   selector: 't9n-add-language-modal',
   templateUrl: './add-language-modal.component.html',
   styleUrls: ['./add-language-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatDialogModule,
     ReactiveFormsModule,

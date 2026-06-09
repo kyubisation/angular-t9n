@@ -6,5 +6,8 @@
     "noUnusedParameters": true,
     "types": []
   },
-  "files": ["main.ts", "polyfills.ts"]
+  "files": ["main.ts", "polyfills.ts"],
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  }
 }

@@ -80,7 +80,9 @@ export class ImportComponent {
     try {
       const result = await this._importService.import(files, this.targetState.value);
       this.importResult.next(result);
-    } catch {}
+    } catch {
+      /* empty */
+    }
     this.importing.next(false);
   }
 }

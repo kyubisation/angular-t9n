@@ -27,7 +27,7 @@ export class SourceOrphansService {
     page?: number;
     entriesPerPage?: number;
     sort?: { active: string; direction: SortDirection };
-    filter?: { [property: string]: string };
+    filter?: Record<string, string>;
   }) {
     const params = createPageParams(query);
     return this._translationService.root.pipe(
@@ -55,6 +55,7 @@ export class SourceOrphansService {
       switchMap((orphans) => {
         const migrateableOrphans = orphans
           .filter((o) => this._canMigrate(o, distanceThreshold))
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .map((o) => this.migrateOrphan(o, (o._embedded!.similar as any)[0]).pipe(mapTo(o)));
         return migrateableOrphans.length ? forkJoin(migrateableOrphans) : of([]);
       }),
@@ -74,8 +75,9 @@ export class SourceOrphansService {
   }
 
   private _canMigrate(orphan: TranslationSourceUnitResponse, distanceThreshold: number) {
-    const similar: Array<TranslationSourceUnitResponse & { distance: number }> | undefined = orphan
-      ._embedded?.similar as any;
+    const similar: (TranslationSourceUnitResponse & { distance: number })[] | undefined =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      orphan._embedded?.similar as any;
     return (
       similar &&
       similar[0].distance <= distanceThreshold &&

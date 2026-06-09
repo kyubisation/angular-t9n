@@ -51,6 +51,7 @@ export class UnitComponent implements OnDestroy {
   private _destroy = new Subject<void>();
 
   constructor() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.params = this._route.params.pipe(map(({ unitId, ...params }) => params));
     this.unit = this._route.paramMap.pipe(
       switchMap((p) => this._translationTargetService.unit(p.get('unitId')!)),

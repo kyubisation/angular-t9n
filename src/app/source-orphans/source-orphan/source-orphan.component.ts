@@ -42,6 +42,7 @@ export class SourceOrphanComponent implements OnDestroy {
   private _orphan?: TranslationSourceUnitResponse;
 
   constructor() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.params = this._route.params.pipe(map(({ orphanId, ...params }) => params));
     this.orphan = this._route.paramMap.pipe(
       switchMap((p) => this._sourceOrphanService.orphan(p.get('orphanId')!)),
