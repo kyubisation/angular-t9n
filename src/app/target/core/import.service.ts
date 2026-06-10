@@ -52,6 +52,7 @@ export class ImportService {
   }
 
   private _readFileAsBinary(file: File) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return new Promise<any>((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (event: ProgressEvent<FileReader>) => {

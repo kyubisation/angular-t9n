@@ -5,7 +5,7 @@ export function createPageParams(query: {
   page?: number;
   entriesPerPage?: number;
   sort?: { active: string; direction: SortDirection };
-  filter?: { [property: string]: string };
+  filter?: Record<string, string>;
 }) {
   let params = new HttpParams();
   if (query.page) {

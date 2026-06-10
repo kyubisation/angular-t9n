@@ -44,7 +44,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Id</th>
           <td
             mat-cell
-            [matTooltip]="row.locations?.join('\n')"
+            [matTooltip]="$safeNavigationMigration(row.locations?.join('\n'))"
             [matTooltipDisabled]="!row.locations?.length"
             matTooltipClass="tooltip-linebreak"
             *matCellDef="let row"

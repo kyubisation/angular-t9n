@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2018",
-    "esModuleInterop": true,
-    "strict": true,
+    "target": "es2022",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "lib": ["es2018", "dom"],
+    "lib": ["es2022", "dom"],
     "types": ["js-levenshtein", "node"]
   }
 }

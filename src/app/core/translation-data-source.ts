@@ -43,7 +43,9 @@ export abstract class TranslationDataSource<T, TFetchResponse = T> extends DataS
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+    /* empty */
+  }
 
   protected abstract _fetchData(
     paginator: MatPaginator,

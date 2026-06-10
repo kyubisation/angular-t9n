@@ -12,7 +12,7 @@ function target({ input, exports = 'auto' }) {
   return {
     input,
     output: {
-      file: input.replace(/\.ts$/, '.js'),
+      file: input.replace(/\.ts$/, '.cjs'),
       exports,
       format: 'cjs',
     },
@@ -44,6 +44,7 @@ function target({ input, exports = 'auto' }) {
     plugins: [
       ts({
         tsconfig: 'tsconfig.node.json',
+        exclude: ['**/*.spec.ts'],
       }),
     ],
   };

@@ -7,7 +7,6 @@ import { EMPTY, merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive()
-// tslint:disable-next-line: directive-class-suffix
 export abstract class Pagination<TDataSource> implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
