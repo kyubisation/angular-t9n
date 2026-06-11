@@ -7,7 +7,7 @@ import {
   TranslationSource,
   TranslationTarget,
   TranslationTargetRegistry,
-} from '../../../server';
+} from '../../../server/index';
 
 import { AngularI18n } from './angular-i18n';
 

@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 
-import { SerializationStrategy, TargetPathBuilder, TranslationTarget } from '../server';
+import { SerializationStrategy, TargetPathBuilder, TranslationTarget } from '../server/index';
 import { MOCK_TARGET_DE } from '../test';
 
 import { PatternPersistenceStrategy } from './pattern-persistence-strategy';

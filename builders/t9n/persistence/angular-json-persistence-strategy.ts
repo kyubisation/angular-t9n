@@ -6,7 +6,7 @@ import {
   SerializationStrategy,
   timestamp,
   TranslationTarget,
-} from '../../../server';
+} from '../../../server/index';
 
 import { AngularI18n } from './angular-i18n';
 

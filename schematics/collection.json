@@ -3,13 +3,13 @@
   "schematics": {
     "ng-add": {
       "description": "Add the translation app to your project",
-      "factory": "./ng-add/index#ngAdd",
+      "factory": "./ng-add/index.cjs#ngAdd",
       "schema": "./ng-add/schema.json"
     },
     "resolve-ng-locales": {
       "description": "Resolves the available locales from the @angular/common package",
       "private": true,
-      "factory": "./resolve-ng-locales/index#resolveNgLocales",
+      "factory": "./resolve-ng-locales/index.cjs#resolveNgLocales",
       "schema": "./resolve-ng-locales/schema.json"
     }
   }

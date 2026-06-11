@@ -2,7 +2,7 @@ import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { logging, normalize, Path } from '@angular-devkit/core';
 
-import { SerializationStrategy, TranslationTarget } from '../../../server';
+import { SerializationStrategy, TranslationTarget } from '../../../server/index';
 import { MOCK_TARGET_DE } from '../../../test';
 
 import { AngularI18n } from './angular-i18n';

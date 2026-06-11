@@ -52,13 +52,13 @@
     "url": "https://github.com/kyubisation/angular-t9n/issues"
   },
   "files": [
-    "bin/*.js",
+    "bin/*.{cjs,js}",
     "builders/builders.json",
-    "builders/*/*.{js,json}",
+    "builders/*/*.{cjs,js,json}",
     "schematics/collection.json",
-    "schematics/*/*.{js,json}",
+    "schematics/*/*.{cjs,js,json}",
     "server/client/*",
-    "server/index.js"
+    "server/index.{cjs,js}"
   ],
   "dependencies": {
     "@nestjs/common": "^11.1.9",

@@ -6,7 +6,7 @@ import {
   TargetPathBuilder,
   timestamp,
   TranslationTarget,
-} from '../server';
+} from '../server/index';
 
 @Injectable()
 export class PatternPersistenceStrategy extends PersistenceStrategy {

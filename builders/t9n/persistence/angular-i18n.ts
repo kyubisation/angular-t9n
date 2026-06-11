@@ -5,7 +5,7 @@ import {
   TranslationSource,
   TranslationTarget,
   TranslationTargetRegistry,
-} from '../../../server';
+} from '../../../server/index';
 
 import {
   AngularJsonI18n,

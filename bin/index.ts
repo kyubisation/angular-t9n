@@ -22,12 +22,12 @@ import {
   XlfDeserializer,
   XlfSerializer,
   XmlParser,
-} from '../server';
+} from '../server/index';
 
 import { AsyncWorkspaceHost } from './async-workspace-host';
 import { PatternPersistenceStrategy } from './pattern-persistence-strategy';
 
-export function init(name: string = 't9n.conf.json') {
+export function init(name = 't9n.conf.json') {
   name = name.endsWith('.json') ? name : `${name}.json`;
   const options: Options & { $schema: string } = {
     $schema: 'https://raw.githubusercontent.com/kyubisation/angular-t9n/master/t9n.schema.json',
@@ -46,7 +46,7 @@ export async function runT9nStandalone(configFile: string) {
     const content = readFileSync(configFilePath, 'utf8');
     config = JSON.parse(content);
   } catch (e) {
-    throw new Error(`Unable to parse file ${configFilePath}`);
+    throw new Error(`Unable to parse file ${configFilePath}: ${e}`);
   }
 
   await t9nStandalone(config);
@@ -111,7 +111,9 @@ export async function t9nStandalone(options: Options, currentWorkingDirectory?: 
   await app.listen(options.port ?? 4300, () =>
     console.log(`Translation server started: http://localhost:${options.port}\n`),
   );
-  return new Promise(() => {});
+  return new Promise(() => {
+    /* empty */
+  });
 
   async function detectXliffVersion(): Promise<'2.0' | '1.2'> {
     const content = await host.readFile(sourceFile);
@@ -156,7 +158,9 @@ export async function t9nStandalone(options: Options, currentWorkingDirectory?: 
 
             console.log(`Detected ${relative(workspaceRoot, targetPath)}`);
             targetRegistry.register(result.language, result.unitMap);
-          } catch {}
+          } catch {
+            /* empty */
+          }
         }),
     );
     return targetRegistry;

@@ -1,1 +1,1 @@
-export { Options as Schema } from '../../server';
+export { Options as Schema } from '../../server/index';

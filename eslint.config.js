@@ -12,7 +12,6 @@ module.exports = defineConfig([
       eslint.configs.recommended,
       tseslint.configs.recommended,
       tseslint.configs.stylistic,
-      angular.configs.tsRecommended,
       importX.flatConfigs.recommended,
       importX.flatConfigs.typescript,
     ],
@@ -39,6 +38,30 @@ module.exports = defineConfig([
       'import-x/namespace': 'off',
       'import-x/no-duplicates': 'off',
       'import-x/no-unresolved': 'off',
+    },
+  },
+  {
+    files: ['src/**/*.ts'],
+    extends: [angular.configs.tsRecommended],
+    processor: angular.processInlineTemplates,
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 't9n',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 't9n',
+          style: 'kebab-case',
+        },
+      ],
+      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
     },
   },
   {

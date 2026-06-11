@@ -3,11 +3,11 @@
 const [, , initOrConfig, configName] = process.argv;
 
 if (initOrConfig === 'init') {
-  require('./index').init(configName);
+  require('./index.cjs').init(configName);
 } else if (process.argv.some((a) => ['--help', '-h'].includes(a))) {
   help();
 } else if (initOrConfig) {
-  require('./index')
+  require('./index.cjs')
     .runT9nStandalone(initOrConfig)
     .catch((e) => {
       console.error(e);

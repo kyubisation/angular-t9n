@@ -5,6 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Build",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "build:node"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "t9n",

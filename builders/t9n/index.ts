@@ -25,12 +25,12 @@ import {
   XlfDeserializer,
   XlfSerializer,
   XmlParser,
-} from '../../server';
+} from '../../server/index';
 
 import { AngularI18n, AngularJsonPersistenceStrategy } from './persistence';
 import { Schema as Options } from './schema';
 
-export * from '../../server';
+export * from '../../server/index';
 export * from './persistence';
 export { Schema as t9nOptions } from './schema';
 

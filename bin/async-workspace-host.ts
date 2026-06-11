@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 
-import { WorkspaceHost } from '../server';
+import type { WorkspaceHost } from '../server';
 
 export class AsyncWorkspaceHost implements WorkspaceHost {
   readFile(path: string): Promise<string> {
