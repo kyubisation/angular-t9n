@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [22.0.0](https://github.com/kyubisation/angular-t9n/compare/21.0.1...22.0.0) (2026-06-11)
+
+### ⚠ BREAKING CHANGES
+
+- This package now expects Angular 22
+
+### Features
+
+- update to Angular 22 ([#66](https://github.com/kyubisation/angular-t9n/issues/66)) ([2d98444](https://github.com/kyubisation/angular-t9n/commit/2d98444b1af32fcf917897fe3bb63a062f487729))
+
 ## [21.0.1](https://github.com/kyubisation/angular-t9n/compare/21.0.0...21.0.1) (2025-12-05)
 
 ## [21.0.0](https://github.com/kyubisation/angular-t9n/compare/20.0.2...21.0.0) (2025-12-05)
