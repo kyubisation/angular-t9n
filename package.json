@@ -121,7 +121,7 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "8.60.1",
     "vitest": "^4.0.8",
-    "xlsx": "^0.18.5",
+    "xlsx": "npm:@stackline/xlsx@^1.0.6",
     "zone.js": "~0.15.0"
   },
   "schematics": "./schematics/collection.json",
